@@ -1,0 +1,44 @@
+Hygeia Project
+14 Feb 2012
+
+The docs directory contains documentation detailing various aspects of the 
+project. The Java team should read the databaseDocumentation and perhaps even
+the jspDocumentation. The JSP team should read the jspDocumentation and the
+formDocumentation. These files should remain up to date with our plans for
+each aspect of the project. The parts of the jspDocumentation regarding forms
+is to be replaced by the formDocumentation. 
+
+The dumps directory contain the SQL dumps for the database. Each revision of the
+database has its own database, which may be reproduced by the dump. hygeia1.sql
+is the first dump, and works with the test pages (see test directory). The
+hygeia2.sql dump is scheduled to be the first database for use in a Hygeia
+build. 
+
+The test directory contains a simple prototype of logging in and out, signing
+up, and redirecting the user based on whether the user is logged in or has 
+submitted forms. The JSP and HTML teams may want to review this if they do not
+have experience with JSP or HTML. 
+
+The WEB-INF directory contains the Java classes and source files. It currently
+contains skeleton files for most classes. The User class has only been 
+implemented to provide the test pages' functionality. The Database class 
+provides rough access to the database (hygeia1 as of this writing). 
+
+The m1 directory is where Milestone 1 (M1) JSP files should go. 
+
+The template.jsp file is a template of how the JSP pages should look with some
+code reminders.
+
+The milestones file is a current plan/outlook for the project. 
+
+To create a working copy of this on your system, copy these files into your
+Tomcat's ROOT directory. Assuming no other changes, the test pages should
+be accessible from http://localhost:8080/test and the m1 pages should be 
+found at http://localhost:8080/m1. SQL dumps can be restored to any MySQL
+server. The Database class is currently set up to use the default user 
+configuration of MySQL, so all that *should* be needed is to run the SQL
+statement: source hygeiaX.sql; where X is the version of the database you want
+to build (provided your working directory is the dumps directory). 
+
+
+

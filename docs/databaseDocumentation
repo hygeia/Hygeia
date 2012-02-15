@@ -1,0 +1,225 @@
+Hygeia Project
+Database Documentation
+Version 2
+
+Table of Contents:
+
+1. users
+2. inventory
+3. foods
+4. components
+5. history
+6. favorites
+7. meals
+
+Purpose: To explain the usage and contents of the database.
+
+Table 1: users
+This table stores user and account information. Each record refers to a unique
+user.
+
+    A. integer uid
+
+        The uid field is the user id field. This contains a positive integer 
+        that is assigned to each user on signup. The uid of 0 is reserved for
+        identifying system-wide records. This field is set to automatically
+        increment, so there is no need to specify it when creating a new user.
+        This field is the preferred field for searching or looking up a user.
+        
+    B. text username
+    
+        The username field is the user's actual name. Full name or first name 
+        only is YET TO BE DECIDED. 
+        
+    C. text hpwd
+    
+        The hpwd field is the hashed copy of the user's password. The specific
+        hashing algorithm is the MD5 (hygeia.Encryption.MD5). Hashes will be
+        stored as strings.
+        
+    D. text email
+    
+        The email field is the user's email address. 
+        
+    E. height real
+    
+        The height in inches. 
+        
+    F. weight real
+    
+        The weight field is a double precision number containing the user's
+        weight in pounds.
+        
+Table 2: inventory
+This table contains the inventory for all users in the system. Each record in 
+this table is a food item in a user's inventory. 
+
+    A. integer iid
+        
+        The iid field is the inventory id field, which serves as a key for
+        inventory table entries. This field is the preferred way to perform
+        searches. Each record in this table has a unique iid, which is assigned
+        automatically. Items in an inventory should be deleted by this field.
+        
+    B. integer uid
+    
+        The uid field provides the user id of the user to whom the record 
+        belongs. A user's inventory can be found by selecting all records that
+        have the user's id in this field. 
+        
+    C. integer fid
+    
+        The fid field is the food id field, which contains the id of the food
+        contained in a user's inventory. This field links to the foods table.
+        
+    D. integer count
+    
+        The count field is the amount of the food item in the user's inventory.
+        This will be the number of servings, or common measurements of the item. 
+        
+Table 3: foods
+This table lists all of the foods available to the system and their nutrition
+information. Each record is a food item with it's information.
+    
+    A. integer fid
+    
+        The fid field is the food id, which is the key for this table. It is
+        automatically assigned when a record is inserted into the table. It is 
+        the preferred way of searching the table.
+        
+    B. integer uid
+    
+        The uid field is the user id of the user that entered the food item
+        into the system. Each user should only be able to see the food items
+        that were entered by that user and that are available system-wide.
+        System-wide food items have a uid of zero. 
+        
+    C. text name
+    
+        The name field is the name of the food item. Ideally, all searches of 
+        the table should be done by fid or uid, and not by specific names. This 
+        field should be searched if trying to auto-complete a user's search. 
+
+    D. integer weight
+    
+        The weight field is the weight of the item in grams.
+
+    E. integer factor
+    
+        The factor field converts the weight of the item to the common
+        measurement of that item, eg. 110 grams to one orange.
+    
+    F. integer calories
+    
+    G. integer carbohydrates
+    
+    H. integer protein
+    
+    I. integer fat
+    
+Table 4: components
+This table contains the components of both user-specified and system-wide meals.
+Each record is a food item, or component, of a meal.
+
+    A. integer cid
+    
+        The cid field is the component id and key for each record in the table. 
+        This field automatically increments, therefore it does not need to be
+        specified when inserting new records. This field is the preferred way of
+        searching the table.
+        
+    B. integer mid
+    
+        The mid field is the meal id, which is used to link all components of
+        one meal together. Each meal is assigned a meal id, and all components
+        will be inserted into the table individually but sharing the meal id.
+        All of the components of a meal may be obtained by selecting all records
+        that have the meal id of the requested meal. 
+        
+    C. integer fid
+    
+        The fid field is the food id, which is the food id of the food being
+        specified by the record.
+        
+    D. integer count
+    
+        The count field specifies the amount in servings or common measurements
+        that is needed to produce the meal.
+        
+Table 5: history
+This table stores the history for all users. Each record is a meal consumed
+by a user.
+
+    A. integer hid
+    
+        The hid field is the history id field, which is the id and key for the
+        table. This field is the preferred way of searching the table. This
+        field automatically increments and does not need to be specified when
+        inserting a new record into the table.
+        
+    B. integer mid
+    
+        The mid field is the meal id field, which is the id of meal eaten by
+        the user. 
+        
+    C. integer uid
+    
+        The uid field is the user id of of the user that consumed the meal. The
+        history of a user can be obtained by selecting all records with the
+        user's id in the uid field.
+        
+    D. timestamp occurence
+    
+        The occurence field is the timestamp of when the user consumed the meal.
+        This field contains both the date and the time. This field can be 
+        accessed in Java via the java.sql.Timestamp class.
+        
+Table 6: favorites
+This table contains the favorite meals for all users. Each record is a meal
+selected by a user as a favorite.
+
+    A. integer fid
+        
+        The fid field is the favorites id, which is the key for this table.
+        This field automatically increments, and does not need to be specified
+        when inserting a record into the table.
+        
+    B. integer mid
+    
+        The mid field is the meal id of the meal chosen by a user as a 
+        favorite.
+        
+    C. integer uid
+    
+        The uid field is the user id of the user that chose the meal as a 
+        favorite. To obtain all of a user's favorites, select all the records
+        that have the user's id in the uid field. 
+        
+Table 7: meals
+This table provides the nutrition information for each meal. Each record is a
+meal. 
+
+    A. integer mid
+    
+        The mid field is the meal id and is the key for this table. Searches of
+        this table should be done by this field. This field is automatically
+        incremented, so this field does not need to be included when inserting
+        new records.
+       
+    B. integer uid
+    
+        The uid field is the user id, which is the user id of the user that
+        entered the meal into the system. If the meal is to be used system-wide,
+        the user id should be zero. A user should only be shown the meals 
+        entered by that user and the system-wide meals.
+    
+    C. integer calories
+    
+    D. integer carbohydrates
+    
+    E. integer protein
+    
+    F. integer fat
+    
+    
+
