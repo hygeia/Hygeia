@@ -22,4 +22,99 @@ Table of Contents:
 Purpose: To define all of the HTML forms on Hygeia to ensure standard access
          and use of forms across all Java server pages. 
          
+Form 1: login
 
+    This form should be placed on any page that permits login.
+    
+    <form action="login.jsp" method="post">
+        <input name="email">
+        <input type="password" name="password">
+        <input type="hidden" name="login" value="login">
+        <input type="submit">
+    </form>
+    
+Form 2: signup
+
+    Javascript validation should be used to check and ensure that both password
+    fields are identical and both email fields are identical. Height and weight
+    should be valid.
+    
+    <form action="signup.jsp" method="post">
+        <input name="username">
+        <input type="password" name="password" id="password">
+        <input type="password" name="password0" id="password0">
+        <input name="email" id="email">
+        <input name="email0" id="email0">
+        <input name="height" id="height">
+        <input name="weight" id="weight">
+        <input type="hidden" name="signup" value="signup">
+        <input type="submit">
+    </form>
+
+Form 3: logout
+
+    All logout buttons should actually be this form.
+    
+    <form action="logout.jsp" method="post">
+        <input type="hidden" name="logout" value="logout">
+        <input type="submit">
+    </form>
+
+Form 4: error
+
+    This is not a real form. It should never be present in any HTML page. 
+    Instead, this is the description and HTML mockup of this would-be form. It
+    is to be used by JSP to report errors to the user. If an error is 
+    encountered while processing a JSP page, it should redirect to error.jsp
+    and appropriately set the two "get" fields, code and echo. code is the
+    error code corresponding to the error. echo is any additional information
+    that should be printed on the screen to the user.
+    
+    <form action="error.jsp" method="get">
+        <input name="code">
+        <input name="echo">
+    </form>
+    
+Form 5: addToInventory
+
+    This form adds food items in the database to the user's inventory. "fid" is
+    the food id of the item to be added. 
+    
+    <form action="inventory.jsp" method="post">
+        <input type="hidden" name="fid">
+        <input name="amount">
+        <input type="hidden" name="addToInventory" value="addToInventory">
+    </form>
+
+Form 6: removeFromInventory
+
+    This form removes food items from the user's inventory. "iid" is the 
+    inventory id of the item to be removed.
+    
+    <form action="inventory.jsp" method="post">
+        <input type="hidden" name="iid">
+        <input name="amount">
+        <input type="hidden" name="removeFromInventory" 
+            value=removeFromInventory">
+    </form>
+    
+Form 7: addFoodToDatabase
+
+    This form adds food items to the database and to the user's inventory.
+    
+    <form action="inventory.jsp" method="post">
+        <input name="name">
+        <input name="calories">
+        <input name="carbohydrates">
+        <input name="protein">
+        <input name="fat">
+        <input name="weight">
+        <input name="serving">
+        <input name="amount">
+        <input type="hidden" name="addFoodToDatabase" value="addFoodToDatabase">
+    </form>
+    
+Form 8: addToHistory
+
+    <form action="history.jsp" method="post">
+    </form>
