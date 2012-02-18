@@ -18,7 +18,7 @@ public class Favorites {
     }
     
     /* Remove a meal from favorites */
-    public boolean deleteMeal(Meal m) {
+    public boolean removeMeal(Meal m) {
     
     }
     

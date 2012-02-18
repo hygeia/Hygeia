@@ -22,8 +22,8 @@ public class Inventory {
     
     }
     
-    /* Delete food from inventory */
-    public boolean deleteFood(Food f) {
+    /* Remove an amount of food from inventory */
+    public boolean removeFood(Food f) {
     
     }
 

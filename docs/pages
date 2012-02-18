@@ -16,6 +16,8 @@ Table of Contents:
 10. profile.jsp
 11. recipes.jsp
 12. admin.jsp
+13. Navigation Bar
+14. about.jsp
 
 Purpose: To explain the usage and definition of each page.
 
@@ -39,10 +41,7 @@ Page 2: login.jsp
     the user should be redirected to the home page. This page should be 
     accessible to non-logged in users, and it should appear as a simple page
     with a login form. This page should redirect to the home page for logged in
-    users. The email field of the form should be named "email" and the password
-    field should be named "password". A hidden field name "login" should be set
-    to "login". The page shall determine that a form was submitted by the 
-    presence of the "login" field.
+    users. 
     
     Workflow:
     
@@ -69,12 +68,7 @@ Page 4: signup.jsp
     The signup page processes the signup form and creates a new user in the
     database. After the user is created, the user should be redirected to the
     home page. Logged in users should be redirected to the home page. Non-logged
-    in users should be presented with a form that asks for username, email,
-    password, height, and weight. Javascript validation should be performed to
-    ensure the form is filled out correctly before sending the data to the
-    server. The form fields should be named "username", "email", "password",
-    "height", "weight". There should also be a hidden field named "signup" that
-    is set to "signup". 
+    in users should be presented with the signup form.
     
     Workflow:
     
@@ -89,14 +83,13 @@ Page 5: home.jsp
     The home page displays the current meal suggestions to a logged in user. 
     The user should be able to reject a suggestion and receive a new one. The
     navigation bar should be present on this page. For non-logged in users, this
-    page should redirect to the index page. A logout form should appear on
-    the navigation bar with a hidden field named "logout" set to "logout".
+    page should redirect to the index page. 
     
     Workflow:
     
     A. Redirect to index.jsp if not logged in (uid session variable is not set).
     B. Create User object from uid.
-    C. Create History object and call the getMeals method.
+    C. Create History object and call the getHistory method.
     D. Call the Algorithm.suggestMeal method.
     E. Display the page with the suggested meal and the most recent meals.
     
@@ -122,15 +115,9 @@ Page 7: inventory.jsp
     The inventory page should process all requests to add or remove items from
     a user's inventory. This page should also be able to display the current
     contents of the inventory. The navigation bar should be present on this
-    page. Non-logged in users should be redirected to the index page. Food 
-    should be added to the inventory by submitting a form with fields "amount".
-    The "fid" and "addToInventory" fields should be set as hidden fields, with
-    the food id as the first and "addToInventory" as the second. To remove an
-    item from the inventory, the same fields should be set, except 
-    "addToInventory" should be "removeFromInventory" set to the same value. 
-    Adding a new food to the system should be done by a form with the fields,
-    "name", "amount", and NUTRITION INFORMATION. A hidden field named 
-    "addFoodToDatabase" should also be set. 
+    page. Non-logged in users should be redirected to the index page. The
+    addToInventory form, removeFromInventory form, and addFoodToDatabase form
+    should be on this page. 
     
     Workflow:
     
@@ -155,17 +142,16 @@ Page 8: history.jsp
 
     The history page should display a user's history of consumed meals. The 
     navigation bar should be present. Non-logged in users should be redirected
-    to the index page. Users should be able to add a meal by filling out a form
-    with a hidden field "addMeal" set, with fields "mid" and "occurrence" set
-    with the meal id and timestamp that the meal was consumed.
+    to the index page. The addToHistory form should be on this page.
     
     Workflow:
     
     A. Redirect to index.jsp if not logged in (uid session variable is not set).
     B. Create History object.
-    C. Check if addMeal parameter is set. If so, create Meal object from mid and
-       occurrence parameters. Call the addMeal method of the History object.
-    D. Call the getMeals method of the History object. Produce a table listing
+    C. Check if addToHistory parameter is set. If so, create Meal object from 
+       mid and occurrence parameters. Call the addMeal method of the History 
+       object.
+    D. Call the getHistory method of the History object. Produce a table listing
        all of the meals and the times they were eaten.
     
 Page 9: favorites.jsp
@@ -173,17 +159,18 @@ Page 9: favorites.jsp
     The favorites page should process all requests to add or remove meals from
     a user's favorites list. This page should also list all of the user's
     favorites. The navigation bar should be present on this page. Non-logged in
-    users should be redirected to the index page.
+    users should be redirected to the index page. The addToFavorites form and 
+    the removeFromFavorites form should be on this page. 
     
     Workflow:
     
     A. Redirect to index.jsp if not logged in (uid session variable is not set).
     B. Create Favorites object. 
-    C. Check if the addFavorite parameter is set. If so, call the addFavorite
+    C. Check if the addToFavorites parameter is set. If so, call the addMeal
        method of the Favorites object, passing a Meal object constructed by the
        mid parameter.
-    D. Check if the removeFavorite parameter is set. If so, call the 
-       removeFavorite method of the Favorites object, passing a Meal object 
+    D. Check if the removeFromFavorites parameter is set. If so, call the 
+       removeMeal method of the Favorites object, passing a Meal object 
        constructed by the mid parameter.
     E. Call the getFavorites method and produce a table of favorites.
 
@@ -192,7 +179,9 @@ Page 10: profile.jsp
     The profile page should process all requests to update a user's profile
     information. It should display all profile information about the user. The
     navigation bar should be present on this page. Non-logged in users should
-    be redirected to the index page.
+    be redirected to the index page. The updateProfile form should be on this
+    page, initially set with the user's information. The resetPassword form
+    should be on this page. 
     
     Workflow:
     
@@ -201,20 +190,26 @@ Page 10: profile.jsp
     C. Check if updateProfile parameter is set. If so, call the updateAllInfo 
        method of the User object, passing the username, email, height, and 
        weight parameters.
-    D. Call the getAllInfo method to extract profile information from the 
-       database. Produce a table with user profile information.
+    D. Check if the resetPassword parameter is set. If so, call the User 
+       object's resetPassword method with the old and new passwords.
+    E. Call the getAllInfo method to extract profile information from the 
+       database. Produce the updateProfile form with the information set
+       as the default values.
     
 Page 11: recipes.jsp
 
     The recipes page should process all requests to add or remove a 
     user-specified recipe from the system. This page should display all recipes
     available to the user. The navigation bar should be present. Non-logged in
-    users should be redirected to the index page.
+    users should be redirected to the index page. The addRecipeToDatabase form
+    and removeRecipeFromDatabase form should be on this page.
     
     Workflow:
     
     A. Redirect to index.jsp if not logged in (uid session variable is not set).
-    B. 
+    B. Check if addRecipeToDatabase parameter is set. If so, ADD RECIPE.
+    C. Check if removeRecipeFromDatabase parameter is set. If so, REMOVE RECIPE.
+    D. Display list of recipes.
     
 Page 12: admin.jsp
 
@@ -223,4 +218,14 @@ Page 12: admin.jsp
     should be redirected to the index page, and logged in users should be 
     redirected to the home page. 
 
+Page 13: Navigation Bar
+
+    The navigation bar IS OR IS NOT an actual page. The navigation bar should 
+    contains links to the home, inventory, favorites, recipes, profile, about,
+    and history pages. The logout form should also be present. 
+    
+Page 14: about.jsp
+
+    The about page should give the purpose of the site and what it does. It 
+    should also list all the developers of the site. 
 

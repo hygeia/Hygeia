@@ -2,11 +2,10 @@ Hygeia Project
 14 Feb 2012
 
 The docs directory contains documentation detailing various aspects of the 
-project. The Java team should read the databaseDocumentation and perhaps even
-the jspDocumentation. The JSP team should read the jspDocumentation and the
-formDocumentation. These files should remain up to date with our plans for
-each aspect of the project. The parts of the jspDocumentation regarding forms
-is to be replaced by the formDocumentation. 
+project. The Java team should read the database documentation and perhaps even
+the pages documentation. The JSP team should read about the pages and the
+forms documentation. These files should remain up to date with our plans for
+each aspect of the project. 
 
 The dumps directory contain the SQL dumps for the database. Each revision of the
 database has its own database, which may be reproduced by the dump. hygeia1.sql
@@ -24,12 +23,8 @@ contains skeleton files for most classes. The User class has only been
 implemented to provide the test pages' functionality. The Database class 
 provides rough access to the database (hygeia1 as of this writing). 
 
-The m1 directory is where Milestone 1 (M1) JSP files should go. 
-
 The template.jsp file is a template of how the JSP pages should look with some
 code reminders.
-
-The milestones file is a current plan/outlook for the project. 
 
 To create a working copy of this on your system, copy these files into your
 Tomcat's ROOT directory. Assuming no other changes, the test pages should

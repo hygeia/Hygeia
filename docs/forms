@@ -116,5 +116,75 @@ Form 7: addFoodToDatabase
     
 Form 8: addToHistory
 
+    This form adds a meal to the user's history. "mid" is the meal id of the 
+    meal and "occurrence" is the date and time it was consumed.
+
     <form action="history.jsp" method="post">
+        <input type="hidden" name="mid">
+        <input name="occurrence">
+        <input type="hidden" name="addToHistory" value="addToHistory">
+        <input type="submit">
+    </form>
+
+Form 9: addToFavorites
+
+    This form adds a meal to the user's favorites.
+    
+    <form action="favorites.jsp" method="post">
+        <input type="hidden" name="mid">
+        <input type="hidden" name="addToFavorites" value="addToFavorites">
+        <input type="submit">
+    </form>
+
+Form 10: removeFromFavorites
+
+    This form removes a meal from the user's favorites.
+    
+    <form action="favorites.jsp" method="post">
+        <input type="hidden" name="mid">
+        <input type="hidden" name="removeFromFavorites" 
+            value="removeFromFavorites">
+        <input type="submit">
+    </form>
+
+Form 11: updateProfile
+
+    This form updates a user's profile information. Should use Javascript 
+    validation.
+    
+    <form action="profile.jsp" method="post">
+        <input name="username">
+        <input name="email">
+        <input name="email0">
+        <input name="height">
+        <input name="weight">
+        <input type="hidden" name="updateProfile" value="updateProfile">
+        <input type="submit">
+    </form>
+
+Form 12: resetPassword
+
+    This form changes the user's password. Javascript validation should check
+    that the two new passwords are the same.
+    
+    <form action="profile.jsp" method="post">
+        <input type="password" name="old">
+        <input type="password" name="password" id="password">
+        <input type="password" name="password0" id="password0">
+        <input type="hidden" name="resetPassword" value="resetPassword">
+        <input type="submit">
+    </form>
+
+Form 13: addRecipeToDatabase
+
+    This form add a user's recipe to the database.
+    
+
+Form 14: removeRecipeFromDatabase
+
+    This form removes  user's recipe from the database.
+    
+    <form action="recipes.jsp" method="post">
+        <input type="hidden" name="mid">
+        <input type="submit">
     </form>
