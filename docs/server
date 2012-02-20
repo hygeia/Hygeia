@@ -1,0 +1,31 @@
+Server Information
+
+
+The server's name is aurora. Aurora's IP address is 132.239.229.86. 
+Aurora is presently running Tomcat and MySQL. SSH access has also been
+set up for each member of the team. 
+
+Users are as follows:
+
+adam
+alex
+anne
+asher
+brian
+corbin
+kenney
+link
+mana
+sara
+
+Each user has a home directory. In each home directory is a www 
+directory. This directory is publicly visible through Tomcat. To access it, 
+navigate to 132.239.229.86/username. The root of the website (132.239.229.86)
+is found at /home/public/www. Your www directory is the location of your git
+repository and it is also a workspace for you. 
+
+Make sure to change your password after you login for the first time. Set up
+git by following the directions on github (git is installed on Aurora), and
+run the setup script. This will ensure your www directory is set up correctly
+and the repository has the most recent changes from github. 
+
