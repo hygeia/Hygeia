@@ -1,0 +1,41 @@
+Hygeia Project
+Coding Assignments
+
+I. Java Files
+    - Asher, would you be interested in leading this team?
+    - What needs to be coded:
+        Database.java
+        Encryption.java
+        Favorites.java
+        History.java
+        Inventory.java
+        Meal.java
+        User.java
+        User.test.java
+    - Who needs to code:
+        Asher, Alex, Corbin
+
+II. JSP Files
+  A. Adam William Kuipers
+    1. index.jsp
+    2. login.jsp
+    3. logout.jsp
+    4. signup.jsp
+  B. Sara Miller
+    1. home.jsp
+    2. error.jsp
+    3. inventory.jsp
+  C. Anne Brookes
+    1. history.jsp
+    2. favorites.jsp
+    3. profile.jsp
+  D. Mana
+    1. recipes.jsp
+    2. admin.jsp
+    3. Navigation Bar (Not sure if this needs to be a separate jsp file)
+    4. about.jsp
+
+III. Stylesheets
+  - Link, you'll know more about what needs to get done here than I do. So you and
+    kenny may work on whatever you two feel is necessary.
+
