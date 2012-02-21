@@ -11,7 +11,6 @@ I. Java Files
         Inventory.java
         Meal.java
         User.java
-        User.test.java
     - Who needs to code:
         Asher, Alex, Corbin
 
@@ -32,10 +31,12 @@ II. JSP Files
   D. Mana
     1. recipes.jsp
     2. admin.jsp
-    3. Navigation Bar (Not sure if this needs to be a separate jsp file)
-    4. about.jsp
+    3. about.jsp
 
 III. Stylesheets
   - Link, you'll know more about what needs to get done here than I do. So you and
     kenny may work on whatever you two feel is necessary.
 
+  - main.css
+  - all images
+  - navigation bar (as separate page, or a template for all pages)
