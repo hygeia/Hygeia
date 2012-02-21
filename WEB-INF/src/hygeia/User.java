@@ -168,6 +168,8 @@ public class User {
     
     }
     
+    /* Changes the user's password provided that old is the user's old 
+       password. */
     public boolean resetPassword(String old, String pwd) {
     
     }

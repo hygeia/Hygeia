@@ -18,7 +18,7 @@ public class History {
     }
     
     /* Add meal to history */
-    public boolean addMeal(Meal m, Timestamp? occurrence) {
+    public boolean addMeal(Meal m, Timestamp occurrence) {
     
     }
 

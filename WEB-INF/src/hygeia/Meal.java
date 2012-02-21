@@ -12,18 +12,13 @@ public class Meal {
     
     }
     
-    /* Used to initialize the database for this class */
-    public static boolean setDb(Database db) {
-    
-    }
-    
     /* Create a new meal in the database consisting of these foods. Returns meal id. */
-    public static int createMeal(Food f[], User u) {
+    public static int createMeal(Database db, User u, Food.Add f[]) {
     
     }
     
-    /* Return array of Food */
-    public Food[] getFoods() {
+    /* Return array of Food items that make up meal */
+    public Food.Add[] getFoods() {
     
     }
     

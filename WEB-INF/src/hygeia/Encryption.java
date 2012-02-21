@@ -15,7 +15,8 @@ public static void main(String args[]) {
 
 }
 
-/* Should return MD5 hashes.. but may be platform dependent */
+/* Should return MD5 hashes.. but may be platform dependent. And this was 
+   written by some anonymous author. FYI.  */
 public static String MD5(String md5) {
    try {
         java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
