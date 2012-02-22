@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+    <title>Hygeia</title>
+    <link type="text/css" rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="favicon.ico" mce_href="favicon.ico"/> 
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Nutrient');
+        data.addColumn('number', 'Grams');
+        data.addRows([
+          ['Carbs',    30],
+          ['Fat',     40],
+          ['Protein',  2],
+        ]);
+
+        var options = {
+          width: 220, height: 200,
+          backgroundColor: '#c3e2da',
+		  legend: {
+		    position:'top',
+		  }
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('pie_chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+	<script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Year');
+        data.addColumn('number', 'Carbs');
+        data.addColumn('number', 'Fat');
+		data.addColumn('number', 'Protein');
+        data.addRows([
+          ['Today', 20, 30, 10]
+        ]);
+
+        var options = {
+          width: 220, height: 200,
+		  backgroundColor: '#c3e2da',
+		  vAxis: {
+		    baselineColor:'#c3e2da',
+			gridlines: {
+			  count:4,
+			  color:'#c3e2da',
+			},
+		  },
+		  title:'Block Level',
+		  legend: {
+		    position:'none'
+		  }
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('bar_chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="page">
+      <div id="header">
+        <img src="h1.png"><a href="Profile.html"><img src="h2.png"></a><img src="h3.png"><a href="Logout.html"><img src="h4.png"></a><img src="h5.png">
+      </div>
+      <div id="oday" class="shadowBox">3 Days Ago<br /><p class="odaytext">Click Here to see this day's intake stats</p></div>
+<div id="oday" class="shadowBox">2 Days Ago<br /><p class="odaytext">Click Here to see this day's intake stats</p></div>
+<div id="oday" class="shadowBox">Yesterday<br /><p class="odaytext">Click Here to see this day's intake stats</p></div>
+<div id="today" class="shadowBox"><h1>Today</h1>
+<div id="chartwrapper"><div id="pie_chart_div"></div><div id="bar_chart_div"></div></div>
+<p class="food">Breakfast<br />Eggs<br />Bacon<br />Sausage<br /><br />Lunch<br />Hamburger<br />Fries<br />Other Shit<br /><br />Add Meal</p>
+</div>
+<div id="footer">
+	</div>
+  </body>
+</html>
