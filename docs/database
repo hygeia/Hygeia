@@ -109,13 +109,13 @@ information. Each record is a food item with it's information.
         The factor field converts the weight of the item to the common
         measurement of that item, eg. 110 grams to one orange.
     
-    F. integer calories
+    F. real calories
     
-    G. integer carbohydrates
+    G. real carbohydrates
     
-    H. integer protein
+    H. real protein
     
-    I. integer fat
+    I. real fat
     
 Table 4: components
 This table contains the components of both user-specified and system-wide meals.
@@ -213,13 +213,17 @@ meal.
         the user id should be zero. A user should only be shown the meals 
         entered by that user and the system-wide meals.
     
-    C. integer calories
+    C. text name
     
-    D. integer carbohydrates
+        The name field is the name of the meal that shall be presented to users.
     
-    E. integer protein
+    D. real calories
     
-    F. integer fat
+    E. real carbohydrates
+    
+    F. real protein
+    
+    G. real fat
     
     
 

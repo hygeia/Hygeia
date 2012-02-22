@@ -13,7 +13,13 @@ public class History {
     }
     
     /* Returns an array of Meal objects */
-    public Meal[] getHistory() {
+    public Meal.List[] getHistory() {
+    
+    }
+    
+    /* Returns an array of meals that are available to the user to add to
+       the history or favorites. */
+    public Meal.List[] getAvailableMeals() {
     
     }
     

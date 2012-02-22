@@ -64,6 +64,25 @@ public class Food {
         
         /* getters for all fields */
     }
+    
+    /* Food.List is used for producing a list of foods visible to the user. */
+    public static class List {
+        
+        private String name;
+        private int fid;
+        
+        public List(String name, int fid) {
+        
+        }
+        
+        public String getName() {
+        
+        }
+        
+        public int getFid() {
+        
+        }
+    }
 
     /* Create a new food in the database. Returns fid if successful. */
     public static int createFood(Database db, Food.Create f) {

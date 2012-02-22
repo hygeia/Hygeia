@@ -17,6 +17,16 @@ public class Meal {
     
     }
     
+    /* Return meal id. */
+    public int getMid() {
+    
+    }
+    
+    /* Fetches and then returns name from database. */
+    public String getName() {
+    
+    }
+    
     /* Return array of Food items that make up meal */
     public Food.Add[] getFoods() {
     
@@ -26,6 +36,27 @@ public class Meal {
     public Nutrition getNutrition() {
     
     }
+    
+    /* Meal.List is used for listing meals to the user. */
+    public static class List {
+    
+        private String name;
+        private int mid;
+        
+        public List(String name, int mid) {
+        
+        }
+        
+        public String getName() {
+        
+        }
+        
+        public int getMid() {
+        
+        }
+    
+    }
+    
 
 }
 

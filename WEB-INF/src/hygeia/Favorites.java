@@ -23,8 +23,15 @@ public class Favorites {
     }
     
     /* Returns an array of Meal objects in favorites */
-    public Meal[] getFavorites() {
+    public Meal.List[] getFavorites() {
     
+    }
+    
+    /* Returns an array of meals that are available to the user to add to
+       the history or favorites. This just calls the same method in the 
+       History class. */
+    public Meal.List[] getAvailableMeals() {
+        return new History(new User(this.db, this.uid)).getAvailableMeals();
     }
 
 }

@@ -17,6 +17,12 @@ public class Inventory {
     
     }
     
+    /* Returns an array of food items that the user may add to meals or to 
+       the inventory. */
+    public Food.List[] getAvailableFoods() {
+    
+    }
+    
     /* Add food to inventory */
     public boolean addFood(Food.Add f) {
     
