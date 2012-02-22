@@ -1,4 +1,5 @@
 create database hygeia2;
+grant all privileges on hygeia2.* to 'hygeiadb'@'localhost';
 use hygeia2;
 create table users (uid integer primary key auto_increment, username text, hpwd text, email text, height real, weight real);
 create table inventory (iid integer primary key auto_increment, uid integer, fid integer, count integer);

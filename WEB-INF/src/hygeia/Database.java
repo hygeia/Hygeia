@@ -7,9 +7,9 @@ public class Database {
 
     private String address = "localhost";
     private int port = 3306;
-    private String username = "root";
-    private String pwd = "";
-    private String name = "hygeia1";
+    private String username = "hygeiadb";
+    private String pwd = "C1rcleofL!fe";
+    private String name = "hygeia2";
     
     private Connection con;
     private Statement stmt;
