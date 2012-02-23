@@ -142,7 +142,8 @@ Page 8: history.jsp
 
     The history page should display a user's history of consumed meals. The 
     navigation bar should be present. Non-logged in users should be redirected
-    to the index page. The addToHistory form should be on this page.
+    to the index page. The addToHistory form and removeFromHistory form 
+    should be on this page.
     
     Workflow:
     
@@ -151,7 +152,9 @@ Page 8: history.jsp
     C. Check if addToHistory parameter is set. If so, create Meal object from 
        mid and occurrence parameters. Call the addMeal method of the History 
        object.
-    D. Call the getHistory method of the History object. Produce a table listing
+    D. Check if removeFromHistory parameter is set. If so, create Meal object
+       from parameters. Call the removeMeal method of the History object.
+    E. Call the getHistory method of the History object. Produce a table listing
        all of the meals and the times they were eaten.
     
 Page 9: favorites.jsp
@@ -227,5 +230,6 @@ Page 13: Navigation Bar
 Page 14: about.jsp
 
     The about page should give the purpose of the site and what it does. It 
-    should also list all the developers of the site. 
+    should also list all the developers of the site. There will be no Java
+    on this page. It is pure HTML describing the project and team. 
 

@@ -5,13 +5,13 @@ import java.sql.*;
 /* Classes for handling food items */
 public class Food {
 
-    /* Food.Add is used for adding to inventory and as components of meals */
-    public static class Add {
+    /* Food.Add is used for adding to inventory */
+    public static class Update {
         
         private int fid;
-        private int amount;
+        private int count;
         
-        public Add(int fid, int amount) {
+        public Add(int fid, int count) {
         
         }
         
@@ -19,12 +19,12 @@ public class Food {
         
         }
         
-        public int getAmount() {
+        public int getCount() {
         
         }
         
         /* Create a Nutrition object with the values filled in from the db */
-        public Nutrition getNutrition() {
+        public Nutrition getNutrition(Database db) {
         
         }
     }
@@ -70,6 +70,7 @@ public class Food {
         
         private String name;
         private int fid;
+        private int count;
         
         public List(String name, int fid) {
         
@@ -80,6 +81,10 @@ public class Food {
         }
         
         public int getFid() {
+        
+        }
+        
+        public int getCount() {
         
         }
     }

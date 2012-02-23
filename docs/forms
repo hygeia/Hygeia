@@ -18,6 +18,7 @@ Table of Contents:
 12. resetPassword Form
 13. addRecipeToDatabase Form
 14. removeRecipeFromDatabase Form
+15. removeFromHistory Form
 
 Purpose: To define all of the HTML forms on Hygeia to ensure standard access
          and use of forms across all Java server pages. 
@@ -88,11 +89,10 @@ Form 5: addToInventory
 
 Form 6: removeFromInventory
 
-    This form removes food items from the user's inventory. "iid" is the 
-    inventory id of the item to be removed.
-    
+    This form removes food items from the user's inventory. "fid" is the food
+    id of the item to be removed (updated). 
     <form action="inventory.jsp" method="post">
-        <input type="hidden" name="iid">
+        <input type="hidden" name="fid">
         <input name="amount">
         <input type="hidden" name="removeFromInventory" 
             value=removeFromInventory">
@@ -186,5 +186,19 @@ Form 14: removeRecipeFromDatabase
     
     <form action="recipes.jsp" method="post">
         <input type="hidden" name="mid">
+        <input type="hidden" name="removeRecipesFromDatabase" 
+            value="removeRecipesFromDatabase">
+        <input type="submit">
+    </form>
+    
+Form 15: removeFromHistory
+
+    This form removes a meal from the user's history. "mid" is the meal id of 
+    the meal and "occurrence" is the date and time it was consumed.
+
+    <form action="history.jsp" method="post">
+        <input type="hidden" name="mid">
+        <input name="occurrence">
+        <input type="hidden" name="removeFromHistory" value="removeFromHistory">
         <input type="submit">
     </form>

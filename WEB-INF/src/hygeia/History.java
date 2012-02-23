@@ -27,5 +27,10 @@ public class History {
     public boolean addMeal(Meal m, Timestamp occurrence) {
     
     }
+    
+    /* Remove meal from history. */
+    public boolean removeMeal(Meal m, Timestamp occurrence) {
+    
+    }
 
 }

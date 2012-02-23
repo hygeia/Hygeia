@@ -28,7 +28,7 @@ public class Meal {
     }
     
     /* Return array of Food items that make up meal */
-    public Food.Add[] getFoods() {
+    public Food.List[] getFoods() {
     
     }
     
@@ -42,8 +42,9 @@ public class Meal {
     
         private String name;
         private int mid;
+        private Timestamp occurrence;
         
-        public List(String name, int mid) {
+        public List(String name, int mid, Timestamp occurrence) {
         
         }
         
@@ -52,6 +53,10 @@ public class Meal {
         }
         
         public int getMid() {
+        
+        }
+        
+        public Timestamp getOccurrence() {
         
         }
     
