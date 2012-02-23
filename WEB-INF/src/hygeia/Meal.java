@@ -13,7 +13,7 @@ public class Meal {
     }
     
     /* Create a new meal in the database consisting of these foods. Returns meal id. */
-    public static int createMeal(Database db, User u, Food.Add f[]) {
+    public static int createMeal(Database db, User u, Food.Update f[]) {
     
     }
     
@@ -28,7 +28,12 @@ public class Meal {
     }
     
     /* Return array of Food items that make up meal */
-    public Food.List[] getFoods() {
+    public Food.Update[] getMeal() {
+    
+    }
+    
+    /* Return array of Food.List items that make up meal to display to user. */
+    public Food.List[] getFoodList() {
     
     }
     

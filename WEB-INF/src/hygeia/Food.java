@@ -5,13 +5,13 @@ import java.sql.*;
 /* Classes for handling food items */
 public class Food {
 
-    /* Food.Add is used for adding to inventory */
+    /* Food.Update is used for adding to inventory */
     public static class Update {
         
         private int fid;
         private int count;
         
-        public Add(int fid, int count) {
+        public Update(int fid, int count) {
         
         }
         
@@ -29,35 +29,14 @@ public class Food {
         }
     }
     
-    /* Food.Remove is for removing items from an inventory. newAmount is to be 
-       the new amount of that item in the inventory. So removing items is 
-       actually more like updating the item count in the inventory. */
-    public static class Remove {
-        
-        private int iid;
-        private int newAmount;
-        
-        public Remove(int iid, int newAmount) {
-        
-        }
-        
-        public int getIid() {
-        
-        }
-        
-        public int getNewAmount() {
-        
-        }
-    }
-    
     /* Food.Create is used for creating new foods in the database. */
     public static class Create {
         
         private String name;
-        private int amount, serving, weight;
-        private double calories, carbohydrates, protein, fat;
+        private int count, weight;
+        private double calories, carbohydrates, protein, fat, factor;
         
-        public Create(String name, int amount, int serv, int wt, double cal, 
+        public Create(String name, int count, double factor, int wt, double cal, 
             double carb, double pro, double fat) {
         
         }

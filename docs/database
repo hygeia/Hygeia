@@ -104,10 +104,10 @@ information. Each record is a food item with it's information.
     
         The weight field is the weight of the item in grams.
 
-    E. integer factor
+    E. real factor
     
-        The factor field converts the weight of the item to the common
-        measurement of that item, eg. 110 grams to one orange.
+        The factor field converts the weight of the item to serving sizes,
+         eg. 110 grams to one orange.
     
     F. real calories
     

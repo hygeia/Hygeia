@@ -13,7 +13,12 @@ public class Inventory {
     }
     
     /* Returns an array of food objects in the inventory */
-    public Food.Add[] getInventory() {
+    public Food.Update[] getInventory() {
+    
+    }
+    
+    /* Returns an array of Food.List objects for displaying to user. */
+    public Food.List[] getInventoryList() {
     
     }
     
@@ -24,13 +29,13 @@ public class Inventory {
     }
     
     /* Add food to inventory */
-    public boolean addFood(Food.Add f) {
+    public boolean addFood(Food.Update f) {
     
     }
     
     /* Remove an amount of food from inventory. This functions more as an 
        update to the quantity of food that is in the inventory. */
-    public boolean removeFood(Food.Remove f) {
+    public boolean removeFood(Food.Update f) {
     
     }
 
