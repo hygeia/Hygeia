@@ -8,3 +8,4 @@ create table components (cid integer primary key auto_increment, mid integer, fi
 create table history (hid integer primary key auto_increment, mid integer, uid integer, occurence timestamp);
 create table favorites (fid integer primary key auto_increment, mid integer, uid integer);
 create table meals (mid integer primary key auto_increment, uid integer, name text, calories real, carbohydrates real, protein real, fat real);
+create table admins (aid integer primary key auto_increment, email text, hpwd text);

@@ -225,5 +225,19 @@ meal.
     
     G. real fat
     
+Table 8: admins
+This table stores the authentication information for admin/superusers.
+
+    A. integer aid
     
+        The aid field is the admin id and it is the key for this table.
+    
+    B. text email
+    
+        The email field is the email address for the admin user.
+    
+    C. text hpwd  
+
+        The hpwd field is the hashed password for the admin user. 
+        
 
