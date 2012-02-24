@@ -14,7 +14,7 @@ public class Algorithm {
 
     /* Main algorithm. types: 1 breakfast, 2 lunch, 3 dinner, 4 snack */
     public Meal suggestMeal(User u, int type) {
-    
+        return null;
     }
     
     /* Sanitizes a String for use. */

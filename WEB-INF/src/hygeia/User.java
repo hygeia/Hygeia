@@ -61,7 +61,7 @@ public class User {
         String email, double ht, double wt) {
         
         if ((db == null) || (uname == null) || (pwd == null) || (email == null)
-             (ht == 0) || (wt == 0)) {
+             || (ht == 0) || (wt == 0)) {
             return -1;
         }
         
@@ -95,22 +95,22 @@ public class User {
     
     /* Delete user. */
     public static boolean deleteUser(Database db, int uid) {
-    
+        return false;
     }
     
     /* Sets instance variables for all properties from the database */
     public boolean getAllInfo() {
         
-        ResultSet rs = this.db.execute("select username, email, height, weight"
+        java.sql.ResultSet rs = this.db.execute("select username, email, height, weight"
             + " from users where uid = " + this.uid + ";");
         
         /* Set variables */
         try {
             if (rs.next()) {
-                this.username = rs.getString();
-                this.email = rs.getString();
-                this.height = rs.getDouble();
-                this.weight = rs.getDouble();
+                this.username = rs.getString("username");
+                this.email = rs.getString("email");
+                this.height = rs.getDouble("height");
+                this.weight = rs.getDouble("weight");
             } else {
                 return false;
             }
@@ -166,11 +166,11 @@ public class User {
         ResultSet rs = this.db.execute("select email from users where uid = " +
             this.uid + ";");
         
-        String email;
+        String email = null;
             
         try {
             if (rs.next()) {
-                email = getString();
+                email = rs.getString("email");
             }
             this.db.free();
         } catch (SQLException e) {
@@ -192,11 +192,11 @@ public class User {
         ResultSet rs = this.db.execute("select email from height where uid = " +
             this.uid + ";");
         
-        double height;
+        double height = 0;
             
         try {
             if (rs.next()) {
-                height = rs.getHeight();
+                height = rs.getDouble("height");
             }
             this.db.free();
         } catch (SQLException e) {
@@ -213,11 +213,11 @@ public class User {
         ResultSet rs = this.db.execute("select email from weight where uid = " +
             this.uid + ";");
         
-        double weight;
+        double weight = 0;
             
         try {
             if (rs.next()) {
-                weight = rs.getWeight();
+                weight = rs.getDouble("weight");
             }
             this.db.free();
         } catch (SQLException e) {
@@ -230,20 +230,17 @@ public class User {
     public boolean updateAllInfo(String username, String email, double ht, double wt) {
         this.username = Algorithm.Clean(username);
         this.email = Algorithm.Clean(email);
-        this.height = Algorithm.Clean(ht);
-        this.weight = Algorithm.Clean(wt);
+        this.height = height;
+        this.weight = weight;
         
         int up;
         
-        try {
             up = this.db.update("update users set username='" + this.username +
             "', email='" + this.email + "', height=" + this.height + ", weight="
             + this.weight + " where uid = " + this.uid + ";");
-        } catch (SQLException e) {
-            return false;
-        }
+
         
-        if (up == 0) {
+        if (up < 0) {
             return false;
         }
         return true;
@@ -254,21 +251,19 @@ public class User {
  
         int up;
         
-        try {
+
             up = this.db.update("update users set username='" + this.username +
              "' where uid = " + this.uid + ";");
-        } catch (SQLException e) {
-            return false;
-        }
+
         
-        if (up == 0) {
+        if (up < 0) {
             return false;
         }
         return true;
     }
     
     public boolean updatePwd(String pwd) {
-    
+        return false;
     }
     
     public boolean updateEmail(String email) {
@@ -276,32 +271,27 @@ public class User {
  
         int up;
         
-        try {
+
             up = this.db.update("update users set email='" + this.email +
              "' where uid = " + this.uid + ";");
-        } catch (SQLException e) {
-            return false;
-        }
+
         
-        if (up == 0) {
+        if (up < 0) {
             return false;
         }
         return true;
     }
     
     public boolean updateHeight(double height) {
-        this.height = Algorithm.Clean(height);
+        this.height = height;
  
         int up;
         
-        try {
             up = this.db.update("update users set height='" + this.height +
              "' where uid = " + this.uid + ";");
-        } catch (SQLException e) {
-            return false;
-        }
+
         
-        if (up == 0) {
+        if (up < 0) {
             return false;
         }
         return true;
@@ -309,18 +299,14 @@ public class User {
     }
     
     public boolean updateWeight(double weight) {
-        this.weight = Algorithm.Clean(weight);
+        this.weight = weight;
  
         int up;
         
-        try {
             up = this.db.update("update users set weight='" + this.weight +
              "' where uid = " + this.uid + ";");
-        } catch (SQLException e) {
-            return false;
-        }
         
-        if (up == 0) {
+        if (up < 0) {
             return false;
         }
         return true;
@@ -334,14 +320,10 @@ public class User {
         
         int up;
         
-        try {
             up = this.db.update("update users set hpwd='" + pwd +
              "' where uid = " + this.uid + " and hpwd = '" + old + "';");
-        } catch (SQLException e) {
-            return false;
-        }
         
-        if (up == 0) {
+        if (up < 0) {
             return false;
         }
         return true;
