@@ -17,6 +17,11 @@ public class Algorithm {
     
     }
     
+    /* Sanitizes a String for use. */
+    public static String Clean(String s) {
+        return s;
+    }
+    
     /* Should return MD5 hashes.. but may be platform dependent. And this was 
        written by some anonymous author. FYI.  */
     public static String MD5(String md5) {
