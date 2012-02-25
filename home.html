@@ -9,8 +9,11 @@
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Nutrient');
+        var data1 = new google.visualization.DataTable(); 
+        var data2 = new google.visualization.DataTable();
+        var data3 = new google.visualization.DataTable();
+        var data4 = new google.visualization.DataTable();
+	data.addColumn('string', 'Nutrient');
         data.addColumn('number', 'Grams');
         data.addRows([
           ['Carbs',    30],
@@ -59,8 +62,14 @@
 		  }
         };
 
-        var chart = new google.visualization.ColumnChart(document.getElementById('bar_chart_div'));
-        chart.draw(data, options);
+        var chart = new google.visualization.ColumnChart(document.getElementById('today_pie'));
+        chart.draw(data1, options);
+        var chart = new google.visualization.ColumnChart(document.getElementById('yesterdday_pie'));
+        chart.draw(data2, options);
+        var chart = new google.visualization.ColumnChart(document.getElementById('-2day_pie'));
+        chart.draw(data3, options);
+        var chart = new google.visualization.ColumnChart(document.getElementById('-3day_pie'));
+        chart.draw(data4, options);
       }
     </script>
   </head>
@@ -73,7 +82,7 @@
 <div id="oday" class="shadowBox">2 Days Ago<br /><p class="odaytext">Click Here to see this day's intake stats</p></div>
 <div id="oday" class="shadowBox">Yesterday<br /><p class="odaytext">Click Here to see this day's intake stats</p></div>
 <div id="today" class="shadowBox"><h1>Today</h1>
-<div id="chartwrapper"><div id="pie_chart_div"></div><div id="bar_chart_div"></div></div>
+<div id="chartwrapper"><div id="today_pie"></div><div id="bar_chart_div"></div></div>
 <p class="food">Breakfast<br />Eggs<br />Bacon<br />Sausage<br /><br />Lunch<br />Hamburger<br />Fries<br />Other Shit<br /><br />Add Meal</p>
 </div>
 <div id="footer">
