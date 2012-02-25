@@ -23,6 +23,11 @@ public class User {
         if ((db == null) || (email == null) || (pwd == null)) {
             return -1;
        }
+       
+       /* Clean inputs */
+       email = Algorithm.Clean(email);
+       pwd = Algorithm.MD5(Algorithm.Clean(pwd));
+       
        ResultSet rs = db.execute("select uid from users where email = '" +
               email + "' and hpwd = '" + pwd + "';");
       
@@ -55,10 +60,17 @@ public class User {
     public static int createUser(Database db, String uname, String pwd, 
         String email, double ht, double wt) {
         
-        if ((db == null) || (uname == null) || (pwd == null) || (email == null))
-            {
+        if ((db == null) || (uname == null) || (pwd == null) || (email == null)
+             || (ht == 0) || (wt == 0)) {
             return -1;
         }
+        
+        /* Clean */
+        uname = Algorithm.Clean(uname);
+        pwd = Algorithm.MD5(Algorithm.Clean(pwd));
+        email = Algorithm.Clean(email);
+        
+        
         
         /* Insert new record */
         int success = db.update("insert into users (username, hpwd, email, " +
@@ -83,12 +95,32 @@ public class User {
     
     /* Delete user. */
     public static boolean deleteUser(Database db, int uid) {
-    
+        return false;
     }
     
     /* Sets instance variables for all properties from the database */
     public boolean getAllInfo() {
-    
+        
+        java.sql.ResultSet rs = this.db.execute("select username, email, height, weight"
+            + " from users where uid = " + this.uid + ";");
+        
+        /* Set variables */
+        try {
+            if (rs.next()) {
+                this.username = rs.getString("username");
+                this.email = rs.getString("email");
+                this.height = rs.getDouble("height");
+                this.weight = rs.getDouble("weight");
+            } else {
+                return false;
+            }
+            this.db.free();
+        } catch (SQLException e) {
+            return false;
+        }
+        
+        return true;
+        
     }
     
     public String getUsername() {
@@ -127,51 +159,174 @@ public class User {
 
     
     public String getEmail() {
-    
+        if (this.email != null) {
+            return this.email;
+        }
+        
+        ResultSet rs = this.db.execute("select email from users where uid = " +
+            this.uid + ";");
+        
+        String email = null;
+            
+        try {
+            if (rs.next()) {
+                email = rs.getString("email");
+            }
+            this.db.free();
+        } catch (SQLException e) {
+            return null;
+        }
+        return email;
     }
     
     /* Do not access db. Use instance variable */
     public int getUid() {
-    
+        return this.uid;
     }
     
     public double getHeight() {
+        if (this.height != 0) {
+            return this.height;
+        }
     
+        ResultSet rs = this.db.execute("select email from height where uid = " +
+            this.uid + ";");
+        
+        double height = 0;
+            
+        try {
+            if (rs.next()) {
+                height = rs.getDouble("height");
+            }
+            this.db.free();
+        } catch (SQLException e) {
+            return 0;
+        }
+        return height;
     }
     
     public double getWeight() {
-    
+        if (this.weight != 0) {
+            return this.weight;
+        }
+        
+        ResultSet rs = this.db.execute("select email from weight where uid = " +
+            this.uid + ";");
+        
+        double weight = 0;
+            
+        try {
+            if (rs.next()) {
+                weight = rs.getDouble("weight");
+            }
+            this.db.free();
+        } catch (SQLException e) {
+            return 0;
+        }
+        return height;
     }
     
     /* Updates the database and instance variables with new information */
     public boolean updateAllInfo(String username, String email, double ht, double wt) {
-    
+        this.username = Algorithm.Clean(username);
+        this.email = Algorithm.Clean(email);
+        this.height = height;
+        this.weight = weight;
+        
+        int up;
+        
+            up = this.db.update("update users set username='" + this.username +
+            "', email='" + this.email + "', height=" + this.height + ", weight="
+            + this.weight + " where uid = " + this.uid + ";");
+
+        
+        if (up < 0) {
+            return false;
+        }
+        return true;
     }
     
     public boolean updateUsername(String uname) {
-    
+        this.username = Algorithm.Clean(uname);
+ 
+        int up;
+        
+
+            up = this.db.update("update users set username='" + this.username +
+             "' where uid = " + this.uid + ";");
+
+        
+        if (up < 0) {
+            return false;
+        }
+        return true;
     }
     
     public boolean updatePwd(String pwd) {
-    
+        return false;
     }
     
     public boolean updateEmail(String email) {
-    
+        this.email = Algorithm.Clean(email);
+ 
+        int up;
+        
+
+            up = this.db.update("update users set email='" + this.email +
+             "' where uid = " + this.uid + ";");
+
+        
+        if (up < 0) {
+            return false;
+        }
+        return true;
     }
     
     public boolean updateHeight(double height) {
+        this.height = height;
+ 
+        int up;
+        
+            up = this.db.update("update users set height='" + this.height +
+             "' where uid = " + this.uid + ";");
+
+        
+        if (up < 0) {
+            return false;
+        }
+        return true;
     
     }
     
     public boolean updateWeight(double weight) {
-    
+        this.weight = weight;
+ 
+        int up;
+        
+            up = this.db.update("update users set weight='" + this.weight +
+             "' where uid = " + this.uid + ";");
+        
+        if (up < 0) {
+            return false;
+        }
+        return true;
     }
     
     /* Changes the user's password provided that old is the user's old 
        password. */
     public boolean resetPassword(String old, String pwd) {
-    
+        old = Algorithm.MD5(Algorithm.Clean(old));
+        pwd = Algorithm.MD5(Algorithm.Clean(pwd));
+        
+        int up;
+        
+            up = this.db.update("update users set hpwd='" + pwd +
+             "' where uid = " + this.uid + " and hpwd = '" + old + "';");
+        
+        if (up < 0) {
+            return false;
+        }
+        return true;
     }
     
 }

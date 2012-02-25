@@ -14,7 +14,12 @@ public class Algorithm {
 
     /* Main algorithm. types: 1 breakfast, 2 lunch, 3 dinner, 4 snack */
     public Meal suggestMeal(User u, int type) {
+        return null;
+    }
     
+    /* Sanitizes a String for use. */
+    public static String Clean(String s) {
+        return s;
     }
     
     /* Should return MD5 hashes.. but may be platform dependent. And this was 
