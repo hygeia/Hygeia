@@ -9,7 +9,7 @@ public class Food {
     public static class Update {
         
         private int fid;
-        private int count;
+        private double count;
         
         public Update(int fid, int count) {
         
@@ -19,7 +19,7 @@ public class Food {
         
         }
         
-        public int getCount() {
+        public double getCount() {
         
         }
         
@@ -33,7 +33,8 @@ public class Food {
     public static class Create {
         
         private String name;
-        private int count, weight;
+        private int weight;
+        private double count;
         private double calories, carbohydrates, protein, fat, factor;
         
         public Create(String name, int count, double factor, int wt, double cal, 
@@ -49,7 +50,7 @@ public class Food {
         
         private String name;
         private int fid;
-        private int count;
+        private double count;
         
         public List(String name, int fid) {
         
@@ -63,7 +64,7 @@ public class Food {
         
         }
         
-        public int getCount() {
+        public double getCount() {
         
         }
     }
