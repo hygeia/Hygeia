@@ -9,9 +9,9 @@ if (request.getParameter("login") != null) {
     */
     int uid = User.login(db, request.getParameter("email"), 
         request.getParameter("password"));
-    if (uid == 0) {
+    if (uid < 1) {
         /* Incorrect login: should do more than just redirect to index */
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("login.jsp?error=badlogin");
         return;
     }
     

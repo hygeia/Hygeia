@@ -16,14 +16,15 @@ if (request.getParameter("signup") != null) {
     Database db = new Database();
     
     /* Create user */
-    int uid = User.createUser(db, username, password, email, 0, 0);
+    int uid = User.createUser(db, username, password, email, 1, 1);
     
     /* Close database */
     db.close();
         
     /* Basic error handling */
     if (uid < 1) {
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("index.jsp?error=badcreate&uid=" + uid);
+        return;
     }
     
     /* Set session variables */

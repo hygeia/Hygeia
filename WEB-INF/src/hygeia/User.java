@@ -36,6 +36,9 @@ public class User {
          /* Try to get uid from result */
          try {
             /* Select first (should be only) record */
+            if (rs == null) {
+                return -2;
+            }
             if (rs.next()) {
                 uid = rs.getInt("uid");
             }
@@ -78,6 +81,10 @@ public class User {
             email + "', " + ht + ", " + wt +");");
         /* Return error if somethign strange happened */
         if (success != 1) {
+            if (db.isAlive() != true) {
+                return -4;
+            }
+            
             return -2;
         }
         
