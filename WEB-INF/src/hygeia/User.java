@@ -59,7 +59,7 @@ public class User {
         return this.db;
     }
     
-    /* Create a new user. Returns uid; zero if unsuccessful  */
+    /* Create a new user. Returns uid; negative if unsuccessful  */
     public static int createUser(Database db, String uname, String pwd, 
         String email, double ht, double wt) {
         
@@ -73,7 +73,10 @@ public class User {
         pwd = Algorithm.MD5(Algorithm.Clean(pwd));
         email = Algorithm.Clean(email);
         
-        
+        /* check if the account already exists. */
+        if (!User.accountExists(db, email)) {
+            return -4;
+        }
         
         /* Insert new record */
         int success = db.update("insert into users (username, hpwd, email, " +
@@ -81,10 +84,6 @@ public class User {
             email + "', " + ht + ", " + wt +");");
         /* Return error if somethign strange happened */
         if (success != 1) {
-            if (db.isAlive() != true) {
-                return -4;
-            }
-            
             return -2;
         }
         
@@ -99,6 +98,33 @@ public class User {
         return uid;
     }
 
+    /* Returns true if an account exists with the given email */
+    private static boolean accountExists(Database db, String email) {
+        
+        if ((db == null) || (email == null)) {
+            return false;
+        }
+        
+        email = Algorithm.Clean(email);
+        
+        ResultSet rs = db.execute("select uid from users where email = '" +
+            email + "');");
+        
+        try {
+            if (rs == null) {
+                return false;
+            }
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            return false;
+        }
+        
+    }
+
     
     /* Delete user. */
     public static boolean deleteUser(Database db, int uid) {
@@ -108,11 +134,14 @@ public class User {
     /* Sets instance variables for all properties from the database */
     public boolean getAllInfo() {
         
-        java.sql.ResultSet rs = this.db.execute("select username, email, height, weight"
+        ResultSet rs = this.db.execute("select username, email, height, weight"
             + " from users where uid = " + this.uid + ";");
         
         /* Set variables */
         try {
+            if (rs == null) {
+                return false;
+            }
             if (rs.next()) {
                 this.username = rs.getString("username");
                 this.email = rs.getString("email");
@@ -136,13 +165,7 @@ public class User {
             return this.username;
         }
     
-        /* Check that the db is accessable */
-        if (this.db == null) {
-            return null;
-        }
-    
         /* Get it */
-        System.out.print(this.db.isAlive() + "\n");
         ResultSet rs = this.db.execute("select username from users where uid = "
             + this.uid + ";");
         
@@ -150,6 +173,9 @@ public class User {
     
         /* Try to find it */
         try {
+            if (rs == null) {
+                return null;
+            }
             if (rs.next()) {
                 username = rs.getString("username");
                 this.username = username;
@@ -176,6 +202,9 @@ public class User {
         String email = null;
             
         try {
+            if (rs == null) {
+                return null;
+            }
             if (rs.next()) {
                 email = rs.getString("email");
             }
@@ -202,6 +231,9 @@ public class User {
         double height = 0;
             
         try {
+            if (rs == null) {
+                return -1;
+            }
             if (rs.next()) {
                 height = rs.getDouble("height");
             }
@@ -223,6 +255,9 @@ public class User {
         double weight = 0;
             
         try {
+            if (rs == null) {
+                return -1;
+            }
             if (rs.next()) {
                 weight = rs.getDouble("weight");
             }
@@ -247,7 +282,7 @@ public class User {
             + this.weight + " where uid = " + this.uid + ";");
 
         
-        if (up < 0) {
+        if (up < 1) {
             return false;
         }
         return true;
@@ -263,7 +298,7 @@ public class User {
              "' where uid = " + this.uid + ";");
 
         
-        if (up < 0) {
+        if (up < 1) {
             return false;
         }
         return true;
@@ -283,7 +318,7 @@ public class User {
              "' where uid = " + this.uid + ";");
 
         
-        if (up < 0) {
+        if (up < 1) {
             return false;
         }
         return true;
@@ -298,7 +333,7 @@ public class User {
              "' where uid = " + this.uid + ";");
 
         
-        if (up < 0) {
+        if (up < 1) {
             return false;
         }
         return true;
@@ -313,7 +348,7 @@ public class User {
             up = this.db.update("update users set weight='" + this.weight +
              "' where uid = " + this.uid + ";");
         
-        if (up < 0) {
+        if (up < 1) {
             return false;
         }
         return true;
@@ -330,7 +365,7 @@ public class User {
             up = this.db.update("update users set hpwd='" + pwd +
              "' where uid = " + this.uid + " and hpwd = '" + old + "';");
         
-        if (up < 0) {
+        if (up < 1) {
             return false;
         }
         return true;
