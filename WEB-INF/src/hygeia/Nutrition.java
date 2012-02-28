@@ -12,6 +12,11 @@ public class Nutrition {
     
     }
     
+    /* Adds the info in n to this object. Returns this. */
+    public Nutrition addNutrition(Nutrition n) {
+    
+    }
+    
     /* getters for all fields */
 
 }

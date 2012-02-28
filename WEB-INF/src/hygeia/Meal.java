@@ -13,25 +13,65 @@ public class Meal {
         this.mid = mid;
     }
     
-    /* Create a new meal in the database consisting of these foods. Returns meal id. */
-    public static int createMeal(Database db, User u, Food.Update f[]) {
-        if ((this.db == null) || (this.u == null) || f == null)) {
+    /* Create a new meal in the database consisting of these foods. Returns meal
+       id. */
+    public static int createMeal(Database db, User u, Food.Update f[], 
+        String name) {
+        if ((this.db == null) || (this.u == null) || f == null) || 
+            (name == null)) {
             return -1;
         }
         
-        int fids[] = new int[f.length];
-        double counts[] = new double[f.length];
+        name = Algorithm.Clean(name);
+        
+        int uid = u.getUid();
         
         /* Ensure each item in f is not null. */
+        /* Create Food.Update objects to get Nutrition. */
+        Nutrition sum = new Nutrition(0, 0, 0, 0);
         for (int i = 0; i < f.length; i++) {
             if (f[i] == null) {
-                return null;
+                return -2;
             }
-            fids[i] = f[i].fid;
-            counts[i] = f[i].count;
+            sum.addNutrition(f[i].getNutrition(db));
         }
         
+        /* Create meal record in database */
+        int r = db.update("insert into meals (uid, name, calories, " +
+            "carbohydrates, protein, fat) values (" + uid + ", '" + name + "', "
+            + sum.getCalories() + ", " + sum.getCarbohydrates() + ", " + 
+            sum.getProtein() + ", " + sum.getFat() + ");");
         
+        /* Check to see if it went correctly. */
+        if (r != 1) {
+            return -3;
+        }
+        
+        /* Now get the mid.. probably not the best way. */
+        int mid = 0;
+        ResultSet rs = db.execute("select mid from meals where uid = " + uid +
+            " and name = '" + name + "';");
+        try {
+            if (rs == null) {
+                return -4;
+            } else {
+                rs.next();
+                mid = rs.getInt("mid");
+            }
+        } catch (SQLException e) {
+            return -5;
+        }
+        
+        /* Not optimal but works to add components to database. */
+        for (Food.Update i : f) {
+            r = db.update("insert into components(mid, fid, count) values (" +
+                mid + ", " + i.getFid() + ", " + i.getCount() + ");");
+            if (r != 1) {
+                /* This is an unclean exit but this shouldn't happen. */
+                return -6;
+            }
+        }
+        return mid;
     }
     
     /* Return meal id. */
