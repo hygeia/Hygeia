@@ -18,5 +18,20 @@ public class Nutrition {
     }
     
     /* getters for all fields */
+    public double getCalories() {
+      
+    }
+        
+    public double getCarbohydrates() {
+        
+    }
+        
+    public double getProtein() {
+        
+    }
+        
+    public double getFat() {
+    
+    }
 
 }

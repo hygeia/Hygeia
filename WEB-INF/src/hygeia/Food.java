@@ -43,6 +43,37 @@ public class Food {
         }
         
         /* getters for all fields */
+        public String getName() {
+        
+        }
+        
+        public int getWeight() {
+        
+        }
+        
+        public double getWeight() {
+        
+        }
+        
+        public double getCount() {
+        
+        }
+        
+        public double getCalories() {
+        
+        }
+        
+        public double getCarbohydrates() {
+        
+        }
+        
+        public double getProtein() {
+        
+        }
+        
+        public double getFat() {
+        
+        }
     }
     
     /* Food.List is used for producing a list of foods visible to the user. */
@@ -52,7 +83,7 @@ public class Food {
         private int fid;
         private double count;
         
-        public List(String name, int fid) {
+        public List(String name, int fid, double count) {
         
         }
         

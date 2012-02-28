@@ -1,6 +1,7 @@
 package hygeia;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Meal {
 
@@ -103,12 +104,57 @@ public class Meal {
     
     /* Return array of Food items that make up meal */
     public Food.Update[] getMeal() {
-    
+        ResultSet rs = this.db.execute("select fid, count from components where"
+            + "mid = " + this.mid + ";");
+        
+        ArrayList<Food.Update> list = new ArrayList<Food.Update>();
+        
+        try {
+            if (rs == null) {
+                return null;
+            } else {
+                while(rs.next()) {
+                    int fid = rs.getInt("fid");
+                    double count = rs.getDouble("count");
+                    list.add(new Food.Update(fid, count));
+                }
+            }
+        } catch (SQLException e) {
+            if (list.isEmpty()) {
+                return null;
+            }
+        }
+        
+        return list.toArray();
     }
     
     /* Return array of Food.List items that make up meal to display to user. */
     public Food.List[] getFoodList() {
-    
+        ResultSet rs = this.db.execute("select foods.fid, foods.name, " +
+             "components.count from components inner join foods on " +
+             "components.fid=foods.fid where components.mid = " + this.mid + 
+             " order by foods.name;");
+        
+        ArrayList<Food.List> list = new ArrayList<Food.List>();
+        
+        try {
+            if (rs == null) {
+                return null;
+            } else {
+                while(rs.next()) {
+                    int fid = rs.getInt("fid");
+                    String name = rs.getString("name");
+                    double count = rs.getDouble("count");
+                    list.add(new Food.List(name, fid, count));
+                }
+            }
+        } catch (SQLException e) {
+            if (list.isEmpty()) {
+                return null;
+            }
+        }
+        
+        return list.toArray();
     }
     
     /* Returns a nutrition object with info for the whole meal */
