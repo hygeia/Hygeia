@@ -8,6 +8,7 @@ if (session.getAttribute("uid") == null) {
 }
 
 String username = (String)session.getAttribute("username");
+int uid = (Integer)session.getAttribute("uid");
 
 %>
 <html>
@@ -16,7 +17,7 @@ String username = (String)session.getAttribute("username");
 <h1>Hygeia</h1>
 <h2>Version 0.8</h2>
 <br>
-<p>Hello, <%= username %> !</p>
+<p>Hello, <%= username %>, user number <%= uid %> !</p>
 <form method="post" action="logout.jsp">
 <input type="hidden" name="logout" type="logout">
 <p>Logout: <input type="submit"></p>

@@ -14,8 +14,8 @@ if (session.getAttribute("uid") == null) {
    to close the database when you are done with it!
    
    Some common tasks:
-   Get user id: int uid = session.getAttribute("uid");
-   Get username: String username = session.getAttribute("username");
+   Get user id: int uid = (Integer)session.getAttribute("uid");
+   Get username: String username = (String)session.getAttribute("username");
    Connect to the database: Database db = new Database();
    Create a user object: User u = new User(db, uid);
    Close the database: db.close();
