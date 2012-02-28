@@ -33,7 +33,7 @@ public class Food {
     public static class Create {
         
         private String name;
-        private int weight;
+        private double weight;
         private double count;
         private double calories, carbohydrates, protein, fat, factor;
         
