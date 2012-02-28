@@ -11,7 +11,7 @@ public class Food {
         private int fid;
         private double count;
         
-        public Update(int fid, int count) {
+        public Update(int fid, double count) {
         
         }
         
@@ -37,17 +37,13 @@ public class Food {
         private double count;
         private double calories, carbohydrates, protein, fat, factor;
         
-        public Create(String name, int count, double factor, int wt, double cal, 
-            double carb, double pro, double fat) {
+        public Create(String name, double count, double factor, int wt, 
+            double cal, double carb, double pro, double fat) {
         
         }
         
         /* getters for all fields */
         public String getName() {
-        
-        }
-        
-        public int getWeight() {
         
         }
         

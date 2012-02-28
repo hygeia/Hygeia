@@ -74,7 +74,7 @@ public class User {
         email = Algorithm.Clean(email);
         
         /* check if the account already exists. */
-        if (!User.accountExists(db, email)) {
+        if (User.accountExists(db, email)) {
             return -4;
         }
         

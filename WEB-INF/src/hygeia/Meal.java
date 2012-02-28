@@ -18,7 +18,7 @@ public class Meal {
        id. */
     public static int createMeal(Database db, User u, Food.Update f[], 
         String name) {
-        if ((this.db == null) || (this.u == null) || (f == null) || 
+        if ((db == null) || (u == null) || (f == null) || 
             (name == null)) {
             return -1;
         }
@@ -125,7 +125,7 @@ public class Meal {
             }
         }
         
-        return list.toArray();
+        return (Food.Update[])list.toArray();
     }
     
     /* Return array of Food.List items that make up meal to display to user. */
@@ -154,7 +154,7 @@ public class Meal {
             }
         }
         
-        return list.toArray();
+        return (Food.List[])list.toArray();
     }
     
     /* Returns a nutrition object with info for the whole meal */
@@ -176,7 +176,7 @@ public class Meal {
                 double carbs = rs.getDouble("carbohydrates");
                 double fat = rs.getDouble("fat");
                 double pro = rs.getDouble("protein");
-                return new Nutrition(cal, carbs, pro, fat);
+                return new Nutrition(cals, carbs, pro, fat);
             }
             return null;
         } catch (SQLException e) {
@@ -207,7 +207,7 @@ public class Meal {
         }
         
         public Timestamp getOccurrence() {
-            return this.occcurrence;
+            return this.occurrence;
         }
     
     }
