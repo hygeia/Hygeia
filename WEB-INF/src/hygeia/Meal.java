@@ -17,7 +17,7 @@ public class Meal {
        id. */
     public static int createMeal(Database db, User u, Food.Update f[], 
         String name) {
-        if ((this.db == null) || (this.u == null) || f == null) || 
+        if ((this.db == null) || (this.u == null) || (f == null) || 
             (name == null)) {
             return -1;
         }
