@@ -1,0 +1,85 @@
+SQL Tutorial/Documentation
+
+FOUR MAIN STATEMENTS:
+
+1. INSERT
+2. SELECT
+3. UPDATE
+4. DELETE
+
+Purpose: Explain how to author simple SQL statements.
+
+1. INSERT
+
+    The insert statement inserts a new record into the database. Format:
+        INSERT INTO [table] ([fields]) VALUES ([data]);
+    Little explanation: specify the field names that are to be inserted in
+    parenthesis after the table's name. Provide the actual values in 
+    parenthesis after "VALUES".
+    Examples:
+        INSERT INTO users (username, email) VALUES ('alex', 'alex@hygeia');
+        INSERT INTO foods (name, calories) VALUES ('banana', 70);
+        INSERT INTO meals (uid) VALUES (6);
+    Notes: If any fields are specified to be non-null, you will receive an error
+    if you do not provide a value for those fields. Auto-incrementing fields do 
+    not need a value, because they will be assigned automatically by the 
+    database.
+    
+2. SELECT
+
+    The select statement selects fields from the database for viewing. Format:
+        SELECT [fields] FROM [table] WHERE [field] = [value];
+    Explanation: Specify the fields (comma separated) to be selected, or a star
+    (*) for all fields. Specify the table name. Specify the name of the field
+    to be searched, and provide the value that it should be.
+    Advanced: Multiple WHERE conditions can be used through AND and OR. Results
+    can be ordered by ORDER BY. Default order is ascending, but descending can 
+    be used with DESC. When fields from two tables that share a field are 
+    needed, INNER JOIN can combine both into one statement.
+    Examples:
+        SELECT uid FROM users WHERE email = 'alex@h' AND hpwd='1234';
+        SELECT * FROM meals WHERE mid = 7;
+        SELECT uid, email FROM users ORDER BY name DESC;
+        SELECT foods.name, components.fid FROM components INNER JOIN foods ON
+            components.fid=foods.fid;
+    Notes: You do not need to select data to modify it. You will get an error
+    if you ask for a non-existent field.
+
+3. UPDATE
+
+    The update statement updates a pre-existing record. Format:
+        UPDATE [table] SET [field] = [value] WHERE [field] = [value];
+    Explanation: Specify table to update. Specify field to change and new value.
+    Specify field name and value to be searched (to find the record that should
+    be updated). 
+    Examples:
+        UPDATE users SET email = 'new@hygeia' WHERE uid = 1;
+        UPDATE users SET height = 21, weight = 86 WHERE uid = 7;
+        UPDATE inventory SET count = 0 WHERE uid = 3 AND fid = 131;
+    Notes: Do not skip the WHERE clause or this will update all records in the
+    table! (AKA change everyone's name to bongo...)
+
+4. DELETE
+
+    The delete statement deletes a record from the table. Format:
+        DELETE FROM [table] WHERE [field] = [value];
+    Explanation: Specify table name. Specify field name and value to be 
+    searched. All records foudn will be deleted.
+    Examples:
+        DELETE FROM users WHERE uid = 6;
+        DELETE FROM components WHERE mid = 13;
+    Notes: This will delete all records that match the WHERE condition 
+    permanently.
+    
+5. More Notes
+
+    SQL fields and table names are case sensitive. Statements (commands) are 
+    not. So INSERT is the same as insert, but UID is not uid. Use quotes 
+    around strings! Double or single works. Login information as well as the 
+    name of the current database is stored at the top of the Database class.
+    You can directly access the database (to enter or test statements) by
+    running:
+        mysql -u hygeiadb -p
+    from the command line on the server. Enter the password found in the class.
+    The database doc has information on all table names and fields. The dumps
+    directory contains the SQL code to create the database. 

@@ -1,6 +1,6 @@
 Hygeia Project
 Database Documentation
-Version 2
+Version 3
 
 Table of Contents:
 
@@ -72,7 +72,7 @@ this table is a food item in a user's inventory.
         The fid field is the food id field, which contains the id of the food
         contained in a user's inventory. This field links to the foods table.
         
-    D. integer count
+    D. real count
     
         The count field is the amount of the food item in the user's inventory.
         This will be the number of servings, or common measurements of the item. 
@@ -100,7 +100,7 @@ information. Each record is a food item with it's information.
         the table should be done by fid or uid, and not by specific names. This 
         field should be searched if trying to auto-complete a user's search. 
 
-    D. integer weight
+    D. real weight
     
         The weight field is the weight of the item in grams.
 
@@ -141,7 +141,7 @@ Each record is a food item, or component, of a meal.
         The fid field is the food id, which is the food id of the food being
         specified by the record.
         
-    D. integer count
+    D. real count
     
         The count field specifies the amount in servings or common measurements
         that is needed to produce the meal.
