@@ -2,17 +2,20 @@ Hygeia Project
 Coding Assignments
 
 I. Java Files
-    - Asher, would you be interested in leading this team?
     - What needs to be coded:
+    1. Alex
         Database.java
-        Encryption.java
+        User.java
+        Meal.java
+    2. Corbin
+        Algorithm.java
         Favorites.java
         History.java
+    3. Asher
         Inventory.java
-        Meal.java
-        User.java
-    - Who needs to code:
-        Asher, Alex, Corbin
+        Admin.java
+        Nutrition.java
+        Food.java
 
 II. JSP Files
   A. Adam William Kuipers
