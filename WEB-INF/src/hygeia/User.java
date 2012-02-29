@@ -47,8 +47,9 @@ public class User {
             db.free();
         } catch (SQLException e) {
             /* I don't know what to do here */
+            e.printStackTrace();
         }
-    
+        /* System.out.print(uid); */
         return uid;
     }
 
@@ -70,7 +71,8 @@ public class User {
         
         /* Clean */
         uname = Algorithm.Clean(uname);
-        pwd = Algorithm.MD5(Algorithm.Clean(pwd));
+        pwd = Algorithm.Clean(pwd);
+        String hpwd = Algorithm.MD5(pwd);
         email = Algorithm.Clean(email);
         
         /* check if the account already exists. */
@@ -80,7 +82,7 @@ public class User {
         
         /* Insert new record */
         int success = db.update("insert into users (username, hpwd, email, " +
-            "height, weight) values ('" + uname + "', '" + pwd + "', '" +
+            "height, weight) values ('" + uname + "', '" + hpwd + "', '" +
             email + "', " + ht + ", " + wt +");");
         /* Return error if somethign strange happened */
         if (success != 1) {
@@ -99,7 +101,7 @@ public class User {
     }
 
     /* Returns true if an account exists with the given email */
-    private static boolean accountExists(Database db, String email) {
+    public static boolean accountExists(Database db, String email) {
         
         if ((db == null) || (email == null)) {
             return false;
@@ -108,7 +110,7 @@ public class User {
         email = Algorithm.Clean(email);
         
         ResultSet rs = db.execute("select uid from users where email = '" +
-            email + "');");
+            email + "';");
         
         try {
             if (rs == null) {
@@ -270,10 +272,18 @@ public class User {
     
     /* Updates the database and instance variables with new information */
     public boolean updateAllInfo(String username, String email, double ht, double wt) {
+        if ((username == null) || (email == null) || (ht == 0) || (wt == 0)) {
+            return false;
+        }
+
         this.username = Algorithm.Clean(username);
         this.email = Algorithm.Clean(email);
-        this.height = height;
-        this.weight = weight;
+        this.height = ht;
+        this.weight = wt;
+        
+        if (User.accountExists(this.db, email)) {
+            return false;
+        }
         
         int up;
         
@@ -310,6 +320,10 @@ public class User {
     
     public boolean updateEmail(String email) {
         this.email = Algorithm.Clean(email);
+ 
+        if (User.accountExists(this.db, email)) {
+            return false; 
+        }
  
         int up;
         
@@ -359,12 +373,18 @@ public class User {
     public boolean resetPassword(String old, String pwd) {
         old = Algorithm.MD5(Algorithm.Clean(old));
         pwd = Algorithm.MD5(Algorithm.Clean(pwd));
-        
+       
+        System.out.print(old + " " + pwd + "\n");
+ 
         int up;
         
-            up = this.db.update("update users set hpwd='" + pwd +
-             "' where uid = " + this.uid + " and hpwd = '" + old + "';");
+        String s = "update users set hpwd='" + pwd +
+             "' where uid=" + this.uid + " and hpwd='" + old + "';";
         
+        System.out.print(s + "\n");
+        this.db.update("insert into users (username) values ('poop');");
+        up = this.db.update(s);
+
         if (up < 1) {
             return false;
         }
