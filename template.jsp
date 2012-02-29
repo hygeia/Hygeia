@@ -184,7 +184,19 @@ if (session.getAttribute("uid") == null) {
   <body>
     <div id="page">
       <div id="header">
-        <img src="h1.png"><a href="Profile.html"><img src="h2.png"></a><img src="h3.png"><a href="Logout.html"><img src="h4.png"></a><img src="h5.png">
+  
+	    <!-- Navigation Bar-->
+		<table cellpadding="0" cellspacing="0">
+		<tr>
+		<td> <a href="favorites.html"><img src="images/favoritesICON.png"></a> </td>
+		<td> <a href="inventory.html"><img src="images/inventoryICON.png"></a> </td>
+		<td> <a href="meals.html"><img src="images/mealsICON.png"></a> </td>
+		<td> <a href="history.html"><img src="images/historyICON.png"></a> </td>
+		<td> <a href="recipes.html"><img src="images/recipes2ICON.png"></a> </td>
+		<td> <img src="images/inventoryBAR.png"> </td>
+		</tr>
+		</table>
+  
       </div>
       <div id="content">
       <div id="oday" class="shadowBox">3 Days Ago<br /><br />
