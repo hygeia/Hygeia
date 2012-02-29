@@ -1,7 +1,15 @@
 <html>
-<head><title>Hygeia Is Under Construction!</title></head>
+<head>
+  <title>
+    Hygeia Is Under Construction!
+  </title>
+</head>
 <body>
-<h1>Hello! Welcome to Hygeia! We are currently under construction!</h1>
-<h2>Come again soon!</h2>
+  <form name = "loggin" action = "login.jsp" method = "post">
+    Email: <input type = "text" name="email" /><br />
+    Password: <input type="password" name="password" /><br />
+    <input type="hidden" name="login" value="login" />
+    <input type="submit" value = "Submit" />
+  </form>
 </body>
-</html>
+</html> 
