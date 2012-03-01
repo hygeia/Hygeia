@@ -1,0 +1,37 @@
+<html>
+<title>
+Hygeia
+</title>
+
+<head>
+<style type="text/css">
+body {background-color:7b840d;}
+<!--input.test {color: a3a770; background:url(EmailAddress.png); height:40px; width:200px; font-size:16px; border:0; border-color:353b00;}-->
+input.email {color: a3a770; background-color:444a1e; height:30px; font-size:16px; border-color:353b00; border-radius:7px; font-family:"Arial"; font-weight:bold; border-style:solid;}
+input.password {color: a3a770; background-color:444a1e; height:30px; font-size:16px; border-color:353b00; border-radius:7px; border-style:solid;}
+input.button {vertical-align: -12px; }
+</style>
+</head>
+
+<body>
+
+<div align="center">
+
+<img src="images/HomepageLogo.png">
+
+<br />
+
+<!-- NEED TO CORRECT AUTHENTICATION -->
+<form>
+<!--<input type="text" action="index.jsp" method="get" value="email address" name="test" class="test"/>-->
+<input type="text" action="index.jsp" value="email address" onclick="this.value='';" method="get" name="email" class="email"/>
+<input type="password" value="password" onclick="this.value='';" name="password" class="password"/>
+<input type="image" src="images/LoginButton.png" value="submit" class="button"/>
+</form>
+<img src="images/SoGood.png">
+
+</div>
+
+</body>
+
+</html>
