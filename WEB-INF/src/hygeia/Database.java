@@ -88,22 +88,23 @@ public class Database {
     
     /* Executes a query (select only) and returns results */
     public ResultSet execute(String query) {
-        if (this.con == null) {
-            return null;
-        } /*else if (this.stmt == null) {*/
-            try {
-                this.stmt = this.con.createStatement();
-                if (this.stmt == null) {
-                    System.out.print("Couldn't create stmt\n");
-                    return null;
-                }
-            } catch (SQLException e) {
-                System.out.print("Exception on stmt create\n");
-                return null;
-            }
-        /*} else */if (query == null) {
+        if (query == null) {
             return null;
         }
+        if (this.con == null) {
+            return null;
+        }
+        try {
+            this.stmt = this.con.createStatement();
+            if (this.stmt == null) {
+                System.out.print("Couldn't create stmt\n");
+                return null;
+            }
+        } catch (SQLException e) {
+            System.out.print("Exception on stmt create\n");
+            return null;
+        }
+        
         
         ResultSet rs;
         
@@ -122,20 +123,21 @@ public class Database {
     
     /* Perform an update, insertion, or deletion */
     public int update(String query) {
-        if (this.con == null) {
-            return -1;
-        } else if (this.stmt == null) {
-            try {
-                this.stmt = this.con.createStatement();
-                if (this.stmt == null) {
-                    return -2;
-                }
-            } catch (SQLException e) {
-                return -3;
-            }
-        } else if (query == null) {
+        if (query == null) {
             return -4;
         }
+        if (this.con == null) {
+            return -1;
+        } 
+        try {
+            this.stmt = this.con.createStatement();
+            if (this.stmt == null) {
+                return -2;
+            }
+        } catch (SQLException e) {
+            return -3;
+        }
+        
         
         int value;
         
