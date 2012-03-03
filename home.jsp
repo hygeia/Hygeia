@@ -22,6 +22,7 @@
    Redirect to another page: response.sendRedirect("url"); return;
  */
 
+ /* this is all temporary because the java files are not yet complete */
 int[] pct1 = {30, 40, 32}; //today
 int[] pct2 = {30, 40, 42};
 int[] pct3 = {30, 40, 37};
@@ -44,6 +45,10 @@ mealFoods[1][0] = "Hamburger"; mealFoods[1][1] = "Fries"; mealFoods[1][2] = "Cok
 String[][] mealNuts = new String[2][3];
 mealNuts[0][0] = "7"; mealNuts[0][1] = "12"; mealNuts[0][2] = "13";
 mealNuts[1][0] = "17"; mealNuts[1][1] = "14"; mealNuts[1][2] = "19";
+
+/* This is what code will actually be called
+	
+*/
 
  %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
