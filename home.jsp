@@ -1,4 +1,4 @@
-<%@ page import = "hygeia.*" %>
+<%@ page import = "hygeia.*,java.util.*,java.sql.Timestamp,java.text.*" %>
 <%
 /* Check to see if a session exists */
 /*if (session.getAttribute("uid") == null) {*/
@@ -33,11 +33,18 @@ int[] block2 = {20, 30, 10};
 int[] block3 = {20, 30, 10};
 int[] block4 = {20, 30, 10};
 
+DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
+Date todaysdate = new Date();
+String day1 = df.format(todaysdate);
+String day2 = df.format(new Date(todaysdate.getTime() - 86400000));
+String day3 = df.format(new Date(todaysdate.getTime() - (86400000 * 2)));
+String day4 = df.format(new Date(todaysdate.getTime() - (86400000 * 3)));
+/*
 String day1 = "March 1, 2012";
 String day2 = "February 29, 2012";
 String day3 = "February 28, 2012";
 String day4 = "February 27, 2012";
-
+*/
 /* this will be replaced with the java code below when it works */
 String[] meals = {"Breakfast", "Lunch"};
 String[][] mealFoods = new String[2][3];
@@ -52,21 +59,81 @@ Database db = new Database();
 int uid = session.getAttribute("uid");
 User u = new User(db, uid);
 History hist = new History(u);
-Meal.List meals[] = hist.getHistory();
-String s = "";
+Meal.List arr[] = hist.getHistory();
+ArrayList<Meal> todayarr = new ArrayList<Meal.List>();
+ArrayList<Meal> yesterdayarr = new ArrayList<Meal.List>();
+ArrayList<Meal> twodayarr = new ArrayList<Meal.List>();
+ArrayList<Meal> threedayarr = new ArrayList<Meal.List>();
 for(int i=0; i<meals.length; i++){
-	s += "<h2>" + meals[i] + "</h2>";
-	Food.List foods[] = meals[i].getFoodList();
-	for(int j=0; j < foods.length; j++){
-		s += (foods[j] + "<br />");
+	switch(findDay(arr[i])){
+		case 0:
+			todayarr.add(new Meal(arr[i].getMid(), db));
+			break;
+		case 1:
+			yesterdayarr.add(new Meal(arr[i].getMid(), db));
+			break;
+		case 2:
+			twodayarr.add(new Meal(arr[i].getMid(), db));
+			break;
+		case 3:
+			threedayarr.add(new Meal(arr[i].getMid(), db));
+			break;
 	}
-	Nutrition nuts = meals[i].getNutrition();
-	s += "<p class=\"total\">Protein: " + nuts.getProtein() + "g ";
-	s += "Fat: " + nuts.getFat() + "g Carbs: " + nuts.getCarbohydrates() + "g</p>";
 }
+
+int[] pct1 = {30, 40, 32}; //today
+int[] pct2 = {30, 40, 42};
+int[] pct3 = {30, 40, 37};
+int[] pct4 = {30, 40, 32};
+
+int[] block1 = {20, 30, 10}; //today
+int[] block2 = {20, 30, 10};
+int[] block3 = {20, 30, 10};
+int[] block4 = {20, 30, 10};
+
+String todayinfo = "";
+for(int i=0; i<todayarr.size(); i++){
+	todayinfo += "<h2>" + todayarr.get(i).getName() + "</h2>";
+	Food.List foods[] = todayarr.get(i).getFoodList();
+	for(int j=0; j < foods.length; j++){
+		todayinfo += (foods[j].getName() + "<br />");
+	}
+	Nutrition nuts = todayarr.get(i).getNutrition();
+	todayinfo += "<p class=\"total\">Protein: " + nuts.getProtein() + "g ";
+	todayinfo += "Fat: " + nuts.getFat() + "g Carbs: " + nuts.getCarbohydrates() + "g</p>";
+}
+
+db.close();
 */
 
  %>
+ <%!
+	/* 0 = today, 1 = yesterday, 2 = two days ago, 3 = three days ago, -1 = more than three days ago */
+/*	int findDay(Meal.List m){
+		Calendar c = new Calendar();
+		int year = c.get(Calendar.YEAR);
+		int month = c.get(Calendar.MONTH);
+		int day = c.get(Calendar.DAY_OF_MONTH);
+		c.set(year, month, day, 0, 0);
+		Timestamp today = new Timestamp(c.getTimeInMillis());
+		Timestamp yesterday = new Timestamp(c.getTimeInMillis() - 86400000);
+		Timestamp twoday = new Timestamp(c.getTimeInMillis() - (86400000 * 2));
+		Timestamp threeday = new Timestamp(c.getTimeInMillis() - (86400000 * 3));
+		
+		if(m.getOccurrence.after(today)){
+			return 0;
+		}else if(m.getOccurrence.after(yesterday)){
+			return 1;
+		}else if(m.getOccurrence.after(twoday)){
+			return 2;
+		}else if(m.getOccurrence.after(threeday)){
+			return 3;
+		}else{
+			return -1;
+		}
+	}*/
+ %>
+ 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
   <head>
