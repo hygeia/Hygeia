@@ -14,6 +14,12 @@ public class Meal {
         this.mid = mid;
     }
     
+    /* Remove the meal from the database. Positive if successful. */
+    public int removeMeal() {
+        int r = this.db.update("delete from meals where mid=" + this.mid + ";");
+        return r;
+    }
+    
     /* Create a new meal in the database consisting of these foods. Returns meal
        id. */
     public static int createMeal(Database db, User u, Food.Update f[], 
