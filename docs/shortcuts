@@ -1,0 +1,12 @@
+
+
+Shortcuts for use on the server:
+
+gita:  git add
+gitc:  git commit -m  !! Doesn't work yet
+gitm:  git mv
+gitpl: git pull
+gitph: git push
+gitr:  git rm
+
+reload: Reloads tomcat (Alex, Asher, and Corbin only)
