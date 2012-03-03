@@ -37,7 +37,6 @@ String day2 = "February 29, 2012";
 String day3 = "February 28, 2012";
 String day4 = "February 27, 2012";
 
-/* these will be removed when java methods are called instead */
 String[] meals = {"Breakfast", "Lunch"};
 String[][] mealFoods = new String[2][3];
 mealFoods[0][0] = "Eggs"; mealFoods[0][1] = "Bacon"; mealFoods[0][2] = "Sausage";
