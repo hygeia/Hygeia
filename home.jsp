@@ -1,4 +1,4 @@
-<%@ page import = "hygeia.*,java.lang.*" %>
+<%@ page import = "hygeia.*" %>
 <%
 /* Check to see if a session exists */
 /*if (session.getAttribute("uid") == null) {*/
@@ -38,6 +38,7 @@ String day2 = "February 29, 2012";
 String day3 = "February 28, 2012";
 String day4 = "February 27, 2012";
 
+/* this will be replaced with the java code below when it works */
 String[] meals = {"Breakfast", "Lunch"};
 String[][] mealFoods = new String[2][3];
 mealFoods[0][0] = "Eggs"; mealFoods[0][1] = "Bacon"; mealFoods[0][2] = "Sausage";
@@ -47,7 +48,22 @@ mealNuts[0][0] = "7"; mealNuts[0][1] = "12"; mealNuts[0][2] = "13";
 mealNuts[1][0] = "17"; mealNuts[1][1] = "14"; mealNuts[1][2] = "19";
 
 /* This is what code will actually be called
-	
+Database db = new Database();
+int uid = session.getAttribute("uid");
+User u = new User(db, uid);
+History hist = new History(u);
+Meal.List meals[] = hist.getHistory();
+String s = "";
+for(int i=0; i<meals.length; i++){
+	s += "<h2>" + meals[i] + "</h2>";
+	Food.List foods[] = meals[i].getFoodList();
+	for(int j=0; j < foods.length; j++){
+		s += (foods[j] + "<br />");
+	}
+	Nutrition nuts = meals[i].getNutrition();
+	s += "<p class=\"total\">Protein: " + nuts.getProtein() + "g ";
+	s += "Fat: " + nuts.getFat() + "g Carbs: " + nuts.getCarbohydrates() + "g</p>";
+}
 */
 
  %>
@@ -212,7 +228,7 @@ mealNuts[1][0] = "17"; mealNuts[1][1] = "14"; mealNuts[1][2] = "19";
   <body>
     <div id="page">
       <div id="header">
-        <img src="h1.png"><a href="Profile.html"><img src="h2.png"></a><img src="h3.png"><a href="Logout.html"><img src="h4.png"></a><img src="h5.png">
+        <img src="images/h1.png"><a href="Profile.html"><img src="images/h2.png"></a><img src="images/h3.png"><a href="Logout.html"><img src="images/h4.png"></a><img src="images/h5.png">
       </div>
       <div id="content">
       <div id="oday" class="shadowBox"><%= day4 %><br /><br />
@@ -261,6 +277,8 @@ mealNuts[1][0] = "17"; mealNuts[1][1] = "14"; mealNuts[1][2] = "19";
 		ret += "Fat: " + mealNuts[i][1] + "g Carbs: " + mealNuts[i][2] + "g</p>";
 	}
 	out.print(ret);
+	
+	//this will be replaced with s as calculated at the top
 %>
         </p>
       </div>
