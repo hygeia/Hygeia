@@ -51,7 +51,7 @@ mealNuts[1][0] = "19"; mealNuts[1][1] = "17"; mealNuts[1][2] = "14";
 
 /* This is what code will actually be called
 Database db = new Database();
-int uid = session.getAttribute("uid");
+int uid = (Integer)session.getAttribute("uid");
 User u = new User(db, uid);
 History hist = new History(u);
 Meal.List arr[] = hist.getHistory();
@@ -110,10 +110,6 @@ for(int i=0; i<threedayarr.size(); i++){
 int[] pct4 = {tempc/threedayarr.size(), tempp/threedayarr.size(), tempf/threedayarr.size()};
 
 // calculate blocks of carbs, protein, and fat for the bar charts 
-int[] block1 = {20, 10, 30}; //today
-int[] block2 = {20, 10, 30};
-int[] block3 = {20, 10, 30};
-int[] block4 = {20, 10, 30};
 
 // create a string that shows meal names, foods, and nutrition info for today 
 String todayinfo = "";
