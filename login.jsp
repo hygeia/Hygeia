@@ -35,17 +35,19 @@ if (request.getParameter("login") != null) {
 }
 %>
 <html>
-<head><title>Hygeia</title></head>
-<body>
-<h1>Hygeia</h1>
-<h2>Version 0.8</h2>
-<h3>Login Page</h3>
-<br>
-<form method="post" action="login.jsp">
-<p>Email: <input name="email"></p>
-<p>Password: <input name="password"></p>
-<input type="hidden" name="login" value="login">
-<p><input type="submit"></p>
-</form>
-</body>
+  <head>
+    <title>Login | Hygeia</title>
+  </head>
+  <body>
+    <h1>Hygeia</h1>
+    <h2>Version 0.8</h2>
+    <h3>Login Page</h3>
+    <br>
+    <form method="post" action="login.jsp">
+      Email: <input name="email" /><br />
+      Password: <input name="password" /><br />
+      <input type="hidden" name="login" value="login" /><br />
+      <input type="submit" />
+    </form>
+  </body>
 </html>

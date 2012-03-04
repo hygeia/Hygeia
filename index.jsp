@@ -1,15 +1,24 @@
+<%
+/* Check to see if a session exists */
+if (session.getAttribute("uid") != null) {
+    response.sendRedirect("home.jsp");
+    return;
+}
+%>
 <html>
-<head>
-  <title>
-    Hygeia Is Under Construction!
-  </title>
-</head>
+  <head>
+    <title>Hygeia</title>
+  </head>
 <body>
-  <form name = "loggin" action = "login.jsp" method = "post">
-    Email: <input type = "text" name="email" /><br />
-    Password: <input type="password" name="password" /><br />
-    <input type="hidden" name="login" value="login" />
-    <input type="submit" value = "Submit" />
-  </form>
+  <h1>Hygeia</h1>
+  <h2>Version 0.8</h2>
+<br />
+<p>Login or <a href="signup.jsp">Signup</a></p>
+<form method="post" action="login.jsp">
+  Email: <input type="text" name="email" /><br />
+  Password: <input type="password" name="password" /><br />
+<input type="hidden" name="login" value="login" />
+<input type="submit" />
+</form>
 </body>
-</html> 
+</html>

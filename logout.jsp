@@ -1,13 +1,9 @@
-<html>
-  <head>
-    <title>
-      Log Out | Hygeia
-    </title>
-  </head>
-  <body>
-    <form action="logout.jsp" method="post" />
-        <input type="hidden" name="logout" value="logout" />
-        <input type="submit" />
-    </form>
-  </body>
-</html>
+<%
+/* Delete the session if it exists */
+if (request.getSession(false) != null) {
+    session.invalidate();
+}
+
+/* Send everyone to index page */
+response.sendRedirect("index.jsp");
+%>
