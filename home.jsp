@@ -23,15 +23,15 @@
  */
 
  /* this is all temporary because the java files are not yet complete */
-int[] pct1 = {30, 40, 32}; //today
-int[] pct2 = {30, 40, 42};
-int[] pct3 = {30, 40, 37};
-int[] pct4 = {30, 40, 32};
+int[] pct1 = {30, 32, 40}; //today
+int[] pct2 = {30, 42, 40};
+int[] pct3 = {30, 37, 40};
+int[] pct4 = {30, 32, 40};
 
-int[] block1 = {20, 30, 10}; //today
-int[] block2 = {20, 30, 10};
-int[] block3 = {20, 30, 10};
-int[] block4 = {20, 30, 10};
+int[] block1 = {20, 10, 30}; //today
+int[] block2 = {20, 10, 30};
+int[] block3 = {20, 10, 30};
+int[] block4 = {20, 10, 30};
 
 DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
 Date todaysdate = new Date();
@@ -39,20 +39,15 @@ String day1 = df.format(todaysdate);
 String day2 = df.format(new Date(todaysdate.getTime() - 86400000));
 String day3 = df.format(new Date(todaysdate.getTime() - (86400000 * 2)));
 String day4 = df.format(new Date(todaysdate.getTime() - (86400000 * 3)));
-/*
-String day1 = "March 1, 2012";
-String day2 = "February 29, 2012";
-String day3 = "February 28, 2012";
-String day4 = "February 27, 2012";
-*/
+
 /* this will be replaced with the java code below when it works */
 String[] meals = {"Breakfast", "Lunch"};
 String[][] mealFoods = new String[2][3];
 mealFoods[0][0] = "Eggs"; mealFoods[0][1] = "Bacon"; mealFoods[0][2] = "Sausage";
 mealFoods[1][0] = "Hamburger"; mealFoods[1][1] = "Fries"; mealFoods[1][2] = "Coke";
 String[][] mealNuts = new String[2][3];
-mealNuts[0][0] = "7"; mealNuts[0][1] = "12"; mealNuts[0][2] = "13";
-mealNuts[1][0] = "17"; mealNuts[1][1] = "14"; mealNuts[1][2] = "19";
+mealNuts[0][0] = "13"; mealNuts[0][1] = "7"; mealNuts[0][2] = "12";
+mealNuts[1][0] = "19"; mealNuts[1][1] = "17"; mealNuts[1][2] = "14";
 
 /* This is what code will actually be called
 Database db = new Database();
@@ -81,16 +76,46 @@ for(int i=0; i<meals.length; i++){
 	}
 }
 
-int[] pct1 = {30, 40, 32}; //today
-int[] pct2 = {30, 40, 42};
-int[] pct3 = {30, 40, 37};
-int[] pct4 = {30, 40, 32};
+// calculate percentage of carbs, protein, and fat for the pie charts
+int tempc = 0;
+int tempp = 0;
+int tempf = 0;
+for(int i=0; i<todayarr.size(); i++){
+	Nutrition nuts = todayarr.get(i).getNutrition();
+	tempc += nuts.getCarbohydrates();
+	tempp += nuts.getProtein();
+	tempf += nuts.getFat();
+}
+int[] pct1 = {tempc/todayarr.size(), tempf/todayarr.size(), tempp/todayarr.size()};
+for(int i=0; i<yesterdayarr.size(); i++){
+	Nutrition nuts = yesterdayarr.get(i).getNutrition();
+	tempc += nuts.getCarbohydrates();
+	tempp += nuts.getProtein();
+	tempf += nuts.getFat();
+}
+int[] pct2 = {tempc/yesterdayarr.size(), tempf/yesterdayarr.size(), tempp/yesterdayarr.size()};
+for(int i=0; i<twodayarr.size(); i++){
+	Nutrition nuts = twodayarr.get(i).getNutrition();
+	tempc += nuts.getCarbohydrates();
+	tempp += nuts.getProtein();
+	tempf += nuts.getFat();
+}
+int[] pct3 = {tempc/twodayarr.size(), tempf/twodayarr.size(), tempp/twodayarr.size()};
+for(int i=0; i<threedayarr.size(); i++){
+	Nutrition nuts = threedayarr.get(i).getNutrition();
+	tempc += nuts.getCarbohydrates();
+	tempp += nuts.getProtein();
+	tempf += nuts.getFat();
+}
+int[] pct4 = {tempc/threedayarr.size(), tempp/threedayarr.size(), tempf/threedayarr.size()};
 
-int[] block1 = {20, 30, 10}; //today
-int[] block2 = {20, 30, 10};
-int[] block3 = {20, 30, 10};
-int[] block4 = {20, 30, 10};
+// calculate blocks of carbs, protein, and fat for the bar charts 
+int[] block1 = {20, 10, 30}; //today
+int[] block2 = {20, 10, 30};
+int[] block3 = {20, 10, 30};
+int[] block4 = {20, 10, 30};
 
+// create a string that shows meal names, foods, and nutrition info for today 
 String todayinfo = "";
 for(int i=0; i<todayarr.size(); i++){
 	todayinfo += "<h2>" + todayarr.get(i).getName() + "</h2>";
@@ -99,8 +124,8 @@ for(int i=0; i<todayarr.size(); i++){
 		todayinfo += (foods[j].getName() + "<br />");
 	}
 	Nutrition nuts = todayarr.get(i).getNutrition();
-	todayinfo += "<p class=\"total\">Protein: " + nuts.getProtein() + "g ";
-	todayinfo += "Fat: " + nuts.getFat() + "g Carbs: " + nuts.getCarbohydrates() + "g</p>";
+	todayinfo += "<p class=\"total\">Carbs: " + nuts.getCarbs() + "g ";
+	todayinfo += "Protein: " + nuts.getProtein() + "g Fat: " + nuts.getFat() + "g</p>";
 }
 
 db.close();
@@ -153,29 +178,29 @@ db.close();
         data1.addColumn('number', 'Grams');
         data1.addRows([
           ['Carbs',    <%= pct1[0] %>],
-          ['Fat',     <%= pct1[1] %>],
-          ['Protein',  <%= pct1[2] %>],
+          ['Protein',     <%= pct1[1] %>],
+          ['Fat',  <%= pct1[2] %>],
 	]);
 	data2.addColumn('string', 'Nutrient');
         data2.addColumn('number', 'Grams');
         data2.addRows([
           ['Carbs',    <%= pct2[0] %>],
-          ['Fat',     <%= pct2[1] %>],
-          ['Protein',  <%= pct2[2] %>],
+          ['Protein',     <%= pct2[1] %>],
+          ['Fat',  <%= pct2[2] %>],
 	]);
 	data3.addColumn('string', 'Nutrient');
         data3.addColumn('number', 'Grams');
         data3.addRows([
           ['Carbs',    <%= pct3[0] %>],
-          ['Fat',     <%= pct3[1] %>],
-          ['Protein',  <%= pct3[2] %>],
+          ['Protein',     <%= pct3[1] %>],
+          ['Fat',  <%= pct3[2] %>],
 	]);
 	data4.addColumn('string', 'Nutrient');
         data4.addColumn('number', 'Grams');
         data4.addRows([
           ['Carbs',    <%= pct4[0] %>],
-          ['Fat',     <%= pct4[1] %>],
-          ['Protein',  <%= pct4[2] %>],
+          ['Protein',     <%= pct4[1] %>],
+          ['Fat',  <%= pct4[2] %>],
         ]);
 
         var optionsToday = {
@@ -218,29 +243,29 @@ db.close();
 	var data4 = new google.visualization.DataTable();	
         data1.addColumn('string', 'Year');
         data1.addColumn('number', 'Carbs');
-        data1.addColumn('number', 'Fat');
-	data1.addColumn('number', 'Protein');
+        data1.addColumn('number', 'Protein');
+	data1.addColumn('number', 'Fat');
         data1.addRows([
           ['<%= day1 %>', <%= block1[0] %>, <%= block1[1] %>, <%= block1[2] %>]
         ]);
 	data2.addColumn('string', 'Year');
         data2.addColumn('number', 'Carbs');
-        data2.addColumn('number', 'Fat');
-	data2.addColumn('number', 'Protein');
+        data2.addColumn('number', 'Protein');
+	data2.addColumn('number', 'Fat');
         data2.addRows([
           ['<%= day2 %>', <%= block2[0] %>, <%= block2[1] %>, <%= block2[2] %>]
         ]);
 	data3.addColumn('string', 'Year');
         data3.addColumn('number', 'Carbs');
-        data3.addColumn('number', 'Fat');
-	data3.addColumn('number', 'Protein');
+        data3.addColumn('number', 'Protein');
+	data3.addColumn('number', 'Fat');
         data3.addRows([
           ['<%= day3 %>', <%= block3[0] %>, <%= block3[1] %>, <%= block3[2] %>]
         ]);
 	data4.addColumn('string', 'Year');
         data4.addColumn('number', 'Carbs');
-        data4.addColumn('number', 'Fat');
-	data4.addColumn('number', 'Protein');
+        data4.addColumn('number', 'Protein');
+	data4.addColumn('number', 'Fat');
         data4.addRows([
           ['<%= day4 %>', <%= block4[0] %>, <%= block4[1] %>, <%= block4[2] %>]
         ]);
@@ -340,8 +365,8 @@ db.close();
 		for(int j=0; j < mealFoods[i].length; j++){
 			ret += (mealFoods[i][j] + "<br />");
 		}
-		ret += "<p class=\"total\">Protein: " + mealNuts[i][0] + "g ";
-		ret += "Fat: " + mealNuts[i][1] + "g Carbs: " + mealNuts[i][2] + "g</p>";
+		ret += "<p class=\"total\">Carbs: " + mealNuts[i][0] + "g ";
+		ret += "Protein: " + mealNuts[i][1] + "g Fat: " + mealNuts[i][2] + "g</p>";
 	}
 	out.print(ret);
 	
