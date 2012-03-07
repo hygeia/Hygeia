@@ -1,0 +1,104 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	font-family: "Times New Roman", arial, Verdana;
+	color: #817a53;
+	background: #fbffcc;
+	height:100%;
+}
+
+#page {
+    position:relative;
+    width:960px;
+	min-height:1900px;
+    margin: 0 auto 0 auto;
+    background: #fbffcc;
+}
+
+#content {
+    margin:0;
+    padding-bottom:60px;
+}
+
+/* Header start */
+#header {
+	text-align: center;
+	margin: 0 0 10px 0;
+	padding: 0;
+}
+/* Header end */
+
+#formbutton{
+cursor:pointer;
+border:outset 1px #ccc;
+background:#999;
+color:#666;
+font-weight:bold;
+padding: 1px 2px;
+background:url(media/formbg.gif) repeat-x left top;
+}
+
+ul
+{
+list-style-type:none;
+margin:0;
+width: 960px;
+padding:0;
+overflow:hidden;
+}
+li
+{
+float:left;
+}
+#nav a:link,a:visited
+{
+display:block;
+font-weight:bold;
+color:#FFFFFF;
+background-color:#98bf21;
+text-align:center;
+padding:4px;
+text-decoration:none;
+text-transform:uppercase;
+}
+a:hover,a:active
+{
+background-color:#7A991A;
+}
+
+p.special {
+text-align:center;
+color:blue;
+}
+
+p.name {
+text-align:center;
+}
+
+#left, #center, #right {
+float:left;
+width:320px;
+margin:0 0 10px 0;
+}
+
+
+#about {
+width: 800px;
+margin: 0 auto 0 auto;
+}
+
+#team {
+width: 960px;
+margin: 0 auto 0 auto;
+}
+
+/* Footer */
+#footer {
+  position:absolute;
+  bottom:0;
+  width:960px;
+  height:60px;
+  text-align:center;
+  color:rgb(255,255,255);
+  background-color:#709100;
+}
