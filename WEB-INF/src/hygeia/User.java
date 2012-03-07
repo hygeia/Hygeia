@@ -227,7 +227,7 @@ public class User {
             return this.height;
         }
     
-        ResultSet rs = this.db.execute("select email from height where uid = " +
+        ResultSet rs = this.db.execute("select height from users  where uid = " +
             this.uid + ";");
         
         double height = 0;
@@ -251,7 +251,7 @@ public class User {
             return this.weight;
         }
         
-        ResultSet rs = this.db.execute("select email from weight where uid = " +
+        ResultSet rs = this.db.execute("select weight from users  where uid = " +
             this.uid + ";");
         
         double weight = 0;
