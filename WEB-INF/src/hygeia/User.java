@@ -136,11 +136,11 @@ public class User {
             return false;
         }
 
-        ResultSet rs = db.execute("DELETE * FROM users WHERE uid = '" +
+        int  r = db.update("DELETE * FROM users WHERE uid = '" +
               uid + "';");
 
 
-        if (rs == null) {
+        if (r < 1) {
             return false;
         }
         
@@ -328,10 +328,10 @@ public class User {
         }
         return true;
     }
-    
+    /* This shouldn't be used.  
     public boolean updatePwd(String pwd) {
         return false;
-    }
+    } */
     
     public boolean updateEmail(String email) {
         this.email = Algorithm.Clean(email);
