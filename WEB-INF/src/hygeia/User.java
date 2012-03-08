@@ -130,7 +130,22 @@ public class User {
     
     /* Delete user. */
     public static boolean deleteUser(Database db, int uid) {
-        return false;
+        
+        if ( uid == null)
+        {
+            return false;
+        }
+
+        ResultSet rs = db.execute("DELETE * FROM users WHERE uid = '" +
+              uid + "';");
+
+
+        if (rs == null) {
+            return false;
+        }
+        
+        return true;
+        }
     }
     
     /* Sets instance variables for all properties from the database */
