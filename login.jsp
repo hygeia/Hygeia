@@ -11,7 +11,7 @@ if (request.getParameter("login") != null) {
         request.getParameter("password"));
     if (uid < 1) {
         /* Incorrect login: should do more than just redirect to index */
-        response.sendRedirect("login.jsp?error=badlogin");
+        response.sendRedirect("error.jsp?code=badlogin");
         db.close();
         return;
     }
