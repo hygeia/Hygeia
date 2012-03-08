@@ -2,154 +2,106 @@ package hygeia;
 
 import java.sql.*;
 
-/* Classes for handling food items */
-public class Food {
+/* Admins log in through a special page which uses these methods. Once logged in
+admins have access to most other features, but create food and meals for
+system-wide use. Admins do not have their own inventories, histories, or
+favorites. */
+public class Admin {
 
-    /* Food.Update is used for adding to inventory */
-    public static class Update {
-        
-        private int fid;
-        private double count;
-        
-        public Update(int fid, double count) {
-            this.setFid ( fid ); 
-            this.setCount ( count );
-        }
-        
-        public int getFid() {
-            return this.fid;
-        }
-        
-        public double getCount() {
-            return this.count;
-        }
+    Database db = new Database ();
 
-        priate void setFid( int fid) {
-            this.fid = fid;
-        }
+    /* Performs a login but uses admins table instead of users. Should return
+zero on success. */
+    public static int login(String email, String pwd) {
+    	if ( email == null || pwd == null )
+    	{
+    		return -1;
+    	}
 
-        private void setCount( int count) {
-
-            // Lower limit of 0, no negative counts;
-            if ( count < 0 )
-            {
-                count = 0;
-            }
-
-            this.count = count;
-        }
-        
-        /* Create a Nutrition object with the values filled in from the db */
-        public Nutrition getNutrition(Database db) {
-
-            // retrive the macronutrient info from the database using the fid
-            double cal = db.execute("select food.calories where food.fid = " + this.getFid() + ";");
-            double carb = db.execute("select food.carbohydrates where food.fid = " + this.getFid() + ";");
-            double pro = db.execute("select food.protein where food.fid = " + this.getFid() + ";");
-            double fat = db.execute("select food.fat where food.fid = " + this.getFid() + ";");
-
-            // multiply the nutrients of the food by the number of food items in inventory (count)
-            cal *= this.getCount();
-            carb *= this.getCount();
-            pro *= this.getCount();
-            fat *= this.getCount();
-
-            // return a newly created Nutriention object with the given macronutrient info
-            return ( new Nutrition(cal, carb, pro, fat) ) ;
-        
-        }
-    }
+    	/* Clean inputs */
+        email = Algorithm.Clean(email);
+        pwd = Algorithm.MD5(Algorithm.Clean(pwd));
+       
+        ResultSet rs = db.execute("SELECT aid FROM Admin WHERE email = '" +
+              email + "' AND hpwd = '" + pwd + "';");
+      
+      	int aid = 0;
     
-    /* Food.Create is used for creating new foods in the database. */
-    public static class Create {
-        
-        private String name;
-        private double weight;
-        private double count; // needed?
-        private double calories, carbohydrates, protein, fat, factor; // wtf is factor?
-        
-        public Create(String name, double count, double factor, int wt,
-            double cal, double carb, double pro, double fat) {
-
-            // instantiate the instance variables
-            this.name          = name;
-            this.count         = count
-            this.factor        = factor;
-            this.weight        = wt;
-            this.calorites     = cal;
-            this.carbohydrates = carb;
-            this.protein       = pro;
-            this.fat           = fat;
-
-        }
-        
-        /* getters for all fields */
-        public String getName() {
-            return this.name;
-        }
-        
-        public double getWeight() {
-            return this.weight;
-        }
-        
-        public double getCount() {
-            return this.count;
-        }
-        
-        public double getCalories() {
-            return this.calories;
-        }
-        
-        public double getCarbohydrates() {
-            return this.carbohydrates;
-        }
-        
-        public double getProtein() {
-            return this.protein;
-        }
-        
-        public double getFat() {
-            return this.fat;
-        }
-    }
-    
-    /* Food.List is used for producing a list of foods visible to the user. */
-    public static class List {
-        
-        private String name;
-        private int fid;
-        private double count;
-        
-        public List(String name, int fid, double count) {
-            this.name = name;
-            this.fid = fid;
-            this.count = count;
-        }
-        
-        public String getName() {
-            return this.name;        
-        }
-        
-        public int getFid() {
-            return this.fid;
-        }
-        
-        public double getCount() {
-            return this.count;
-        }
-    }
-
-    /* Create a new food in the database. Returns fid if successful. 0 if unsuccessful */
-    public static int createFood(Database db, Food.Create f) {
-        if ( db.update("INSERT INTO Food (name, weight, count, calories, carbohydrates,"+
-            " protein, fat, factor) VALUES (" + f.getName() + ", '" + f.getWeight() + "', "
-            + f.getCount() + ", " + f.getCalories() + ", " + f.getCarbohydrates() + 
-            ", " + f.getProtein() + ", " + f.getFat() + ", " + f.getFactor() + ");" ) < 0 )
+        /* Try to get aid from result */
+        try 
         {
-            return ( db.execute("SELECT fid FROM Food WHERE Food.name ='" + f.getName() + "';") );
-        } 
+            /* Select first (should be only) record */
+            if (rs == null) {
+                return -2;
+            }
+            if (rs.next()) {
+                aid = rs.getInt("aid");
+            }
+        
+            /* Free db resources */
+            db.free();
+        } catch (SQLException e) 
+        {
+            /* I don't know what to do here */
+            e.printStackTrace();
+        }
+        /* System.out.print(aid); */
+        return aid;
+    	
+    }
+    
+    /* Creates a new admin in the admins table. */
+    public static int createAdmin(String email, String pwd) {
+    
+        if ( email == null || pwd == null ) {
+            return -1;
+        }
+        
+        /* Clean */
+        email = Algorithm.Clean(email);
+        pwd = Algorithm.Clean(pwd);
+        String hpwd = Algorithm.MD5(pwd);
+        
+        /* check if the account already exists. */
+        if (User.accountExists(db, email)) {
+            return -4;
+        }
+        
+        /* Insert new record */
+        int success = db.update("INSERT into Admin (email, hpwd)" + 
+                      " values ('" + email + "', '" + hpwd + "');");
+        /* Return error if somethign strange happened */
+        if (success != 1) {
+            return -2;
+        }
+        
+        /* Now get the aid */
+        int aid = Admin.login(db, email, pwd);
+        
+        /* If there was an error from User.login, return an error code */
+        if (uid < 1) {
+            return -3;
+        }
+        
+        return aid;
+    }
+    
+    
+    /* Deletes an admin fromt he admins table. Returns the true if successful*/
+    public static boolean deleteAdmin(String email) {
+        if ( email == null)
+        {
+        	return false;
+        }
 
-        return 0;
+        ResultSet rs = db.execute("DELETE aid FROM Admin WHERE email = '" +
+              email + "';");
+
+        if (rs == null) {
+        	return false;
+        }
+        
+        return true;
     }
 
 }
