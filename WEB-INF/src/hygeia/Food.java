@@ -41,14 +41,36 @@ public class Food {
         
         /* Create a Nutrition object with the values filled in from the db */
         public Nutrition getNutrition(Database db) {
-		double cal =0, carb= 0, pro=0, fat=0;
-/* THIS NEEDS WORK
+            double cal =0, carb= 0, pro=0, fat=0;
+
             // retrive the macronutrient info from the database using the fid
-            double cal = db.execute("select food.calories where food.fid = " + this.getFid() + ";");
-            double carb = db.execute("select food.carbohydrates where food.fid = " + this.getFid() + ";");
-            double pro = db.execute("select food.protein where food.fid = " + this.getFid() + ";");
-            double fat = db.execute("select food.fat where food.fid = " + this.getFid() + ";");
-*/
+            ResultSet rs = db.execute("SELECT calories, carbohydrates, protein, fat " 
+                            + "FROM food WHERE fid = '" + this.fid + "';");
+      
+            int aid = 0;
+    
+            /* Try to get aid from result */
+            try 
+            {
+                /* Select first (should be only) record */
+                if (rs == null) {
+                    return -2;
+            }
+                if (rs.next()) {
+                    double cal = rs.getDouble("calories");
+                    double carb = rs.getDouble("carbohydrates");
+                    double pro = rs.getDouble("protein");
+                    double fat = rs.getDouble("fat"); 
+                }
+        
+            /* Free db resources */
+            db.free();
+            } catch (SQLException e) 
+            {
+                /* I don't know what to do here */
+                e.printStackTrace();
+            }
+            
             // multiply the nutrients of the food by the number of food items in inventory (count)
             cal *= this.getCount();
             carb *= this.getCount();
