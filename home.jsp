@@ -41,9 +41,9 @@ String day3 = df.format(new Date(todaysdate.getTime() - (86400000 * 2)));
 String day4 = df.format(new Date(todaysdate.getTime() - (86400000 * 3)));
 
 /* this will be replaced with the java code below when it works */
-String todayinfo = "<h2>Breakfast</h2><p class=\"meal\">Eggs<br />Bacon<br />Sausage<br /></p>" + 
+String todayinfo = "<h2>Breakfast</h2><p class=\"meal\">7g&nbsp;&nbsp;&nbsp;Eggs<br />8g&nbsp;&nbsp;&nbsp;Bacon<br />9g&nbsp;&nbsp;&nbsp;Sausage<br /></p>" + 
 	"<p class=\"total\">Carbs: 13g Protein: 7g Fat: 12g</p>" + 
-	"<h2>Lunch</h2><p class=\"meal\">Hamburger<br />Fries<br />Coke<br /></p>" + 
+	"<h2>Lunch</h2><p class=\"meal\">7g&nbsp;&nbsp;&nbsp;Hamburger<br />7g&nbsp;&nbsp;&nbsp;Fries<br />16g&nbsp;&nbsp;&nbsp;Coke<br /></p>" + 
 	"<p class=\"total\">Carbs: 19g Protein: 17g Fat: 14g</p>";
 
 /* This is what code will actually be called
@@ -114,7 +114,7 @@ for(int i=0; i<todayarr.size(); i++){
 	todayinfo += "<h2>" + todayarr.get(i).getName() + "</h2>";
 	Food.List foods[] = todayarr.get(i).getFoodList();
 	for(int j=0; j < foods.length; j++){
-		todayinfo += (foods[j].getName() + "<br />");
+		todayinfo += (foods[j].getCount() + "g&nbsp;&nbsp;&nbsp;" + foods[j].getName() + "<br />");
 	}
 	Nutrition nuts = todayarr.get(i).getNutrition();
 	todayinfo += "<p class=\"total\">Carbs: " + nuts.getCarbs() + "g ";
@@ -208,13 +208,10 @@ db.close();
         };
 
 	var optionsOday = {
-          width: 84, height: 84,
+          width: 170, height: 170,
           backgroundColor:'#8b9A70',
-		  legend: {
-		    position:'none',
-		  },
-		chartArea:{width:"98%",height:"98%"},
-	pieSliceText:'none'
+		  legend: {position: 'top', textStyle: {color: 'black', fontSize: 8}},
+		chartArea:{width:"70%",height:"70%"}
         };
 
 
@@ -285,7 +282,7 @@ db.close();
         };
 
 	var optionsOday = {
-          width: 84, height: 84,
+          width: 170, height: 170,
 		  backgroundColor: '#8b9A70',
 		  vAxis: {
 		    baselineColor:'#8b9A70',
@@ -294,7 +291,7 @@ db.close();
 			  color:'#8b9A70',
 			},
 		  },
-		  chartArea:{width:"100%",height:"100%"},
+		  chartArea:{width:"70%",height:"70%"},
 		  legend: {
 		    position:'none'
 		  },	
@@ -358,8 +355,9 @@ db.close();
         </p>
       </div>
     </div>
-      <div id="footer">Hygeia is a project developed for a Software Engineering class at UCSD.<br />
-        Please contact us at hygeia@gmail.com if you would like to use any of the code found here.
+      <div id="footer"><a href="about.jsp">About Us</a><br />
+		Hygeia is a project developed for a Software Engineering class at UCSD.<br />
+        Please contact us at hygeia110@gmail.com if you would like to use any of the code found here.
       </div>
     </div>
   </body>
