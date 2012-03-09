@@ -11,7 +11,7 @@
    Retrieve whatever data is needed and do any processing here. Try to do all
    database interactions and processing before any HTML, so that the page 
    can be redirected to an error page if soemthing should go wrong. Remember
-   to close the database when you are done with it!
+   to close the database when you are done with it!  Please remember!
    
    Some common tasks:
    Get user id: int uid = session.getAttribute("uid");
