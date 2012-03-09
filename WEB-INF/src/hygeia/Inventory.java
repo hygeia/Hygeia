@@ -2,6 +2,7 @@
 package hygeia;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Inventory {
 
@@ -26,7 +27,7 @@ public class Inventory {
         }
 
         // create an arraylist of Food.Update to be instantiated
-        ArrayList<Food.Update> foodInv = new ArrayList();  
+        ArrayList<Food.Update> foodInv = new ArrayList<Food.Update>();  
 
         // query the database by uid, retriving fid of each food       
         ResultSet rs = this.db.execute("SELECT fid, count FROM inventory " 
@@ -57,43 +58,41 @@ public class Inventory {
     }
     
     /* Returns an array of Food.List objects for displaying to user. */
-    public Food.List[] getInventoryList() {
+    public Food.List[] getInventoryList() { 
         // check if the database is null
         if (db == null) {
             return null;
         }
 
         // create an arraylist of Food.Update to be instantiated
-        ArrayList<Food.List> foodInv = new ArrayList();  
+        ArrayList<Food.List> foodInv = new ArrayList<Food.List>();  
 
-        // query the inventory table by uid, inventory query result set     
-        ResultSet inv_rs = this.db.execute("SELECT fid, count FROM inventory " 
-                       + "WHERE uid='" + this.uid + "';");
-        ResultSet food_rs; //food query result set
-
-        // instantiate each Food.Update by the retrived fid's
-        int selectedFid;
-        int selectedCount;
-        String selectedName;
+        // query the inventory table by uid, inventory query result set 
+        ResultSet rs = this.db.execute("select inventory.fid, " +
+            "inventory.count, foods.name from inventory inner join foods on " +
+            "inventory.fid=foods.fid where inventory.uid=" + this.uid +
+            " and inventory.count > 0 order by name;");
+            
+        int fid;
+        int count;
+        String name;
+        
+        /* Build arraylist of objects */
         try {
-            if (inv_rs == null) {
+            if (rs == null) {
                 return null;
             }
-            while (inv_rs.next()) {
-                // get the fid and count from inventory table
-                selectedFid   = inv_rs.getInt("fid"); 
-                selectedCount = inv_rs.getInt("count");
-                // use the fid to get the name of the food from the foods table
-                food_rs = this.db.execute("SELECT name FROM foods WHERE fid='" 
-                                        + selectedFid + "';");
-                selectedName = food_rs.getString("name");   // ** possible error if the food_rs is null
-                // add the item in the array of food.list
-                foodInv.add( new Food.List(selectedName, selectedFid, selectedCount) );
+            while (rs.next()) {
+                fid = rs.getInt("fid");
+                count = rs.getInt("count");
+                name = rs.getString("name");
+                foodInv.add(new Food.List(name, fid, count));
             }
+            db.free();
         } catch (SQLException e) {
             return null;
         }
-
+            
         // Convert the arraylist into an array
         Food.List [] invArr = new Food.List[foodInv.size()];
         foodInv.toArray(invArr);
@@ -105,31 +104,29 @@ public class Inventory {
     }
     
     /* Returns an array of food items that the user may add to meals or to 
-       the inventory. */
+       the inventory. Meaning that these are foods in the system that were
+       entered by the user or are system-wide. The user does not actually need
+       them in his inventory. */
     public Food.List[] getAvailableFoods() {
-        int count = 0
-        Food.List[] allFoods = getInventoryList();
-
-        for (int i = 0; i < allFoods.length - 1; i++)
-        {
-            if ( allFoods[i].getCount > 0 )
-            {
-                count++;
+    
+        ResultSet rs = this.db.execute("select fid, name from foods where " +
+            "uid = 0 or uid = " + this.uid + ";");
+            
+        ArrayList<Food.List> foods = new ArrayList<Food.List>();
+        
+        try {
+            if (rs == null) {
+                return null;
             }
-        }
-
-        Food.List[] available = new Food.List[count];
-
-        for (int i = 0, int j = 0; i < allFoods.length - 1; i++)
-        {
-            if ( allFoods[i].getCount > 0 )
-            {
-                available[j] = allFoods[i]; 
-                j++;
+            while (rs.next()) {
+                foods.add(new Food.List(rs.getString("name"), 
+                    rs.getInt("fid"), 0));
             }
+        } catch (SQLException e) {
+            return null;
         }
-
-        return available;    
+        
+        return (Food.List[])foods.toArray();  
     }
     
     /* Add food to inventory */
@@ -139,47 +136,26 @@ public class Inventory {
         {
             return false;
         }
-
-        // get the count of the food in the inventory table
-        int count;
-        int success;
-        ResultSet rs = db.execute("SELECT count FROM inventory WHERE uid='" 
-                        + f.getUid() + "' AND fid='" + f.getFid() + "';");
-        try {
-            if (rs == null) {
-                // Insert new food record into inventory
-                success = db.update("INSERT INTO inventory (uid, fid, count) VALUES (" 
-                    + this.uid + f.getFid() + f.getCount() + ")"); 
-                if (success != 1)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-            } 
-            else 
-            {
-                rs.next();
-                count = rs.getInt("count");
-            }
-        } catch (SQLException e) {
+        
+        /* Run the update */
+        int r = this.db.update("update inventory set count = count + " +
+            f.getCount() + " where uid = " + this.uid + " and fid = " +
+            f.getFid() + ";");
+        
+        /* If food isn't in inventory yet (r == 0) insert it */
+        if (r == 0) {
+        r = this.db.update("insert into inventory(uid, fid, count) values (" +
+            this.uid + ", " + f.getFid() + ", " + f.getCount() + ");");
+        }
+        
+        db.free();
+        
+        /* failure... */
+        if (r < 1) {
             return false;
         }
-        // change the count of the food in inventory by the amount in Food.Update f
-        count = count + f.getCount();
-
-        // Update count record in inventory
-        success = db.update("UPDATE count FROM inventory WHERE uid='" 
-                        + f.getUid() + "' AND fid='" + f.getFid() + "' "
-                        + "VALUES (" + count +");");
-
-        // Return error if something strange happened
-        if (success != 1) {
-            return false;
-        }
-        return true;
+        
+        return true;   
     }
     
     /* Remove an amount of food from inventory. This functions more as an 
@@ -192,10 +168,10 @@ public class Inventory {
         }
 
         // get the count of the food in the inventory table
-        int count;
+        double count;
         int success;
         ResultSet rs = db.execute("SELECT count FROM inventory WHERE uid='" 
-                        + f.getUid() + "' AND fid='" + f.getFid() + "';");
+                        + this.uid + "' AND fid='" + f.getFid() + "';");
         try {
             // if false then the record doesn't exist so return false
             if (rs == null) {
@@ -217,9 +193,8 @@ public class Inventory {
         }
 
         // Update count record in inventory
-        success = db.update("UPDATE count FROM inventory WHERE uid='" 
-                        + f.getUid() + "' AND fid='" + f.getFid() + "' "
-                        + "VALUES (" + count +");");
+        success = db.update("UPDATE inventory set count = " + count + 
+            " WHERE uid='" + this.uid + "' AND fid='" + f.getFid() + "';");
 
         // Return error if something strange happened
         if (success != 1) {
