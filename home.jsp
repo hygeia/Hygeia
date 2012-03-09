@@ -313,7 +313,16 @@ db.close();
   <body>
     <div id="page">
       <div id="header">
-        <img src="images/h1.png"><a href="profile.html"><img src="images/h2.png"></a><img src="images/h3.png"><a href="logout.html"><img src="images/h4.png"></a><img src="images/h5.png">
+        <table cellpadding="0" cellspacing="0">
+<tr>
+<td> <a href="index.jsp"><img src="images/lightICON1.png"></a></td>
+<td> <a href="inventory.jsp"><img src="images/lightICON2.png" style="margin-left: -10px;" href="index.jsp"></a></td>
+<td> <a href="favorites.jsp"><img src="images/lightICON3.png" style="margin-left: -5px;"></a></td>
+<td> <a href="history.jsp"><img src="images/lightICON4.png" style="margin-left: -10px;"></a></td>
+<td> <a href="recipes.jsp"><img src="images/lightICON5.png" style="margin-left: -10px;"></a></td>
+<td> <img src="images/lightICON6.png" style="margin-left: -10px;"></td>
+</tr>
+</table>
       </div>
       <div id="content">
       <div id="oday" class="shadowBox"><%= day4 %><br /><br />

@@ -52,7 +52,7 @@ height:28px;
 <tr>
 <td> <a href="index.jsp"><img src="images/lightICON1.png"></a></td>
 <td> <a href="inventory.jsp"><img src="images/lightICON2.png" style="margin-left: -10px;" href="index.jsp"></a></td>
-<td> <a href="favorites.jsp"><img src="images/lightICON3.png" style="margin-left: -10px;"></a></td>
+<td> <a href="favorites.jsp"><img src="images/lightICON3.png" style="margin-left: -5px;"></a></td>
 <td> <a href="history.jsp"><img src="images/lightICON4.png" style="margin-left: -10px;"></a></td>
 <td> <a href="recipes.jsp"><img src="images/lightICON5.png" style="margin-left: -10px;"></a></td>
 <td> <img src="images/lightICON6.png" style="margin-left: -10px;"></td>
