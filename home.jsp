@@ -323,7 +323,7 @@ db.close();
           <div id="threeday_bar">
           </div>
         </div>
-        Carbs/Protein/Fat Ratio and Block Levels for 3 days ago
+        <p class="oday">Carbs/Protein/Fat Ratio and Block Levels for<br />3 days ago</p>
       </div>
       <div id="oday" class="shadowBox"><%= day3 %><br /><br />
         <div id="chartwrapperOday">
@@ -332,7 +332,7 @@ db.close();
           <div id="twoday_bar">
           </div>
         </div>
-        <br />Carbs/Protein/Fat Ratio and Block Levels for 2 days ago
+        <br /><p class="oday">Carbs/Protein/Fat Ratio and Block Levels for<br />2 days ago</p>
       </div>
       <div id="oday" class="shadowBox"><%= day2 %><br /><br />
         <div id="chartwrapperOday">
@@ -341,7 +341,7 @@ db.close();
           <div id="yesterday_bar">
           </div>
         </div>
-        <br />Carbs/Protein/Fat Ratio and Block Levels for yesterday
+        <br /><p class="oday">Carbs/Protein/Fat Ratio and Block Levels for yesterday</p>
       </div>
       <div id="today" class="shadowBox"><h1><%= day1 %></h1>
         <div id="chartwrapperToday">
