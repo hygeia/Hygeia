@@ -9,12 +9,13 @@ public class Favorites {
     
     /* create user's favorites object */
     public Favorites(User u) {
-    
+		this.db = u.getDb();
+		this.uid = u.getUid();
     }
     
     /* Add a meal to the favorites */
     public boolean addMeal(Meal m) {
-    
+		db.update("insert into favorites values");
     }
     
     /* Remove a meal from favorites */

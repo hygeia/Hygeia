@@ -12,8 +12,8 @@ public class Algorithm {
     private final double SAME = 0.1; //used as a margin of error for relatively balanced meals
 
     public Algorithm(Database db, User u) {
-		this.uid = u.uid;
-		this.db = u.db;
+		this.uid = u.getUid();
+		this.db = u.getDb();
     }
 
     /* Main algorithm. types: 1 breakfast, 2 lunch, 3 dinner, 4 snack */
