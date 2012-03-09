@@ -44,17 +44,15 @@ public class Food {
             double cal =0, carb= 0, pro=0, fat=0;
 
             // retrive the macronutrient info from the database using the fid
-            ResultSet rs = db.execute("SELECT calories, carbohydrates, protein, fat " 
-                            + "FROM food WHERE fid = '" + this.fid + "';");
-      
-            int aid = 0;
+            ResultSet rs = db.execute("SELECT calories, carbohydrates, " +
+                "protein, fat FROM food WHERE fid = '" + this.fid + "';");
     
-            /* Try to get aid from result */
+            /* Try to get nutrition from result */
             try 
             {
                 /* Select first (should be only) record */
                 if (rs == null) {
-                    return -2;
+                    return null;
             }
                 if (rs.next()) {
                     double cal = rs.getDouble("calories");
@@ -67,17 +65,18 @@ public class Food {
             db.free();
             } catch (SQLException e) 
             {
-                /* I don't know what to do here */
-                e.printStackTrace();
+               return null;
             }
             
-            // multiply the nutrients of the food by the number of food items in inventory (count)
+            // multiply the nutrients of the food by the number of food items
+            // in inventory (count)
             cal *= this.getCount();
             carb *= this.getCount();
             pro *= this.getCount();
             fat *= this.getCount();
 
-            // return a newly created Nutriention object with the given macronutrient info
+            // return a newly created Nutriention object with the given 
+            //macronutrient info
             return ( new Nutrition(cal, carb, pro, fat) ) ;
         
         }
@@ -163,18 +162,50 @@ public class Food {
     }
 
     /* Create a new food in the database. Returns fid if successful. 0 if unsuccessful */
-    public static int createFood(Database db, Food.Create f) {
-/* THIS NEEDS WORK
-        /* Insert Food into foods table * /
-        if ( db.update("INSERT INTO foods (name, weight, calories, carbohydrates,"+
-            " protein, fat, factor) VALUES (" + f.getName() + ", '" + f.getWeight() + "', "
-            + ", " + f.getCalories() + ", " + f.getCarbohydrates() +
-            ", " + f.getProtein() + ", " + f.getFat() + ", " + f.getFactor() + ");" ) < 0 )
-        {
-            return ( db.execute("SELECT fid FROM foods WHERE Food.name ='" + f.getName() + "';") );
-        } */
-
-        return 0;
+    public static int createFood(User u, Food.Create f) {
+    
+        if ((u == null) || (f == null)) {
+            return -1;
+        }
+        
+        Database db = u.getDb();
+        int uid = u.getUid();
+        
+        String name = f.getName();
+        double wt = f.getWeight();
+        double fac = f.getFactor();
+        double cal = f.getCalories();
+        double carb = f.getCarbohydrates();
+        double pro = f.getProtein();
+        double fat = f.getFat();
+        
+        int r = db.update("insert into foods (uid, name, weight, factor, " +
+            "calories, carbohydrates, protein, fat) values (" + uid + ", '" +
+            name + "', " + wt + ", " + fac + ", " + cal + ", " + carb + ", " +
+            pro + ", " + fat + ");");
+            
+        if (r < 1) {
+            return -2;
+        }
+        
+        /* Get fid.. the long way */
+        ResultSet rs = db.execute("select fid from foods where name = '" +
+            name + "' and uid = " + uid + ";");
+            
+        int fid = 0;
+            
+        try {
+            if (rs == null) {
+                return -3;
+            }
+            rs.next();
+            fid = rs.getInteger("fid");
+            db.free();
+        } catch (SQLException e) {
+            return -4;
+        }
+    
+        return fid;
     }
 
 }

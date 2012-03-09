@@ -7,15 +7,16 @@ public class User {
     
     private Database db;
     private int uid;
-    private int blocks;
     private String username;
     private String email;
-    private String sex;
+    private char gender;
+    private short actvity;
+    private int blocks;
     private double height;
     private double weight;
     private double hips;
     private double waist;
-    private double leanbodymass;
+    private double leanBodyMass;
         
     /*Use this to create User object in a page after the user has started a session */
     public User(Database db, int uid) {
@@ -51,8 +52,7 @@ public class User {
             /* Free db resources */
             db.free();
         } catch (SQLException e) {
-            /* I don't know what to do here */
-            e.printStackTrace();
+            return -3;
         }
         /* System.out.print(uid); */
         return uid;
@@ -67,7 +67,7 @@ public class User {
     
     /* Create a new user. Returns uid; negative if unsuccessful  */
     public static int createUser(Database db, String uname, String pwd, 
-        String email, double ht, double wt) {
+        String email, double ht, double wt, char gender) {
         
         if ((db == null) || (uname == null) || (pwd == null) || (email == null)
              || (ht == 0) || (wt == 0)) {
@@ -87,8 +87,8 @@ public class User {
         
         /* Insert new record */
         int success = db.update("insert into users (username, hpwd, email, " +
-            "height, weight) values ('" + uname + "', '" + hpwd + "', '" +
-            email + "', " + ht + ", " + wt +");");
+            "height, weight, gender) values ('" + uname + "', '" + hpwd + "', '"
+             + email + "', " + ht + ", " + wt +", '" + gender + "');");
         /* Return error if somethign strange happened */
         if (success != 1) {
             return -2;
@@ -155,7 +155,8 @@ public class User {
     public boolean getAllInfo() {
         
         ResultSet rs = this.db.execute("select username, email, height, weight"
-            + " from users where uid = " + this.uid + ";");
+            + ", gender, activity, blocks, hips, waist, leanBodyMass" +
+            " from users where uid = " + this.uid + ";");
         
         /* Set variables */
         try {
@@ -167,6 +168,12 @@ public class User {
                 this.email = rs.getString("email");
                 this.height = rs.getDouble("height");
                 this.weight = rs.getDouble("weight");
+                this.gender = rs.getString("gender").charAt(1);
+                this.activity = (short)rs.getInt("activity");
+                this.blocks = rs.getInt("blocks");
+                this.hips = rs.getDouble("hips");
+                this.waist = rs.getDouble("waist");
+                this.leanBodyMass = rs.getDouble("leanBodyMass");
             } else {
                 return false;
             }
@@ -239,13 +246,37 @@ public class User {
     public int getUid() {
         return this.uid;
     }
+
+    public char getGender() {
+        return this.gender;
+    }
+    
+    public int getActivity() {
+        return this.activity;
+    }
+    
+    public int getBlocks() {
+        return this.blocks;
+    }
+    
+    public double getHips() {
+        return this.hips;
+    }
+    
+    public double getWaist() {
+        return this.waist;
+    }
+    
+    public double getLeanBodyMass() {
+        return this.leanBodyMass;
+    }
     
     public double getHeight() {
         if (this.height != 0) {
             return this.height;
         }
     
-        ResultSet rs = this.db.execute("select height from users  where uid = " +
+        ResultSet rs = this.db.execute("select height from users where uid = " +
             this.uid + ";");
         
         double height = 0;
