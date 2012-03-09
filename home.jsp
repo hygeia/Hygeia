@@ -126,7 +126,7 @@ db.close();
 
  %>
  <%!
-	/* 0 = today, 1 = yesterday, 2 = two days ago, 3 = three days ago, -1 = more than three days ago */
+	/* 0 = today, 1 = yesterday, 2 = two days ago, 3 = three days ago, 4 = more than three days ago -1 = future*/
 	int findDay(Meal.List m){
 		Calendar c = Calendar.getInstance();
 		int year = c.get(Calendar.YEAR);
@@ -137,8 +137,11 @@ db.close();
 		Timestamp yesterday = new Timestamp(c.getTimeInMillis() - 86400000);
 		Timestamp twoday = new Timestamp(c.getTimeInMillis() - (86400000 * 2));
 		Timestamp threeday = new Timestamp(c.getTimeInMillis() - (86400000 * 3));
+		Timestamp tomorrow = new Timestamp(c.getTimeInMillis() + 86400000);
 		
-		if(m.getOccurrence().after(today)){
+		if(m.getOccurrence().after(tomorrow)){
+			return -1;
+		}else if(m.getOccurrence().after(today)){
 			return 0;
 		}else if(m.getOccurrence().after(yesterday)){
 			return 1;
@@ -147,7 +150,7 @@ db.close();
 		}else if(m.getOccurrence().after(threeday)){
 			return 3;
 		}else{
-			return -1;
+			return 4;
 		}
 	}
  %>
