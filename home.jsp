@@ -1,11 +1,11 @@
 <%@ page import = "hygeia.*,java.util.*,java.sql.Timestamp,java.text.*" %>
 <%
 /* Check to see if a session exists */
-/*if (session.getAttribute("uid") == null) {*/
+/* if (session.getAttribute("uid") == null) {*/
     /* Send away non-logged in users */
 /*    response.sendRedirect("index.jsp");
     return;
-}*/
+}
 
 /*
    Retrieve whatever data is needed and do any processing here. Try to do all
@@ -41,13 +41,10 @@ String day3 = df.format(new Date(todaysdate.getTime() - (86400000 * 2)));
 String day4 = df.format(new Date(todaysdate.getTime() - (86400000 * 3)));
 
 /* this will be replaced with the java code below when it works */
-String[] meals = {"Breakfast", "Lunch"};
-String[][] mealFoods = new String[2][3];
-mealFoods[0][0] = "Eggs"; mealFoods[0][1] = "Bacon"; mealFoods[0][2] = "Sausage";
-mealFoods[1][0] = "Hamburger"; mealFoods[1][1] = "Fries"; mealFoods[1][2] = "Coke";
-String[][] mealNuts = new String[2][3];
-mealNuts[0][0] = "13"; mealNuts[0][1] = "7"; mealNuts[0][2] = "12";
-mealNuts[1][0] = "19"; mealNuts[1][1] = "17"; mealNuts[1][2] = "14";
+String todayinfo = "<h2>Breakfast</h2>Eggs<br />Bacon<br />Sausage<br />" + 
+	"<p class=\"total\">Carbs: 13g Protein: 7g Fat: 12g</p>" + 
+	"<h2>Lunch</h2>Hamburger<br />Fries<br />Coke<br />" + 
+	"<p class=\"total\">Carbs: 19g Protein: 17g Fat: 14g</p>";
 
 /* This is what code will actually be called
 Database db = new Database();
@@ -130,8 +127,8 @@ db.close();
  %>
  <%!
 	/* 0 = today, 1 = yesterday, 2 = two days ago, 3 = three days ago, -1 = more than three days ago */
-/*	int findDay(Meal.List m){
-		Calendar c = new Calendar();
+	int findDay(Meal.List m){
+		Calendar c = Calendar.getInstance();
 		int year = c.get(Calendar.YEAR);
 		int month = c.get(Calendar.MONTH);
 		int day = c.get(Calendar.DAY_OF_MONTH);
@@ -141,18 +138,18 @@ db.close();
 		Timestamp twoday = new Timestamp(c.getTimeInMillis() - (86400000 * 2));
 		Timestamp threeday = new Timestamp(c.getTimeInMillis() - (86400000 * 3));
 		
-		if(m.getOccurrence.after(today)){
+		if(m.getOccurrence().after(today)){
 			return 0;
-		}else if(m.getOccurrence.after(yesterday)){
+		}else if(m.getOccurrence().after(yesterday)){
 			return 1;
-		}else if(m.getOccurrence.after(twoday)){
+		}else if(m.getOccurrence().after(twoday)){
 			return 2;
-		}else if(m.getOccurrence.after(threeday)){
+		}else if(m.getOccurrence().after(threeday)){
 			return 3;
 		}else{
 			return -1;
 		}
-	}*/
+	}
  %>
  
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -316,7 +313,7 @@ db.close();
   <body>
     <div id="page">
       <div id="header">
-        <img src="images/h1.png"><a href="Profile.html"><img src="images/h2.png"></a><img src="images/h3.png"><a href="Logout.html"><img src="images/h4.png"></a><img src="images/h5.png">
+        <img src="images/h1.png"><a href="profile.html"><img src="images/h2.png"></a><img src="images/h3.png"><a href="logout.html"><img src="images/h4.png"></a><img src="images/h5.png">
       </div>
       <div id="content">
       <div id="oday" class="shadowBox"><%= day4 %><br /><br />
@@ -354,20 +351,7 @@ db.close();
           </div>
         </div>
         <p class="food">
-<%
-	String ret = "";
-	for(int i=0; i < meals.length; i++){
-		ret += "<h2>" + meals[i] + "</h2>";
-		for(int j=0; j < mealFoods[i].length; j++){
-			ret += (mealFoods[i][j] + "<br />");
-		}
-		ret += "<p class=\"total\">Carbs: " + mealNuts[i][0] + "g ";
-		ret += "Protein: " + mealNuts[i][1] + "g Fat: " + mealNuts[i][2] + "g</p>";
-	}
-	out.print(ret);
-	
-	//this will be replaced with s as calculated at the top
-%>
+			<%= todayinfo %>
         </p>
       </div>
     </div>
