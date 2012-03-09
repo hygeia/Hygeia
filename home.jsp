@@ -205,13 +205,10 @@ db.close();
         };
 
 	var optionsOday = {
-          width: 84, height: 84,
+          width: 170, height: 170,
           backgroundColor:'#8b9A70',
-		  legend: {
-		    position:'none',
-		  },
-		chartArea:{width:"98%",height:"98%"},
-	pieSliceText:'none'
+		  legend: {position: 'top', textStyle: {color: 'black', fontSize: 8}},
+		chartArea:{width:"70%",height:"70%"}
         };
 
 
@@ -282,7 +279,7 @@ db.close();
         };
 
 	var optionsOday = {
-          width: 84, height: 84,
+          width: 170, height: 170,
 		  backgroundColor: '#8b9A70',
 		  vAxis: {
 		    baselineColor:'#8b9A70',
@@ -291,7 +288,7 @@ db.close();
 			  color:'#8b9A70',
 			},
 		  },
-		  chartArea:{width:"100%",height:"100%"},
+		  chartArea:{width:"70%",height:"70%"},
 		  legend: {
 		    position:'none'
 		  },	
@@ -355,8 +352,9 @@ db.close();
         </p>
       </div>
     </div>
-      <div id="footer">Hygeia is a project developed for a Software Engineering class at UCSD.<br />
-        Please contact us at hygeia@gmail.com if you would like to use any of the code found here.
+      <div id="footer"><a href="about.jsp">About Us</a><br />
+		Hygeia is a project developed for a Software Engineering class at UCSD.<br />
+        Please contact us at hygeia110@gmail.com if you would like to use any of the code found here.
       </div>
     </div>
   </body>
