@@ -1,17 +1,17 @@
 <%@ page import = "hygeia.*,java.util.*,java.sql.Timestamp,java.text.*" %>
 <%
 /* Check to see if a session exists */
-/*if (session.getAttribute("uid") == null) {*/
+if (session.getAttribute("uid") == null){ 
     /* Send away non-logged in users */
-/*    response.sendRedirect("index.jsp");
+    response.sendRedirect("index.jsp");
     return;
-}*/
+}
 
 /*
    Retrieve whatever data is needed and do any processing here. Try to do all
    database interactions and processing before any HTML, so that the page 
    can be redirected to an error page if soemthing should go wrong. Remember
-   to close the database when you are done with it!
+   to close the database when you are done with it!  Please remember!
    
    Some common tasks:
    Get user id: int uid = session.getAttribute("uid");
@@ -21,7 +21,37 @@
    Close the database: db.close();
    Redirect to another page: response.sendRedirect("url"); return;
  */
-
+ 
+//in case there is no data, don't show graphs
+String showThreeDayCharts = 
+		"<div id=\"chartwrapperOday\">" +
+          "<div id=\"threeday_pie\">" +
+          "</div>" +
+          "<div id=\"threeday_bar\">" +
+          "</div>" +
+        "</div>";
+String showTwoDayCharts = 
+		"<div id=\"chartwrapperOday\">" +
+          "<div id=\"twoday_pie\">" +
+          "</div>" +
+          "<div id=\"twoday_bar\">" +
+          "</div>" +
+        "</div>";
+String showYesterdayCharts = 
+		"<div id=\"chartwrapperOday\">" +
+          "<div id=\"yesterday_pie\">" +
+          "</div>" +
+          "<div id=\"yesterday_bar\">" +
+          "</div>" +
+        "</div>";
+String showTodayCharts = 
+		"<div id=\"chartwrapperToday\">" +
+          "<div id=\"today_pie\">" +
+          "</div>" +
+          "<div id=\"today_bar\">" +
+          "</div>" +
+        "</div>";
+		
  /* this is all temporary because the java files are not yet complete */
 int[] pct1 = {30, 32, 40}; //today
 int[] pct2 = {30, 42, 40};
@@ -40,14 +70,11 @@ String day2 = df.format(new Date(todaysdate.getTime() - 86400000));
 String day3 = df.format(new Date(todaysdate.getTime() - (86400000 * 2)));
 String day4 = df.format(new Date(todaysdate.getTime() - (86400000 * 3)));
 
-/* this will be replaced with the java code below when it works */
-String[] meals = {"Breakfast", "Lunch"};
-String[][] mealFoods = new String[2][3];
-mealFoods[0][0] = "Eggs"; mealFoods[0][1] = "Bacon"; mealFoods[0][2] = "Sausage";
-mealFoods[1][0] = "Hamburger"; mealFoods[1][1] = "Fries"; mealFoods[1][2] = "Coke";
-String[][] mealNuts = new String[2][3];
-mealNuts[0][0] = "13"; mealNuts[0][1] = "7"; mealNuts[0][2] = "12";
-mealNuts[1][0] = "19"; mealNuts[1][1] = "17"; mealNuts[1][2] = "14";
+// this will be replaced with the java code below when it works 
+String todayInfo = "<h2>Breakfast</h2><p class=\"meal\">7g&nbsp;&nbsp;&nbsp;Eggs<br />8g&nbsp;&nbsp;&nbsp;Bacon<br />9g&nbsp;&nbsp;&nbsp;Sausage<br /></p>" + 
+	"<p class=\"total\">Carbs: 13g Protein: 7g Fat: 12g</p>" + 
+	"<h2>Lunch</h2><p class=\"meal\">7g&nbsp;&nbsp;&nbsp;Hamburger<br />7g&nbsp;&nbsp;&nbsp;Fries<br />16g&nbsp;&nbsp;&nbsp;Coke<br /></p>" + 
+	"<p class=\"total\">Carbs: 19g Protein: 17g Fat: 14g</p>";
 
 /* This is what code will actually be called
 Database db = new Database();
@@ -59,7 +86,7 @@ ArrayList<Meal> todayarr = new ArrayList<Meal.List>();
 ArrayList<Meal> yesterdayarr = new ArrayList<Meal.List>();
 ArrayList<Meal> twodayarr = new ArrayList<Meal.List>();
 ArrayList<Meal> threedayarr = new ArrayList<Meal.List>();
-for(int i=0; i<meals.length; i++){
+for(int i=0; i<arr.length; i++){
 	switch(findDay(arr[i])){
 		case 0:
 			todayarr.add(new Meal(arr[i].getMid(), db));
@@ -77,50 +104,69 @@ for(int i=0; i<meals.length; i++){
 }
 
 // calculate percentage of carbs, protein, and fat for the pie charts
-int tempc = 0;
-int tempp = 0;
-int tempf = 0;
+int tempc = 0, tempp = 0, tempf = 0;
+//int[] pct1, pct2, pct3, pct4;
 for(int i=0; i<todayarr.size(); i++){
 	Nutrition nuts = todayarr.get(i).getNutrition();
 	tempc += nuts.getCarbohydrates();
 	tempp += nuts.getProtein();
 	tempf += nuts.getFat();
 }
-int[] pct1 = {tempc/todayarr.size(), tempf/todayarr.size(), tempp/todayarr.size()};
+if(todayarr.size() == 0){
+	showTodayCharts = "add a meal to start tracking progress";
+	pct1 = {0,0,0};
+}else{
+	pct1 = {tempc/todayarr.size(), tempf/todayarr.size(), tempp/todayarr.size()};
+}
 for(int i=0; i<yesterdayarr.size(); i++){
 	Nutrition nuts = yesterdayarr.get(i).getNutrition();
 	tempc += nuts.getCarbohydrates();
 	tempp += nuts.getProtein();
 	tempf += nuts.getFat();
 }
-int[] pct2 = {tempc/yesterdayarr.size(), tempf/yesterdayarr.size(), tempp/yesterdayarr.size()};
+if(yesterdayarr.size() == 0){
+	showYesterdayCharts = "add a meal to start tracking progress";
+	pct2 = {0,0,0};
+}else{
+	pct2 = {tempc/yesterdayarr.size(), tempf/yesterdayarr.size(), tempp/yesterdayarr.size()};
+}
 for(int i=0; i<twodayarr.size(); i++){
 	Nutrition nuts = twodayarr.get(i).getNutrition();
 	tempc += nuts.getCarbohydrates();
 	tempp += nuts.getProtein();
 	tempf += nuts.getFat();
 }
-int[] pct3 = {tempc/twodayarr.size(), tempf/twodayarr.size(), tempp/twodayarr.size()};
+if(twodayarr.size() == 0){
+	showTwoDayCharts = "add a meal to start tracking progress";
+	pct3 = {0,0,0};
+}else{
+	pct3 = {tempc/twodayarr.size(), tempf/twodayarr.size(), tempp/twodayarr.size()};
+}
 for(int i=0; i<threedayarr.size(); i++){
 	Nutrition nuts = threedayarr.get(i).getNutrition();
 	tempc += nuts.getCarbohydrates();
 	tempp += nuts.getProtein();
 	tempf += nuts.getFat();
 }
-int[] pct4 = {tempc/threedayarr.size(), tempp/threedayarr.size(), tempf/threedayarr.size()};
+if(todayarr.size() == 0){
+	showThreeDayCharts = "add a meal to start tracking progress";
+	pct3 = {0,0,0};
+}else{
+	pct4 = {tempc/threedayarr.size(), tempp/threedayarr.size(), tempf/threedayarr.size()};
+}
 
 // calculate blocks of carbs, protein, and fat for the bar charts 
 
 // create a string that shows meal names, foods, and nutrition info for today 
-String todayinfo = "";
+String todayInfo = "";
 for(int i=0; i<todayarr.size(); i++){
-	todayinfo += "<h2>" + todayarr.get(i).getName() + "</h2>";
+	todayinfo += "<h2>" + todayarr.get(i).getName() + "</h2><p class=\"meal\">";
 	Food.List foods[] = todayarr.get(i).getFoodList();
 	for(int j=0; j < foods.length; j++){
-		todayinfo += (foods[j].getName() + "<br />");
+		todayinfo += (foods[j].getCount() + "g&nbsp;&nbsp;&nbsp;" + foods[j].getName() + "<br />");
 	}
 	Nutrition nuts = todayarr.get(i).getNutrition();
-	todayinfo += "<p class=\"total\">Carbs: " + nuts.getCarbs() + "g ";
+	todayinfo += "</p><p class=\"total\">Carbs: " + nuts.getCarbs() + "g ";
 	todayinfo += "Protein: " + nuts.getProtein() + "g Fat: " + nuts.getFat() + "g</p>";
 }
 
@@ -129,9 +175,9 @@ db.close();
 
  %>
  <%!
-	/* 0 = today, 1 = yesterday, 2 = two days ago, 3 = three days ago, -1 = more than three days ago */
-/*	int findDay(Meal.List m){
-		Calendar c = new Calendar();
+	/* 0 = today, 1 = yesterday, 2 = two days ago, 3 = three days ago, 4 = more than three days ago -1 = future*/
+	int findDay(Meal.List m){
+		Calendar c = Calendar.getInstance();
 		int year = c.get(Calendar.YEAR);
 		int month = c.get(Calendar.MONTH);
 		int day = c.get(Calendar.DAY_OF_MONTH);
@@ -140,19 +186,22 @@ db.close();
 		Timestamp yesterday = new Timestamp(c.getTimeInMillis() - 86400000);
 		Timestamp twoday = new Timestamp(c.getTimeInMillis() - (86400000 * 2));
 		Timestamp threeday = new Timestamp(c.getTimeInMillis() - (86400000 * 3));
+		Timestamp tomorrow = new Timestamp(c.getTimeInMillis() + 86400000);
 		
-		if(m.getOccurrence.after(today)){
+		if(m.getOccurrence().after(tomorrow)){
+			return -1;
+		}else if(m.getOccurrence().after(today)){
 			return 0;
-		}else if(m.getOccurrence.after(yesterday)){
+		}else if(m.getOccurrence().after(yesterday)){
 			return 1;
-		}else if(m.getOccurrence.after(twoday)){
+		}else if(m.getOccurrence().after(twoday)){
 			return 2;
-		}else if(m.getOccurrence.after(threeday)){
+		}else if(m.getOccurrence().after(threeday)){
 			return 3;
 		}else{
-			return -1;
+			return 4;
 		}
-	}*/
+	}
  %>
  
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -208,13 +257,10 @@ db.close();
         };
 
 	var optionsOday = {
-          width: 84, height: 84,
+          width: 170, height: 170,
           backgroundColor:'#8b9A70',
-		  legend: {
-		    position:'none',
-		  },
-		chartArea:{width:"98%",height:"98%"},
-	pieSliceText:'none'
+		  legend: {position: 'top', textStyle: {color: 'black', fontSize: 8}},
+		chartArea:{width:"70%",height:"70%"}
         };
 
 
@@ -285,7 +331,7 @@ db.close();
         };
 
 	var optionsOday = {
-          width: 84, height: 84,
+          width: 170, height: 170,
 		  backgroundColor: '#8b9A70',
 		  vAxis: {
 		    baselineColor:'#8b9A70',
@@ -294,7 +340,7 @@ db.close();
 			  color:'#8b9A70',
 			},
 		  },
-		  chartArea:{width:"100%",height:"100%"},
+		  chartArea:{width:"70%",height:"70%"},
 		  legend: {
 		    position:'none'
 		  },	
@@ -316,63 +362,40 @@ db.close();
   <body>
     <div id="page">
       <div id="header">
-        <img src="images/h1.png"><a href="Profile.html"><img src="images/h2.png"></a><img src="images/h3.png"><a href="logout.jsp"><img src="images/h4.png"></a><img src="images/h5.png">
+        <table cellpadding="0" cellspacing="0">
+<tr>
+<td> <a href="index.jsp"><img src="images/lightICON1.png"></a></td>
+<td> <a href="inventory.jsp"><img src="images/lightICON2.png" style="margin-left: -10px;" href="index.jsp"></a></td>
+<td> <a href="favorites.jsp"><img src="images/lightICON3.png" style="margin-left: -5px;"></a></td>
+<td> <a href="history.jsp"><img src="images/lightICON4.png" style="margin-left: -10px;"></a></td>
+<td> <a href="recipes.jsp"><img src="images/lightICON5.png" style="margin-left: -10px;"></a></td>
+<td> <img src="images/lightICON6.png" style="margin-left: -10px;"></td>
+</tr>
+</table>
       </div>
       <div id="content">
       <div id="oday" class="shadowBox"><%= day4 %><br /><br />
-        <div id="chartwrapperOday">
-          <div id="threeday_pie">
-          </div>
-          <div id="threeday_bar">
-          </div>
-        </div>
-        Carbs/Protein/Fat Ratio and Block Levels for 3 days ago
+        <%= showThreeDayCharts %>
+        <p class="oday">Carbs/Protein/Fat Ratio and Block Levels for<br />3 days ago</p>
       </div>
       <div id="oday" class="shadowBox"><%= day3 %><br /><br />
-        <div id="chartwrapperOday">
-          <div id="twoday_pie">
-          </div>
-          <div id="twoday_bar">
-          </div>
-        </div>
-        <br />Carbs/Protein/Fat Ratio and Block Levels for 2 days ago
+        <%= showTwoDayCharts %>
+        <br /><p class="oday">Carbs/Protein/Fat Ratio and Block Levels for<br />2 days ago</p>
       </div>
       <div id="oday" class="shadowBox"><%= day2 %><br /><br />
-        <div id="chartwrapperOday">
-          <div id="yesterday_pie">
-          </div>
-          <div id="yesterday_bar">
-          </div>
-        </div>
-        <br />Carbs/Protein/Fat Ratio and Block Levels for yesterday
+        <%= showYesterdayCharts %>
+        <br /><p class="oday">Carbs/Protein/Fat Ratio and Block Levels for yesterday</p>
       </div>
       <div id="today" class="shadowBox"><h1><%= day1 %></h1>
-        <div id="chartwrapperToday">
-          <div id="today_pie">
-          </div>
-          <div id="today_bar">
-          </div>
-        </div>
+        <%= showTodayCharts %>
         <p class="food">
-<%
-	String ret = "";
-	for(int i=0; i < meals.length; i++){
-		ret += "<h2>" + meals[i] + "</h2>";
-		for(int j=0; j < mealFoods[i].length; j++){
-			ret += (mealFoods[i][j] + "<br />");
-		}
-		ret += "<p class=\"total\">Carbs: " + mealNuts[i][0] + "g ";
-		ret += "Protein: " + mealNuts[i][1] + "g Fat: " + mealNuts[i][2] + "g</p>";
-	}
-	out.print(ret);
-	
-	//this will be replaced with s as calculated at the top
-%>
+			<%= todayInfo %>
         </p>
       </div>
     </div>
-      <div id="footer">Hygeia is a project developed for a Software Engineering class at UCSD.<br />
-        Please contact us at hygeia@gmail.com if you would like to use any of the code found here.
+      <div id="footer"><a href="about.jsp">About Us</a><br />
+		Hygeia is a project developed for a Software Engineering class at UCSD.<br />
+        Please contact us at hygeia110@gmail.com if you would like to use any of the code found here.
       </div>
     </div>
   </body>

@@ -1,91 +1,175 @@
-<!--
-        Filename: favorites.jsp
-        Description: Proccess all requests to add or remove meals from the
-		     user's favorite list. The Page should list all the user's
-		     favorites.
--->
-
-<%@ page import = "hygeia.*" %>
 <%
- /* Check to see if a session exists */
-if (session.getAttribute("uid") == null) {
-    /* Send away non-logged in users */
-    response.sendRedirect("index.jsp");
-    return;
-}
-
-Database db = new Database();
-int uid = (Integer)session.getAttribute("uid");
-User u = new User(db, uid);
-String name = u.getUserName();
-
-Favorites f = new Favorites(u);
-
-if(request.getParameter(removeFromFavorites).equals("removeFromFavorites"))
-{
- f.removeMeal(meal[i]);
-}
-
-if(request.getParameter("addToFavorite") != null)
-{
- f.addMeal(meal[i]);
-}
-
-Meal[] meal = f.getFavorites();
-
-// Start form
-String s = "<form action=\"favorites.jsp\" method=\"post\">";
-
-// Go through each favorite meal
-for(int i = 0; i< meal.length; i++)
-{
- String mealName = meal[i].getName();
- s = s + mealName + "</br>";
-
- int mid = meal[i].getMid();
-  s = s + " <input type=\"hidden\" name=\""+ mid + "\">";
-        
-  s = s + " <input type=\"hidden\" name=\"removeFromFavorites\"" + 
-            "value=\"removeFromFavorites\">";
-  s = s + "<input type=\"submit\" name = \"Remove\">";
-
- List<String> food = meal[i].getFoodList }
- Iterator<String> it = food.iterator();
-
- while(it.hasNext())
- {
-  String item = (String)it.next();
-  s = s + "<br>" + item + "</br>";
- }
-
- Nutrition nut = meal[i].getNutrition();
- s = s + "Calories: " + nut.cals + " Carbohydrates: " + nut.carbs +
-        " Fat: " + nut.fat + " Protein: " + nut.pro + "</br>";
-}
-
-// End Form
-s = s + "</form>";
- 
+int[] pct1 = {30, 32, 40}; 
+int[] block1 = {20, 10, 30};
+String meal = "MEAL NAME HERE";
 %>
 
-<HTML>
-<BODY>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 
-<!-- Ask user if they would like to add meal to history -->
-<h1>Add favorite</h1>
+<head>
+<link type="text/css" rel="stylesheet" href="favoritesStyle.css" />
+    <link rel="shortcut icon" href="favicon.ico" mce_href="favicon.ico"/> 
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data1 = new google.visualization.DataTable(); 
+	data1.addColumn('string', 'Nutrient');
+        data1.addColumn('number', 'Grams');
+        data1.addRows([
+          ['Carbs',    <%= pct1[0] %>],
+          ['Protein',     <%= pct1[1] %>],
+          ['Fat',  <%= pct1[2] %>],
+	]);
 
-</br>
+        var optionsToday = {
+          width: 220, height: 200,
+          backgroundColor: '#fbffcc',
+		  legend: {
+		    position:'top',
+		  }
+        };
 
-<form action="favorites.jsp" method="post">
-<input type="hidden" name="mid">
-<input type="hidden" name="addToFavorites" value="addToFavorites">
-<input type="submit" name="Add">
+        var chart1 = new google.visualization.PieChart(document.getElementById('today_pie'));
+        chart1.draw(data1, optionsToday);
+      }
+    </script>
+	<script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data1 = new google.visualization.DataTable();	
+        data1.addColumn('string', 'Meal');
+        data1.addColumn('number', 'Carbs');
+        data1.addColumn('number', 'Protein');
+	data1.addColumn('number', 'Fat');
+        data1.addRows([
+          ['<%= meal %>', <%= block1[0] %>, <%= block1[1] %>, <%= block1[2] %>]
+        ]);
+	
+
+	
+
+        var optionsToday = {
+          width: 220, height: 200,
+		  backgroundColor: '#fbffcc',
+		  vAxis: {
+		    baselineColor:'#fbffcc',
+			gridlines: {
+			  count:4,
+			  color:'#fbffcc',
+			},
+		  },
+		  title:'Block Level',
+		  legend: {
+		    position:'none'
+		  }
+        };
+
+
+        var chart1 = new google.visualization.ColumnChart(document.getElementById('today_bar'));
+        chart1.draw(data1, optionsToday);
+      }
+    </script>
+
+<style type="text/css">
+body{background-color: fbffcc}
+
+#searchwrapper {
+width:310px; /*follow your image's size*/
+height:40px;/*follow your image's size*/
+background-image:url(THE_SEARCH_BOX_IMAGE);
+background-repeat:no-repeat; /*important*/
+padding:0px;
+margin:0px;
+position:relative; /*important*/
+}
+ 
+#searchwrapper form { display:inline ; }
+ 
+.searchbox {
+border-style:outset;
+border-width:2px;
+border-color:b2b48c;
+border-radius:7px;
+background-color:fbffcc; /*important*/
+position:absolute; /*important*/
+top:4px;
+left:9px;
+width:256px;
+height:28px;
+font-size:18px;
+font-family:verdana;
+}
+ 
+.searchbox_submit {
+border:0px; /*important*/
+background-color:transparent; /*important*/
+position:absolute; /*important*/
+top:4px;
+left:265px;
+width:32px;
+height:28px;
+}
+</style>
+</head>
+<div id="page">
+  <div id="header">
+<!-- Navigation Bar -->
+
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td> <a href="index.jsp"><img src="images/lightICON1.png"></a></td>
+<td> <a href="inventory.jsp"><img src="images/lightICON2.png" style="margin-left: -10px;" href="index.jsp"></a></td>
+<td> <a href="favorites.jsp"><img src="images/lightICON3.png" style="margin-left: -5px;"></a></td>
+<td> <a href="history.jsp"><img src="images/lightICON4.png" style="margin-left: -10px;"></a></td>
+<td> <a href="recipes.jsp"><img src="images/lightICON5.png" style="margin-left: -10px;"></a></td>
+<td> <img src="images/lightICON6.png" style="margin-left: -10px;"></td>
+</tr>
+</table>
+
+  </div>
+<br />
+
+<body>
+<div id="left">
+<div id="searchwrapper"><form action="">
+<input type="text" class="searchbox" name="s" value="" />
+<input type="image" src="images/searchBarICON.png" class="searchbox_submit" value="" />
 </form>
-</br>
+</div>
 
-<h1><%= name %>'s Favorite Meals </h1>  
-<P><%= s %>
+<img class="page" src="images/breakfastFavoritesICON.png">
+<br />
 
-</BODY>
-</HTML>
+<br />
+<img class="page" src="images/DefaultFavoritesICON.png" style="margin-left: 10px; margin-right:10px;">
+<img class="page" src="images/DefaultFavoritesICON.png" style="margin-left: 10px; margin-right:10px;">
+<img class="page" src="images/DefaultFavoritesICON.png" style="margin-left: 10px; margin-right:10px;">
+<img class="page" src="images/DefaultFavoritesICON.png" style="margin-left: 10px; margin-right:10px;">
+<br />
+<br />
+<img class="page" src="images/DefaultFavoritesICON.png" style="margin-left: 10px; margin-right:10px;">
+<img class="page" src="images/DefaultFavoritesICON.png" style="margin-left: 10px; margin-right:10px;">
+<img class="page" src="images/DefaultFavoritesICON.png" style="margin-left: 10px; margin-right:10px;">
+<br />
+<br />
 
+<img class="page" src="images/lunchFavoritesICON.png">
+<br />
+
+<br />
+<img class="page" src="images/DefaultFavoritesICON.png" style="margin-left: 10px; margin-right:10px;">
+<img class="page" src="images/DefaultFavoritesICON.png" style="margin-left: 10px; margin-right:10px;">
+<img class="page" src="images/DefaultFavoritesICON.png" style="margin-left: 10px; margin-right:10px;">
+
+</div>
+<div id="right">
+  <div id="today_pie"></div>
+  <div id="today_bar"></div>
+</div>
+</div>
+</body>
+</html>
