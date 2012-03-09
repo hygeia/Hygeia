@@ -1,3 +1,4 @@
+
 <!--
    Filename: updateProfile.jsp
    Description: This page will update the users information.
@@ -6,6 +7,7 @@
 -->
 
 <%@ page import = "hygeia.*" %>
+<%@ page import = "java.io.FileNotFoundException" %>
 <%
 /* Check to see if a session exists */
  if (session.getAttribute("uid") == null) {
@@ -45,6 +47,12 @@ if( sex.equals("m"))
  m = "checked";
 }
 
+/*
+ * This chunk of code is used to set the activity radio button to what the
+ * user put in during another session. This is useful to the user in the 
+ * way it avoids reduntant annoying input.
+ */
+ 
 // int activity = u.getActivity();
 int activity = 4;
 
@@ -80,23 +88,34 @@ if(activity == 6)
  a6 = "checked";
 }
 
+/*
+out.println(Calculator.percentBodyFat("f","145","38","38","38","27","27","27",67.0,"6.5")); 
+*/
 
+/* retrieve input from form */
 String theName = request.getParameter("name");
+
+/* Check if the inputed name is valid */
 if(theName != null) 
 {
+  /* Convert the height into inches for Calculator use */
   int tempft = Integer.parseInt(request.getParameter("ft"));
   int feetToInch = tempft*12;
   int tempin = Integer.parseInt(request.getParameter("in"));
   height = feetToInch + tempin;
-  weight = Double.parseDouble(request.getParameter("weight")); 
-  u.updateUsername(theName);
-  out.println(weight);
+ 
+  /* Retrieve weight from form and parse it into a double */
+  weight = Double.parseDouble(request.getParameter("weight"));
+
+  /* Update user info according to the form */
   u.updateAllInfo(theName, u.getEmail(), height, weight);          
+  
   session.setAttribute( "username", theName );
-  db.close();
-  response.sendRedirect("profile.jsp");
+  db.close(); // close database
+  response.sendRedirect("profile.jsp"); // Go back to profile.jsp
 
 }
+
 %>
  <html>
  <title>Update Profile</title>
@@ -155,217 +174,12 @@ Hygeia will find the average of these three measurements</br>
      your wrist at the space between your dominant hand and your wrist bone,</br>
      at the location where your wrist bends.</br>
 
- <P> Wrist measurement(INCHES): <INPUT TYPE="TEXT" VALUE="<%= wrist %>" NAME="wrist" SIZE="10">
+ <P> Wrist measurement(INCHES):
+ <INPUT TYPE="TEXT" VALUE="<%= wrist %>" NAME="wrist" SIZE="10">
 
  <P>
  <INPUT TYPE="SUBMIT" VALUE="Submit">
  </FORM> 
-<%
-   /*
-	char gender;
-	String act;
-	String hip1, hip2, hip3;
-	String waist1, waist2, waist3;
-	String wrist;
-	boolean nFlag= false;
-        boolean gFlag= false;
-        boolean wFlag= false;
-        boolean aFlag= false;
-        boolean weFlag= false;
-        boolean hpFlag= false; 
-        boolean hFlag= false;
-        boolean waFlag= false;
-
-        if(request.getParameter("name") == null
-            || request.getParameter("name").equals("")) 
-	{
-            out.println("<html><font color=red>Please enter your name.</font></html></br>");
-        }
-	else
-	{
-	 u.updateUsername(request.getParameter("name"));
-	 nFlag = true;
-	}
-	if(request.getParameter("sex") != null) 
-	{
-           if(request.getParameter("sex").equals("female")) 
-	    {
-                    gender ='f';
-                    gFlag= true;
-	    }
-           
-           if(request.getParameter("sex").equals("male")) 
-	    {
-		    gender ='m';
-                    gFlag= true;
-
-	    }
-        }
-	else
-	{
-	 out.println("<html><font color=red>Please select a gender.</font></html></br>");
-	}
-	
-	if(request.getParameter("activity") != null)
-	{
-	 if(request.getParameter("activity").equals("1"))
-	 {
-		act = "0.5";
-                aFlag= true;
-
-	 }
-	 if(request.getParameter("activity").equals("2"))
-	 {
-		act = "0.6";
-                aFlag= true;
-
- 	 }
-	 if(request.getParameter("activity").equals("3"))
-         {
-                act = "0.7";
-                aFlag= true;
-
-         }
-         if(request.getParameter("activity").equals("4"))
-         {
-                act = "0.8";
-                aFlag= true;
-
-         }
-         if(request.getParameter("activity").equals("5"))
-         {
-                act = "0.9";
-                aFlag= true;
-
-         }
-         if(request.getParameter("activity").equals("6"))
-         {
-                act = "1.0";
-		aFlag= true;
-         }
-	}
-	else
-        {
-         out.println("<html><font color=red>Please enter your activity level."+
-			"</font></html></br>");
-        }
-        
-	if(request.getParameter("weight") == null
-            || request.getParameter("weight").equals(""))
-        {
-         out.println("<html><font color=red>Please enter your weight."+
-			"</font></html></br>");
-        }
-        else
-        {
-         u.updateWeight(Double.parseDouble(request.getParameter("weight")));
-         weFlag= true;
-        }
-
-        if(request.getParameter("hip1") == null
-            || request.getParameter("hip1").equals(""))
-        {
-            out.println("<html><font color=red>Please enter all 3 hip measurements.</font></html></br>");
-        }
-        else
-        {
-            hip1 =request.getParameter("hip1");
-            hpFlag= true;
-
-        }
-
-       if(request.getParameter("hip2") == null
-            || request.getParameter("hip2").equals(""))
-        {
-            out.println("<html><font color=red>Please enter all 3 hip measurements.</font></html></br>");
-        }
-        else
-        {
-            hip2 =request.getParameter("hip2");
-            hpFlag= true;
-        
-	}
-
-       if(request.getParameter("hip3") == null
-            || request.getParameter("hip3").equals(""))
-        {
-            out.println("<html><font color=red>Please enter all 3 hip measurements.</font></html></br>");
-        }
-        else
-        {
-            hip3 =request.getParameter("hip3");
-            hpFlag= true;
-
-	}
-
-       if(request.getParameter("waist1") == null
-            || request.getParameter("waist1").equals(""))
-        {
-            out.println("<html><font color=red>Please enter all 3 waist measurements.</font></html></br>");
-        }
-        else
-        {
-            waist1 =request.getParameter("waist1");
-            waFlag= true;
-        }
-
-       if(request.getParameter("waist2") == null
-            || request.getParameter("waist2").equals(""))
-        {
-            out.println("<html><font color=red>Please enter all 3 waist measurements.</font></html></br>");
-        }
-        else
-        {
-            waist2 =request.getParameter("waist2");
-            waFlag= true;
-
-	}
-
-       if(request.getParameter("waist3") == null
-            || request.getParameter("waist3").equals(""))
-        {
-            out.println("<html><font color=red>Please enter all 3 waist measurements.</font></html></br>");
-        }
-        else
-        {
-            waist3 =request.getParameter("waist3");
-	    waFlag= true;
-        }
-
-        if(request.getParameter("height") == null
-            || request.getParameter("height").equals(""))
-        {
-            out.println("<html><font color=red>Please enter your height.</font></html></br>");
-        }
-        else
-        {
-	 u.updateHeight(77.0);   
-	 hFlag= true;
-        }
-
-       if(request.getParameter("wrist") == null
-            || request.getParameter("wrist").equals(""))
-        {
-            out.println("<html><font color=red>Please enter your wrist measurement.</font></html></br>");
-        }
-        else
-        {
-            wrist =request.getParameter("wrist");
-            wFlag= true;
-	}
-	String theName = request.getParameter("name");
-	if (theName != null) 
-	{
-	   u.updateAllInfo(theName,u.getEmail(),
-				Double.parseDouble(request.getParameter("weight")),
-				Double.parseDouble(request.getParameter("height")));
-    	   u.updateUsername(theName);
-	   
-	   session.setAttribute( "username", theName );
-	   response.sendRedirect("profile.jsp");
-    	   return;
-	}*/ 
-%>
  </body>
  </html>
 
