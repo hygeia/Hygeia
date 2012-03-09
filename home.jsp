@@ -316,7 +316,7 @@ db.close();
   <body>
     <div id="page">
       <div id="header">
-        <img src="images/h1.png"><a href="Profile.html"><img src="images/h2.png"></a><img src="images/h3.png"><a href="Logout.html"><img src="images/h4.png"></a><img src="images/h5.png">
+        <img src="images/h1.png"><a href="Profile.html"><img src="images/h2.png"></a><img src="images/h3.png"><a href="logout.jsp"><img src="images/h4.png"></a><img src="images/h5.png">
       </div>
       <div id="content">
       <div id="oday" class="shadowBox"><%= day4 %><br /><br />
