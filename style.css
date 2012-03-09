@@ -1,24 +1,29 @@
-html, body {
-	margin: 0;
-	padding: 0;
-	font-family: "Times New Roman", arial, Verdana;
-	color: #817a53;
-	background: #fbffcc;
-	height:100%;
+html {
+    height:100%;
+    margin:0;
+    padding:0;
+}
+ 
+body {
+    margin:0;
+    background: #fbffcc fixed;
+    height:100%;
+    text-align:center;
+    padding:0;
 }
 
 #page {
-    position:relative;
     width:960px;
     min-height:100%;
     margin: 0 auto 0 auto;
-    background: #fbffcc;
+    position:relative;
+    background-color:#fbffcc;
 }
 
 #content {
     margin:0;
     padding-bottom:40px;
-    min-height:100%;
+    min-height:650px;
 }
 
 /* Header start */
@@ -138,9 +143,15 @@ width:137px;
 }
 
 p.total {
-padding: 0 0 2px 0;
+padding: 0 0 1px 8px;
 font-weight:bold;
 font-size:14px;
+text-align:left;
+}
+
+p.meal {
+padding: 0 0 0 8px;
+text-align:left;
 }
 
 h1 {

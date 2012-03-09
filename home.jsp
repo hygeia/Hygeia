@@ -41,9 +41,9 @@ String day3 = df.format(new Date(todaysdate.getTime() - (86400000 * 2)));
 String day4 = df.format(new Date(todaysdate.getTime() - (86400000 * 3)));
 
 /* this will be replaced with the java code below when it works */
-String todayinfo = "<h2>Breakfast</h2>Eggs<br />Bacon<br />Sausage<br />" + 
+String todayinfo = "<h2>Breakfast</h2><p class=\"meal\">Eggs<br />Bacon<br />Sausage<br /></p>" + 
 	"<p class=\"total\">Carbs: 13g Protein: 7g Fat: 12g</p>" + 
-	"<h2>Lunch</h2>Hamburger<br />Fries<br />Coke<br />" + 
+	"<h2>Lunch</h2><p class=\"meal\">Hamburger<br />Fries<br />Coke<br /></p>" + 
 	"<p class=\"total\">Carbs: 19g Protein: 17g Fat: 14g</p>";
 
 /* This is what code will actually be called
