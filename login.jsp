@@ -44,17 +44,24 @@ if (request.getParameter("login") != null) {
 <html>
   <head>
     <title>Login | Hygeia</title>
+    <link type="text/css" rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>Hygeia</h1>
-    <h2>Version 0.FUCK</h2>
-    <h3>Login Page</h3>
+    <img src="images/lightICON6.png"/>
+    <h3>Login</h3>
     <br>
     <form method="post" action="login.jsp">
-      Email: <input type="text" name="email" /><br />
-      Password: <input type="password" name="password" /><br />
+      <table style="align:center;">
+      <tr>
+          <td> Email: </td> 
+          <td><input type="text" name="email" /></td>
+      </tr>
+      <tr>
+          <td>Password: </td> 
+          <td><input type="password" name="password" /></td>
       <input type="hidden" name="login" value="login" /><br />
       <input type="submit" />
+      </table>
     </form>
   </body>
 </html>
