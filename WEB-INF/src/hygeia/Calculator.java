@@ -11,11 +11,7 @@ public class Calculator {
 // Declarations
 double f = 0.5;
 
-public Calculator()
-{
-}
- 
-public double percentBodyFat(String sex, String w, String h1, 
+public static double percentBodyFat(String sex, String w, String h1, 
   String h2, String h3, String a1, String a2, String a3, double height, String wr) 
   throws FileNotFoundException
 {
@@ -251,7 +247,7 @@ public double percentBodyFat(String sex, String w, String h1,
  return percentBodyFat;
 }
 
-public double leanBodyMass(double weight, double percentBodyFat)
+public static double leanBodyMass(double weight, double percentBodyFat)
 {
   // Declaration
   double leanBodyMass;
@@ -270,7 +266,7 @@ public double leanBodyMass(double weight, double percentBodyFat)
  
 }
 
-public double protein(double leanBodyMass, int activLevel)
+public static double protein(double leanBodyMass, int activLevel)
 {  
 	double act = 0;
 	double protein;
