@@ -1,27 +1,52 @@
 $(document).ready(function(){
   $("#signupform").validate({
+
+    /* Prevent double submissions */
+    submitHandler: function(form){
+      if(!this.wasSent){
+        this.wasSent = true;
+        $(':submit', form).val('Please wait...')
+                          .attr('disabled', 'disabled')
+                          .addClass('disabled');
+        form.submit();
+      } else {
+        return false;
+      }
+    }
+
     rules: {
-        username: 'required',
-        password: {
-            required: true,
-            minlength: 6
+        username: {
+          required: true,
+          rangelength: [2, 20]
+        }
+        user_password: { 
+          required: true, 
+          rangelength: [6, 16], 
+          number: true 
+        }, 
+        reenter_password: { 
+          required: true,
+          equalTo: "#user_password" 
         },
-        retype_password: {
-          required:true,
-          equalTo: "#password"
-        },
-        email: {
+        user_email: {
             required: true,
             email: true
         }
-    },
-    messages: {
-        password: {
-            required: 'Please provide a password',
-            minlength: 'Your password must be at least 6 characters long'
-        },
-        retype_password: 'They must be equal',
-        email: 'Please enter a valid email address'
-    }   
+        reenter_email: {
+            required: true,
+            email: true,
+            equalTo: "#user_email"
+        }
+      },
+      messages: {
+          password: {
+              required: 'You must have a password',
+              rangelength: 'Your password must be between 6 and 16 characters long',
+              number: 'Your password must contain a number'
+          },
+          reenter_password: 'Passwords must match',
+          email: 'Please enter a valid email address',
+          reenter_email: 'Emails must match'
+      }   
   });
 });

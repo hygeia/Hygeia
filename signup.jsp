@@ -11,8 +11,9 @@ if (session.getAttribute("uid") != null) {
 if (request.getParameter("signup") != null) {
 
     String username = (String)request.getParameter("username");
-    String password = (String)request.getParameter("password");
-    String email = (String)request.getParameter("email");
+    String password = (String)request.getParameter("user_password");
+    String email = (String)request.getParameter("user_email");
+    char sex = ((String) request.getParameter("sex")).charAt(1);
     
     Database db = new Database();
     
@@ -49,14 +50,25 @@ if (request.getParameter("signup") != null) {
     <form id="signupform" method="post" action="signup.jsp">
       <label for="username">Name:</label>
       <input type="text" name="username" /><br />
+
       <label for="email">Email:</label>
-      <input type="text" name="email" /><br />
+      <input type="text" name="user_email" /><br />
+
+      <label for="email">Email:</label>
+      <input type="text" name="reenter_email" /><br />
+
       <label for="password">Password:</label>
-      <input type="password" name="password" /><br />
+      <input type="password" id="user_password" name="user_password" /><br />
+
       <label for="retype_password">Retype Password:</label>
-      <input type="password" name="retype_password" /><br />
+      <input type="password" id= "reenter_password" name="reenter_password" /><br />
+
+      <input type="radio" name="sex" value="male" /> Male<br />
+      <input type="radio" name="sex" value="female" /> Female<br />
+
       <input type="hidden" name="signup" value="signup" />
       <input type="submit" />
+
     </form>
   </body>
 </html>

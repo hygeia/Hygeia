@@ -131,8 +131,7 @@ public class User {
     /* Delete user. */
     public static boolean deleteUser(Database db, int uid) {
         
-        if ( uid == null)
-        {
+        if ( uid < 1) {
             return false;
         }
 
@@ -145,7 +144,6 @@ public class User {
         }
         
         return true;
-        }
     }
     
     /* Sets instance variables for all properties from the database */
@@ -296,7 +294,7 @@ public class User {
         this.height = ht;
         this.weight = wt;
         
-        if (User.accountExists(this.db, email)) {
+        if (!User.accountExists(this.db, email)) {
             return false;
         }
         
