@@ -1,89 +1,180 @@
-/* Refer to Asher Garland for reference. */
 package hygeia;
 
-/* A class for containing nutrition information. No database access. */
-public class Nutrition {
+import java.sql.*;
 
-    private double calories;
-    private double carbohydrates;
-    private double protein;
-    private double fat;
-    
-    public Nutrition(double cal, double carb, double pro, double fat) {
-        this.setCalories( cal );
-        this.setCarbohydrates( carb );
-        this.setProtein( pro );
-        this.setFat( fat );
-    }
+/* Classes for handling food items */
+public class Food {
 
-    
-    /* Adds the info in n to this object. Returns this. */
-    public Nutrition addNutrition(Nutrition n) {
-        this.setCalories( this.getCalories() + n.getCalories() );
-        this.setCarbohydrates( this.getCarbohydrates() + n.getCarbohydrates() );
-        this.setProtein( this.getProtein() + n.getProtein() );
-        this.setFat( this.getFat() + n.getFat() );
-
-        return (this);
-
-    }
-    
-    /* getters for all fields */
-    public double getCalories() {
-        return this.calories;      
-    }
-
-    private void setCalories ( double cal )
-    {
-        if ( cal < 0 )
-        {
-            cal = 0;
-        }
-
-        this.calories = cal;
-    }
-
+    /* Food.Update is used for adding to inventory */
+    public static class Update {
         
-    public double getCarbohydrates() {
-        return this.carbohydrates;
-    }
-
-    private void setCarbohydrates( double carb )
-    {
-        if (carb < 0)
-        {
-            carb = 0;
-        }
-
-        this.carbohydrates = carb;
-    }
+        private int fid;
+        private double count;
         
-    public double getProtein() {
-        return this.protein;
-    }
-
-    private void setProtein ( double pro )
-    {
-        if ( pro < 0 )
-        {
-            pro = 0;
+        public Update(int fid, double count) {
+            this.setFid ( fid );
+            this.setCount ( count );
         }
-
-        this.protein = pro;
-    }
         
-    public double getFat() {
-        return this.fat;
-    }
-
-    private void setFat ( double fat )
-    {
-        if ( fat < 0 )
-        {
-            fat = 0;
+        public int getFid() {
+            return this.fid;
+        }
+        
+        public double getCount() {
+            return this.count;
         }
 
-        this.fat = fat;
+        private void setFid( int fid) {
+            this.fid = fid;
+        }
+
+        private void setCount( double count) {
+
+            // Lower limit of 0, no negative counts;
+            if ( count < 0 )
+            {
+                count = 0;
+            }
+
+            this.count = count;
+        }
+        
+        /* Create a Nutrition object with the values filled in from the db */
+        public Nutrition getNutrition(Database db) {
+            double cal =0, carb= 0, pro=0, fat=0;
+
+            // retrive the macronutrient info from the database using the fid
+            ResultSet rs = db.execute("SELECT calories, carbohydrates, protein, fat " 
+                            + "FROM food WHERE fid = '" + this.fid + "';");
+      
+            int aid = 0;
+    
+            /* Try to get aid from result */
+            try 
+            {
+                /* Select first (should be only) record */
+                if (rs == null) {
+                    return -2;
+            }
+                if (rs.next()) {
+                    double cal = rs.getDouble("calories");
+                    double carb = rs.getDouble("carbohydrates");
+                    double pro = rs.getDouble("protein");
+                    double fat = rs.getDouble("fat"); 
+                }
+        
+            /* Free db resources */
+            db.free();
+            } catch (SQLException e) 
+            {
+                /* I don't know what to do here */
+                e.printStackTrace();
+            }
+            
+            // multiply the nutrients of the food by the number of food items in inventory (count)
+            cal *= this.getCount();
+            carb *= this.getCount();
+            pro *= this.getCount();
+            fat *= this.getCount();
+
+            // return a newly created Nutriention object with the given macronutrient info
+            return ( new Nutrition(cal, carb, pro, fat) ) ;
+        
+        }
+    }
+    
+    /* Food.Create is used for creating new foods in the database. */
+    public static class Create {
+        
+        private String name;
+        private double weight;
+        private double count; // needed?
+        private double calories, carbohydrates, protein, fat, factor; // wtf is factor?
+        
+        public Create(String name, double count, double factor, int wt,
+            double cal, double carb, double pro, double fat) {
+
+            // instantiate the instance variables
+            this.name = name;
+            this.count = count;
+            this.factor = factor;
+            this.weight = wt;
+            this.calories = cal;
+            this.carbohydrates = carb;
+            this.protein = pro;
+            this.fat = fat;
+
+        }
+        
+        /* getters for all fields */
+        public String getName() {
+            return this.name;
+        }
+        
+        public double getWeight() {
+            return this.weight;
+        }
+        
+        public double getCount() {
+            return this.count;
+        }
+        
+        public double getCalories() {
+            return this.calories;
+        }
+        
+        public double getCarbohydrates() {
+            return this.carbohydrates;
+        }
+        
+        public double getProtein() {
+            return this.protein;
+        }
+        
+        public double getFat() {
+            return this.fat;
+        }
+    }
+    
+    /* Food.List is used for producing a list of foods visible to the user. */
+    public static class List {
+        
+        private String name;
+        private int fid;
+        private double count;
+        
+        public List(String name, int fid, double count) {
+            this.name = name;
+            this.fid = fid;
+            this.count = count;
+        }
+        
+        public String getName() {
+            return this.name;
+        }
+        
+        public int getFid() {
+            return this.fid;
+        }
+        
+        public double getCount() {
+            return this.count;
+        }
+    }
+
+    /* Create a new food in the database. Returns fid if successful. 0 if unsuccessful */
+    public static int createFood(Database db, Food.Create f) {
+/* THIS NEEDS WORK
+        /* Insert Food into foods table * /
+        if ( db.update("INSERT INTO foods (name, weight, calories, carbohydrates,"+
+            " protein, fat, factor) VALUES (" + f.getName() + ", '" + f.getWeight() + "', "
+            + ", " + f.getCalories() + ", " + f.getCarbohydrates() +
+            ", " + f.getProtein() + ", " + f.getFat() + ", " + f.getFactor() + ");" ) < 0 )
+        {
+            return ( db.execute("SELECT fid FROM foods WHERE Food.name ='" + f.getName() + "';") );
+        } */
+
+        return 0;
     }
 
 }
