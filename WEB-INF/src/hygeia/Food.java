@@ -24,11 +24,11 @@ public class Food {
             return this.count;
         }
 
-        priate void setFid( int fid) {
+        private void setFid( int fid) {
             this.fid = fid;
         }
 
-        private void setCount( int count) {
+        private void setCount( double count) {
 
             // Lower limit of 0, no negative counts;
             if ( count < 0 )
@@ -41,13 +41,14 @@ public class Food {
         
         /* Create a Nutrition object with the values filled in from the db */
         public Nutrition getNutrition(Database db) {
-
+		double cal =0, carb= 0, pro=0, fat=0;
+/* THIS NEEDS WORK
             // retrive the macronutrient info from the database using the fid
             double cal = db.execute("select food.calories where food.fid = " + this.getFid() + ";");
             double carb = db.execute("select food.carbohydrates where food.fid = " + this.getFid() + ";");
             double pro = db.execute("select food.protein where food.fid = " + this.getFid() + ";");
             double fat = db.execute("select food.fat where food.fid = " + this.getFid() + ";");
-
+*/
             // multiply the nutrients of the food by the number of food items in inventory (count)
             cal *= this.getCount();
             carb *= this.getCount();
@@ -73,10 +74,10 @@ public class Food {
 
             // instantiate the instance variables
             this.name = name;
-            this.count = count
+            this.count = count;
             this.factor = factor;
             this.weight = wt;
-            this.calorites = cal;
+            this.calories = cal;
             this.carbohydrates = carb;
             this.protein = pro;
             this.fat = fat;
@@ -141,20 +142,15 @@ public class Food {
 
     /* Create a new food in the database. Returns fid if successful. 0 if unsuccessful */
     public static int createFood(Database db, Food.Create f) {
-
-        /* Clean */
-        email = Algorithm.Clean(email);
-        pwd = Algorithm.Clean(pwd);
-        String hpwd = Algorithm.MD5(pwd);
-
-        /* Insert Food into foods table */
+/* THIS NEEDS WORK
+        /* Insert Food into foods table * /
         if ( db.update("INSERT INTO foods (name, weight, calories, carbohydrates,"+
             " protein, fat, factor) VALUES (" + f.getName() + ", '" + f.getWeight() + "', "
             + ", " + f.getCalories() + ", " + f.getCarbohydrates() +
             ", " + f.getProtein() + ", " + f.getFat() + ", " + f.getFactor() + ");" ) < 0 )
         {
             return ( db.execute("SELECT fid FROM foods WHERE Food.name ='" + f.getName() + "';") );
-        }
+        } */
 
         return 0;
     }
