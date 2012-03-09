@@ -82,7 +82,7 @@ box-shadow: 3px 3px 4px #000;
 #oday {
 float:left;
 background-color:#8B9A70;
-margin-top:150px;
+margin-top:50px;
 min-width:170px;
 width:170px;
 margin-right:3px;
@@ -102,14 +102,12 @@ padding-bottom:40px;
 /* Wrapper for today's charts */
 #chartwrapperToday {
 float:right;
-width:220px;
+width:222px;
 }
 
 /* Wrapper for other day's charts */
 #chartwrapperOday {
-float:left;
-width:168px;
-margin-left:2px;
+width:170px;
 }
 
 #yesterday_pie {
@@ -172,7 +170,7 @@ color:rgb(255,255,255);
   position:absolute;
   bottom:0;
   width:960px;
-  height:40px;
+  height:60px;
   text-align:center;
   color:rgb(255,255,255);
   background-color:#709100;
