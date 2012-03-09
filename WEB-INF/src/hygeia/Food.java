@@ -2,163 +2,161 @@ package hygeia;
 
 import java.sql.*;
 
-/* Admins log in through a special page which uses these methods. Once logged in
-admins have access to most other features, but create food and meals for
-system-wide use. Admins do not have their own inventories, histories, or
-favorites. */
-public class Admin {
+/* Classes for handling food items */
+public class Food {
 
-    /* Performs a login but uses admins table instead of users. Should return
-zero on success. */
-    public static int login(Database db, String email, String pwd) {
-        if ( email == null || pwd == null )
-    	{
-    		return -1;
-    	}
-
-    	/* Clean inputs */
-        email = Algorithm.Clean(email);
-        pwd = Algorithm.MD5(Algorithm.Clean(pwd));
-        String hpwd = Algorithm.MD5(pwd);
-       
-        ResultSet rs = db.execute("SELECT aid FROM admins WHERE email = '" +
-              email + "' AND hpwd = '" + pwd + "';");
-      
-      	int aid = 0;
-    
-        /* Try to get aid from result */
-        try 
-        {
-            /* Select first (should be only) record */
-            if (rs == null) {
-                return -2;
-            }
-            if (rs.next()) {
-                aid = rs.getInt("aid");
-            }
+    /* Food.Update is used for adding to inventory */
+    public static class Update {
         
-            /* Free db resources */
-            db.free();
-        } catch (SQLException e) 
-        {
-            /* I don't know what to do here */
-            e.printStackTrace();
+        private int fid;
+        private double count;
+        
+        public Update(int fid, double count) {
+            this.setFid ( fid ); 
+            this.setCount ( count );
         }
-        /* System.out.print(aid); */
-        return aid;
-    	
+        
+        public int getFid() {
+            return this.fid;
+        }
+        
+        public double getCount() {
+            return this.count;
+        }
+
+        priate void setFid( int fid) {
+            this.fid = fid;
+        }
+
+        private void setCount( int count) {
+
+            // Lower limit of 0, no negative counts;
+            if ( count < 0 )
+            {
+                count = 0;
+            }
+
+            this.count = count;
+        }
+        
+        /* Create a Nutrition object with the values filled in from the db */
+        public Nutrition getNutrition(Database db) {
+
+            // retrive the macronutrient info from the database using the fid
+            double cal = db.execute("select food.calories where food.fid = " + this.getFid() + ";");
+            double carb = db.execute("select food.carbohydrates where food.fid = " + this.getFid() + ";");
+            double pro = db.execute("select food.protein where food.fid = " + this.getFid() + ";");
+            double fat = db.execute("select food.fat where food.fid = " + this.getFid() + ";");
+
+            // multiply the nutrients of the food by the number of food items in inventory (count)
+            cal *= this.getCount();
+            carb *= this.getCount();
+            pro *= this.getCount();
+            fat *= this.getCount();
+
+            // return a newly created Nutriention object with the given macronutrient info
+            return ( new Nutrition(cal, carb, pro, fat) ) ;
+        
+        }
     }
     
-    /* Creates a new admin in the admins table. */
-    public static int createAdmin(Database db, String email, String pwd) {
-    
-        if ( email == null || pwd == null ) {
-            return -1;
+    /* Food.Create is used for creating new foods in the database. */
+    public static class Create {
+        
+        private String name;
+        private double weight;
+        private double count; // needed?
+        private double calories, carbohydrates, protein, fat, factor; // wtf is factor?
+        
+        public Create(String name, double count, double factor, int wt,
+            double cal, double carb, double pro, double fat) {
+
+            // instantiate the instance variables
+            this.name          = name;
+            this.count         = count
+            this.factor        = factor;
+            this.weight        = wt;
+            this.calorites     = cal;
+            this.carbohydrates = carb;
+            this.protein       = pro;
+            this.fat           = fat;
+
         }
         
+        /* getters for all fields */
+        public String getName() {
+            return this.name;
+        }
+        
+        public double getWeight() {
+            return this.weight;
+        }
+        
+        public double getCount() {
+            return this.count;
+        }
+        
+        public double getCalories() {
+            return this.calories;
+        }
+        
+        public double getCarbohydrates() {
+            return this.carbohydrates;
+        }
+        
+        public double getProtein() {
+            return this.protein;
+        }
+        
+        public double getFat() {
+            return this.fat;
+        }
+    }
+    
+    /* Food.List is used for producing a list of foods visible to the user. */
+    public static class List {
+        
+        private String name;
+        private int fid;
+        private double count;
+        
+        public List(String name, int fid, double count) {
+            this.name = name;
+            this.fid = fid;
+            this.count = count;
+        }
+        
+        public String getName() {
+            return this.name;        
+        }
+        
+        public int getFid() {
+            return this.fid;
+        }
+        
+        public double getCount() {
+            return this.count;
+        }
+    }
+
+    /* Create a new food in the database. Returns fid if successful. 0 if unsuccessful */
+    public static int createFood(Database db, Food.Create f) {
+
         /* Clean */
         email = Algorithm.Clean(email);
         pwd = Algorithm.Clean(pwd);
         String hpwd = Algorithm.MD5(pwd);
-        
-        /* check if the account already exists. */
-        if (User.accountExists(db, email)) {
-            return -4;
-        }
-        
-        /* Insert new record */
-        int success = db.update("INSERT into admins (email, hpwd)" + 
-                      " values ('" + email + "', '" + hpwd + "');");
-        /* Return error if somethign strange happened */
-        if (success != 1) {
-            return -2;
-        }
-        
-        /* Now get the aid */
-        int aid = Admin.login(db, email, pwd);
-        
-        /* If there was an error from User.login, return an error code */
-        if (uid < 1) {
-            return -3;
-        }
-        
-        return aid;
-    }
-    
-    
-    /* Deletes an admin fromt he admins table. Returns the true if successful*/
-    public static boolean deleteAdmin(Database db, String email) {
-        if ( email == null)
+
+        /* Insert Food into foods table */
+        if ( db.update("INSERT INTO foods (name, weight, calories, carbohydrates,"+
+            " protein, fat, factor) VALUES (" + f.getName() + ", '" + f.getWeight() + "', "
+            + ", " + f.getCalories() + ", " + f.getCarbohydrates() + 
+            ", " + f.getProtein() + ", " + f.getFat() + ", " + f.getFactor() + ");" ) < 0 )
         {
-        	return false;
-        }
+            return ( db.execute("SELECT fid FROM foods WHERE Food.name ='" + f.getName() + "';") );
+        } 
 
-        /* Clean */
-        email = Algorithm.Clean(email);
-
-        ResultSet rs = db.execute("DELETE * FROM admins WHERE email = '" +
-              email + "';");
-
-        if (rs < 1) {
-        	return false;
-        }
-        
-        return true;
+        return 0;
     }
 
-
-    /* Deletes a User from the User table; returns true if successful */
-    public boolean deleteUser(Databse db, User selected)
-    {
-    	if ( User.accountExists(db, selected.getEmail()) )
-    		{
-    			return ( User.deleteUser( db, selected.getUid() ) );
-    		}
-    	return false;    	
-    }
-
-    /* Creates a User and inserts in the User table; returns true if successfil */
-    public static boolean createUser(Database db, String uname, String pwd, String email, 
-    							double ht, double wt)
-    {
-    	try
-    	{
-    		// create the user, User.createUser inserts the info into the user table and return uid
-    		User newUser = new User(db, User.createUser(Database db, String uname, String pwd,
-        		String email, double ht, double wt) );
-
-        	if ( newUser == null )
-        	{
-        		return false;
-        	}
-        	return true;
-        }
-        // if any exception is thrown then something broke up so delete that entered data and return false
-        catch ( Exception e)
-        {
-        	this.deleteUser( newUser );
-        	return false;
-        }
-    	
-    	return false;
-    }
-
-    /* Create a new Food item; return true if successful */
-    public static boolean createFood(String name, double count, double factor, int wt,
-            double cal, double carb, double pro, double fat)
-    {
-    	Food newFood = new Food.Create(name, count, factor, wt, cal, carb, pro, fat);
-    	if (newFood == null)
-    	{
-    		return false;
-    	}
-
-    	return true;
-    }
-
-    /* Delete a new Food item; return true if successful */
-    public static boolean deleteFood()
-    {
-    	return false;
-    }
 }
