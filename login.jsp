@@ -48,10 +48,11 @@ if (request.getParameter("login") != null) {
   </head>
   <body>
     <img src="images/lightICON6.png"/>
+    <div id="page"><div id="content">
     <h3>Login</h3>
     <br>
     <form method="post" action="login.jsp">
-      <table style="align:center;">
+      <table style="margin-left:auto;margin-right:auto;">
       <tr>
           <td> Email: </td> 
           <td><input type="text" name="email" /></td>
@@ -60,8 +61,15 @@ if (request.getParameter("login") != null) {
           <td>Password: </td> 
           <td><input type="password" name="password" /></td>
       <input type="hidden" name="login" value="login" /><br />
-      <input type="submit" />
+      <tr>
+          <td><input type="submit" value="Login!"/></td>
+      <tr>
       </table>
     </form>
+   <div id="footer"><a href="about.jsp">About Us</a><br />
+		Hygeia is a project developed for a Software Engineering class at UCSD.<br />
+        Please contact us at hygeia110@gmail.com if you would like to use any of the code found here.
+      </div>
+  </div></div> <!-- content -->
   </body>
 </html>
