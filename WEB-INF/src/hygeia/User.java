@@ -280,7 +280,7 @@ public class User {
         } catch (SQLException e) {
             return 0;
         }
-        return height;
+        return weight;
     }
     
     /* Updates the database and instance variables with new information */

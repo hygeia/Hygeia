@@ -9,8 +9,8 @@ public class History {
     
     /* Creates user's history object */
     public History(User u) {
-    	this.db = u.db;
-    	this.uid = u.uid;
+    	this.db = u.getDb();
+    	this.uid = u.getUid();
     }
     
     /* Returns an array of Meal objects */
