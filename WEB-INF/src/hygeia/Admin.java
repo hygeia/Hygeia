@@ -1,3 +1,4 @@
+/* Refer to Asher Garland fo reference. */
 package hygeia;
 
 import java.sql.*;
@@ -8,12 +9,10 @@ system-wide use. Admins do not have their own inventories, histories, or
 favorites. */
 public class Admin {
 
-    Database db = new Database ();
-
     /* Performs a login but uses admins table instead of users. Should return
 zero on success. */
-    public static int login(String email, String pwd) {
-    	if ( email == null || pwd == null )
+    public static int login(Database db, String email, String pwd) {
+        if ( email == null || pwd == null )
     	{
     		return -1;
     	}
@@ -22,7 +21,7 @@ zero on success. */
         email = Algorithm.Clean(email);
         pwd = Algorithm.MD5(Algorithm.Clean(pwd));
        
-        ResultSet rs = db.execute("SELECT aid FROM Admin WHERE email = '" +
+        ResultSet rs = db.execute("SELECT aid FROM admins WHERE email = '" +
               email + "' AND hpwd = '" + pwd + "';");
       
       	int aid = 0;
@@ -51,7 +50,7 @@ zero on success. */
     }
     
     /* Creates a new admin in the admins table. */
-    public static int createAdmin(String email, String pwd) {
+    public static int createAdmin(Database db, String email, String pwd) {
     
         if ( email == null || pwd == null ) {
             return -1;
@@ -68,7 +67,7 @@ zero on success. */
         }
         
         /* Insert new record */
-        int success = db.update("INSERT into Admin (email, hpwd)" + 
+        int success = db.update("INSERT into admins (email, hpwd)" + 
                       " values ('" + email + "', '" + hpwd + "');");
         /* Return error if somethign strange happened */
         if (success != 1) {
@@ -88,20 +87,78 @@ zero on success. */
     
     
     /* Deletes an admin fromt he admins table. Returns the true if successful*/
-    public static boolean deleteAdmin(String email) {
+    public static boolean deleteAdmin(Database db, String email) {
         if ( email == null)
         {
         	return false;
         }
 
-        ResultSet rs = db.execute("DELETE aid FROM Admin WHERE email = '" +
+        /* Clean */
+        email = Algorithm.Clean(email);
+
+        ResultSet rs = db.execute("DELETE * FROM admins WHERE email = '" +
               email + "';");
 
-        if (rs == null) {
+        if (rs < 1) {
         	return false;
         }
         
         return true;
     }
 
+
+    /* Deletes a User from the User table; returns true if successful */
+    public boolean deleteUser(Databse db, User selected)
+    {
+    	if ( User.accountExists(db, selected.getEmail()) )
+    		{
+    			return ( User.deleteUser( db, selected.getUid() ) );
+    		}
+    	return false;    	
+    }
+
+    /* Creates a User and inserts in the User table; returns true if successfil */
+    public static boolean createUser(Database db, String uname, String pwd, String email, 
+    							double ht, double wt)
+    {
+    	try
+    	{
+    		// create the user, User.createUser inserts the info into the user table and return uid
+    		User newUser = new User(db, User.createUser(Database db, String uname, String pwd,
+        		String email, double ht, double wt) );
+
+        	if ( newUser == null )
+        	{
+        		return false;
+        	}
+        	return true;
+        }
+        // if any exception is thrown then something broke up so delete that entered data and return false
+        catch ( Exception e)
+        {
+        	this.deleteUser( newUser );
+        	return false;
+        }
+    	
+    	return false;
+    }
+
+    /* Create a new Food item; return true if successful */
+    public static boolean createFood(String name, double count, double factor, int wt,
+            double cal, double carb, double pro, double fat)
+    {
+    	Food newFood = new Food.Create(name, count, factor, wt, cal, carb, pro, fat);
+    	if (newFood == null)
+    	{
+    		return false;
+    	}
+
+    	return true;
+    }
+
+    /* Delete a new Food item; return true if successful */
+    public static boolean deleteFood()
+    {
+    	return false;
+    }
 }
