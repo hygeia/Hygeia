@@ -1,9 +1,9 @@
 <%@ page import = "hygeia.*,java.util.*,java.sql.Timestamp,java.text.*" %>
 <%
 /* Check to see if a session exists */
-/* if (session.getAttribute("uid") == null) {*/
+if (session.getAttribute("uid") == null){ 
     /* Send away non-logged in users */
-/*    response.sendRedirect("index.jsp");
+    response.sendRedirect("index.jsp");
     return;
 }
 
@@ -21,7 +21,37 @@
    Close the database: db.close();
    Redirect to another page: response.sendRedirect("url"); return;
  */
-
+ 
+//in case there is no data, don't show graphs
+String showThreeDayCharts = 
+		"<div id=\"chartwrapperOday\">" +
+          "<div id=\"threeday_pie\">" +
+          "</div>" +
+          "<div id=\"threeday_bar\">" +
+          "</div>" +
+        "</div>";
+String showTwoDayCharts = 
+		"<div id=\"chartwrapperOday\">" +
+          "<div id=\"twoday_pie\">" +
+          "</div>" +
+          "<div id=\"twoday_bar\">" +
+          "</div>" +
+        "</div>";
+String showYesterdayCharts = 
+		"<div id=\"chartwrapperOday\">" +
+          "<div id=\"yesterday_pie\">" +
+          "</div>" +
+          "<div id=\"yesterday_bar\">" +
+          "</div>" +
+        "</div>";
+String showTodayCharts = 
+		"<div id=\"chartwrapperToday\">" +
+          "<div id=\"today_pie\">" +
+          "</div>" +
+          "<div id=\"today_bar\">" +
+          "</div>" +
+        "</div>";
+		
  /* this is all temporary because the java files are not yet complete */
 int[] pct1 = {30, 32, 40}; //today
 int[] pct2 = {30, 42, 40};
@@ -40,8 +70,8 @@ String day2 = df.format(new Date(todaysdate.getTime() - 86400000));
 String day3 = df.format(new Date(todaysdate.getTime() - (86400000 * 2)));
 String day4 = df.format(new Date(todaysdate.getTime() - (86400000 * 3)));
 
-/* this will be replaced with the java code below when it works */
-String todayinfo = "<h2>Breakfast</h2><p class=\"meal\">7g&nbsp;&nbsp;&nbsp;Eggs<br />8g&nbsp;&nbsp;&nbsp;Bacon<br />9g&nbsp;&nbsp;&nbsp;Sausage<br /></p>" + 
+// this will be replaced with the java code below when it works 
+String todayInfo = "<h2>Breakfast</h2><p class=\"meal\">7g&nbsp;&nbsp;&nbsp;Eggs<br />8g&nbsp;&nbsp;&nbsp;Bacon<br />9g&nbsp;&nbsp;&nbsp;Sausage<br /></p>" + 
 	"<p class=\"total\">Carbs: 13g Protein: 7g Fat: 12g</p>" + 
 	"<h2>Lunch</h2><p class=\"meal\">7g&nbsp;&nbsp;&nbsp;Hamburger<br />7g&nbsp;&nbsp;&nbsp;Fries<br />16g&nbsp;&nbsp;&nbsp;Coke<br /></p>" + 
 	"<p class=\"total\">Carbs: 19g Protein: 17g Fat: 14g</p>";
@@ -56,7 +86,7 @@ ArrayList<Meal> todayarr = new ArrayList<Meal.List>();
 ArrayList<Meal> yesterdayarr = new ArrayList<Meal.List>();
 ArrayList<Meal> twodayarr = new ArrayList<Meal.List>();
 ArrayList<Meal> threedayarr = new ArrayList<Meal.List>();
-for(int i=0; i<meals.length; i++){
+for(int i=0; i<arr.length; i++){
 	switch(findDay(arr[i])){
 		case 0:
 			todayarr.add(new Meal(arr[i].getMid(), db));
@@ -74,50 +104,69 @@ for(int i=0; i<meals.length; i++){
 }
 
 // calculate percentage of carbs, protein, and fat for the pie charts
-int tempc = 0;
-int tempp = 0;
-int tempf = 0;
+int tempc = 0, tempp = 0, tempf = 0;
+//int[] pct1, pct2, pct3, pct4;
 for(int i=0; i<todayarr.size(); i++){
 	Nutrition nuts = todayarr.get(i).getNutrition();
 	tempc += nuts.getCarbohydrates();
 	tempp += nuts.getProtein();
 	tempf += nuts.getFat();
 }
-int[] pct1 = {tempc/todayarr.size(), tempf/todayarr.size(), tempp/todayarr.size()};
+if(todayarr.size() == 0){
+	showTodayCharts = "add a meal to start tracking progress";
+	pct1 = {0,0,0};
+}else{
+	pct1 = {tempc/todayarr.size(), tempf/todayarr.size(), tempp/todayarr.size()};
+}
 for(int i=0; i<yesterdayarr.size(); i++){
 	Nutrition nuts = yesterdayarr.get(i).getNutrition();
 	tempc += nuts.getCarbohydrates();
 	tempp += nuts.getProtein();
 	tempf += nuts.getFat();
 }
-int[] pct2 = {tempc/yesterdayarr.size(), tempf/yesterdayarr.size(), tempp/yesterdayarr.size()};
+if(yesterdayarr.size() == 0){
+	showYesterdayCharts = "add a meal to start tracking progress";
+	pct2 = {0,0,0};
+}else{
+	pct2 = {tempc/yesterdayarr.size(), tempf/yesterdayarr.size(), tempp/yesterdayarr.size()};
+}
 for(int i=0; i<twodayarr.size(); i++){
 	Nutrition nuts = twodayarr.get(i).getNutrition();
 	tempc += nuts.getCarbohydrates();
 	tempp += nuts.getProtein();
 	tempf += nuts.getFat();
 }
-int[] pct3 = {tempc/twodayarr.size(), tempf/twodayarr.size(), tempp/twodayarr.size()};
+if(twodayarr.size() == 0){
+	showTwoDayCharts = "add a meal to start tracking progress";
+	pct3 = {0,0,0};
+}else{
+	pct3 = {tempc/twodayarr.size(), tempf/twodayarr.size(), tempp/twodayarr.size()};
+}
 for(int i=0; i<threedayarr.size(); i++){
 	Nutrition nuts = threedayarr.get(i).getNutrition();
 	tempc += nuts.getCarbohydrates();
 	tempp += nuts.getProtein();
 	tempf += nuts.getFat();
 }
-int[] pct4 = {tempc/threedayarr.size(), tempp/threedayarr.size(), tempf/threedayarr.size()};
+if(todayarr.size() == 0){
+	showThreeDayCharts = "add a meal to start tracking progress";
+	pct3 = {0,0,0};
+}else{
+	pct4 = {tempc/threedayarr.size(), tempp/threedayarr.size(), tempf/threedayarr.size()};
+}
 
 // calculate blocks of carbs, protein, and fat for the bar charts 
 
 // create a string that shows meal names, foods, and nutrition info for today 
-String todayinfo = "";
+String todayInfo = "";
 for(int i=0; i<todayarr.size(); i++){
-	todayinfo += "<h2>" + todayarr.get(i).getName() + "</h2>";
+	todayinfo += "<h2>" + todayarr.get(i).getName() + "</h2><p class=\"meal\">";
 	Food.List foods[] = todayarr.get(i).getFoodList();
 	for(int j=0; j < foods.length; j++){
 		todayinfo += (foods[j].getCount() + "g&nbsp;&nbsp;&nbsp;" + foods[j].getName() + "<br />");
 	}
 	Nutrition nuts = todayarr.get(i).getNutrition();
-	todayinfo += "<p class=\"total\">Carbs: " + nuts.getCarbs() + "g ";
+	todayinfo += "</p><p class=\"total\">Carbs: " + nuts.getCarbs() + "g ";
 	todayinfo += "Protein: " + nuts.getProtein() + "g Fat: " + nuts.getFat() + "g</p>";
 }
 
@@ -326,41 +375,21 @@ db.close();
       </div>
       <div id="content">
       <div id="oday" class="shadowBox"><%= day4 %><br /><br />
-        <div id="chartwrapperOday">
-          <div id="threeday_pie">
-          </div>
-          <div id="threeday_bar">
-          </div>
-        </div>
+        <%= showThreeDayCharts %>
         <p class="oday">Carbs/Protein/Fat Ratio and Block Levels for<br />3 days ago</p>
       </div>
       <div id="oday" class="shadowBox"><%= day3 %><br /><br />
-        <div id="chartwrapperOday">
-          <div id="twoday_pie">
-          </div>
-          <div id="twoday_bar">
-          </div>
-        </div>
+        <%= showTwoDayCharts %>
         <br /><p class="oday">Carbs/Protein/Fat Ratio and Block Levels for<br />2 days ago</p>
       </div>
       <div id="oday" class="shadowBox"><%= day2 %><br /><br />
-        <div id="chartwrapperOday">
-          <div id="yesterday_pie">
-          </div>
-          <div id="yesterday_bar">
-          </div>
-        </div>
+        <%= showYesterdayCharts %>
         <br /><p class="oday">Carbs/Protein/Fat Ratio and Block Levels for yesterday</p>
       </div>
       <div id="today" class="shadowBox"><h1><%= day1 %></h1>
-        <div id="chartwrapperToday">
-          <div id="today_pie">
-          </div>
-          <div id="today_bar">
-          </div>
-        </div>
+        <%= showTodayCharts %>
         <p class="food">
-			<%= todayinfo %>
+			<%= todayInfo %>
         </p>
       </div>
     </div>
