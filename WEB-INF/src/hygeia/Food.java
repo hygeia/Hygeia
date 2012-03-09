@@ -45,7 +45,7 @@ public class Food {
 
             // retrive the macronutrient info from the database using the fid
             ResultSet rs = db.execute("SELECT calories, carbohydrates, " +
-                "protein, fat FROM food WHERE fid = '" + this.fid + "';");
+                "protein, fat FROM foods WHERE fid = '" + this.fid + "';");
     
             /* Try to get nutrition from result */
             try 

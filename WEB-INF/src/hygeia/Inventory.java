@@ -126,7 +126,7 @@ public class Inventory {
             return null;
         }
         
-        return (Food.List[])foods.toArray();  
+        return (Food.List[])foods.toArray(new Food.List[1]);  
     }
     
     /* Add food to inventory */
