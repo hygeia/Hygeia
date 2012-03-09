@@ -45,7 +45,7 @@ public class Food {
 
             // retrive the macronutrient info from the database using the fid
             ResultSet rs = db.execute("SELECT calories, carbohydrates, " +
-                "protein, fat FROM food WHERE fid = '" + this.fid + "';");
+                "protein, fat FROM foods WHERE fid = '" + this.fid + "';");
     
             /* Try to get nutrition from result */
             try 
@@ -55,10 +55,10 @@ public class Food {
                     return null;
             }
                 if (rs.next()) {
-                    double cal = rs.getDouble("calories");
-                    double carb = rs.getDouble("carbohydrates");
-                    double pro = rs.getDouble("protein");
-                    double fat = rs.getDouble("fat"); 
+                    cal = rs.getDouble("calories");
+                    carb = rs.getDouble("carbohydrates");
+                    pro = rs.getDouble("protein");
+                    fat = rs.getDouble("fat"); 
                 }
         
             /* Free db resources */
@@ -116,6 +116,10 @@ public class Food {
         
         public double getCount() {
             return this.count;
+        }
+        
+        public double getFactor() {
+            return this.factor;
         }
         
         public double getCalories() {
@@ -199,7 +203,7 @@ public class Food {
                 return -3;
             }
             rs.next();
-            fid = rs.getInteger("fid");
+            fid = rs.getInt("fid");
             db.free();
         } catch (SQLException e) {
             return -4;

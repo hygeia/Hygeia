@@ -10,7 +10,7 @@ public class User {
     private String username;
     private String email;
     private char gender;
-    private short actvity;
+    private short activity;
     private int blocks;
     private double height;
     private double weight;
