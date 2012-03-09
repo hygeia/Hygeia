@@ -1,29 +1,17 @@
-html {
-    height:100%;
-    margin:0;
-    padding:0;
-}
- 
-body {
-    margin:0;
-    background: #fbffcc fixed;
-    height:100%;
-    text-align:center;
-    padding:0;
+html, body {
+	margin: 0;
+	padding: 0;
+	font-family: "Times New Roman", arial, Verdana;
+	color: #817a53;
+	background: #fbffcc;
 }
 
 #page {
-    width:960px;
-    min-height:100%;
-    margin: 0 auto 0 auto;
     position:relative;
-    background-color:#fbffcc;
-}
-
-#content {
-    margin:0;
-    padding-bottom:40px;
-    min-height:650px;
+	width:960px;
+	height:680px;
+	margin: 0 auto 0 auto;
+	padding: 0;
 }
 
 /* Header start */
@@ -44,11 +32,13 @@ padding: 1px 2px;
 background:url(media/formbg.gif) repeat-x left top;
 }
 
+
+
 ul
 {
 list-style-type:none;
 margin:0;
-width: 960px;
+width: 900px;
 padding:0;
 overflow:hidden;
 }
@@ -59,6 +49,7 @@ float:left;
 #nav a:link,a:visited
 {
 display:block;
+width:100px;
 font-weight:bold;
 color:#FFFFFF;
 background-color:#98bf21;
@@ -72,6 +63,7 @@ a:hover,a:active
 background-color:#7A991A;
 }
 
+
 .shadowBox {
 -moz-box-shadow: 3px 3px 4px #000;
 -webkit-box-shadow: 3px 3px 4px #000;
@@ -81,65 +73,27 @@ box-shadow: 3px 3px 4px #000;
 /* Box properties for o(ther)day and today */
 #oday {
 float:left;
-background-color:#8B9A70;
-margin-top:50px;
-min-width:170px;
-width:170px;
+background: url("t1.png");
+margin-top:150px;
+min-width:130px;
+width:130px;
 margin-right:3px;
 text-align:center;
 color:rgb(255,255,255);
--moz-border-radius: 15px;
--webkit-border-radius: 15px;
--khtml-border-radius: 15px;
-border-radius: 15px;
 }
 
 #today {
 float:left;
 background-color:#c3e2da;
 margin-right:3px;
-min-height:500px;
-width:437px;
-padding-bottom:40px;
--moz-border-radius: 15px;
--webkit-border-radius: 15px;
--khtml-border-radius: 15px;
-border-radius: 15px;
+height:500px;
+width:557px;
 }
 
-/* Wrapper for today's charts */
-#chartwrapperToday {
+/* Wrapper for the charts */
+#chartwrapper {
 float:right;
-width:222px;
-}
-
-/* Wrapper for other day's charts */
-#chartwrapperOday {
-width:170px;
-}
-
-#yesterday_pie {
-float:left;
-}
-
-#yesterday_bar {
-float:right;
-}
-
-#twoday_pie {
-float:left;
-}
-
-#twoday_bar {
-float:right;
-}
-
-#threeday_pie {
-float:left;
-}
-
-#threeday_bar {
-float:right;
+width:220px;
 }
 
 /* Text properties for main box */
@@ -148,42 +102,14 @@ padding: 0 0 0 5px;
 width:137px;
 }
 
-p.oday {
-padding: 0 3px 0 3px;
-}
-
-p.total {
-padding: 0 0 1px 8px;
-font-weight:bold;
-font-size:14px;
-text-align:left;
-}
-
-p.meal {
-padding: 0 0 0 8px;
-text-align:left;
-}
 
 h1 {
 text-align:center;
-}
-
-h2 {
-padding:0;
-margin:0;
 }
 
 p.odaytext {
 color:rgb(255,255,255);
 }
 
-/* Footer */
-#footer {
-  position:absolute;
-  bottom:0;
-  width:960px;
-  height:60px;
-  text-align:center;
-  color:rgb(255,255,255);
-  background-color:#709100;
-}
+
+
