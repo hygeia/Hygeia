@@ -7,11 +7,16 @@ public class User {
     
     private Database db;
     private int uid;
+    private int blocks;
     private String username;
     private String email;
+    private String sex;
     private double height;
     private double weight;
-    
+    private double hips;
+    private double waist;
+    private double leanbodymass;
+        
     /*Use this to create User object in a page after the user has started a session */
     public User(Database db, int uid) {
         this.db = db;
