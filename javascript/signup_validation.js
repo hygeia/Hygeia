@@ -36,7 +36,9 @@ $(document).ready(function(){
             required: true,
             email: true,
             equalTo: "#user_email"
-        }
+        },
+        user_sex:
+          required: true
       },
       messages: {
           password: {
