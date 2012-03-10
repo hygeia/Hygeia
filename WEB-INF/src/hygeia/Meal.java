@@ -86,6 +86,27 @@ public class Meal {
         return this.mid;
     }
     
+    /* Return timestamp. */
+    public Timestamp getOccurrence() {
+        ResultSet rs = this.db.execute("select occurrence from history where " +
+            "mid = " + this.mid + ";");
+        
+        Timestamp t;
+            
+        try {
+            if (rs == null) {
+                return null;
+            }
+            rs.next();
+            t = rs.getTimestamp("occurrence");
+            db.free();
+        } catch (SQLException e) {
+            return null;
+        }   
+        
+        return t;     
+    }
+    
     /* Fetches and then returns name from database. */
     public String getName() {
         if (this.db == null) {
@@ -111,7 +132,7 @@ public class Meal {
     /* Return array of Food items that make up meal */
     public Food.Update[] getMeal() {
         ResultSet rs = this.db.execute("select fid, count from components where"
-            + "mid = " + this.mid + ";");
+            + " mid = " + this.mid + ";");
         
         ArrayList<Food.Update> list = new ArrayList<Food.Update>();
         
@@ -131,7 +152,7 @@ public class Meal {
             }
         }
         
-        return (Food.Update[])list.toArray();
+        return (Food.Update[])list.toArray(new Food.Update[1]);
     }
     
     /* Return array of Food.List items that make up meal to display to user. */
@@ -160,7 +181,7 @@ public class Meal {
             }
         }
         
-        return (Food.List[])list.toArray();
+        return (Food.List[])list.toArray(new Food.List[1]);
     }
     
     /* Returns a nutrition object with info for the whole meal */

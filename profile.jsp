@@ -24,7 +24,6 @@ db.close();
  String name = (String)session.getAttribute("username");
 
  double weight = u.getWeight();
- out.println(weight);
  double height = u.getHeight();
  double temp =  height/12;
  int ft = (int)(height/12);
@@ -49,7 +48,8 @@ db.close();
    Redirect to another page: response.sendRedirect("url"); return;
  */ 
  %>
- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
  <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
  <head>
  <title>Hygeia</title>
@@ -62,11 +62,13 @@ db.close();
 	    <!-- Navigation Bar-->
 		<table cellpadding="0" cellspacing="0">
 		<tr>
-		<td> <a href="favorites.html"><img src="images/favoritesICON.png"></a> </td>
-		<td> <a href="inventory.html"><img src="images/inventoryICON.png"></a> </td>
+		<td> <a href="favorites.html">
+		<img src="images/favoritesICON.png"></a> </td>
+		<td> <a href="inventory.html">
+		<img src="images/inventoryICON.png"></a> </td>
 		<td> <a href="meals.html"><img src="images/mealsICON.png"></a> </td>
 		<td> <a href="history.html"><img src="images/historyICON.png"></a> </td>
-		<td> <a href="recipes.html"><img src="images/recipes2ICON.png"></a> </td>
+		<td> <a href="recipes.html"><img src="images/recipes2ICON.png"></a></td>
 		<td> <img src="images/inventoryBAR.png"> </td>
 		</tr>
 		</table>
@@ -88,10 +90,10 @@ db.close();
      {
     %>
 	Hello <%= name %>!</br></br>
-	Your current weight is <%= weight %>lbs.</br>
-	You are <%= ft %> ft <%= in  %> in tall.</br>
-	Your current lean body mass is <%= leanBodyMass %>lbs.</br>
-	Your current estimated body fat is <%= bodyFat %>lbs.</br>
+	Your current weight is <%= weight %> lbs.</br>
+	You are <%= ft %> ft. <%= in  %> in. tall.</br>
+	Your current lean body mass is <%= leanBodyMass %> lbs.</br>
+	Your current estimated body fat is <%= bodyFat %> lbs.</br>
 	Following a "Zone" favorable diet your daily protein requirement is 
 	<%= protein %>grams. </br></br>
 	In order to maintain a "Zone" favorable diet you should have:</br>
@@ -107,8 +109,10 @@ db.close();
      } 
     %>
     </div>
-     <div id="footer">Hygeia is a project developed for a Software Engineering class at UCSD.<br />
-        Please contact us at hygeia@gmail.com if you would like to use any of the code found here.
+     <div id="footer">Hygeia is a project developed for a Software Engineering class 
+			at UCSD.<br />
+        Please contact us at hygeia@gmail.com if you would like to use any of the code
+	 found here.
       </div>
     </div>
  <!-- 

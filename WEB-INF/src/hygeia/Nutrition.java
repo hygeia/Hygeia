@@ -1,4 +1,4 @@
-/* Refer to Asher Garland for reference. */
+/* Refer to Asher Garland for reference. */ 
 package hygeia;
 
 /* A class for containing nutrition information. No database access. */
