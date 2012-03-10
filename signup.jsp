@@ -13,14 +13,14 @@ if (request.getParameter("signup") != null) {
     String username = request.getParameter("username");
     String password = request.getParameter("user_password");
     String email = request.getParameter("user_email");
-    String height = request.getParameter("user_height");
-    String weight = request.getParameter("user_weight");
-    char sex = request.getParameter("user_sex");
-    
+    double height = Double.parseDouble(request.getParameter("user_height"));
+    double weight = Double.parseDouble(request.getParameter("user_weight"));
+    char sex = request.getParameter("user_sex").charAt(0);   
+ 
     Database db = new Database();
     
     /* Create user */
-    int uid = User.createUser(db, username, password, email, 1, 1);
+    int uid = User.createUser(db, username, password, email, height, weight, sex);
     
     /* Close database */
     db.close();
@@ -43,6 +43,14 @@ if (request.getParameter("signup") != null) {
     <script type="text/javascript" src="javascript/jquery.validate.min.js"></script>          
     <script type="text/javascript" src="javascript/signup_validation.js"></script>          
     <title>Hygeia</title>
+    <style type="text/css">
+      * {font-family: Verdana; font-size: 96%; }
+      label { width: 10em; float: left; }
+      label.error { font-style:italic;float: none; color: red; padding-left: .5em; vertical-align:top; }
+      p { clear: both; }
+      .submit { margin-left: 12em }
+      em { font-weight: bold; padding-right: 1em; vertical-align: top; }
+    </style>
   </head>
   <body>
     <h1>Hygeia</h1>
@@ -50,26 +58,51 @@ if (request.getParameter("signup") != null) {
     <h3>Signup Page</h3>
     <br>
     <form id="signupform" method="post" action="signup.jsp">
-      <label for="username">Name:</label>
-      <input type="text" name="username" /><br />
+      <p>
+        <label for="username">Name</label>
+        <input type="text" name="username" />
+      </p>
 
-      <label for="email">Email:</label>
-      <input type="text" name="user_email" /><br />
+      <p>
+        <label for="email">Email</label>
+        <input type="text" id="user_email" name="user_email" /><br />
+      </p>
 
-      <label for="email">Email:</label>
-      <input type="text" name="reenter_email" /><br />
+      <p>
+        <label for="email">Reenter Email</label>
+        <input type="text" name="reenter_email" /><br />
+      </p>
 
-      <label for="password">Password:</label>
-      <input type="password" id="user_password" name="user_password" /><br />
+      <p>
+        <label for="password">Password</label>
+        <input type="password" id="user_password" name="user_password" /><br />
+      </p>
 
-      <label for="retype_password">Retype Password:</label>
+      <p>
+      <label for="retype_password">Reenter Password</label>
       <input type="password" id= "reenter_password" name="reenter_password" /><br />
+      </p>
 
-      <input type="radio" name="user_sex" value="male" /> Male<br />
-      <input type="radio" name="user_sex" value="female" /> Female<br />
+      <p>
+      <input type="radio" name="user_sex" value="male" />Male<br />
+      <input type="radio" name="user_sex" value="female" />Female
+      <label for="user_sex" class="error" style="display:none;">Please chose one</label>
+      </p>
 
+      <p>
+      <label for="height">Height</label>
+      <input name="user_height" />
+      </p>
+
+      <p>
+      <label for="weight">Weight</label>
+      <input name="user_weight" />
+      </p>
+
+      <p>
       <input type="hidden" name="signup" value="signup" />
       <input type="submit" />
+      </p>
 
     </form>
   </body>

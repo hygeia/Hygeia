@@ -1,29 +1,29 @@
 import java.io.BufferedReader;
-package hygeia;
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
+
 
 
 public class Calculator {
 	
 // Declarations
 double f = 0.5;
-
-public static double percentBodyFat(String sex, String w, String h1, 
-  String h2, String h3, String a1, String a2, String a3, double height, String wr) 
+ 
+public static double percentBodyFat(String sex, String w, double hips, 
+		double waist, double height, String wr) 
   throws FileNotFoundException
 {
  // Declarations
- double hip, weight, hip1, hip2, hip3, abd1, abd2, abd3, abdomen, 
- doubRes;
+ double weight, doubRes;
  double constantA = 0;
  double constantB = 0;
  double constantC = 0;
  double percentBodyFat = 0;
  String result;
  boolean flag =true;
+//Declarations
+ double f = 0.5;
  
  /*
   * If user is female
@@ -40,28 +40,17 @@ public static double percentBodyFat(String sex, String w, String h1,
   weight = Double.parseDouble(w);
   
   /*
-   * Get 3 Hip measurements and take the average
+   * Round hips measurements
    */
-  hip1 = Double.parseDouble(h1);
-  hip2 = Double.parseDouble(h2);
-  hip3 = Double.parseDouble(h3);
-  
-  hip = (hip1 + hip2 + hip3)/3;
-  
-  hip = f* Math.round(hip/f);
-  System.out.println(hip);
+  hips = f* Math.round(hips/f);
+  System.out.println("hips:" + hips);
   
   /*
-   * Get 3 Abdomen measurements and take the average
+   * Round waist measurement
    */
-  abd1 = Double.parseDouble(a1);
-  abd2 = Double.parseDouble(a2);
-  abd3 = Double.parseDouble(a3);
-  
-  abdomen = (abd1 + abd2 + abd3)/3;
-  abdomen = f* Math.round(abdomen/f);
-  System.out.println(abdomen);
-  
+  waist = f* Math.round(waist/f);
+  System.out.println("Waist: "+ waist);
+
   /* 
    * Find values in database
    */
@@ -78,7 +67,7 @@ public static double percentBodyFat(String sex, String w, String h1,
   {
    doubRes = Double.parseDouble(result);
    
-   if(doubRes == hip)
+   if(doubRes == hips)
    {
     flag = false;
     result = hipConst.next();
@@ -111,7 +100,7 @@ public static double percentBodyFat(String sex, String w, String h1,
   {
    doubRes = Double.parseDouble(result);
    
-   if(doubRes == abdomen)
+   if(doubRes == waist)
    {
     flag = false;
     result = abdConst.next();
@@ -190,14 +179,8 @@ public static double percentBodyFat(String sex, String w, String h1,
    /*
     * Get 3 Abdomen measurements and take the average
     */
-
-   abd1 = Double.parseDouble(a1);
-   abd2 = Double.parseDouble(a2);
-   abd3 = Double.parseDouble(a3);
-   
-   abdomen = (abd1 + abd2 + abd3)/3;
-   abdomen = f* Math.round(abdomen/f);
-   System.out.println(abdomen);
+   waist = f* Math.round(waist/f);
+   System.out.println("Waist: "+waist);
    
          // wrist measurement
    wrist = Double.parseDouble(wr);
@@ -207,7 +190,7 @@ public static double percentBodyFat(String sex, String w, String h1,
     * Wrist - Waist value used for table look up 
     */
    
-   ww = abdomen - wrist;
+   ww = waist - wrist;
    
    /*
     * Find values in table
@@ -252,6 +235,8 @@ public static double leanBodyMass(double weight, double percentBodyFat)
   // Declaration
   double leanBodyMass;
   double bodyFat = 0;
+//Declarations
+  double f = 0.5;
   
   /*
    * Calculate Lean Body Mass
@@ -266,7 +251,7 @@ public static double leanBodyMass(double weight, double percentBodyFat)
  
 }
 
-public static double protein(double leanBodyMass, int activLevel)
+public double protein(double leanBodyMass, int activLevel)
 {  
 	double act = 0;
 	double protein;

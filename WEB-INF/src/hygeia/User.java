@@ -79,6 +79,7 @@ public class User {
         pwd = Algorithm.Clean(pwd);
         String hpwd = Algorithm.MD5(pwd);
         email = Algorithm.Clean(email);
+        gender = Character.toUpperCase(gender);
         
         /* check if the account already exists. */
         if (User.accountExists(db, email)) {

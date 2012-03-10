@@ -4,6 +4,7 @@ import java.sql.*;
 import java.security.*;
 import java.util.StringTokenizer;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Algorithm {
 
@@ -19,15 +20,16 @@ public class Algorithm {
     /* Main algorithm. types: 1 breakfast, 2 lunch, 3 dinner, 4 snack */
     public Meal suggestMeal(User u, int type) {
 		//pulls all meals from the universal meal list and the user's personal meals
-        ResultSet rs = db.execute("select mid from meals where uid = " + u.uid + " or uid = 0;");
+        ResultSet rs = db.execute("select mid from meals where uid = " + u.getUid() + " or uid = 0;");
         //arraylist of meal IDs that come from the database
-        ArrayList<int> results = new ArrayList();
+        ArrayList<Integer> results = new ArrayList();
 		while(rs.next())
 		{
 			results.add(rs.getInt("mid"));
 		}
 		//retrieves a list of food in the inventory
-		Food.Update[] fu = Inventory.getInventory();
+		Inventory inven = new Inventory(u);
+		Food.Update[] fu = inven.getInventory();
 		//random generator to select a meal at random from available MIDs
 		Random r = new Random(results.size());
 		//if the inventorymatchcount variable equals the number of ingredients in a recipe, all necessary ingredients are available
@@ -39,21 +41,24 @@ public class Algorithm {
 		{
 			inventorymatchcount = 0;
 			m = new Meal(db, results.get(r.nextInt()));
-			for (int i = 0; i < m.getMeal().getCount(); i++)
+			for (int i = 0; i < m.getMeal().length; i++)
 			{
-				for (int j = 0; j < fu.getCount(); j++)
+				for (int j = 0; j < fu.length; j++)
 				{
 					if (m.getMeal()[i] == fu[j])
 						inventorymatchcount += 1;
 				}
 			}
-			if (inventorymatchcount == m.getCount())
+			if (inventorymatchcount == m.getMeal.length)
 			{
 				//currently not calorie budget based. Functionality will be added if budget is accessible.
 				//begins balanced suggestion based on the 40:30:30 ideal,
 				//+ and - 10% (defined as constant SAME, Suggest A Meal Error) to find relatively balanced meals
-				Nutrition n = new Nutrition(m.getNutrition()); //makes a nutrition object holding the meal's total nutrition
-				double totalGrams = n.getCarbohydrates() + n.getProtein() + n.getFat();
+				Nutrition n = new Nutrition(m.getNutrition().getCalories(),
+					m.getNutrition().getCarbohydrates(), m.getNutrition().getProtein(),
+					m.getNutrition().getFat()); //makes a nutrition object holding the meal's total nutrition
+				double totalGrams = 0;
+				totalGrams = (n.getCarbohydrates() + n.getProtein() + n.getFat());
 				if (n.getCarbohydrates() / totalGrams > 0.4 - SAME 
 						&& n.getCarbohydrates() / totalGrams < 0.4 + SAME)
 				{

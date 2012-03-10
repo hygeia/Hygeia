@@ -12,33 +12,15 @@ $(document).ready(function(){
       } else {
         return false;
       }
-    }
+    },
 
     rules: {
-        username: {
-          required: true,
-          rangelength: [2, 20]
-        }
-        user_password: { 
-          required: true, 
-          rangelength: [6, 16], 
-          number: true 
-        }, 
-        reenter_password: { 
-          required: true,
-          equalTo: "#user_password" 
-        },
-        user_email: {
-            required: true,
-            email: true
-        }
-        reenter_email: {
-            required: true,
-            email: true,
-            equalTo: "#user_email"
-        },
-        user_sex:
-          required: true
+        username: { required: true, rangelength: [2, 20] },
+        user_password: { required: true, rangelength: [6, 16], number: false }, 
+        reenter_password: { required: true, equalTo: "#user_password" }, 
+        user_email: { required: true, email: true },
+        reenter_email: { required: true, email: true, equalTo: "#user_email" },
+        user_sex: { required: true }
       },
       messages: {
           password: {
