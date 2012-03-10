@@ -213,7 +213,7 @@ db.close();
 		<script>
 			$(document).ready(function(){
 				//Examples of how to assign the ColorBox event to elements
-				$(".ajax").colorbox({width:"925px", height:"600px"});
+				$(".ajax").colorbox({innerWidth:"925px", innerHeight:"600px", iframe:true});
 			});
 		</script>
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
