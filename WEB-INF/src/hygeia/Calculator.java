@@ -1,13 +1,12 @@
-import java.io.BufferedReader;
 package hygeia;
-
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
 
 
 public class Calculator {
-	
+
 // Declarations
 double f = 0.5;
 
@@ -16,6 +15,7 @@ public static double percentBodyFat(String sex, String w, String h1,
   throws FileNotFoundException
 {
  // Declarations
+ double f = 0.5;
  double hip, weight, hip1, hip2, hip3, abd1, abd2, abd3, abdomen, 
  doubRes;
  double constantA = 0;
@@ -250,6 +250,7 @@ public static double percentBodyFat(String sex, String w, String h1,
 public static double leanBodyMass(double weight, double percentBodyFat)
 {
   // Declaration
+  double f = 0.5;
   double leanBodyMass;
   double bodyFat = 0;
   
@@ -270,6 +271,7 @@ public static double protein(double leanBodyMass, int activLevel)
 {  
 	double act = 0;
 	double protein;
+	double f = 0.5;
 	
 	if(activLevel == 1)
 	{
