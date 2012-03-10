@@ -69,7 +69,7 @@ public class History {
     public boolean addMeal(Meal m, Timestamp occurrence) {
     
 		int r = db.update("insert into history (mid, uid, occurrence) values (" 
-			+ m.getMid() + "," + this.uid + "," + m.getOccurrence() + ");");
+			+ m.getMid() + "," + this.uid + "," + occurrence + ");");
 		
 		if (r < 1) {
 		    return false;
@@ -83,7 +83,7 @@ public class History {
     
 		int r = db.update("delete from history where mid = " + m.getMid() 
 			+ " and uid = " + this.uid + " and occurrence = '" + 
-			m.getOccurrence() + "';");
+			occurrence + "';");
 			
 	    if (r < 1) {
 	        return false;
