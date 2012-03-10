@@ -76,42 +76,7 @@ String meal = "MEAL NAME HERE";
 
 <style type="text/css">
 body{background-color: fbffcc}
-
-#searchwrapper {
-width:310px; /*follow your image's size*/
-height:40px;/*follow your image's size*/
-background-image:url(THE_SEARCH_BOX_IMAGE);
-background-repeat:no-repeat; /*important*/
-padding:0px;
-margin:0px;
-position:relative; /*important*/
-}
- 
-#searchwrapper form { display:inline ; }
- 
-.searchbox {
-border-style:outset;
-border-width:2px;
-border-color:b2b48c;
-border-radius:7px;
-background-color:fbffcc; /*important*/
-position:absolute; /*important*/
-top:4px;
-left:9px;
-width:256px;
-height:28px;
-font-size:18px;
-font-family:verdana;
-}
- 
-.searchbox_submit {
-border:0px; /*important*/
-background-color:transparent; /*important*/
-position:absolute; /*important*/
-top:4px;
-left:265px;
-width:32px;
-height:28px;
+li{color:black; font-family:arial;}
 }
 </style>
 </head>
@@ -119,53 +84,39 @@ height:28px;
   <div id="header">
 <!-- Navigation Bar -->
 
+
 <table cellpadding="0" cellspacing="0">
 <tr>
 <td> <a href="index.jsp"><img src="images/lightICON1.png"></a></td>
 <td> <a href="inventory.jsp"><img src="images/lightICON2.png" style="margin-left: -10px;" href="index.jsp"></a></td>
-<td> <a href="favorites.jsp"><img src="images/lightICON3.png" style="margin-left: -5px;"></a></td>
-<td> <a href="history.jsp"><img src="images/lightICON4.png" style="margin-left: -10px;"></a></td>
+<td> <a href="favorites.jsp"><img src="images/darkICON3.png" style="margin-left: -5px;"></a></td>
+<td> <a href="history.jsp"><img src="images/lightICON4.png" style="margin-left: -5px;"></a></td>
 <td> <a href="recipes.jsp"><img src="images/lightICON5.png" style="margin-left: -10px;"></a></td>
 <td> <img src="images/lightICON6.png" style="margin-left: -10px;"></td>
 </tr>
 </table>
 
-  </div>
 <br />
 
-<body>
-<div id="left">
-<div id="searchwrapper"><form action="">
-<input type="text" class="searchbox" name="s" value="" />
-<input type="image" src="images/searchBarICON.png" class="searchbox_submit" value="" />
-</form>
-</div>
+<h2 style="text-align:right; font-family: verdana; background-color: #77850c; color:#fbff90; font-color: black; margin-right:700px; border-color:353b00; border-radius:7px; color=black; padding-right: 0.5cm"> Meal 1 </h2>
 
-<img class="page" src="images/breakfastFavoritesICON.png">
-<br />
+<ul>
+<li> steak </li><br/>
+<li> brocolli </li><br/>
+<li> carrots </li><br/>
+<li> mashed potatoes </li>
+</ul>
 
-<br />
-<img class="page" src="images/DefaultFavoritesICON.png" style="margin-left: 10px; margin-right:10px;">
-<img class="page" src="images/DefaultFavoritesICON.png" style="margin-left: 10px; margin-right:10px;">
-<img class="page" src="images/DefaultFavoritesICON.png" style="margin-left: 10px; margin-right:10px;">
-<img class="page" src="images/DefaultFavoritesICON.png" style="margin-left: 10px; margin-right:10px;">
-<br />
-<br />
-<img class="page" src="images/DefaultFavoritesICON.png" style="margin-left: 10px; margin-right:10px;">
-<img class="page" src="images/DefaultFavoritesICON.png" style="margin-left: 10px; margin-right:10px;">
-<img class="page" src="images/DefaultFavoritesICON.png" style="margin-left: 10px; margin-right:10px;">
-<br />
-<br />
+<h2 style="text-align:right; font-family: verdana; background-color: #77850c; color:#fbff90; font-color: black; margin-right:700px; border-color:353b00; border-radius:7px; color=black; padding-right: 0.5cm"> Meal 2 </h2>
 
-<img class="page" src="images/lunchFavoritesICON.png">
-<br />
+<ul>
+<li> salad </li><br/>
+<li> spinach </li><br/>
+<li> tofu </li><br/>
+<li> gravy </li>
+</ul>
 
-<br />
-<img class="page" src="images/DefaultFavoritesICON.png" style="margin-left: 10px; margin-right:10px;">
-<img class="page" src="images/DefaultFavoritesICON.png" style="margin-left: 10px; margin-right:10px;">
-<img class="page" src="images/DefaultFavoritesICON.png" style="margin-left: 10px; margin-right:10px;">
 
-</div>
 <div id="right">
   <div id="today_pie"></div>
   <div id="today_bar"></div>
