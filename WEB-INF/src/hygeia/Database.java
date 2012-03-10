@@ -144,7 +144,7 @@ public class Database {
         try {
             value = this.stmt.executeUpdate(query);
         } catch (SQLException e) {
-            value = -5;
+            value = -5; 
         } 
         try {
             if (this.stmt != null) {

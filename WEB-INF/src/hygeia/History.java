@@ -68,9 +68,9 @@ public class History {
     /* Add meal to history */
     public boolean addMeal(Meal m, Timestamp occurrence) {
     
-		int r = db.update("insert into history (mid, uid, occurrence) values (" 
-			+ m.getMid() + "," + this.uid + "," + occurrence + ");");
-		
+		String s = "insert into history (mid, uid, occurrence) values (" 
+			+ m.getMid() + "," + this.uid + ",'" + occurrence + "');";	
+		int r = this.db.update(s);
 		if (r < 1) {
 		    return false;
 		}
