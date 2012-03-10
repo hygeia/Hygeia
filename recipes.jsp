@@ -1,8 +1,12 @@
+<<<<<<< HEAD
+<%@ page import = "hygeia.*" %>
+=======
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 
 <head>
     <link type="text/css" rel="stylesheet" href="style.css" />
+>>>>>>> f6ca7a8af3c6087e83c7c1d72317fe743dc47143
 
 	<style type="text/css">
 #image {
@@ -15,6 +19,42 @@ z-index: 10;
 margin-right: 10px;
 }
 
+<<<<<<< HEAD
+String username = (String)session.getAttribute("username");
+int uid = (Integer)session.getAttribute("uid");
+Database db = new Database();
+
+/* Form addRecipeToDatabase */
+
+if(request.getParameter("removeRecipesFromDatabase") != null) {
+        User u = new User(db, uid);
+        History hist = new History(u);
+        MealList arr[] = hist.getAvailableMeals();
+        String s = "";
+       
+        for (int i = 0; i < arr.length; i++) {
+                s = "<form action=\"recipes.jsp\" method=\"post\">";
+	   	 	 s += arr[i].getName();
+                s += " <input type=\"hidden\"name=\"mid\" value=" + 
+				arr[i].getMid() + ">";
+                s+= "<input type=\"hidden\" name=\"removeRecipesFromDatabase\" value=\"removeRecipesFromDatabase\"> <input type=\"submit\">  </form>";
+        }
+}
+
+if(request.getParameter("addRecipeToDatabase") != null) {
+        User u = new User(db, uid);
+        History hist = new History(u);
+        MealList arr[] = hist.getAvailableMeals();
+        String s = "";
+       
+        for (int i = 0; i < arr.length; i++) {
+                s = "<form action=\"recipes.jsp\" method=\"post\">";
+	    		 s += arr[i].getName();
+                s += " <input type=\"hidden\"name=\"mid\" value=" + 
+				arr[i].getMid() + ">";
+                s+= "<input type=\"hidden\" name=\"addRecipesToDatabase\" value=\"addRecipesToDatabase\"> <input type=\"submit\">  </form>";
+        }
+=======
 .trans {
 opacity:.50;filter:
 alpha(opacity=50);
@@ -41,6 +81,7 @@ font-family: Verdana, Arial, Helvetica, sans-serif;
 font-size: 12px;
 font-weight: bold;
 margin-top: 10px;
+>>>>>>> f6ca7a8af3c6087e83c7c1d72317fe743dc47143
 }
 </style>
 
@@ -49,6 +90,9 @@ margin-top: 10px;
     <div id="page">
 	      <div id="header">
 
+<<<<<<< HEAD
+/* Display Navigation Bar */
+=======
 <!-- Navigation Bar -->
 
 <table cellpadding="0" cellspacing="0">
@@ -61,6 +105,7 @@ margin-top: 10px;
 <td> <img src="images/lightICON6.png" style="margin-left: -10px;"></td>
 </tr>
 </table>
+>>>>>>> f6ca7a8af3c6087e83c7c1d72317fe743dc47143
 
 <br />
 
@@ -173,5 +218,19 @@ quantity:
 </div>
 </div>
 
+<<<<<<< HEAD
+<html>
+<head><title>Hygeia</title></head>
+<body>
+<h1>Hygeia</h1>
+<h2>Version 0.8</h2>
+<br>
+<p><%= username %>'s Recipes: </p>
+<%= s %>
+</form>
+</body>
+</html>!-- <form method="post" action="recipes.jsp"/> -->
+=======
 </body>
 </html>
+>>>>>>> f6ca7a8af3c6087e83c7c1d72317fe743dc47143

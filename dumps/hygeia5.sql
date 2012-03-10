@@ -67,7 +67,8 @@ alter table components add foreign key (mid) references meals(mid) on delete cas
 alter table history add foreign key (mid) references meals(mid) on delete cascade;
 alter table favorites add foreign key (mid) references meals(mid) on delete cascade;
 
-insert into users values(0, "systemwide", "nologon", "bounce@hygeia", 1, 1);
+insert into users values(0, "systemwide", "nologon", "bounce@hygeia", 1, 1, 'M',
+    1, 1, 1, 1, 1);
 update users set uid=0 where uid=1;
 
 set sql_mode = "STRICT_ALL_TABLES";
