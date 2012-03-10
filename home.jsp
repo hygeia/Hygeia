@@ -162,7 +162,7 @@ for(int i=0; i<todayarr.size(); i++){
 	todayInfo += "Protein: " + nuts.getProtein() + "g Fat: " + nuts.getFat() + "g</p>";
 }
 if(todayarr.size() == 0){
-	todayInfo += "You have no meals planned yet. Click the add meal button to get started!";
+	todayInfo += "<p class=\"meal\">You have no meals planned yet. Click the add meal button to get started!</p>";
 }
 
 db.close();
@@ -370,7 +370,7 @@ db.close();
       <div id="header">
         <table cellpadding="0" cellspacing="0">
 <tr>
-<td> <a href="index.jsp"><img src="images/lightICON1.png"></a></td>
+<td> <a href="index.jsp"><img src="images/darkICON1.png"></a></td>
 <td> <a href="inventory.jsp"><img src="images/lightICON2.png" style="margin-left: -10px;" href="index.jsp"></a></td>
 <td> <a href="favorites.jsp"><img src="images/lightICON3.png" style="margin-left: -5px;"></a></td>
 <td> <a href="history.jsp"><img src="images/lightICON4.png" style="margin-left: -10px;"></a></td>
