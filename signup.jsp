@@ -10,10 +10,12 @@ if (session.getAttribute("uid") != null) {
 /* Check to see if user came here from the signup form */
 if (request.getParameter("signup") != null) {
 
-    String username = (String)request.getParameter("username");
-    String password = (String)request.getParameter("user_password");
-    String email = (String)request.getParameter("user_email");
-    char sex = ((String) request.getParameter("sex")).charAt(1);
+    String username = request.getParameter("username");
+    String password = request.getParameter("user_password");
+    String email = request.getParameter("user_email");
+    String height = request.getParameter("user_height");
+    String weight = request.getParameter("user_weight");
+    char sex = request.getParameter("user_sex");
     
     Database db = new Database();
     
@@ -63,8 +65,8 @@ if (request.getParameter("signup") != null) {
       <label for="retype_password">Retype Password:</label>
       <input type="password" id= "reenter_password" name="reenter_password" /><br />
 
-      <input type="radio" name="sex" value="male" /> Male<br />
-      <input type="radio" name="sex" value="female" /> Female<br />
+      <input type="radio" name="user_sex" value="male" /> Male<br />
+      <input type="radio" name="user_sex" value="female" /> Female<br />
 
       <input type="hidden" name="signup" value="signup" />
       <input type="submit" />

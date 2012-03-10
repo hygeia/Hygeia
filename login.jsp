@@ -57,6 +57,7 @@ if (request.getParameter("login") != null) {
     <div id="page"><div id="content">
     <h3>Login</h3>
     <br>
+    Not a member? <a href="signup.jsp">Sign up.</a>
     <form method="post" action="login.jsp">
       <table style="margin-left:auto;margin-right:auto;">
         <%= loginerr %>  
