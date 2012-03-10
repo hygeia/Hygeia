@@ -60,7 +60,13 @@ if (request.getParameter("searchForFood") != null) {
             " value='Add!'></td></form></tr>\n";
         searchDisp += s;
     }
-    searchDisp += "</table>\n";
+    searchDisp += "</table>\n<h3>If you can't find your food, create it!</h3><table>\n" +
+        "<form action='inventory.jsp' method='post'><tr>Food Name: <input name='name'></tr>" +
+        "<tr>Weight: <input name='weight'></tr><tr>Serving Size: <input name='serving'></tr>" +
+        "<tr>Calories: <input name='calories'></tr><tr>Carbohydrates: <input " +
+        "name='carbohydrates'></tr><tr>Protein: <input name='protein'></tr><tr>Fat: " +
+        "<input name='fat'></tr><input type='hidden' name='addFoodToDatabase' value=1>" +
+        "<input type='submit' value='Create Food!'></form></table>\n";
 }
 
 if (request.getParameter("addToInventory") != null) {
