@@ -71,34 +71,34 @@ String day3 = df.format(new Date(todaysdate.getTime() - (86400000 * 2)));
 String day4 = df.format(new Date(todaysdate.getTime() - (86400000 * 3)));
 
 // this will be replaced with the java code below when it works 
-String todayInfo = "<h2>Breakfast</h2><p class=\"meal\">7g&nbsp;&nbsp;&nbsp;Eggs<br />8g&nbsp;&nbsp;&nbsp;Bacon<br />9g&nbsp;&nbsp;&nbsp;Sausage<br /></p>" + 
+/*String todayInfo = "<h2>Breakfast</h2><p class=\"meal\">7g&nbsp;&nbsp;&nbsp;Eggs<br />8g&nbsp;&nbsp;&nbsp;Bacon<br />9g&nbsp;&nbsp;&nbsp;Sausage<br /></p>" + 
 	"<p class=\"total\">Carbs: 13g Protein: 7g Fat: 12g</p>" + 
 	"<h2>Lunch</h2><p class=\"meal\">7g&nbsp;&nbsp;&nbsp;Hamburger<br />7g&nbsp;&nbsp;&nbsp;Fries<br />16g&nbsp;&nbsp;&nbsp;Coke<br /></p>" + 
 	"<p class=\"total\">Carbs: 19g Protein: 17g Fat: 14g</p>";
-
-/* This is what code will actually be called
+*/
+// This is what code will actually be called
 Database db = new Database();
 int uid = (Integer)session.getAttribute("uid");
 User u = new User(db, uid);
 History hist = new History(u);
 Meal.List arr[] = hist.getHistory();
-ArrayList<Meal> todayarr = new ArrayList<Meal.List>();
-ArrayList<Meal> yesterdayarr = new ArrayList<Meal.List>();
-ArrayList<Meal> twodayarr = new ArrayList<Meal.List>();
-ArrayList<Meal> threedayarr = new ArrayList<Meal.List>();
+ArrayList<Meal> todayarr = new ArrayList<Meal>();
+ArrayList<Meal> yesterdayarr = new ArrayList<Meal>();
+ArrayList<Meal> twodayarr = new ArrayList<Meal>();
+ArrayList<Meal> threedayarr = new ArrayList<Meal>();
 for(int i=0; i<arr.length; i++){
 	switch(findDay(arr[i])){
 		case 0:
-			todayarr.add(new Meal(arr[i].getMid(), db));
+			todayarr.add(new Meal(db, arr[i].getMid()));
 			break;
 		case 1:
-			yesterdayarr.add(new Meal(arr[i].getMid(), db));
+			yesterdayarr.add(new Meal(db, arr[i].getMid()));
 			break;
 		case 2:
-			twodayarr.add(new Meal(arr[i].getMid(), db));
+			twodayarr.add(new Meal(db, arr[i].getMid()));
 			break;
 		case 3:
-			threedayarr.add(new Meal(arr[i].getMid(), db));
+			threedayarr.add(new Meal(db, arr[i].getMid()));
 			break;
 	}
 }
@@ -114,9 +114,9 @@ for(int i=0; i<todayarr.size(); i++){
 }
 if(todayarr.size() == 0){
 	showTodayCharts = "add a meal to start tracking progress";
-	pct1 = {0,0,0};
+	pct1[0] = 0; pct1[1] = 0; pct1[2] = 0;
 }else{
-	pct1 = {tempc/todayarr.size(), tempf/todayarr.size(), tempp/todayarr.size()};
+	pct1[0] = tempc/todayarr.size(); pct1[1] = tempf/todayarr.size(); pct1[2] = tempp/todayarr.size();
 }
 for(int i=0; i<yesterdayarr.size(); i++){
 	Nutrition nuts = yesterdayarr.get(i).getNutrition();
@@ -126,9 +126,9 @@ for(int i=0; i<yesterdayarr.size(); i++){
 }
 if(yesterdayarr.size() == 0){
 	showYesterdayCharts = "add a meal to start tracking progress";
-	pct2 = {0,0,0};
+	pct2[0] = 0; pct2[1] = 0; pct2[2] = 0;
 }else{
-	pct2 = {tempc/yesterdayarr.size(), tempf/yesterdayarr.size(), tempp/yesterdayarr.size()};
+	pct2[0] = tempc/yesterdayarr.size(); pct2[1] = tempf/yesterdayarr.size(); pct2[2] = tempp/yesterdayarr.size();
 }
 for(int i=0; i<twodayarr.size(); i++){
 	Nutrition nuts = twodayarr.get(i).getNutrition();
@@ -138,9 +138,9 @@ for(int i=0; i<twodayarr.size(); i++){
 }
 if(twodayarr.size() == 0){
 	showTwoDayCharts = "add a meal to start tracking progress";
-	pct3 = {0,0,0};
+	pct3[0] = 0; pct3[1] = 0; pct3[2] = 0;
 }else{
-	pct3 = {tempc/twodayarr.size(), tempf/twodayarr.size(), tempp/twodayarr.size()};
+	pct3[0] = tempc/twodayarr.size(); pct3[1] = tempf/twodayarr.size(); pct3[2] = tempp/twodayarr.size();
 }
 for(int i=0; i<threedayarr.size(); i++){
 	Nutrition nuts = threedayarr.get(i).getNutrition();
@@ -150,9 +150,9 @@ for(int i=0; i<threedayarr.size(); i++){
 }
 if(todayarr.size() == 0){
 	showThreeDayCharts = "add a meal to start tracking progress";
-	pct3 = {0,0,0};
+	pct4[0] = 0; pct4[1] = 0; pct4[2] = 0;
 }else{
-	pct4 = {tempc/threedayarr.size(), tempp/threedayarr.size(), tempf/threedayarr.size()};
+	pct4[0] = tempc/threedayarr.size(); pct4[1] = tempp/threedayarr.size(); pct4[2] = tempf/threedayarr.size();
 }
 
 // calculate blocks of carbs, protein, and fat for the bar charts 
@@ -160,18 +160,21 @@ if(todayarr.size() == 0){
 // create a string that shows meal names, foods, and nutrition info for today 
 String todayInfo = "";
 for(int i=0; i<todayarr.size(); i++){
-	todayinfo += "<h2>" + todayarr.get(i).getName() + "</h2><p class=\"meal\">";
+	todayInfo += "<h2>" + todayarr.get(i).getName() + "</h2><p class=\"meal\">";
 	Food.List foods[] = todayarr.get(i).getFoodList();
 	for(int j=0; j < foods.length; j++){
-		todayinfo += (foods[j].getCount() + "g&nbsp;&nbsp;&nbsp;" + foods[j].getName() + "<br />");
+		todayInfo += (foods[j].getCount() + "g&nbsp;&nbsp;&nbsp;" + foods[j].getName() + "<br />");
 	}
 	Nutrition nuts = todayarr.get(i).getNutrition();
-	todayinfo += "</p><p class=\"total\">Carbs: " + nuts.getCarbs() + "g ";
-	todayinfo += "Protein: " + nuts.getProtein() + "g Fat: " + nuts.getFat() + "g</p>";
+	todayInfo += "</p><p class=\"total\">Carbs: " + nuts.getCarbohydrates() + "g ";
+	todayInfo += "Protein: " + nuts.getProtein() + "g Fat: " + nuts.getFat() + "g</p>";
+}
+if(todayarr.size() == 0){
+	todayInfo += "You have no meals planned yet. Click the add meal button to get started!";
 }
 
 db.close();
-*/
+
 
  %>
  <%!
@@ -188,7 +191,9 @@ db.close();
 		Timestamp threeday = new Timestamp(c.getTimeInMillis() - (86400000 * 3));
 		Timestamp tomorrow = new Timestamp(c.getTimeInMillis() + 86400000);
 		
-		if(m.getOccurrence().after(tomorrow)){
+		if(m == null){
+			return -1;
+		}else if(m.getOccurrence().after(tomorrow)){
 			return -1;
 		}else if(m.getOccurrence().after(today)){
 			return 0;
