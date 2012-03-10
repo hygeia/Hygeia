@@ -86,6 +86,27 @@ public class Meal {
         return this.mid;
     }
     
+    /* Return timestamp. */
+    public Timestamp getOccurrence() {
+        ResultSet rs = this.db.execute("select occurrence from history where " +
+            "mid = " + this.mid + ";");
+        
+        Timestamp t;
+            
+        try {
+            if (rs == null) {
+                return null;
+            }
+            rs.next();
+            t = rs.getTimestamp("occurrence");
+            db.free();
+        } catch (SQLException e) {
+            return null;
+        }   
+        
+        return t;     
+    }
+    
     /* Fetches and then returns name from database. */
     public String getName() {
         if (this.db == null) {
