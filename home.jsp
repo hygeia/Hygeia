@@ -215,6 +215,15 @@ db.close();
     <title>Hygeia</title>
     <link type="text/css" rel="stylesheet" href="style.css" />
     <link rel="shortcut icon" href="favicon.ico" mce_href="favicon.ico"/> 
+<link rel="stylesheet" href="colorbox.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script src="javascript/jquery.colorbox.js"></script>
+		<script>
+			$(document).ready(function(){
+				//Examples of how to assign the ColorBox event to elements
+				$(".ajax").colorbox({width:"925px", height:"600px"});
+			});
+		</script>
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
@@ -391,7 +400,7 @@ db.close();
         <%= showYesterdayCharts %>
         <br /><p class="oday">Carbs/Protein/Fat Ratio and Block Levels for yesterday</p>
       </div>
-      <div id="today" class="shadowBox"><h1><%= day1 %></h1>
+      <div id="today" class="shadowBox"><h1><%= day1 %></h1><a class='ajax' href="addMeal.jsp"><img src="images/addMeal.png" width=100px height=33px></a>
         <%= showTodayCharts %>
         <p class="food">
 			<%= todayInfo %>

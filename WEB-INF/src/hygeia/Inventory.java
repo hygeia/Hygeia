@@ -107,10 +107,12 @@ public class Inventory {
        the inventory. Meaning that these are foods in the system that were
        entered by the user or are system-wide. The user does not actually need
        them in his inventory. */
-    public Food.List[] getAvailableFoods() {
+    public Food.List[] getAvailableFoods(String s) {
     
+        s = Algorithm.Clean(s);
+
         ResultSet rs = this.db.execute("select fid, name from foods where " +
-            "uid = 0 or uid = " + this.uid + ";");
+            "uid = 0 or uid = " + this.uid + " and name like '%" + s + "%';");
             
         ArrayList<Food.List> foods = new ArrayList<Food.List>();
         

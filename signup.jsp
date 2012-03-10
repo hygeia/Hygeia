@@ -15,7 +15,7 @@ if (request.getParameter("signup") != null) {
     String email = request.getParameter("user_email");
     double height = Double.parseDouble(request.getParameter("user_height"));
     double weight = Double.parseDouble(request.getParameter("user_weight"));
-    char sex = request.getParameter("user_sex").charAt(1);   
+    char sex = request.getParameter("user_sex").charAt(0);   
  
     Database db = new Database();
     
