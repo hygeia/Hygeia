@@ -102,9 +102,9 @@ for(int i=0; i<arr.length; i++){
 }
 
 // calculate percentage of carbs, protein, and fat for the pie charts and blocks for the bar charts
-int tempc = 0, tempp = 0, tempf = 0;
-//int[] pct1, pct2, pct3, pct4;
-int[] block1, block2, block3, block4;
+double tempc = 0, tempp = 0, tempf = 0;
+double[] pct1 = {0, 0, 0}; double[] pct2 = {0, 0, 0}; double[] pct3 = {0, 0, 0}; double[] pct4 = {0, 0, 0};
+double[] block1 = {0, 0, 0}; double[] block2 = {0, 0, 0}; double[] block3 = {0, 0, 0}; double[] block4 = {0, 0, 0};
 for(int i=0; i<todayarr.size(); i++){
 	Nutrition nuts = todayarr.get(i).getNutrition();
 	tempc += nuts.getCarbohydrates();
@@ -113,10 +113,9 @@ for(int i=0; i<todayarr.size(); i++){
 }
 if(todayarr.size() == 0){
 	showTodayCharts = "add a meal to start tracking progress";
-	pct1[0] = 0; pct1[1] = 0; pct1[2] = 0;
-	block1[0] = 0; block1[1] = 0; block1[2] = 0;
 }else{
 	pct1[0] = tempc/todayarr.size(); pct1[1] = tempf/todayarr.size(); pct1[2] = tempp/todayarr.size();
+	//calculate blocks
 }
 for(int i=0; i<yesterdayarr.size(); i++){
 	Nutrition nuts = yesterdayarr.get(i).getNutrition();
@@ -126,9 +125,9 @@ for(int i=0; i<yesterdayarr.size(); i++){
 }
 if(yesterdayarr.size() == 0){
 	showYesterdayCharts = "add a meal to start tracking progress";
-	pct2[0] = 0; pct2[1] = 0; pct2[2] = 0;
 }else{
 	pct2[0] = tempc/yesterdayarr.size(); pct2[1] = tempf/yesterdayarr.size(); pct2[2] = tempp/yesterdayarr.size();
+	//calculate blocks
 }
 for(int i=0; i<twodayarr.size(); i++){
 	Nutrition nuts = twodayarr.get(i).getNutrition();
@@ -138,9 +137,9 @@ for(int i=0; i<twodayarr.size(); i++){
 }
 if(twodayarr.size() == 0){
 	showTwoDayCharts = "add a meal to start tracking progress";
-	pct3[0] = 0; pct3[1] = 0; pct3[2] = 0;
 }else{
 	pct3[0] = tempc/twodayarr.size(); pct3[1] = tempf/twodayarr.size(); pct3[2] = tempp/twodayarr.size();
+	//calculate blocks
 }
 for(int i=0; i<threedayarr.size(); i++){
 	Nutrition nuts = threedayarr.get(i).getNutrition();
@@ -150,9 +149,9 @@ for(int i=0; i<threedayarr.size(); i++){
 }
 if(todayarr.size() == 0){
 	showThreeDayCharts = "add a meal to start tracking progress";
-	pct4[0] = 0; pct4[1] = 0; pct4[2] = 0;
 }else{
 	pct4[0] = tempc/threedayarr.size(); pct4[1] = tempp/threedayarr.size(); pct4[2] = tempf/threedayarr.size();
+	//calculate blocks
 }
 
 // create a string that shows meal names, foods, and nutrition info for today 
