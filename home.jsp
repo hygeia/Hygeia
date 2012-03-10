@@ -24,32 +24,24 @@ if (session.getAttribute("uid") == null){
  
 //in case there is no data, don't show graphs
 String showThreeDayCharts = 
-		"<div id=\"chartwrapperOday\">" +
-          "<div id=\"threeday_pie\">" +
-          "</div>" +
-          "<div id=\"threeday_bar\">" +
-          "</div>" +
+        "<div id=\"threeday_pie\">" +
+        "</div>" +
+        "<div id=\"threeday_bar\">" +
         "</div>";
 String showTwoDayCharts = 
-		"<div id=\"chartwrapperOday\">" +
-          "<div id=\"twoday_pie\">" +
-          "</div>" +
-          "<div id=\"twoday_bar\">" +
-          "</div>" +
+        "<div id=\"twoday_pie\">" +
+        "</div>" +
+        "<div id=\"twoday_bar\">" +
         "</div>";
 String showYesterdayCharts = 
-		"<div id=\"chartwrapperOday\">" +
-          "<div id=\"yesterday_pie\">" +
-          "</div>" +
-          "<div id=\"yesterday_bar\">" +
-          "</div>" +
+        "<div id=\"yesterday_pie\">" +
+        "</div>" +
+        "<div id=\"yesterday_bar\">" +
         "</div>";
 String showTodayCharts = 
-		"<div id=\"chartwrapperToday\">" +
-          "<div id=\"today_pie\">" +
-          "</div>" +
-          "<div id=\"today_bar\">" +
-          "</div>" +
+        "<div id=\"today_pie\">" +
+        "</div>" +
+        "<div id=\"today_bar\">" +
         "</div>";
 		
  /* this is all temporary because the java files are not yet complete */
@@ -389,19 +381,27 @@ db.close();
       </div>
       <div id="content">
       <div id="oday" class="shadowBox"><%= day4 %><br /><br />
-        <%= showThreeDayCharts %>
-        <p class="oday">Carbs/Protein/Fat Ratio and Block Levels for<br />3 days ago</p>
+        <div id="chartwrapperOday">
+		  <%= showThreeDayCharts %>
+        </div>
+        <br /><p class="oday">Carbs/Protein/Fat Ratio and Block Levels for<br />3 days ago</p>
       </div>
       <div id="oday" class="shadowBox"><%= day3 %><br /><br />
-        <%= showTwoDayCharts %>
+        <div id="chartwrapperOday">
+		  <%= showTwoDayCharts %>
+        </div>
         <br /><p class="oday">Carbs/Protein/Fat Ratio and Block Levels for<br />2 days ago</p>
       </div>
       <div id="oday" class="shadowBox"><%= day2 %><br /><br />
-        <%= showYesterdayCharts %>
+        <div id="chartwrapperOday">
+		  <%= showYesterdayCharts %>
+        </div>
         <br /><p class="oday">Carbs/Protein/Fat Ratio and Block Levels for yesterday</p>
       </div>
       <div id="today" class="shadowBox"><h1><%= day1 %></h1><a class='ajax' href="addMeal.jsp"><img src="images/addMeal.png" width=100px height=33px></a>
-        <%= showTodayCharts %>
+        <div id="chartwrapperToday">
+		  <%= showTodayCharts %>
+        </div>
         <p class="food">
 			<%= todayInfo %>
         </p>
