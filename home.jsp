@@ -44,8 +44,8 @@ String showTodayCharts =
         "<div id=\"today_bar\">" +
         "</div>";
 		
- /* this is all temporary because the java files are not yet complete */
-int[] pct1 = {30, 32, 40}; //today
+ /* this is all old from when the java files were not yet complete */
+/*int[] pct1 = {30, 32, 40}; //today
 int[] pct2 = {30, 42, 40};
 int[] pct3 = {30, 37, 40};
 int[] pct4 = {30, 32, 40};
@@ -54,6 +54,7 @@ int[] block1 = {20, 10, 30}; //today
 int[] block2 = {20, 10, 30};
 int[] block3 = {20, 10, 30};
 int[] block4 = {20, 10, 30};
+*/
 
 DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
 Date todaysdate = new Date();
@@ -73,6 +74,11 @@ Database db = new Database();
 int uid = (Integer)session.getAttribute("uid");
 User u = new User(db, uid);
 History hist = new History(u);
+if(hist == null){
+	response.sendRedirect("error.jsp?code=7&echo=Could not populate history");
+    db.close();
+    return;
+}
 Meal.List arr[] = hist.getHistory();
 ArrayList<Meal> todayarr = new ArrayList<Meal>();
 ArrayList<Meal> yesterdayarr = new ArrayList<Meal>();
@@ -95,9 +101,10 @@ for(int i=0; i<arr.length; i++){
 	}
 }
 
-// calculate percentage of carbs, protein, and fat for the pie charts
+// calculate percentage of carbs, protein, and fat for the pie charts and blocks for the bar charts
 int tempc = 0, tempp = 0, tempf = 0;
 //int[] pct1, pct2, pct3, pct4;
+int[] block1, block2, block3, block4;
 for(int i=0; i<todayarr.size(); i++){
 	Nutrition nuts = todayarr.get(i).getNutrition();
 	tempc += nuts.getCarbohydrates();
@@ -107,6 +114,7 @@ for(int i=0; i<todayarr.size(); i++){
 if(todayarr.size() == 0){
 	showTodayCharts = "add a meal to start tracking progress";
 	pct1[0] = 0; pct1[1] = 0; pct1[2] = 0;
+	block1[0] = 0; block1[1] = 0; block1[2] = 0;
 }else{
 	pct1[0] = tempc/todayarr.size(); pct1[1] = tempf/todayarr.size(); pct1[2] = tempp/todayarr.size();
 }
@@ -146,8 +154,6 @@ if(todayarr.size() == 0){
 }else{
 	pct4[0] = tempc/threedayarr.size(); pct4[1] = tempp/threedayarr.size(); pct4[2] = tempf/threedayarr.size();
 }
-
-// calculate blocks of carbs, protein, and fat for the bar charts 
 
 // create a string that shows meal names, foods, and nutrition info for today 
 String todayInfo = "";
