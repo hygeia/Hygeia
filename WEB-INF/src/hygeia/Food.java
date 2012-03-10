@@ -87,15 +87,13 @@ public class Food {
         
         private String name;
         private double weight;
-        private double count; // needed?
         private double calories, carbohydrates, protein, fat, factor; // wtf is factor?
         
-        public Create(String name, double count, double factor, int wt,
+        public Create(String name, double factor, int wt,
             double cal, double carb, double pro, double fat) {
 
             // instantiate the instance variables
             this.name = name;
-            this.count = count;
             this.factor = factor;
             this.weight = wt;
             this.calories = cal;
@@ -112,10 +110,6 @@ public class Food {
         
         public double getWeight() {
             return this.weight;
-        }
-        
-        public double getCount() {
-            return this.count;
         }
         
         public double getFactor() {
