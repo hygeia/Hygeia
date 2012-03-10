@@ -1,5 +1,5 @@
 create database hygeia5;
-grant all privileges on hygeia5.* to 'hygeiadb'@'localhost';
+grant insert, select, update, delete on hygeia5.* to 'hygeiadb'@'localhost';
 use hygeia5;
 create table users (
     uid integer primary key auto_increment, 
