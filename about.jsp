@@ -16,9 +16,11 @@
 
 <!-- If user is logged in, display typical header.  Else, display Sign Up Button.  -->
 
-<h1><font face="helvetica neue" color="green"><center>
+<div id="button">
+       <a href="profile.jsp"><img src="images/getStarted.png" width=150px height=50px></a>
+    </div>
+<h1><font face="helvetica neue" color="green">
 about hygeia
-</center>
 </h1>
 <div id="page">
   <div id="content">
