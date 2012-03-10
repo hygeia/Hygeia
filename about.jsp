@@ -10,8 +10,9 @@
 %>
 
 <html>
-<head><title>Hygeia</title></head>
+<head><title>About | Hygeia</title></head>
 <link type="text/css" rel="stylesheet" href="aboutStyle.css" />
+<link rel="shortcut icon" href="favicon.ico" mce_href="favicon.ico"/> 
 <body>
 
 <!-- If user is logged in, display typical header.  Else, display Sign Up Button.  -->
