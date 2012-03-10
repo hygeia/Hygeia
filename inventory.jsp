@@ -1,11 +1,11 @@
 <%@ page import = "hygeia.*" %>
 <%
 /* Check to see if a session exists */
-/*if (session.getAttribute("uid") == null) {*/
+if (session.getAttribute("uid") == null) {
     /* Send away non-logged in users */
-/*    response.sendRedirect("index.jsp");
+    response.sendRedirect("index.jsp");
     return;
-}*/
+}
 
 /*
    Retrieve whatever data is needed and do any processing here. Try to do all
@@ -22,15 +22,80 @@
    Redirect to another page: response.sendRedirect("url"); return;
  */
  
- /*
+
 Database db = new Database();
 int uid = (Integer)session.getAttribute("uid");
+String username = (String)session.getAttribute("username");
 User u = new User(db, uid);
-Inventory inv = new Inventory(uid);
+Inventory inv = new Inventory(u);
+
+String searchDisp = "";
+
+if (request.getParameter("removeFromInventory") != null) {
+    int fid = Integer.parseInt(request.getParameter("fid"));
+    double count=Double.parseDouble(request.getParameter("count"));
+    boolean r = inv.removeFood(new Food.Update(fid, count));
+    if (r == false) {
+        response.sendRedirect("error.jsp?code=2&echo=Could not update" +
+            " inventory");
+        db.close();
+        return;
+    }
+}
+
+if (request.getParameter("searchForFood") != null) {
+    String term = request.getParameter("nameSearch");
+    Food.List avail[] = inv.getAvailableFoods(term);
+    if (avail == null) {
+        response.sendRedirect("error.jsp?code=1&echo=Could not fetch foods");
+        db.close();
+        return;
+    }
+    searchDisp = "<table style='margin:auto auto;'>\n";
+    for (Food.List f : avail) {
+        String s = "<tr><form action='inventory.jsp' method='post'>" +
+            "<input type='hidden' name='fid' value=" + f.getFid() + ">" +
+            "<td>" + f.getName() + "</td><td>Amount to Add: </td><td> <input name='count'" +
+            "><input type='hidden' name='addToInventory' value=1><input type='submit'" +
+            " value='Add!'></td></form></tr>\n";
+        searchDisp += s;
+    }
+    searchDisp += "</table>\n";
+}
+
+if (request.getParameter("addToInventory") != null) {
+    int fid = Integer.parseInt(request.getParameter("fid"));
+    double count = Double.parseDouble(request.getParameter("count"));
+    boolean r = inv.addFood(new Food.Update(fid, count));
+    if (r == false) {
+        response.sendRedirect("error.jsp?code=2&echo=Could not update inventory");
+        db.close();
+        return;
+    }
+}
+
 Food.List[] arr = inv.getInventoryList();
+if (arr == null) {
+    response.sendRedirect("error.jsp?code=1&echo=Could not fetch inventory");
+    db.close();
+    return;
+}
+
+/* Produce table of foods, with remove forms */
+String invDisp = "<table style='margin:auto auto;'>\n";
+for (Food.List f : arr) {
+    String s = "<tr><form action='inventory.jsp' method='post'>" +
+        "<input type='hidden' name='fid' value=" + f.getFid() + ">" +
+        "<td>" + f.getName() + "</td><td>Amount: <input name='count' " +
+        "value=" + f.getCount() + "><input type='hidden' name='" +
+        "removeFromInventory' value=1><input type='submit' value='Remove'>" +
+        "</td></form></tr>\n";
+    invDisp += s;
+}
+invDisp += "</table>\n";
 
 db.close();
- */
+
  
  %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -99,6 +164,22 @@ margin-top: 10px;
 
 <br />
 
+<h1><%= username %>'s Inventory</h1>
+
+<%= invDisp %>
+
+<br><br>
+
+<h2>Add a Food to Your Inventory</h2>
+<form action="inventory.jsp" method="post">
+  <p>Enter part of the food's name: <input name="nameSearch" />
+  <input type="hidden" name="searchForFood" value=1 />
+  <input type="submit" value="Find It!"/>
+</form>
+
+<%= searchDisp %>
+
+<!--
 <div align="center">
 <table>
 <tr>
@@ -204,7 +285,7 @@ quantity:
 
 </table>
 </div>
-
+-->
 </div>
 </div>
 
