@@ -8,7 +8,6 @@ body {
     margin:0;
     background: #fbffcc fixed;
     height:100%;
-    text-align:center;
     padding:0;
 }
 
@@ -20,18 +19,14 @@ body {
     background-color:#fbffcc;
 }
 
-#content {
-    margin:0;
-    padding-bottom:40px;
-    min-height:600px;
-}
-
 #left {
 float:left;
+padding-left:20px;
 }
 
 #right {
 float:right;
+padding-right:75px;
 }
 
 #formbutton{
