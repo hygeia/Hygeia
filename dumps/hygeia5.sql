@@ -19,7 +19,7 @@ create table inventory (
     uid integer not null, 
     fid integer not null, 
     count real not null,
-    foreign key (uid) references users(uid) on delete cascade));
+    foreign key (uid) references users(uid) on delete cascade);
 create table foods (
     fid integer primary key auto_increment, 
     uid integer not null, 

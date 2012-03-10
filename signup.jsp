@@ -13,14 +13,14 @@ if (request.getParameter("signup") != null) {
     String username = request.getParameter("username");
     String password = request.getParameter("user_password");
     String email = request.getParameter("user_email");
-    String height = request.getParameter("user_height");
-    String weight = request.getParameter("user_weight");
-    String sex = request.getParameter("user_sex");
-    
+    double height = Double.parseDouble(request.getParameter("user_height"));
+    double weight = Double.parseDouble(request.getParameter("user_weight"));
+    char sex = request.getParameter("user_sex").charAt(1);   
+ 
     Database db = new Database();
     
     /* Create user */
-    int uid = User.createUser(db, username, password, email, 1, 1);
+    int uid = User.createUser(db, username, password, email, height, weight, sex);
     
     /* Close database */
     db.close();
@@ -65,7 +65,7 @@ if (request.getParameter("signup") != null) {
 
       <p>
         <label for="email">Email</label>
-        <input type="text" name="user_email" /><br />
+        <input type="text" id="user_email" name="user_email" /><br />
       </p>
 
       <p>
@@ -87,6 +87,16 @@ if (request.getParameter("signup") != null) {
       <input type="radio" name="user_sex" value="male" />Male<br />
       <input type="radio" name="user_sex" value="female" />Female
       <label for="user_sex" class="error" style="display:none;">Please chose one</label>
+      </p>
+
+      <p>
+      <label for="height">Height</label>
+      <input name="user_height" />
+      </p>
+
+      <p>
+      <label for="weight">Weight</label>
+      <input name="user_weight" />
       </p>
 
       <p>
