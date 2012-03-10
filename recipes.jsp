@@ -1,4 +1,3 @@
-
 <%@ page import = "hygeia.*" %>
 
 <%
@@ -10,7 +9,7 @@ if (session.getAttribute("uid") == null) {
 }
 
 String username = (String)session.getAttribute("username");
-int uid = session.getAttribute("uid");
+int uid = (Integer)session.getAttribute("uid");
 Database db = new Database();
 
 /* Form addRecipeToDatabase */
@@ -26,9 +25,7 @@ if(request.getParameter("removeRecipesFromDatabase") != null) {
 	   	 	 s += arr[i].getName();
                 s += " <input type=\"hidden\"name=\"mid\" value=" + 
 				arr[i].getMid() + ">";
-                s+= "<input type=\"hidden\" name=\"removeRecipesFromDatabase\" value=\"removeRecipesFromDatabase\">" +
-				" <input type=\"submit\">" +
-				" </form>";
+                s+= "<input type=\"hidden\" name=\"removeRecipesFromDatabase\" value=\"removeRecipesFromDatabase\"> <input type=\"submit\">  </form>";
         }
 }
 
@@ -43,15 +40,10 @@ if(request.getParameter("addRecipeToDatabase") != null) {
 	    		 s += arr[i].getName();
                 s += " <input type=\"hidden\"name=\"mid\" value=" + 
 				arr[i].getMid() + ">";
-                s+= "<input type=\"hidden\" name=\"addRecipesToDatabase\" 
-            	value=\"addRecipesToDatabase\"> 
-			<input type=\"submit\">
-    			</form>";
+                s+= "<input type=\"hidden\" name=\"addRecipesToDatabase\" value=\"addRecipesToDatabase\"> <input type=\"submit\">  </form>";
         }
 }
 
-
-<%
 
 /* Display Navigation Bar */
 
@@ -65,5 +57,6 @@ if(request.getParameter("addRecipeToDatabase") != null) {
 <br>
 <p><%= username %>'s Recipes: </p>
 <%= s %>
+</form>
 </body>
-</html>/  
+</html>!-- <form method="post" action="recipes.jsp"/> -->
