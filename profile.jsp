@@ -33,6 +33,9 @@ db.close();
  double bodyFat = weight-leanBodyMass;
  double protein = 80;//User.getProtein();
  int block = (int)protein/7;
+ /*double percentBodyFat = 
+	Calculator.percentBodyFat(sex,weight,hip,waist,height, wrist);*/ 
+
 /*
    Retrieve whatever data is needed and do any processing here. Try to do all
    database interactions and processing before any HTML, so that the page 
