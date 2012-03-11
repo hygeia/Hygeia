@@ -96,9 +96,9 @@ else
  a1= "checked";
 }
 
-/* Debugging statement 
-out.println(Calculator.percentBodyFat("f","145",38.0,27.0,67.0,"6.5")); 
-*/
+/* Debugging statement */
+out.println( Calculator.percentBodyFat("m","180",37.5,37.0,69.0,"7")); 
+
 
 /* retrieve input from form */
 String theName = request.getParameter("name");
@@ -136,6 +136,13 @@ if(theName != null)
   double perBodFat = Calculator.percentBodyFat(sex, 
 			request.getParameter("weight"),hips, waist, height,
 			request.getParameter("wrist"));
+  if(perBodFat < 0)
+  {
+   /* error flaged*/
+    response.sendRedirect("error.jsp");
+    return;
+  }
+
   lbm = Calculator.leanBodyMass(weight, perBodFat);
   //double protein = 
 //	Calculator.protein(lbm,Integer.parseInt(request.getParameter("activity")));
