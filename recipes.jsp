@@ -1,12 +1,12 @@
-<<<<<<< HEAD
+<!-- <<<<<<< HEAD -->
 <%@ page import = "hygeia.*" %>
-=======
+<!-- ======= -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 
 <head>
     <link type="text/css" rel="stylesheet" href="style.css" />
->>>>>>> f6ca7a8af3c6087e83c7c1d72317fe743dc47143
+<!-- >>>>>>> f6ca7a8af3c6087e83c7c1d72317fe743dc47143 -->
 
 	<style type="text/css">
 #image {
@@ -19,19 +19,26 @@ z-index: 10;
 margin-right: 10px;
 }
 
-<<<<<<< HEAD
+<!-- <<<<<<< HEAD -->
+<%
+
+/* Check to see if a session exists */
+if (session.getAttribute("uid") == null) {
+    /* Send away non-logged in users */
+    response.sendRedirect("index.jsp");
+    return;
+}
+ 
 String username = (String)session.getAttribute("username");
 int uid = (Integer)session.getAttribute("uid");
 Database db = new Database();
-
+String s = "";
 /* Form addRecipeToDatabase */
 
 if(request.getParameter("removeRecipesFromDatabase") != null) {
         User u = new User(db, uid);
         History hist = new History(u);
-        MealList arr[] = hist.getAvailableMeals();
-        String s = "";
-       
+        Meal.List arr[] = hist.getAvailableMeals("");
         for (int i = 0; i < arr.length; i++) {
                 s = "<form action=\"recipes.jsp\" method=\"post\">";
 	   	 	 s += arr[i].getName();
@@ -44,8 +51,7 @@ if(request.getParameter("removeRecipesFromDatabase") != null) {
 if(request.getParameter("addRecipeToDatabase") != null) {
         User u = new User(db, uid);
         History hist = new History(u);
-        MealList arr[] = hist.getAvailableMeals();
-        String s = "";
+        Meal.List arr[] = hist.getAvailableMeals("");
        
         for (int i = 0; i < arr.length; i++) {
                 s = "<form action=\"recipes.jsp\" method=\"post\">";
@@ -54,7 +60,9 @@ if(request.getParameter("addRecipeToDatabase") != null) {
 				arr[i].getMid() + ">";
                 s+= "<input type=\"hidden\" name=\"addRecipesToDatabase\" value=\"addRecipesToDatabase\"> <input type=\"submit\">  </form>";
         }
-=======
+}
+%>
+<!-- ======= -->
 .trans {
 opacity:.50;filter:
 alpha(opacity=50);
@@ -81,7 +89,7 @@ font-family: Verdana, Arial, Helvetica, sans-serif;
 font-size: 12px;
 font-weight: bold;
 margin-top: 10px;
->>>>>>> f6ca7a8af3c6087e83c7c1d72317fe743dc47143
+<!-- >>>>>>> f6ca7a8af3c6087e83c7c1d72317fe743dc47143 -->
 }
 </style>
 
@@ -90,9 +98,10 @@ margin-top: 10px;
     <div id="page">
 	      <div id="header">
 
-<<<<<<< HEAD
+<%
 /* Display Navigation Bar */
-=======
+%>
+
 <!-- Navigation Bar -->
 
 <table cellpadding="0" cellspacing="0">
@@ -107,7 +116,7 @@ margin-top: 10px;
 <td> <a href="logout.jsp"><img src="images/lightICON8.png"></a></td>
 </tr>
 </table>
->>>>>>> f6ca7a8af3c6087e83c7c1d72317fe743dc47143
+<!-- >>>>>>> f6ca7a8af3c6087e83c7c1d72317fe743dc47143 -->
 
 <br />
 
@@ -220,7 +229,7 @@ quantity:
 </div>
 </div>
 
-<<<<<<< HEAD
+
 <html>
 <head><title>Hygeia</title></head>
 <body>
@@ -231,8 +240,8 @@ quantity:
 <%= s %>
 </form>
 </body>
-</html>!-- <form method="post" action="recipes.jsp"/> -->
-=======
+</html>
+
 </body>
 </html>
->>>>>>> f6ca7a8af3c6087e83c7c1d72317fe743dc47143
+<!-- >>>>>>> f6ca7a8af3c6087e83c7c1d72317fe743dc47143-->
