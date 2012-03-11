@@ -62,15 +62,15 @@ db.close();
 	    <!-- Navigation Bar-->
 		<table cellpadding="0" cellspacing="0">
 		<tr>
-		<td> <a href="favorites.html">
-		<img src="images/favoritesICON.png"></a> </td>
-		<td> <a href="inventory.html">
-		<img src="images/inventoryICON.png"></a> </td>
-		<td> <a href="meals.html"><img src="images/mealsICON.png"></a> </td>
-		<td> <a href="history.html"><img src="images/historyICON.png"></a> </td>
-		<td> <a href="recipes.html"><img src="images/recipes2ICON.png"></a></td>
-		<td> <img src="images/inventoryBAR.png"> </td>
-		</tr>
+<td> <a href="home.jsp"><img src="images/lightICON1.png"></a></td>
+<td> <a href="inventory.jsp"><img src="images/lightICON2.png"></a></td>
+<td> <a href="history.jsp"><img src="images/lightICON3.png"></a></td>
+<td> <a href="recipes.jsp"><img src="images/lightICON4.png"></a></td>
+<td> <a href="profile.jsp"><img src="images/darkICON5.png"></a></td>
+<td> <a href="favorites.jsp"><img src="images/lightICON6.png"></a></td>
+<td> <img src="images/lightICON7.png"></td>
+<td> <a href="logout.jsp"><img src="images/lightICON8.png"></a></td>
+</tr>
 		</table>
  
       </div>

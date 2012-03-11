@@ -159,12 +159,14 @@ margin-top: 10px;
 
 <table cellpadding="0" cellspacing="0">
 <tr>
-<td> <a href="index.jsp"><img src="images/lightICON1.png" style="margin-right: 10px;"></a></td>
-<td> <a href="inventory.jsp"><img src="images/darkICON2.png" style="margin-left: -10px; margin-right:8px" href="index.jsp"></a></td>
-<td> <a href="favorites.jsp"><img src="images/lightICON3.png" style="margin-left: -10px;"></a></td>
-<td> <a href="history.jsp"><img src="images/lightICON4.png" style="margin-left: -10px;"></a></td>
-<td> <a href="recipes.jsp"><img src="images/lightICON5.png" style="margin-left: -10px;"></a></td>
-<td> <img src="images/lightICON6.png" style="margin-left: -10px;"></td>
+<td> <a href="home.jsp"><img src="images/lightICON1.png"></a></td>
+<td> <a href="inventory.jsp"><img src="images/darkICON2.png"></a></td>
+<td> <a href="history.jsp"><img src="images/lightICON3.png"></a></td>
+<td> <a href="recipes.jsp"><img src="images/lightICON4.png"></a></td>
+<td> <a href="profile.jsp"><img src="images/lightICON5.png"></a></td>
+<td> <a href="favorites.jsp"><img src="images/lightICON6.png"></a></td>
+<td> <img src="images/lightICON7.png"></td>
+<td> <a href="logout.jsp"><img src="images/lightICON8.png"></a></td>
 </tr>
 </table>
 
