@@ -5,7 +5,7 @@
 		     their history as desired.
 -->
 
-<%@ page import = "hygeia.*" %>
+<%@ page import = "hygeia.*,java.util.*,java.sql.Timestamp,java.text.*" %>
 <%
  /* Check to see if a session exists */
 if (session.getAttribute("uid") == null) {
@@ -17,75 +17,80 @@ if (session.getAttribute("uid") == null) {
 Database db = new Database();
 int uid = (Integer)session.getAttribute("uid");
 User u = new User(db, uid);
-History h = new History(u);
+History history = new History(u);
+Meal.List meals[] = history.getHistory();
+String historyForm = "";
 
-if(request.getParameter(removeFromHistory).equals("removeFromHistory"))
+if(meals != null)
 {
- h.removeMeal(meal[i], occur);
-}
+ historyForm += "<form action=\"history.jsp\" method=\"post\">";
 
-if(request.getParameter("addMeal") != null)
-{
- h.addMeal(meal, occur);
-}
-
-Meal[] meal = h.getHistory();
-
-// Start form
-String s = " <form action=\"history.jsp\" method=\"post\">";
-
-// Go through each meal
-for(int i = 0; i<meal.length; i++)
-{
- int mid = meal[i].getMid();
- s = s + "<input type=\"hidden\" name=\""+ mid +"\">";
-
- String mealName = meal[i].getName();
- s = s + mealName + "</br>";
-
- String occurrence = meal[i].getOccurrence().toString();
- s = s + "<input type= \"hidden\" name=\"" + occurrence + "\">";
- s = s + occurence + "</br>";
-
- s = s + "<input type=\"hidden\" name=\"removeFromHistory\" value=\"removeFromHistory\">";
- s = s + "<input type=\"submit\" name=\"Remove\">";
- s = s + "</form>";
-
- List<String> food = meal[i].getFoodList();
- Iterator<String> it = food.iterator();
-
- while(it.hasNext())
+ for(int i = 0; i<meals.length; i++)
  {
-  String item = (String)it.next();
-  s = s + "<br>" + item + "</br>";
- }
+  String name = meals[i].getName();
+  int mid = meals[i].getMid();
+  Timestamp  occurrence = meals[i].getOccurrence();
 
- Nutrition nut = meal[i].getNutrition();
- s = s + "Calories: " + nut.cals + " Carbohydrates: " + nut.carbs + 
-	" Fat: " + nut.fat + " Protein: " + nut.pro + "</br>"; 
+  historyForm += "<input type=\"hidden\" name=\""+ mid +"\">" + name + "- ";
+  historyForm += "<input type= \"hidden\" name=\"" + occurrence + "\">"
+		+ occurrence + "</br>";
+  historyForm += "<input type=\"hidden\" name=\"removeFromHistory\" value=\"removeFromHistory\">";
+  historyForm +="<input type=\"submit\" name=\"Remove\">";
+ 
+  historyForm += "</form>";
+ 
+ if(request.getParameter("removeFromHistory")!= null)
+ {
+  Meal newMeal = new Meal(db, mid );
+  history.removeMeal(newMeal, occurrence);
+ }
+}
+/*
+if(request.getParameter("removeFromHistory")!= null)
+{
+ Meal newMeal = new Meal(db, Integer.parseInt(request.getParameter("mid")));
+ Timestamp  occurrence = request.getParameter("occurrence");
+ historyForm += "</form>";
+ history.removeMeal(newMeal, occurrence);
+}
+*/
+if(request.getParameter("addToHistory")!= null)
+{
+ Calendar c = Calendar.getInstance();
+		int year = c.get(Calendar.YEAR);
+		int month = c.get(Calendar.MONTH);
+		int day = c.get(Calendar.DAY_OF_MONTH);
+		c.set(year, month, day, 0, 0);
+		Timestamp today = new Timestamp(c.getTimeInMillis());
+ /*out.println(request.getParameter(monthfield ));*/
+/*
+ Meal newMeal = new Meal(db, request.getParameter("mid"));
+ boolean check = history.addMeal(newMeal,today);
+
+ if(!check)
+{
+ response.sendRedirect("error.jsp");
+ return;
+}*/
 }
 
-// End form
-s = s + "</form>";
 
-
-%>     
+%>
 
 <HTML>
 <BODY>
 
 <!-- Ask user if they would like to add meal to history -->
-<h1>Add to history</h1>
+Add to history
 
-<form action="history.jsp" method="post">
+<form action="addMeal.jsp" method="post">
 <input type="hidden" name="mid">
-<input name="occurrence">
 <input type="hidden" name="addToHistory" value="addToHistory">
-<input type="submit" name:"Add">
+<input type="submit" value="Add">
 </form>
 </br>
 <H1> Meal History </H1>
-<P><%= s %>
+<P>
 
 </BODY>
 </HTML>
