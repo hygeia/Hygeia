@@ -253,7 +253,7 @@ public static double leanBodyMass(double weight, double percentBodyFat)
  
 }
 
-public double protein(double leanBodyMass, int activLevel)
+public static double protein(double leanBodyMass, int activLevel)
 {  
 	double act = 0;
 	double protein;
