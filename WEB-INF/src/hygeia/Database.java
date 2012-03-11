@@ -9,7 +9,7 @@ public class Database {
     private int port = 3306;
     private String username = "hygeiadb";
     private String pwd = "C1rcleofL!fe";
-    private String name = "hygeia5";
+    private String name = "hygeia6";
     
     private Connection con;
     private Statement stmt;
