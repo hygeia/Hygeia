@@ -41,12 +41,12 @@ if (request.getParameter("signup") != null) {
   <head>
     <script type="text/javascript" src="javascript/jquery-1.7.1.min.js"></script>          
     <script type="text/javascript" src="javascript/jquery.validate.min.js"></script>          
-    <script type="text/javascript" src="javascript/signup_validation.js"></script>          
+    <script type="text/javascript" src="javascript/validation.js"></script>          
     <title>Hygeia</title>
     <style type="text/css">
       * {font-family: Verdana; font-size: 96%; }
       label { width: 10em; float: left; }
-      label.error { font-style:italic;float: none; color: red; padding-left: .5em; vertical-align:top; }
+      label.error { float: none; color: red; padding-left: .5em; vertical-align:top; }
       p { clear: both; }
       .submit { margin-left: 12em }
       em { font-weight: bold; padding-right: 1em; vertical-align: top; }

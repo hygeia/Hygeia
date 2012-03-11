@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  $('#form').validate({
+  $('update_profile_form').validate({
     /* Prevent double submissions */
     submitHandler: function(form){
       if(!this.wasSent){
@@ -13,6 +13,18 @@ $(document).ready(function () {
       }
     },
     rules: {
-    }
+      sex_field: { required:true },
+      activity: { required:true },
+      user_weight: { required:true, digits:true },
+      hip1: { required:true, digits:true },
+      hip2: { required:true, digits:true },
+      hip3: { required:true, digits:true },
+      waist1: { required:true, digits:true },
+      waist2: { required:true, digits:true },
+      waist3: { required:true, digits:true },
+      ft: { required:true, digits:true },
+      inches: { required:true, digits:true },
+      wrist: { required:true, digits:true }
+   }
   });
 });
