@@ -34,11 +34,12 @@ float:right;
 
 h1.new {
 text-align:center;
-padding-left:150px;
+margin-left:150px;
 }
 
 h1 {
 text-align:center;
+color:green;
 }
 
 #formbutton{

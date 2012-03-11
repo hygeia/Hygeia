@@ -7,6 +7,35 @@
  * Java on this page. It is pure HTML describing the project and team. 
  *   
  */
+ 
+ String nav = "";
+ /* if the user is not logged in, don't show the navigation bar */
+if (session.getAttribute("uid") == null){ 
+	nav = "<div id=\"button\">" + 
+    "<a href=\"profile.jsp\"><img src=\"images/getStarted.png\" width=150px height=50px></a>" +
+    "</div>" +
+	"<h1 class=\"new\"><font face=\"helvetica neue\" color=\"green\">" +
+	"about hygeia" +
+	"</h1>";
+}
+else{ //show the navigation bar
+	nav = "<div id=\"header\">" +
+        "<table cellpadding=\"0\" cellspacing=\"0\">" +
+"<tr>" +
+"<td> <a href=\"home.jsp\"><img src=\"images/lightICON1.png\"></a></td>" +
+"<td> <a href=\"inventory.jsp\"><img src=\"images/lightICON2.png\"></a></td>" +
+"<td> <a href=\"history.jsp\"><img src=\"images/lightICON3.png\"></a></td>" +
+"<td> <a href=\"recipes.jsp\"><img src=\"images/lightICON4.png\"></a></td>" +
+"<td> <a href=\"profile.jsp\"><img src=\"images/lightICON5.png\"></a></td>" +
+"<td> <a href=\"favorites.jsp\"><img src=\"images/lightICON6.png\"></a></td>" +
+"<td> <img src=\"images/lightICON7.png\"></td>" +
+"<td> <a href=\"logout.jsp\"><img src=\"images/lightICON8.png\"></a></td>" +
+"</tr>" +
+"</table>" +
+"</div>" +
+"<h1>about hygeia</h1>";
+}
+
 %>
 
 <html>
@@ -17,13 +46,8 @@
 
 <!-- If user is logged in, display typical header.  Else, display Sign Up Button.  -->
 
-<div id="button">
-       <a href="profile.jsp"><img src="images/getStarted.png" width=150px height=50px></a>
-    </div>
-<h1><font face="helvetica neue" color="green">
-about hygeia
-</h1>
 <div id="page">
+  <%= nav %>
   <div id="content">
     <div id="about">
       <p class="about">
