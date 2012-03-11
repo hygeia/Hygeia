@@ -18,18 +18,97 @@ Database db = new Database();
 int uid = (Integer)session.getAttribute("uid");
 User u = new User(db, uid);
 History history = new History(u);
-Meal.List meals[] = history.getHistory();
+//Meal.List meals[] = history.getHistory();
+
 String historyForm = "";
 
+if(request.getParameter("removeFromHistory")!= null)
+{
+ int mid = Integer.parseInt(request.getParameter("mid"));
+ String o = request.getParameter("occurrence"); 
+ SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+ java.util.Date parsedDate = dateFormat.parse(o);
+ java.sql.Timestamp occur = new java.sql.Timestamp(parsedDate.getTime()); 
+ 
+ Meal meal = new Meal(db, mid);
+ boolean check = history.removeMeal(meal, occur);
+ 
+ String searchDisp = "";
+
+ if(check == false)
+ {
+  response.sendRedirect("error.jsp?code=2&echo=Could not remove");
+  db.close();
+  return;
+ }
+}
+
+if(request.getParameter("addToHistory") != null)
+{
+ int mid = Integer.parseInt(request.getParameter("mid"));
+ String o = request.getParameter("occurrence");
+ SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd hh:mm");
+ //yyyy-MM-dd hh:mm:ss.SSS");
+ java.util.Date parsedDate = dateFormat.parse(o);
+ java.sql.Timestamp occur = new java.sql.Timestamp(parsedDate.getTime());    
+   
+ Meal meal = new Meal(db, mid);
+ boolean check = history.addMeal(meal, occur);
+
+ if(check == false)
+ {
+  response.sendRedirect("error.jsp?code=2&echo=Could not add meal");
+  db.close();
+  return;
+  }
+ }
+
+if(request.getParameter("searchForMeal") != null)
+{
+ String term = request.getParameter("nameSearch");
+ Meal.List meal[] = history.getAvailableMeals(term);
+ 
+ if (meal == null) 
+ {
+   response.sendRedirect("error.jsp?code=1&echo=Could not fetch meal");
+   db.close();
+   return;
+ }
+ 
+ String searchDisp = "<table style='margin:auto auto;'>\n";
+
+ for(Meal.List m : meal)
+ {
+  String s = "<tr><form action='history.jsp' method='post'>" +
+	"<input type='hidden' name='mid' value=" + m.getMid() + ">" +
+	"<td>" + m.getName() + "</td><td> Occurrence(MM-dd hh:mm):"+
+ 	"(<input type='text' name='occurrence'> <input type='hidden'"+
+	" name='addToHistory' value=1><input type='submit' value='Add!'></td> "
+	+ "</form></tr>\n"; 
+  searchDisp += s;
+ } 
+ 
+}
+
+String term = request.getParameter("nameSearch");
+Meal.List meal[] = history.getAvailableMeals(term);
+if( meal == null )
+{
+ response.sendRedirect("error.jsp?code=1&echo=Could not fetch meal");
+ db.close();
+ return;
+}
+
+Meal.List meals[] = history.getHistory();
 if(meals != null)
 {
  historyForm += "<form action=\"history.jsp\" method=\"post\">";
 
- for(int i = 0; i<meals.length; i++)
+ for(Meal.List m : meals)
  {
-  String name = meals[i].getName();
-  int mid = meals[i].getMid();
-  Timestamp  occurrence = meals[i].getOccurrence();
+  String name = m.getName();
+  int mid = m.getMid();
+  Timestamp  occurrence = m.getOccurrence();
 
   historyForm += "<input type=\"hidden\" name=\""+ mid +"\">" + name + "- ";
   historyForm += "<input type= \"hidden\" name=\"" + occurrence + "\">"
@@ -38,12 +117,12 @@ if(meals != null)
   historyForm +="<input type=\"submit\" name=\"Remove\">";
  
   historyForm += "</form>";
- 
+ /*
  if(request.getParameter("removeFromHistory")!= null)
  {
   Meal newMeal = new Meal(db, mid );
   history.removeMeal(newMeal, occurrence);
- }
+ }*/
 }
 }
 /*
@@ -54,7 +133,7 @@ if(request.getParameter("removeFromHistory")!= null)
  historyForm += "</form>";
  history.removeMeal(newMeal, occurrence);
 }
-*/
+
 if(request.getParameter("addToHistory")!= null)
 {
  Calendar c = Calendar.getInstance();
@@ -63,7 +142,7 @@ if(request.getParameter("addToHistory")!= null)
 		int day = c.get(Calendar.DAY_OF_MONTH);
 		c.set(year, month, day, 0, 0);
 		Timestamp today = new Timestamp(c.getTimeInMillis());
- /*out.println(request.getParameter(monthfield ));*/
+ out.println(request.getParameter(monthfield ));*/
 /*
  Meal newMeal = new Meal(db, request.getParameter("mid"));
  boolean check = history.addMeal(newMeal,today);
@@ -72,9 +151,9 @@ if(request.getParameter("addToHistory")!= null)
 {
  response.sendRedirect("error.jsp");
  return;
-}*/
 }
-
+}
+*/
 
 %>
 
@@ -84,14 +163,18 @@ if(request.getParameter("addToHistory")!= null)
 <!-- Ask user if they would like to add meal to history -->
 Add to history
 
-<form action="addMeal.jsp" method="post">
-<input type="hidden" name="mid">
-<input type="hidden" name="addToHistory" value="addToHistory">
-<input type="submit" value="Add">
+<form action="history.jsp" method="post">
+<p>Enter part of meal name:<input name="nameSearch">
+<input type="hidden" name="searchForFood" value=1>
+<input type="submit" value="Find It!">
 </form>
 </br>
 <H1> Meal History </H1>
 <P>
 
+<%= searchDisp %>
+
+<br>
+<%= historyForm %>
 </BODY>
 </HTML>
