@@ -42,9 +42,13 @@ if( sex.equals("f") )
 {
  f = "checked";
 }
-if( sex.equals("m"))
+else if( sex.equals("m"))
 {
  m = "checked";
+}
+else
+{
+ f = "checked";
 }
 
 /*
@@ -67,25 +71,29 @@ if(activity == 1)
 {
  a1 = "checked";
 }
-if(activity == 2)
+else if(activity == 2)
 {
  a2 = "checked";
 }
-if(activity == 3)
+else if(activity == 3)
 {
  a3 = "checked";
 }
-if(activity == 4)
+else if(activity == 4)
 {
  a4 = "checked";
 }
-if(activity == 5)
+else if(activity == 5)
 {
  a5 = "checked";
 }
-if(activity == 6)
+else if(activity == 6)
 {
  a6 = "checked";
+}
+else
+{
+ a1= "checked";
 }
 
 /* Debugging statement 
