@@ -16,6 +16,7 @@ public class User {
     private double weight;
     private double hips;
     private double waist;
+    private double wrist;
     private double leanBodyMass;
         
     /*Use this to create User object in a page after the user has started a session */
@@ -156,7 +157,7 @@ public class User {
     public boolean getAllInfo() {
         
         ResultSet rs = this.db.execute("select username, email, height, weight"
-            + ", gender, activity, blocks, hips, waist, leanBodyMass" +
+            + ", gender, activity, blocks, hips, waist, wrist, leanBodyMass" +
             " from users where uid = " + this.uid + ";");
         
         /* Set variables */
@@ -169,6 +170,7 @@ public class User {
                 this.email = rs.getString("email");
                 this.height = rs.getDouble("height");
                 this.weight = rs.getDouble("weight");
+                this.wrist = rs.getDouble("wrist");
                 this.gender = rs.getString("gender").charAt(1);
                 this.activity = (short)rs.getInt("activity");
                 this.blocks = rs.getInt("blocks");
@@ -268,6 +270,10 @@ public class User {
         return this.waist;
     }
     
+    public double getWrist() {
+        return this.wrist;
+    }
+    
     public double getLeanBodyMass() {
         return this.leanBodyMass;
     }
@@ -321,15 +327,25 @@ public class User {
     }
     
     /* Updates the database and instance variables with new information */
-    public boolean updateAllInfo(String username, String email, double ht, double wt) {
-        if ((username == null) || (email == null) || (ht == 0) || (wt == 0)) {
+    public boolean updateAllInfo(String username, String email, char gender, 
+        short activity, int blocks, double ht, double wt, double hips, 
+        double waist, double wrist, double lbm) {
+        if ((username == null) || (email == null) || (ht < 1) || (wt < 1) || 
+            (hips < 1) || (waist < 1) || (wrist < 1) || (lbm < 1)) {
             return false;
         }
 
         this.username = Algorithm.Clean(username);
         this.email = Algorithm.Clean(email);
+        this.gender = gender;
+        this.activity = activity;
+        this.blocks = blocks;
         this.height = ht;
         this.weight = wt;
+        this.hips = hips;
+        this.waist = waist;
+        this.wrist = wrist;
+        
         
         if (!User.accountExists(this.db, email)) {
             return false;
@@ -337,9 +353,11 @@ public class User {
         
         int up;
         
-            up = this.db.update("update users set username='" + this.username +
-            "', email='" + this.email + "', height=" + this.height + ", weight="
-            + this.weight + " where uid = " + this.uid + ";");
+        up = this.db.update("update users set username='" + this.username +
+            "', email='" + this.email + "', gender='" + gender + "', activity=" 
+            + activity + ", blocks=" + blocks + ", height=" + ht + ", weight="
+            + wt + ", hips=" + hips + ", waist=" + waist + ", wrist=" + wrist +
+            ", leanBodyMass=" + lbm + " where uid = " + this.uid + ";");
 
         
         if (up < 1) {
