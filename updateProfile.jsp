@@ -18,7 +18,7 @@
 Database db = new Database();
 int uid = (Integer)session.getAttribute("uid");
 User u = new User(db, uid);
-//boolean check = u.getAllInfo();
+boolean check = u.getAllInfo();
 
 String name = u.getUsername();
 double weight = u.getWeight();
@@ -38,11 +38,11 @@ String sex = Character.toString(u.getGender());
 //String sex = "f";
 String f= "";
 String m= ""; 
-if( sex.equals("f") )
+if( sex.equals("F") )
 {
  f = "checked";
 }
-else if( sex.equals("m"))
+else if( sex.equals("M"))
 {
  m = "checked";
 }

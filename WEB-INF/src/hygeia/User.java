@@ -171,7 +171,7 @@ public class User {
                 this.height = rs.getDouble("height");
                 this.weight = rs.getDouble("weight");
                 this.wrist = rs.getDouble("wrist");
-                this.gender = rs.getString("gender").charAt(1);
+                this.gender = rs.getString("gender").charAt(0);
                 this.activity = (short)rs.getInt("activity");
                 this.blocks = rs.getInt("blocks");
                 this.hips = rs.getDouble("hips");
