@@ -7,7 +7,7 @@
 -->
 
 <%@ page import = "hygeia.*" %>
-<%@ page import = "java.io.FileNotFoundException" %>
+
 <%
 /* Check to see if a session exists */
  if (session.getAttribute("uid") == null) {
@@ -88,9 +88,9 @@ if(activity == 6)
  a6 = "checked";
 }
 
-/*
-out.println(Calculator.percentBodyFat("f","145","38","38","38","27","27","27",67.0,"6.5")); 
-*/
+
+out.println(Calculator.percentBodyFat("f","145",38.0,27.0,67.0,"6.5")); 
+
 
 /* retrieve input from form */
 String theName = request.getParameter("name");
@@ -103,7 +103,17 @@ if(theName != null)
   int feetToInch = tempft*12;
   int tempin = Integer.parseInt(request.getParameter("in"));
   height = feetToInch + tempin;
- 
+
+  /* Take average of hip measurement */
+  hips = (Double.parseDouble(request.getParameter("hips1")) + 
+	  Double.parseDouble(request.getParameter("hips2")) +
+	  Double.parseDouble(request.getParameter("hips3")))/3;
+
+  /* Take average of waist measurements */
+  waist = (Double.parseDouble(request.getParameter("waist1")) +
+           Double.parseDouble(request.getParameter("waist2")) +
+           Double.parseDouble(request.getParameter("waist3")))/3;
+
   /* Retrieve weight from form and parse it into a double */
   weight = Double.parseDouble(request.getParameter("weight"));
 
