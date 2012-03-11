@@ -23,7 +23,7 @@ $(document).ready(function () {
       waist2: { required:true, digits:true },
       waist3: { required:true, digits:true },
       ft: { required:true, digits:true },
-      inches: { required:true, digits:true },
+      in: { required:true, digits:true },
       wrist: { required:true, digits:true }
    }
   });

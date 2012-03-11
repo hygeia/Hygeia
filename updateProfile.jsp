@@ -32,18 +32,14 @@ double height = u.getHeight();
 double temp =  height/12;
 int ft = (int)(height/12);
 double inc = (temp-ft)*12;
-<<<<<<< HEAD
-int in = (int) inc;
 //String sex = u.getSex();
-String sex = "f";
-=======
+//String sex = "f";
 int in = (int) inc;
 
 String sex = Character.toString(u.getGender());
 //String sex = "f";
->>>>>>> 301f8ed2ed8787f6b4c048bbd60c7039b04bc2c9
-String f= "";
-String m= ""; 
+String f = "";
+String m = ""; 
 if( sex.equals("F") )
 {
  f = "checked";
