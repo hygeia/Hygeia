@@ -233,12 +233,7 @@ quantity:
 <html>
 <head><title>Hygeia</title></head>
 <body>
-<h1>Hygeia</h1>
-<h2>Version 0.8</h2>
-<br>
-<p><%= username %>'s Recipes: </p>
 <%= s %>
-</form>
 </body>
 </html>
 
