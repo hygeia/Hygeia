@@ -7,6 +7,35 @@
  * Java on this page. It is pure HTML describing the project and team. 
  *   
  */
+ 
+ String nav = "";
+ /* if the user is not logged in, don't show the navigation bar */
+if (session.getAttribute("uid") == null){ 
+	nav = "<div id=\"button\">" + 
+    "<a href=\"profile.jsp\"><img src=\"images/getStarted.png\" width=150px height=50px></a>" +
+    "</div>" +
+	"<h1 class=\"new\"><font face=\"helvetica neue\" color=\"green\">" +
+	"about hygeia" +
+	"</h1>";
+}
+else{ //show the navigation bar
+	nav = "<div id=\"header\">" +
+        "<table cellpadding=\"0\" cellspacing=\"0\">" +
+"<tr>" +
+"<td> <a href=\"home.jsp\"><img src=\"images/lightICON1.png\"></a></td>" +
+"<td> <a href=\"inventory.jsp\"><img src=\"images/lightICON2.png\"></a></td>" +
+"<td> <a href=\"history.jsp\"><img src=\"images/lightICON3.png\"></a></td>" +
+"<td> <a href=\"recipes.jsp\"><img src=\"images/lightICON4.png\"></a></td>" +
+"<td> <a href=\"profile.jsp\"><img src=\"images/lightICON5.png\"></a></td>" +
+"<td> <a href=\"favorites.jsp\"><img src=\"images/lightICON6.png\"></a></td>" +
+"<td> <img src=\"images/lightICON7.png\"></td>" +
+"<td> <a href=\"logout.jsp\"><img src=\"images/lightICON8.png\"></a></td>" +
+"</tr>" +
+"</table>" +
+"</div>" +
+"<h1>about hygeia</h1>";
+}
+
 %>
 
 <html>
@@ -17,13 +46,8 @@
 
 <!-- If user is logged in, display typical header.  Else, display Sign Up Button.  -->
 
-<div id="button">
-       <a href="profile.jsp"><img src="images/getStarted.png" width=150px height=50px></a>
-    </div>
-<h1><font face="helvetica neue" color="green">
-about hygeia
-</h1>
 <div id="page">
+  <%= nav %>
   <div id="content">
     <div id="about">
       <p class="about">
@@ -40,40 +64,41 @@ about hygeia
 
 <div id="team">
   <div id="left">
-    <img src="adam.png" width=320px height=320px>
+    <img src="images/adam.png" width=320px height=320px>
     <p class="name">Adam William Kuipers</p>
     Project Manager - enjoys fur hats and tasteful blazers<br /><br />
-	<img src="anne.png" width=320px height=320px>
-    <p class="name">Anne Brookes</p>
-    Software Architect - avid runner and explorer of places far and wide<br /><br />
-	<img src="link.png" width=320px height=320px>
-    <p class="name">Lincoln J Race</p>
-    Algorithm Specialaist - basically the coolest person ever and in no way the one who wrote this page<br />
+	<img src="images/asher.png" width=320px height=320px>
+     <p class="name">Asher McCall Garland</p>
+     Database Specialist - enjoys cinnamon Whiskey and coding on the beach<br /><br />
+	 <img src="images/kenney.png" width=320px height=320px>
+     <p class="name">Kenney Cheung</p>
+     Software Development Lead - fascinated with the city of Los Angeles<br /><br />
   </div>
   <div id="center">
-     <img src="corbin.png" width=320px height=320px>
-     <p class="name">Corbin Lewis</p>
-     Software Development Lead - random fact extraordinar with a keen sense of pants color<br /><br />
-	 <img src="brian.png" width=320px height=320px>
+     <img src="images/alex.png" width=320px height=320px>
+     <p class="name">Alex Morris</p>
+     Database Specialist - Eagle Scout who enjoys wearing suits<br /><br />
+	 <img src="images/brian.png" width=320px height=320px>
      <p class="name">Brian Ta</p>
      Graphic Designer - either pro or terrible at longboarding depending on the day<br /><br />
-	 <img src="mana.png" width=320px height=320px>
-     <p class="name">Mana Jammalamadaka</p>
-     Senior System Analyst - staunchly vegetarian but not vegan<br /><br />
-	 <img src="sara.png" width=320px height=320px>
+	 <img src="images/link.png" width=320px height=320px>
+    <p class="name">Lincoln J Race</p>
+    Algorithm Specialaist/User Interface - basically the coolest person ever and in no way the one who wrote this page<br />
+	 <img src="images/sara.png" width=320px height=320px>
 	 <p class="name">Sara Millar</p>
      Quality Assurance Specialist - always has to tell people she's not a vegetarian<br /><br />
    </div>
    <div id="right">
-   <img src="asher.png" width=320px height=320px>
-     <p class="name">Asher McCall Garland</p>
-     Database Specialist - enjoys cinnamon Whiskey and coding on the beach<br /><br />
-	 <img src="kenney.png" width=320px height=320px>
-     <p class="name">Kenney Cheung</p>
-     Software Development Lead - fascinated with the city of Los Angeles<br /><br />
-	 <img src="alex.png" width=320px height=320px>
-     <p class="name">Alex Morris</p>
-     Database Specialist - Eagle Scout who enjoys wearing suits<br /><br />
+   <img src="images/anne.png" width=320px height=320px>
+    <p class="name">Anne Brookes</p>
+    Software Architect - avid runner and explorer of places far and wide<br /><br />
+	<img src="images/corbin.png" width=320px height=320px>
+     <p class="name">Corbin Lewis</p>
+     Software Development Lead - random fact extraordinar with a keen sense of pants color<br /><br />
+	 
+	 <img src="images/mana.png" width=320px height=320px>
+     <p class="name">Mana Jammalamadaka</p>
+     Senior System Analyst - staunchly vegetarian but not vegan<br /><br />
     </div>
 </div>
   </div>

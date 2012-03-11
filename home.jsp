@@ -375,12 +375,14 @@ db.close();
       <div id="header">
         <table cellpadding="0" cellspacing="0">
 <tr>
-<td> <a href="index.jsp"><img src="images/darkICON1.png"></a></td>
-<td> <a href="inventory.jsp"><img src="images/lightICON2.png" style="margin-left: -10px;" href="index.jsp"></a></td>
-<td> <a href="favorites.jsp"><img src="images/lightICON3.png" style="margin-left: -5px;"></a></td>
-<td> <a href="history.jsp"><img src="images/lightICON4.png" style="margin-left: -10px;"></a></td>
-<td> <a href="recipes.jsp"><img src="images/lightICON5.png" style="margin-left: -10px;"></a></td>
-<td> <img src="images/lightICON6.png" style="margin-left: -10px;"></td>
+<td> <a href="home.jsp"><img src="images/lightICON1.png"></a></td>
+<td> <a href="inventory.jsp"><img src="images/lightICON2.png"></a></td>
+<td> <a href="history.jsp"><img src="images/lightICON3.png"></a></td>
+<td> <a href="recipes.jsp"><img src="images/lightICON4.png"></a></td>
+<td> <a href="profile.jsp"><img src="images/lightICON5.png"></a></td>
+<td> <a href="favorites.jsp"><img src="images/lightICON6.png"></a></td>
+<td> <img src="images/lightICON7.png"></td>
+<td> <a href="logout.jsp"><img src="images/lightICON8.png"></a></td>
 </tr>
 </table>
       </div>
@@ -403,7 +405,7 @@ db.close();
         </div>
         <br /><p class="oday">Carbs/Protein/Fat Ratio and Block Levels for yesterday</p>
       </div>
-      <div id="today" class="shadowBox"><h1><%= day1 %></h1><a class='ajax' href="addMeal.jsp"><img src="images/addMeal.png" width=100px height=33px></a>
+      <div id="today" class="shadowBox"><h1><%= day1 %></h1><a class='ajax' href="mealChoice.jsp"><img src="images/addMeal.png" width=200px height=66px></a>
         <div id="chartwrapperToday">
 		  <%= showTodayCharts %>
         </div>

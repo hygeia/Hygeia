@@ -53,6 +53,11 @@ if (request.getParameter("searchForFood") != null) {
     }
     searchDisp = "<table style='margin:auto auto;'>\n";
     for (Food.List f : avail) {
+		if( f == null ){
+			response.sendRedirect("error.jsp?code=1&echo=Error finding foods with name " + term);
+			db.close();
+			return;
+		}
         String s = "<tr><form action='inventory.jsp' method='post'>" +
             "<input type='hidden' name='fid' value=" + f.getFid() + ">" +
             "<td>" + f.getName() + "</td><td>Amount to Add: </td><td> <input name='count'" +
@@ -90,6 +95,11 @@ if (arr == null) {
 /* Produce table of foods, with remove forms */
 String invDisp = "<table style='margin:auto auto;'>\n";
 for (Food.List f : arr) {
+	if( f == null ){
+		response.sendRedirect("error.jsp?code=1&echo=Error diplaying food");
+		db.close();
+		return;
+	}
     String s = "<tr><form action='inventory.jsp' method='post'>" +
         "<input type='hidden' name='fid' value=" + f.getFid() + ">" +
         "<td>" + f.getName() + "</td><td>Amount: <input name='count' " +
@@ -159,14 +169,18 @@ margin-top: 10px;
 
 <table cellpadding="0" cellspacing="0">
 <tr>
-<td> <a href="index.jsp"><img src="images/lightICON1.png" style="margin-right: 10px;"></a></td>
-<td> <a href="inventory.jsp"><img src="images/darkICON2.png" style="margin-left: -10px; margin-right:8px" href="index.jsp"></a></td>
-<td> <a href="favorites.jsp"><img src="images/lightICON3.png" style="margin-left: -10px;"></a></td>
-<td> <a href="history.jsp"><img src="images/lightICON4.png" style="margin-left: -10px;"></a></td>
-<td> <a href="recipes.jsp"><img src="images/lightICON5.png" style="margin-left: -10px;"></a></td>
-<td> <img src="images/lightICON6.png" style="margin-left: -10px;"></td>
+<td> <a href="home.jsp"><img src="images/lightICON1.png"></a></td>
+<td> <a href="inventory.jsp"><img src="images/darkICON2.png"></a></td>
+<td> <a href="history.jsp"><img src="images/lightICON3.png"></a></td>
+<td> <a href="recipes.jsp"><img src="images/lightICON4.png"></a></td>
+<td> <a href="profile.jsp"><img src="images/lightICON5.png"></a></td>
+<td> <a href="favorites.jsp"><img src="images/lightICON6.png"></a></td>
+<td> <img src="images/lightICON7.png"></td>
+<td> <a href="logout.jsp"><img src="images/lightICON8.png"></a></td>
 </tr>
 </table>
+	</div>
+	<div id="content">
 
 <br />
 
@@ -293,7 +307,11 @@ quantity:
 </div>
 -->
 </div>
-</div>
+<div id="footer"><a href="about.jsp">About Us</a><br />
+		Hygeia is a project developed for a Software Engineering class at UCSD.<br />
+        Please contact us at hygeia110@gmail.com if you would like to use any of the code found here.
+      </div>
+	  </div>
 
 </body>
 </html>

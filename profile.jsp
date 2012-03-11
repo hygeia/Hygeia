@@ -20,8 +20,16 @@ Database db = new Database();
 int uid = (Integer)session.getAttribute("uid");
 User u = new User(db, uid);
 db.close();
-
- String name = (String)session.getAttribute("username");
+/*
+boolean load = u.getAllInfo();
+if(load == false)
+{
+ response.sendRedirect("error.jsp");
+ db.close();
+ return;
+}
+*/
+String name = (String)session.getAttribute("username");
 
  double weight = u.getWeight();
  double height = u.getHeight();
@@ -29,10 +37,14 @@ db.close();
  int ft = (int)(height/12);
  double inc = (temp-ft)*12;
  int in = (int) inc;
- double leanBodyMass = 120; //User.getLeanBodyMass();
+ double leanBodyMass =  u.getLeanBodyMass();
  double bodyFat = weight-leanBodyMass;
- double protein = 80;//User.getProtein();
+ int protein = 80;//User.getBlocks();
  int block = (int)protein/7;
+  
+ /*double percentBodyFat = 
+	Calculator.percentBodyFat(sex,weight,hip,waist,height, wrist);*/ 
+
 /*
    Retrieve whatever data is needed and do any processing here. Try to do all
    database interactions and processing before any HTML, so that the page 
@@ -62,15 +74,15 @@ db.close();
 	    <!-- Navigation Bar-->
 		<table cellpadding="0" cellspacing="0">
 		<tr>
-		<td> <a href="favorites.html">
-		<img src="images/favoritesICON.png"></a> </td>
-		<td> <a href="inventory.html">
-		<img src="images/inventoryICON.png"></a> </td>
-		<td> <a href="meals.html"><img src="images/mealsICON.png"></a> </td>
-		<td> <a href="history.html"><img src="images/historyICON.png"></a> </td>
-		<td> <a href="recipes.html"><img src="images/recipes2ICON.png"></a></td>
-		<td> <img src="images/inventoryBAR.png"> </td>
-		</tr>
+<td> <a href="home.jsp"><img src="images/lightICON1.png"></a></td>
+<td> <a href="inventory.jsp"><img src="images/lightICON2.png"></a></td>
+<td> <a href="history.jsp"><img src="images/lightICON3.png"></a></td>
+<td> <a href="recipes.jsp"><img src="images/lightICON4.png"></a></td>
+<td> <a href="profile.jsp"><img src="images/darkICON5.png"></a></td>
+<td> <a href="favorites.jsp"><img src="images/lightICON6.png"></a></td>
+<td> <img src="images/lightICON7.png"></td>
+<td> <a href="logout.jsp"><img src="images/lightICON8.png"></a></td>
+</tr>
 		</table>
  
       </div>
@@ -109,10 +121,9 @@ db.close();
      } 
     %>
     </div>
-     <div id="footer">Hygeia is a project developed for a Software Engineering class 
-			at UCSD.<br />
-        Please contact us at hygeia@gmail.com if you would like to use any of the code
-	 found here.
+     <div id="footer"><a href="about.jsp">About Us</a><br />
+		Hygeia is a project developed for a Software Engineering class at UCSD.<br />
+        Please contact us at hygeia110@gmail.com if you would like to use any of the code found here.
       </div>
     </div>
  <!-- 
