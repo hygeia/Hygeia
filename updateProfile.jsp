@@ -88,9 +88,9 @@ if(activity == 6)
  a6 = "checked";
 }
 
-
+/* Debugging statement 
 out.println(Calculator.percentBodyFat("f","145",38.0,27.0,67.0,"6.5")); 
-
+*/
 
 /* retrieve input from form */
 String theName = request.getParameter("name");
@@ -152,10 +152,10 @@ if(theName != null)
 
  <FORM METHOD="POST" ACTION="updateProfile.jsp">
 
- <P> Name </br>
+ <P> Name: </br>
  <INPUT TYPE="TEXT" VALUE="<%= name %>" NAME="name" SIZE="20">
 
- <P> Gender </br>
+ <P> Gender: </br>
  <INPUT TYPE="RADIO" NAME="sex" VALUE="female" <%= f %> >Female
  <INPUT TYPE="RADIO" NAME="sex" VALUE="male" <%= m %> >Male
 
