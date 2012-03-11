@@ -53,6 +53,11 @@ if (request.getParameter("searchForFood") != null) {
     }
     searchDisp = "<table style='margin:auto auto;'>\n";
     for (Food.List f : avail) {
+		if( f == null ){
+			response.sendRedirect("error.jsp?code=1&echo=Error finding foods with name " + term);
+			db.close();
+			return;
+		}
         String s = "<tr><form action='inventory.jsp' method='post'>" +
             "<input type='hidden' name='fid' value=" + f.getFid() + ">" +
             "<td>" + f.getName() + "</td><td>Amount to Add: </td><td> <input name='count'" +
@@ -90,6 +95,11 @@ if (arr == null) {
 /* Produce table of foods, with remove forms */
 String invDisp = "<table style='margin:auto auto;'>\n";
 for (Food.List f : arr) {
+	if( f == null ){
+		response.sendRedirect("error.jsp?code=1&echo=Error diplaying food");
+		db.close();
+		return;
+	}
     String s = "<tr><form action='inventory.jsp' method='post'>" +
         "<input type='hidden' name='fid' value=" + f.getFid() + ">" +
         "<td>" + f.getName() + "</td><td>Amount: <input name='count' " +
