@@ -27,6 +27,10 @@ text-align:center;
 float:left;
 margin-top:100px;
 width:250px;
+padding-left:30px;
+}
+
+p.choice {
 padding-left:50px;
 }
 

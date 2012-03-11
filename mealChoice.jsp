@@ -16,16 +16,16 @@
     <div id="content">
 	  <h1>How Would You Like to Enter Your Meal?</h1>
 	  <div id="left">
-	  <a href="addMeal.jsp"><img src="images/addMeal.png" width=100px height=33px></a><br /><br />
-	  Pick a meal from your list of favorites
+	  <a href="addMeal.jsp"><img src="images/favorites.png" ></a><br /><br />
+	  <p class="choice">Pick a meal from your list of favorites</p>
 	  </div>
 	  <div id="left">
-	  <a href="addMeal.jsp"><img src="images/addMeal.png" width=100px height=33px></a><br /><br />
-	  Get a suggested meal from our suggestion algorithm
+	  <a href="addMeal.jsp"><img src="images/getSuggestion.png" ></a><br /><br />
+	  <p class="choice">Get a suggested meal from our suggestion algorithm</p>
 	  </div>
 	  <div id="left">
-	  <a href="addMeal.jsp"><img src="images/addMeal.png" width=100px height=33px></a><br /><br />
-	  Input a custom meal from the food you have available in your inventory
+	  <a href="addMeal.jsp"><img src="images/input.png" ></a><br /><br />
+	  <p class="choice">Input a custom meal from the food you have available in your inventory</p>
 	  </div>
   </div>
   </body>
