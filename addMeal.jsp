@@ -1,3 +1,32 @@
+<%@ page import = "hygeia.*,java.util.*,java.sql.Timestamp,java.text.*" %>
+<%
+/* Check to see if a session exists */
+if (session.getAttribute("uid") == null){ 
+    /* Send away non-logged in users */
+    response.sendRedirect("index.jsp");
+    return;
+}
+
+/*
+   Retrieve whatever data is needed and do any processing here. Try to do all
+   database interactions and processing before any HTML, so that the page 
+   can be redirected to an error page if soemthing should go wrong. Remember
+   to close the database when you are done with it!  Please remember!
+   
+   Some common tasks:
+   Get user id: int uid = session.getAttribute("uid");
+   Get username: String username = session.getAttribute("username");
+   Connect to the database: Database db = new Database();
+   Create a user object: User u = new User(db, uid);
+   Close the database: db.close();
+   Redirect to another page: response.sendRedirect("url"); return;
+ */
+Database db = new Database();
+int uid = (Integer)session.getAttribute("uid");
+User u = new User(db, uid);
+db.close();
+
+%>
 <html>
   <head>
     <link type="text/css" rel="stylesheet" href="addMeal.css" />
@@ -48,6 +77,7 @@ yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, 
         <input type="hidden" name="addToHistory" value="addToHistory">
         <div id="right"><input type="submit"></div>
     </form>
+	<br /><a href="mealChoice.jsp"> Select another method of adding a meal </a>
 	<script type="text/javascript">
 
 //populatedropdown(id_of_day_select, id_of_month_select, id_of_year_select)
