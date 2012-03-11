@@ -105,9 +105,9 @@ if(theName != null)
   height = feetToInch + tempin;
 
   /* Take average of hip measurement */
-  hips = (Double.parseDouble(request.getParameter("hips1")) + 
-	  Double.parseDouble(request.getParameter("hips2")) +
-	  Double.parseDouble(request.getParameter("hips3")))/3;
+  hips = (Double.parseDouble(request.getParameter("hip1")) + 
+	  Double.parseDouble(request.getParameter("hip2")) +
+	  Double.parseDouble(request.getParameter("hip3")))/3;
 
   /* Take average of waist measurements */
   waist = (Double.parseDouble(request.getParameter("waist1")) +
