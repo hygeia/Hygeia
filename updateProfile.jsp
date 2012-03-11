@@ -18,7 +18,7 @@
 Database db = new Database();
 int uid = (Integer)session.getAttribute("uid");
 User u = new User(db, uid);
-boolean check = u.getAllInfo();
+//boolean check = u.getAllInfo();
 
 String name = u.getUsername();
 double weight = u.getWeight();
@@ -89,7 +89,7 @@ if(activity == 6)
 }
 
 
-/*out.println(Calculator.percentBodyFat("f","145",38.0,27.0,67.0,"6.5"));*/ 
+out.println(Calculator.percentBodyFat("f","145",38.0,27.0,67.0,"6.5")); 
 
 
 /* retrieve input from form */
@@ -125,6 +125,14 @@ if(theName != null)
   char gender = sex.charAt(0);
 
   double lbm = 0; 
+  double perBodFat = Calculator.percentBodyFat(sex, 
+			request.getParameter("weight"),hips, waist, height,
+			request.getParameter("wrist"));
+  lbm = Calculator.leanBodyMass(weight, perBodFat);
+  //double protein = 
+//	Calculator.protein(lbm,Integer.parseInt(request.getParameter("activity")));
+ // blocks = (int)protein;
+
   u.updateAllInfo(theName, u.getEmail(),gender, act, blocks, height, 
 		weight, hips, waist, wrist, lbm);     
   
