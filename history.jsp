@@ -80,7 +80,7 @@ if(request.getParameter("searchForMeal") != null)
  for(Meal.List m : meal)
  {
   String s = "<tr><form action='history.jsp' method='post'>" +
-	"<input type='hidden' name='mid' value=" + m.getMid() + ">" +
+	"<input type='hidden' name='mid' value='" + m.getMid() + "'>" +
 	"<td>" + m.getName() + "</td><td> Occurrence(MM-dd hh:mm):"+
  	"(<input type='text' name='occurrence'> <input type='hidden'"+
 	" name='addToHistory' value=1><input type='submit' value='Add!'></td> "
@@ -90,19 +90,16 @@ if(request.getParameter("searchForMeal") != null)
  
 }
 
-String term = request.getParameter("nameSearch");
-Meal.List meal[] = history.getAvailableMeals(term);
-if( meal == null )
+// display history
+Meal.List meals[] = history.getHistory();
+if( meals == null )
 {
- response.sendRedirect("error.jsp?code=1&echo=Could not fetch meal");
+ response.sendRedirect("error.jsp?code=1&echo=Could not fetch history");
  db.close();
  return;
 }
 
-Meal.List meals[] = history.getHistory();
-if(meals != null)
-{
- historyForm += "<form action=\"history.jsp\" method=\"post\">";
+String histDisp = "<table style='margin:auto auto;'>\n";
 
  for(Meal.List m : meals)
  {
@@ -110,53 +107,17 @@ if(meals != null)
   int mid = m.getMid();
   Timestamp  occurrence = m.getOccurrence();
 
-  historyForm += "<input type=\"hidden\" name=\""+ mid +"\">" + name + "- ";
-  historyForm += "<input type= \"hidden\" name=\"" + occurrence + "\">"
-		+ occurrence + "</br>";
-  historyForm += "<input type=\"hidden\" name=\"removeFromHistory\" value=\"removeFromHistory\">";
-  historyForm +="<input type=\"submit\" name=\"Remove\">";
+  histDisp += "<form action='history.jsp' method='post'>" +
+  	 "<input type='hidden' name='"+ mid +"'>" + name + " Date: " +
+  	 "<input type= 'hidden' name='" + occurrence + "'>" +
+	 occurrence + "</br> <input type='hidden' name='removeFromHistory'" +
+	" value='removeFromHistory'> <input type='submit' value='Remove'>"+
+  	"<form action='history.jsp' method='post'> </form>\n";
+ }
  
-  historyForm += "</form>";
- /*
- if(request.getParameter("removeFromHistory")!= null)
- {
-  Meal newMeal = new Meal(db, mid );
-  history.removeMeal(newMeal, occurrence);
- }*/
-}
-}
-/*
-if(request.getParameter("removeFromHistory")!= null)
-{
- Meal newMeal = new Meal(db, Integer.parseInt(request.getParameter("mid")));
- Timestamp  occurrence = request.getParameter("occurrence");
- historyForm += "</form>";
- history.removeMeal(newMeal, occurrence);
-}
-
-if(request.getParameter("addToHistory")!= null)
-{
- Calendar c = Calendar.getInstance();
-		int year = c.get(Calendar.YEAR);
-		int month = c.get(Calendar.MONTH);
-		int day = c.get(Calendar.DAY_OF_MONTH);
-		c.set(year, month, day, 0, 0);
-		Timestamp today = new Timestamp(c.getTimeInMillis());
- out.println(request.getParameter(monthfield ));*/
-/*
- Meal newMeal = new Meal(db, request.getParameter("mid"));
- boolean check = history.addMeal(newMeal,today);
-
- if(!check)
-{
- response.sendRedirect("error.jsp");
- return;
-}
-}
-*/
+ histDisp += "</table>\n";
 
 %>
-
 <HTML>
 <head>
   <title>History | Hygeia</title>
@@ -196,7 +157,7 @@ Add to history
 <%= searchDisp %>
 
 <br>
-<%= historyForm %>
+<%= histDisp %>
 =======
 </div>
 <div id="footer"><a href="about.jsp">About Us</a><br />
