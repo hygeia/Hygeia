@@ -21,9 +21,91 @@ if (session.getAttribute("uid") == null){
    Close the database: db.close();
    Redirect to another page: response.sendRedirect("url"); return;
  */
+ 
 Database db = new Database();
 int uid = (Integer)session.getAttribute("uid");
 User u = new User(db, uid);
+Inventory inv = new Inventory(u);
+
+ArrayList<Food.Update> f = new ArrayList<Food.Update>();
+
+if (request.getParameter("addToMeal") != null) {
+    int fid = Integer.parseInt(request.getParameter("fid"));
+    double count=Double.parseDouble(request.getParameter("count"));
+	Food.Update food = new Food.Update(fid, count);
+    boolean r = inv.removeFood(food);
+    if (r == false) {
+        response.sendRedirect("error.jsp?code=2&echo=Could not update" +
+            " inventory");
+        db.close();
+        return;
+    }
+	f.add(food);
+}
+
+if (request.getParameter("addToHistory") != null) {
+	String mealName = request.getParameter("name");
+	int mid = Integer.parseInt(request.getParameter("mid"));
+	History hist = new History(u);
+	int idk = Meal.createMeal(db, u, (Food.Update[])f.toArray(), mealName);
+	Calendar c = Calendar.getInstance();
+	c.set(Calendar.YEAR, Integer.parseInt(request.getParameter("yeardropdown")));
+	String month = request.getParameter("monthdropdown");
+	if( month.equals("Jan")){
+		c.set(Calendar.MONTH, Calendar.JANUARY);
+	}else if( month.equals("Feb")){
+		c.set(Calendar.MONTH, Calendar.FEBRUARY);
+	}else if( month.equals("Mar")){
+		c.set(Calendar.MONTH, Calendar.MARCH);
+	}else if( month.equals("Apr")){
+		c.set(Calendar.MONTH, Calendar.APRIL);
+	}else if( month.equals("May")){
+		c.set(Calendar.MONTH, Calendar.MAY);
+	}else if( month.equals("Jun")){
+		c.set(Calendar.MONTH, Calendar.JUNE);
+	}else if( month.equals("Jul")){
+		c.set(Calendar.MONTH, Calendar.JULY);
+	}else if( month.equals("Aug")){
+		c.set(Calendar.MONTH, Calendar.AUGUST);
+	}else if( month.equals("Sept")){
+		c.set(Calendar.MONTH, Calendar.SEPTEMBER);
+	}else if( month.equals("Oct")){
+		c.set(Calendar.MONTH, Calendar.OCTOBER);
+	}else if( month.equals("Nov")){
+		c.set(Calendar.MONTH, Calendar.NOVEMBER);
+	}else if( month.equals("Dec")){
+		c.set(Calendar.MONTH, Calendar.DECEMBER);
+	}else{
+		response.sendRedirect("error.jsp?code=2&echo=Could not parse date");
+		db.close();
+		return;
+	}
+	c.set(Calendar.DAY_OF_MONTH, Integer.parseInt(request.getParameter("daydropdown")));
+	Timestamp today = new Timestamp(c.getTimeInMillis());
+	
+	hist.addMeal(new Meal(db, idk), today);
+}
+
+Food.List[] arr = inv.getInventoryList();
+if (arr == null) {
+    response.sendRedirect("error.jsp?code=1&echo=Could not fetch inventory");
+    db.close();
+    return;
+}
+
+/* Produce table of foods, with add to meal forms */
+String invDisp = "<table style='margin:auto auto;'>\n";
+for (Food.List fl : arr) {
+    String s = "<tr><form action='addMeal.jsp' method='post'>" +
+        "<input type='hidden' name='fid' value=" + fl.getFid() + ">" +
+        "<td>" + fl.getName() + "</td><td>Amount: <input name='count' " +
+        "value=" + fl.getCount() + "><input type='hidden' name='" +
+        "addToMeal' value=1><input type='submit' value='Add To Meal'>" +
+        "</td></form></tr>\n";
+    invDisp += s;
+}
+invDisp += "</table>\n";
+
 db.close();
 
 %>
@@ -64,19 +146,18 @@ yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, 
   <body>
   <div id="page">
     <div id="content">
-      <center><h1>Input Your Own Meal</h1></center><br />
-	<form action="history.jsp" method="post">
+      <center><h1>Add a Meal</h1></center><br />
+	<form action="addMeal.jsp" method="post">
         <div id="left">Name: <input name="name"></div>
 		<input type="hidden" name="mid">
-        <div id="right">Date: <select id="daydropdown">
-</select> 
-<select id="monthdropdown">
-</select> 
-<select id="yeardropdown">
-</select></div> <br /><br /><br />
-        <input type="hidden" name="addToHistory" value="addToHistory">
+        <div id="right">Date: <select id="daydropdown"></select> 
+			<select id="monthdropdown"></select> 
+			<select id="yeardropdown"></select>
+		</div>
+		<br /><br /><br /><input type="hidden" name="addToHistory" value="addToHistory">
         <div id="right"><input type="submit"></div>
     </form>
+	<br /><%= invDisp %>
 	<br /><a href="mealChoice.jsp"> Select another method of adding a meal </a>
 	<script type="text/javascript">
 
