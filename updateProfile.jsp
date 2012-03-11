@@ -7,7 +7,6 @@
 -->
 
 <%@ page import = "hygeia.*" %>
-
 <%
 /* Check to see if a session exists */
  if (session.getAttribute("uid") == null) {
@@ -19,23 +18,24 @@
 Database db = new Database();
 int uid = (Integer)session.getAttribute("uid");
 User u = new User(db, uid);
+boolean check = u.getAllInfo();
+
 String name = u.getUsername();
-//double weight = u.getWeight();
-double weight = 145;
-//double waist = u.getWaist();
-double waist = 29;
-// double hips = u.getHips();
-double hips = 38;
-// souble wrist = u.getWrist();
-double wrist = 6.5;
-//double height = u.getHeight();
-double height = 67;;
+double weight = u.getWeight();
+double waist = u.getWaist();
+double hips = u.getHips();
+//double hips = 38;
+double wrist = u.getWrist();
+//double wrist = 6.5;
+double height = u.getHeight();
+//double height = 67;;
 double temp =  height/12;
 int ft = (int)(height/12);
 double inc = (temp-ft)*12;
 int in = (int) inc;
-//String sex = u.getSex();
-String sex = "f";
+
+String sex = Character.toString(u.getGender());
+//String sex = "f";
 String f= "";
 String m= ""; 
 if( sex.equals("f") )
@@ -53,8 +53,8 @@ if( sex.equals("m"))
  * way it avoids reduntant annoying input.
  */
  
-// int activity = u.getActivity();
-int activity = 4;
+int activity = u.getActivity();
+//int activity = 4;
 
 String a1 ="";
 String a2 ="";
@@ -89,7 +89,7 @@ if(activity == 6)
 }
 
 
-out.println(Calculator.percentBodyFat("f","145",38.0,27.0,67.0,"6.5")); 
+/*out.println(Calculator.percentBodyFat("f","145",38.0,27.0,67.0,"6.5"));*/ 
 
 
 /* retrieve input from form */
@@ -116,9 +116,17 @@ if(theName != null)
 
   /* Retrieve weight from form and parse it into a double */
   weight = Double.parseDouble(request.getParameter("weight"));
-
+  int blocks = 0;
   /* Update user info according to the form */
-  u.updateAllInfo(theName, u.getEmail(), height, weight);          
+
+  short act= (short)Integer.parseInt(request.getParameter("activity"));
+  wrist = Double.parseDouble(request.getParameter("wrist"));
+  sex = request.getParameter("sex");
+  char gender = sex.charAt(0);
+
+  double lbm = 0; 
+  u.updateAllInfo(theName, u.getEmail(),gender, act, blocks, height, 
+		weight, hips, waist, wrist, lbm);     
   
   session.setAttribute( "username", theName );
   db.close(); // close database
