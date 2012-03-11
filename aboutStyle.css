@@ -32,9 +32,13 @@ html, body {
 float:right;
 }
 
-h1 {
+h1.new {
 text-align:center;
 padding-left:150px;
+}
+
+h1 {
+text-align:center;
 }
 
 #formbutton{
