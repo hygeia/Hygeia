@@ -6,7 +6,7 @@ String loginerr = "";
 
 /* Set if user had incorrect psswd or email */
 if (request.getParameter("err") != null) 
-  loginerr = "Incorrect email or password";
+  loginerr = "<p style=\"color:red\">Incorrect email or password</p>";
 /* check if sent from a login page */
 if (request.getParameter("login") != null) {
     // MAGIC NUMBERS
@@ -60,7 +60,7 @@ if (request.getParameter("login") != null) {
     Not a member? <a href="signup.jsp" style="color:#87D7A5">Sign up.</a>
     <form method="post" action="login.jsp">
       <table style="margin-left:auto;margin-right:auto;">
-        <%= loginerr %>  
+        <%= loginerr %>
       <tr>
           <td> Email: </td> 
           <td><input type="text" name="email" /></td>

@@ -118,9 +118,12 @@ if(theName != null)
 
 %>
  <html>
- <title>Update Profile</title>
- <link href="main.css" rel="stylesheet" type="text/css">
- <!-- <script src="main.js"> -->
+ <head>
+   <script type="text/javascript" src="javascript/jquery-1.7.1.min.js"></script>          
+   <script type="text/javascript" src="javascript/jquery.validate.min.js"></script>          
+   <script type="text/javascript" src="javascript/signup_validation.js"></script>          
+   <title>Update Profile | Hygeia</title>
+   <link href="main.css" rel="stylesheet" type="text/css" />
  </head>
  <body>
 
