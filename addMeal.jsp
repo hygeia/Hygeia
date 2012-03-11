@@ -16,7 +16,7 @@ var today=new Date()
 var dayfield=document.getElementById(dayfield)
 var monthfield=document.getElementById(monthfield)
 var yearfield=document.getElementById(yearfield)
-for (var i=0; i<31; i++)
+for (var i=1; i<32; i++)
 dayfield.options[i]=new Option(i, i+1)
 dayfield.options[today.getDate()]=new Option(today.getDate(), today.getDate(), true, true) //select today's day
 for (var m=0; m<12; m++)
@@ -35,7 +35,7 @@ yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, 
   <body>
   <div id="page">
     <div id="content">
-      <center><h1>Add a Meal</h1></center><br />
+      <center><h1>Input Your Own Meal</h1></center><br />
 	<form action="history.jsp" method="post">
         <div id="left">Name: <input name="name"></div>
 		<input type="hidden" name="mid">
