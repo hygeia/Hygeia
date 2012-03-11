@@ -112,7 +112,7 @@ public class Inventory {
         s = Algorithm.Clean(s);
 
         ResultSet rs = this.db.execute("select fid, name from foods where " +
-            "uid = 0 or uid = " + this.uid + " and name like '%" + s + "%';");
+            "(uid = 0 or uid = " + this.uid + ") and name like '%" + s + "%';");
             
         ArrayList<Food.List> foods = new ArrayList<Food.List>();
         

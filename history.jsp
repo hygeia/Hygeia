@@ -158,7 +158,27 @@ if(request.getParameter("addToHistory")!= null)
 %>
 
 <HTML>
+<head>
+  <title>History | Hygeia</title>
+  <link type="text/css" rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="favicon.ico" mce_href="favicon.ico"/> 
+</head>
 <BODY>
+    <div id="page">
+	<div id="content">
+      <div id="header">
+        <table cellpadding="0" cellspacing="0">
+<tr>
+<td> <a href="home.jsp"><img src="images/lightICON1.png"></a></td>
+<td> <a href="inventory.jsp"><img src="images/lightICON2.png"></a></td>
+<td> <a href="history.jsp"><img src="images/lightICON3.png"></a></td>
+<td> <a href="recipes.jsp"><img src="images/lightICON4.png"></a></td>
+<td> <a href="profile.jsp"><img src="images/lightICON5.png"></a></td>
+<td> <a href="favorites.jsp"><img src="images/lightICON6.png"></a></td>
+<td> <img src="images/lightICON7.png"></td>
+<td> <a href="logout.jsp"><img src="images/lightICON8.png"></a></td>
+</tr>
+</table>
 
 <!-- Ask user if they would like to add meal to history -->
 Add to history
@@ -172,9 +192,18 @@ Add to history
 <H1> Meal History </H1>
 <P>
 
+<<<<<<< HEAD
 <%= searchDisp %>
 
 <br>
 <%= historyForm %>
+=======
+</div>
+<div id="footer"><a href="about.jsp">About Us</a><br />
+		Hygeia is a project developed for a Software Engineering class at UCSD.<br />
+        Please contact us at hygeia110@gmail.com if you would like to use any of the code found here.
+      </div>
+</div>
+>>>>>>> 639da075249cec58b72df1485127bb1107b93e19
 </BODY>
 </HTML>
