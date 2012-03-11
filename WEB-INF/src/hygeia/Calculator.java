@@ -194,6 +194,13 @@ public static double percentBodyFat(String sex, String w, double hips,
    
    ww = waist - wrist;
    
+
+   /*report error */
+   if((ww < 22)||(ww > 50 ) || (weight < 120) || (weight > 300))
+   {
+	   return -1.0;
+   }
+
    /*
     * Find values in table
     */
@@ -254,7 +261,8 @@ public static double leanBodyMass(double weight, double percentBodyFat)
 }
 
 public static double protein(double leanBodyMass, int activLevel)
-{  
+{
+	double f = 0.5;  
 	double act = 0;
 	double protein;
 	
