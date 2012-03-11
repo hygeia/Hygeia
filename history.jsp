@@ -45,6 +45,7 @@ if(meals != null)
   history.removeMeal(newMeal, occurrence);
  }
 }
+}
 /*
 if(request.getParameter("removeFromHistory")!= null)
 {
