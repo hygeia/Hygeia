@@ -20,8 +20,16 @@ Database db = new Database();
 int uid = (Integer)session.getAttribute("uid");
 User u = new User(db, uid);
 db.close();
-
- String name = (String)session.getAttribute("username");
+/*
+boolean load = u.getAllInfo();
+if(load == false)
+{
+ response.sendRedirect("error.jsp");
+ db.close();
+ return;
+}
+*/
+String name = (String)session.getAttribute("username");
 
  double weight = u.getWeight();
  double height = u.getHeight();
@@ -29,10 +37,11 @@ db.close();
  int ft = (int)(height/12);
  double inc = (temp-ft)*12;
  int in = (int) inc;
- double leanBodyMass = 120; //User.getLeanBodyMass();
+ double leanBodyMass =  u.getLeanBodyMass();
  double bodyFat = weight-leanBodyMass;
- double protein = 80;//User.getProtein();
+ int protein = 80;//User.getBlocks();
  int block = (int)protein/7;
+  
  /*double percentBodyFat = 
 	Calculator.percentBodyFat(sex,weight,hip,waist,height, wrist);*/ 
 
