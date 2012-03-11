@@ -40,40 +40,41 @@ about hygeia
 
 <div id="team">
   <div id="left">
-    <img src="adam.png" width=320px height=320px>
+    <img src="images/adam.png" width=320px height=320px>
     <p class="name">Adam William Kuipers</p>
     Project Manager - enjoys fur hats and tasteful blazers<br /><br />
-	<img src="anne.png" width=320px height=320px>
-    <p class="name">Anne Brookes</p>
-    Software Architect - avid runner and explorer of places far and wide<br /><br />
-	<img src="link.png" width=320px height=320px>
-    <p class="name">Lincoln J Race</p>
-    Algorithm Specialaist - basically the coolest person ever and in no way the one who wrote this page<br />
+	<img src="images/asher.png" width=320px height=320px>
+     <p class="name">Asher McCall Garland</p>
+     Database Specialist - enjoys cinnamon Whiskey and coding on the beach<br /><br />
+	 <img src="images/kenney.png" width=320px height=320px>
+     <p class="name">Kenney Cheung</p>
+     Software Development Lead - fascinated with the city of Los Angeles<br /><br />
   </div>
   <div id="center">
-     <img src="corbin.png" width=320px height=320px>
-     <p class="name">Corbin Lewis</p>
-     Software Development Lead - random fact extraordinar with a keen sense of pants color<br /><br />
-	 <img src="brian.png" width=320px height=320px>
+     <img src="images/alex.png" width=320px height=320px>
+     <p class="name">Alex Morris</p>
+     Database Specialist - Eagle Scout who enjoys wearing suits<br /><br />
+	 <img src="images/brian.png" width=320px height=320px>
      <p class="name">Brian Ta</p>
      Graphic Designer - either pro or terrible at longboarding depending on the day<br /><br />
-	 <img src="mana.png" width=320px height=320px>
-     <p class="name">Mana Jammalamadaka</p>
-     Senior System Analyst - staunchly vegetarian but not vegan<br /><br />
-	 <img src="sara.png" width=320px height=320px>
+	 <img src="images/link.png" width=320px height=320px>
+    <p class="name">Lincoln J Race</p>
+    Algorithm Specialaist/User Interface - basically the coolest person ever and in no way the one who wrote this page<br />
+	 <img src="images/sara.png" width=320px height=320px>
 	 <p class="name">Sara Millar</p>
      Quality Assurance Specialist - always has to tell people she's not a vegetarian<br /><br />
    </div>
    <div id="right">
-   <img src="asher.png" width=320px height=320px>
-     <p class="name">Asher McCall Garland</p>
-     Database Specialist - enjoys cinnamon Whiskey and coding on the beach<br /><br />
-	 <img src="kenney.png" width=320px height=320px>
-     <p class="name">Kenney Cheung</p>
-     Software Development Lead - fascinated with the city of Los Angeles<br /><br />
-	 <img src="alex.png" width=320px height=320px>
-     <p class="name">Alex Morris</p>
-     Database Specialist - Eagle Scout who enjoys wearing suits<br /><br />
+   <img src="images/anne.png" width=320px height=320px>
+    <p class="name">Anne Brookes</p>
+    Software Architect - avid runner and explorer of places far and wide<br /><br />
+	<img src="images/corbin.png" width=320px height=320px>
+     <p class="name">Corbin Lewis</p>
+     Software Development Lead - random fact extraordinar with a keen sense of pants color<br /><br />
+	 
+	 <img src="images/mana.png" width=320px height=320px>
+     <p class="name">Mana Jammalamadaka</p>
+     Senior System Analyst - staunchly vegetarian but not vegan<br /><br />
     </div>
 </div>
   </div>
