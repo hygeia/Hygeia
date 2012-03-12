@@ -94,21 +94,31 @@ if (arr == null) {
 
 /* Produce table of foods, with remove forms */
 String invDisp = "<table style='margin:auto auto;'>\n";
-for (Food.List f : arr) {
+String invDispPics = "<table>";
+for (int i = 0; i < arr.length; i++) {
+	Food.List f = arr[i];
 	if( f == null ){
 		response.sendRedirect("error.jsp?code=1&echo=Error diplaying food");
 		db.close();
 		return;
 	}
-    String s = "<tr><form action='inventory.jsp' method='post'>" +
+	if(i%4==0) {invDispPics += "<tr>";}
+	String d = "<td><div id='image'><div id='image'><div class='text' style='text-align:left'>" +
+		"<br /><br /><br /><br /><br /><br /><br /><br /><br />" + f.getName() + "<br />" +
+		"quantity: " + f.getCount() + "g</div><div class='trans'></div></div>";
+    String s = "<form action='inventory.jsp' method='post'>" +
         "<input type='hidden' name='fid' value=" + f.getFid() + ">" +
-        "<td>" + f.getName() + "</td><td>Amount: <input name='count' " +
+        "Amount: <input name='count' size=2 " +
         "value=" + f.getCount() + "><input type='hidden' name='" +
         "removeFromInventory' value=1><input type='submit' value='Remove'>" +
-        "</td></form></tr>\n";
+        "</form>\n</td>";
     invDisp += s;
+	invDispPics += d;
+	invDispPics += s;
+	if(i%4==3) {invDispPics += "</tr>";}
 }
 invDisp += "</table>\n";
+invDispPics += "</table>";
 
 db.close();
 
@@ -188,7 +198,9 @@ margin-top: 10px;
 
 <h1><%= username %>'s Inventory</h1>
 
-<%= invDisp %>
+<div align="center">
+<%= invDispPics %>
+</div>
 
 <br><br>
 
