@@ -1,0 +1,597 @@
+<?xml version='1.0' encoding='ISO-8859-1' standalone='yes'?>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN' 'http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml' >
+<head>
+<title>Database documentation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF8"/>
+<style type='text/css'>
+	 #dbs {font-family:Tahoma,Dialog,Sans-Serif;font-size:11px;background:#fff;width:80%;border-collapse:collapse;text-align:left;margin:20px;}
+	 #dbs thead{background:#ddd;}
+	 #dbs th{font-size:12px;font-weight:bold;color:#336;border-bottom:2px solid #336;padding:7px 8px;}
+	 #dbs td{border-bottom:1px solid #ccc;color:#336;padding:3px 8px;white-space: pre;}
+	 td.subpart{font-weight:bold;background:#ddd}
+	 td.name{background:#f2f2f2}
+	 #dbs tbody tr:hover td{color:#000;background:#fffcea;}
+</style>
+</head>
+
+<body>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'   width='666' height='554' viewbox='0 0 784 652' >
+<style type='text/css'>
+  text                { text-rendering: optimizeLegibility; fill:#000000; font-family: Candara, Dialog, Arial; font-size:12px; }
+  text.colType        { fill:#a9bdc6; font-size:12px; }
+  text.tableTitle     { fill:#111111; font-size:12px; font-weight:bold; }
+  path                { stroke:#4d423e; stroke-width:1.5; fill:none; }
+  rect.grp            { opacity:0.5; stroke:#c2ab83; stroke-width:1; }
+  rect.table          { fill:#ffffff; stroke:#495272; stroke-width:0.5; }
+  line.table          { stroke:#495272; stroke-width:0.5; }
+  rect.callout        { fill:#fcfcef; stroke:none; }
+  rect.calloutBorder  { fill:none; filter:url(#shadowFilter); stroke:#8b8480; stroke-width:0.5; }
+</style>
+<defs>
+  <pattern id='layoutGradientOld' patternUnits='userSpaceOnUse' x='0' y='0' width='10' height='10' viewBox='0 0 10 10'>
+    <rect x='0' y='0' width='10' height='10' style='fill:#f9f8f2;' />
+    <line x1='5' y1='10' x2='5' y2='0' style='stroke:#949494;stroke-width:0.5;stroke-dasharray:1,9;'  />
+  </pattern>
+  <radialGradient id='layoutGradient' cx='20%' cy='20%' r='25%' fx='10%' fy='0%'>
+	   <stop offset='0%' stop-color='#ffffff' />
+    <stop offset='100%' stop-color='#efefef' />
+  </radialGradient>
+  <filter id='shadowFilter' filterUnits='objectBoundingBox' x='-1.2' y='-1.2' width='3' height='3'>
+    <feGaussianBlur in='SourceAlpha' stdDeviation='1' />
+    <feComponentTransfer result='shadow'>
+      <feFuncA type='linear' slope='1' intercept='0' />
+      </feComponentTransfer>
+    <feComposite in2='shadow' in='SourceGraphic'/>
+  </filter>
+  <linearGradient id='tableHeaderGradient' x1='0%' y1='0%' x2='0%' y2='100%' >
+          <stop offset='0%' stop-color='#eff7fc' stop-opacity='1'/> 
+          <stop offset='50%' stop-color='#d9e5f6' stop-opacity='1'/> 
+          <stop offset='51%' stop-color='#bdd4f1' stop-opacity='1'/> 
+          <stop offset='100%' stop-color='#d6e2f9' stop-opacity='1' /> 
+   </linearGradient>
+  <radialGradient id='legendGradient' fx='5%' fy='5%' r='75%' spreadMethod='pad'>
+          <stop offset='0%' stop-color='#6985ff' stop-opacity='1'/> 
+          <stop offset='100%' stop-color='#1e2a5f' stop-opacity='1' /> 
+   </radialGradient>
+  <pattern id='hintPointerSV' patternUnits='userSpaceOnUse' x='0' y='0' width='14' height='14' viewBox='0 0 14 14' >
+      <path d='M 0,0 Q 7,7,0,13 Q 13,7,13,0' style='fill:#f7fbf7;stroke:#8d9380;' />
+  </pattern>
+  <pattern id='hintPointerSE' patternUnits='userSpaceOnUse' x='0' y='0' width='14' height='14' viewBox='0 0 14 14' >
+      <path d='M 0,0 Q 3,7,13,13 Q 7,7,13,0' style='fill:#f7fbf7;stroke:#8d9380;' />
+  </pattern>
+  <pattern id='hintPointerNV' patternUnits='userSpaceOnUse' x='0' y='0' width='14' height='14' viewBox='0 0 14 14' >
+      <path d='M 0,13 Q 7,7,0,0 Q 13,7,13,13' style='fill:#f7fbf7;stroke:#8d9380;' />
+  </pattern>
+  <pattern id='hintPointerNE' patternUnits='userSpaceOnUse' x='0' y='0' width='14' height='14' viewBox='0 0 14 14' >
+      <path d='M 0,13 Q 3,7,13,0 Q 7,7,13,13' style='fill:#f7fbf7;stroke:#8d9380;' />
+  </pattern>
+  <symbol id='pkOld' overflow='visible' >
+      <path d='M 4 0 L 9 0 L 10 1 L 10 3 L 8 5 L 8 10 L 6.5 11 L 5 10 L 5 5 L 3 3 L 3 1 z' style='fill:#fffacf;stroke-width:0.9;stroke:#9a6a18;stroke-linejoin:round;' />
+  </symbol>
+  <symbol id='pk' overflow='visible' >
+     <path style='fill:#e9ad16;fill-opacity:1;stroke:#9c4f15;stroke-width:0.7;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:3.00300009'
+        d='M 9.3678877,3.5695485 C 9.1030218,3.2729386 9.0796382,2.7628519 9.3396185,2.4517097 9.5449651,2.1956495 9.9040386,2.0980533 10.199638,2.2169415 10.533525,2.3415459 10.775153,2.706942 10.750675,3.0842709 10.737029,3.3980003 10.541153,3.699122 10.258248,3.8066067 9.966649,3.9250429 9.6169668,3.8418805 9.4008073,3.6062324 9.3894892,3.5943518 9.3785264,3.582104 9.3678886,3.5695487 z M 11.226617,6.9916004 C 11.888137,6.3548946 12.293488,5.4172188 12.311087,4.442353 12.378144,2.7379364 11.248678,1.0541269 9.7322318,0.44767357 8.3887112,-0.1280313 6.7865012,0.26822889 5.8918395,1.4007929 5.080823,2.3839145 4.9336815,3.8452096 5.3635544,5.101615 L 4.3670905,5.315913 C 4.0664984,5.3682645 4.0967703,5.6316724 4.2574957,5.8208829 L 4.9124,6.5655244 4.1543436,7.2512357 3.2136002,7.2163506 3.1674775,8.5586827 2.0406832,8.5086512 1.5965306,8.9299953 1.5471661,10.179833 0.75616674,10.195223 0.2112857,10.758575 0.15354288,11.735988 0.07199052,12.765553 c 0.36440953,0.238225 0.79006967,0.195492 1.44938278,-0.02675 L 6.3033562,8.1282037 6.8217102,8.6765688 C 6.9985465,8.8799427 7.3003699,8.7497574 7.358381,8.5016252 L 7.4938877,7.5084164 c 0.8537488,0.3985387 1.8303125,0.4711541 2.6851793,0.1427713 0.393927,-0.1407258 0.746858,-0.3701772 1.04755,-0.6595873 z'/>
+     <path d='M 6.8014948,6.3102123 0.15369063,13.024481 0.21560535,12.141962 6.0062342,6.2683782 z'
+        style='fill:#ffe5a5;fill-opacity:1;stroke:#854e31;stroke-width:0.09912433;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:3.00300009'/>
+  </symbol>
+  <symbol id='idx' overflow='visible' >
+      <rect style='fill:#e07554;fill-opacity:1;stroke:#7e4d31;stroke-width:0.71934468;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none'
+         width='2.2948461' height='8.430995' x='7.4853182' y='-0.76877761' ry='1.1477984' transform='matrix(0.701052,0.71311015,-0.72795999,0.68561961,0,0)' />
+      <path style='fill:#ffffe2;fill-opacity:1;stroke:#515151;stroke-width:0.87400001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none'
+         d='m 26.042441,8.6441889 a 4.1303873,4.1303873 0 1 1 -8.260774,0 4.1303873,4.1303873 0 1 1 8.260774,0 z'
+         transform='matrix(1.025587,0,0,0.98782477,-14.690585,-3.8627278)' />
+  </symbol>
+  <marker id='arrow' viewBox='0 0 7 7' refX='0' refY='3' markerUnits='strokeWidth' markerWidth='7' markerHeight='7' orient='auto'>
+    <path d='M 0,0 L 7, 3 L 0,7 z' style='fill:#776c57; stroke-width:0px;' />
+  </marker>
+  <marker id='foot' viewBox='0 0 7 7' refX='7' refY='3' markerUnits='strokeWidth' markerWidth='7' markerHeight='7' orient='auto'>
+    <path d='M 0,3 L 14, 3 z' style='stroke:#776c57;' />
+  </marker>
+</defs>
+
+<!-- ============= Desktop ============= -->
+<rect x='1' y='1' width='782' height='650' rx='7' ry='7' style='fill:url(#layoutGradient); stroke:#104576; stroke-width:0.5;' />
+
+<!-- ============= Group 'meals' ============= -->
+<rect class='grp' style='fill:#ffffcc;' x='198' y='22' width='556' height='488' rx='7' ry='7'/>
+<text x='208' y='32'>meals</text>
+
+<!-- ============= Group 'Unreferenced' ============= -->
+<rect class='grp' style='fill:#fff8d6;' x='30' y='22' width='108' height='124' rx='7' ry='7'/>
+<text x='40' y='32'>Unreferenced</text>
+
+<!-- ============= Table 'admins' ============= -->
+<rect class='table' x='42' y='35' width='84' height='84' rx='7' ry='7' />
+<path d='M 43 56 L 43 43 Q 43 36 50 36 L 118 36 Q 125 36 125 43 L 125 56 L43 56 ' style='fill:url(#tableHeaderGradient); stroke:none;' />
+<line class='table' x1='42' y1='56' x2='126' y2='56'/>
+<a xlink:href='#admins' title='admins' ><text x='58' y='49' class='tableTitle'>admins</text></a>
+  <use id='pk' x='43' y='66' xlink:href='#pk'/><a xlink:href='#aid' title='aid int'><text x='56' y='77'>aid</text></a>
+  <a xlink:href='#email' title='email text'><text x='56' y='91'>email</text></a>
+  <a xlink:href='#hpwd' title='hpwd text'><text x='56' y='105'>hpwd</text></a>
+
+<path transform='translate(7,0)' marker-start='url(#foot)' marker-end='url(#arrow)'  title='components&#095;ibfk&#095;2' d='M 420 140 L 420,182'  />
+
+<path transform='translate(7,0)' marker-start='url(#foot)' marker-end='url(#arrow)'  title='components&#095;ibfk&#095;1' d='M 518 126 L 567,126 Q 574,126 574,133 L 574,189 Q 574,196 581,196 L 588,196'  />
+
+<!-- ============= Table 'components' ============= -->
+<rect class='table' x='406' y='35' width='112' height='98' rx='7' ry='7' />
+<path d='M 407 56 L 407 43 Q 407 36 414 36 L 510 36 Q 517 36 517 43 L 517 56 L407 56 ' style='fill:url(#tableHeaderGradient); stroke:none;' />
+<line class='table' x1='406' y1='56' x2='518' y2='56'/>
+<a xlink:href='#components' title='components' ><text x='418' y='49' class='tableTitle'>components</text></a>
+  <use id='pk' x='407' y='66' xlink:href='#pk'/><a xlink:href='#cid' title='cid int'><text x='420' y='77'>cid</text></a>
+  <use id='idx' x='407' y='80' xlink:href='#idx'/><a xlink:href='#mid' title='mid int'><text x='420' y='91'>mid</text></a>
+  <use id='idx' x='407' y='94' xlink:href='#idx'/><a xlink:href='#fid' title='fid int'><text x='420' y='105'>fid</text></a>
+  <a xlink:href='#count' title='count double'><text x='420' y='119'>count</text></a>
+
+<path transform='translate(7,0)' marker-start='url(#foot)' marker-end='url(#arrow)'  title='favorites&#095;ibfk&#095;2' d='M 350 126 L 371,126 Q 378,126 378,133 L 378,189 Q 378,196 385,196 L 392,196'  />
+
+<path transform='translate(7,0)' marker-start='url(#foot)' marker-end='url(#arrow)'  title='favorites&#095;ibfk&#095;1' d='M 280 140 L 280,182'  />
+
+<!-- ============= Table 'favorites' ============= -->
+<rect class='table' x='266' y='49' width='84' height='84' rx='7' ry='7' />
+<path d='M 267 70 L 267 57 Q 267 50 274 50 L 342 50 Q 349 50 349 57 L 349 70 L267 70 ' style='fill:url(#tableHeaderGradient); stroke:none;' />
+<line class='table' x1='266' y1='70' x2='350' y2='70'/>
+<a xlink:href='#favorites' title='favorites' ><text x='276' y='63' class='tableTitle'>favorites</text></a>
+  <use id='pk' x='267' y='80' xlink:href='#pk'/><a xlink:href='#fid' title='fid int'><text x='280' y='91'>fid</text></a>
+  <use id='idx' x='267' y='94' xlink:href='#idx'/><a xlink:href='#mid' title='mid int'><text x='280' y='105'>mid</text></a>
+  <use id='idx' x='267' y='108' xlink:href='#idx'/><a xlink:href='#uid' title='uid int'><text x='280' y='119'>uid</text></a>
+
+<path transform='translate(7,0)' marker-start='url(#foot)' marker-end='url(#arrow)'  title='foods&#095;ibfk&#095;1' d='M 588 336 L 567,336 Q 560,336 560,343 L 560,343 Q 560,350 553,350 L 350,350'  />
+
+<!-- ============= Table 'foods' ============= -->
+<rect class='table' x='602' y='189' width='140' height='168' rx='7' ry='7' />
+<path d='M 603 210 L 603 197 Q 603 190 610 190 L 734 190 Q 741 190 741 197 L 741 210 L603 210 ' style='fill:url(#tableHeaderGradient); stroke:none;' />
+<line class='table' x1='602' y1='210' x2='742' y2='210'/>
+<a xlink:href='#foods' title='foods' ><text x='652' y='203' class='tableTitle'>foods</text></a>
+  <use id='pk' x='603' y='220' xlink:href='#pk'/><a xlink:href='#fid' title='fid int'><text x='616' y='231'>fid</text></a>
+  <use id='idx' x='603' y='234' xlink:href='#idx'/><a xlink:href='#uid' title='uid int'><text x='616' y='245'>uid</text></a>
+  <a xlink:href='#name' title='name text'><text x='616' y='259'>name</text></a>
+  <a xlink:href='#weight' title='weight double'><text x='616' y='273'>weight</text></a>
+  <a xlink:href='#factor' title='factor double'><text x='616' y='287'>factor</text></a>
+  <a xlink:href='#calories' title='calories double'><text x='616' y='301'>calories</text></a>
+  <a xlink:href='#carbohydrates' title='carbohydrates double'><text x='616' y='315'>carbohydrates</text></a>
+  <a xlink:href='#protein' title='protein double'><text x='616' y='329'>protein</text></a>
+  <a xlink:href='#fat' title='fat double'><text x='616' y='343'>fat</text></a>
+
+<path transform='translate(7,0)' marker-start='url(#foot)' marker-end='url(#arrow)'  title='history&#095;ibfk&#095;2' d='M 420 378 L 420,336'  />
+
+<path transform='translate(7,0)' marker-start='url(#foot)' marker-end='url(#arrow)'  title='history&#095;ibfk&#095;1' d='M 392 392 L 350,392'  />
+
+<!-- ============= Table 'history' ============= -->
+<rect class='table' x='406' y='385' width='112' height='98' rx='7' ry='7' />
+<path d='M 407 406 L 407 393 Q 407 386 414 386 L 510 386 Q 517 386 517 393 L 517 406 L407 406 ' style='fill:url(#tableHeaderGradient); stroke:none;' />
+<line class='table' x1='406' y1='406' x2='518' y2='406'/>
+<a xlink:href='#history' title='history' ><text x='437' y='399' class='tableTitle'>history</text></a>
+  <use id='pk' x='407' y='416' xlink:href='#pk'/><a xlink:href='#hid' title='hid int'><text x='420' y='427'>hid</text></a>
+  <use id='idx' x='407' y='430' xlink:href='#idx'/><a xlink:href='#mid' title='mid int'><text x='420' y='441'>mid</text></a>
+  <use id='idx' x='407' y='444' xlink:href='#idx'/><a xlink:href='#uid' title='uid int'><text x='420' y='455'>uid</text></a>
+  <a xlink:href='#occurrence' title='occurrence timestamp'><text x='420' y='469'>occurrence</text></a>
+
+<path transform='translate(7,0)' marker-start='url(#foot)' marker-end='url(#arrow)'  title='inventory&#095;ibfk&#095;2' d='M 616 140 L 616,182'  />
+
+<path transform='translate(7,0)' marker-start='url(#foot)' marker-end='url(#arrow)'  title='inventory&#095;ibfk&#095;1' d='M 588 112 L 539,112 Q 532,112 532,119 L 532,161 Q 532,168 525,168 L 343,168 Q 336,168 336,175 L 336,182'  />
+
+<!-- ============= Table 'inventory' ============= -->
+<rect class='table' x='602' y='35' width='84' height='98' rx='7' ry='7' />
+<path d='M 603 56 L 603 43 Q 603 36 610 36 L 678 36 Q 685 36 685 43 L 685 56 L603 56 ' style='fill:url(#tableHeaderGradient); stroke:none;' />
+<line class='table' x1='602' y1='56' x2='686' y2='56'/>
+<a xlink:href='#inventory' title='inventory' ><text x='610' y='49' class='tableTitle'>inventory</text></a>
+  <use id='pk' x='603' y='66' xlink:href='#pk'/><a xlink:href='#iid' title='iid int'><text x='616' y='77'>iid</text></a>
+  <use id='idx' x='603' y='80' xlink:href='#idx'/><a xlink:href='#uid' title='uid int'><text x='616' y='91'>uid</text></a>
+  <use id='idx' x='603' y='94' xlink:href='#idx'/><a xlink:href='#fid' title='fid int'><text x='616' y='105'>fid</text></a>
+  <a xlink:href='#count' title='count double'><text x='616' y='119'>count</text></a>
+
+<path transform='translate(7,0)' marker-start='url(#foot)' marker-end='url(#arrow)'  title='meals&#095;ibfk&#095;1' d='M 392 210 L 350,210'  />
+
+<!-- ============= Table 'meals' ============= -->
+<rect class='table' x='406' y='189' width='140' height='140' rx='7' ry='7' />
+<path d='M 407 210 L 407 197 Q 407 190 414 190 L 538 190 Q 545 190 545 197 L 545 210 L407 210 ' style='fill:url(#tableHeaderGradient); stroke:none;' />
+<line class='table' x1='406' y1='210' x2='546' y2='210'/>
+<a xlink:href='#meals' title='meals' ><text x='455' y='203' class='tableTitle'>meals</text></a>
+  <use id='pk' x='407' y='220' xlink:href='#pk'/><a xlink:href='#mid' title='mid int'><text x='420' y='231'>mid</text></a>
+  <use id='idx' x='407' y='234' xlink:href='#idx'/><a xlink:href='#uid' title='uid int'><text x='420' y='245'>uid</text></a>
+  <a xlink:href='#name' title='name text'><text x='420' y='259'>name</text></a>
+  <a xlink:href='#calories' title='calories double'><text x='420' y='273'>calories</text></a>
+  <a xlink:href='#carbohydrates' title='carbohydrates double'><text x='420' y='287'>carbohydrates</text></a>
+  <a xlink:href='#protein' title='protein double'><text x='420' y='301'>protein</text></a>
+  <a xlink:href='#fat' title='fat double'><text x='420' y='315'>fat</text></a>
+
+<!-- ============= Table 'users' ============= -->
+<rect class='table' x='210' y='189' width='140' height='224' rx='7' ry='7' />
+<path d='M 211 210 L 211 197 Q 211 190 218 190 L 342 190 Q 349 190 349 197 L 349 210 L211 210 ' style='fill:url(#tableHeaderGradient); stroke:none;' />
+<line class='table' x1='210' y1='210' x2='350' y2='210'/>
+<a xlink:href='#users' title='users' ><text x='260' y='203' class='tableTitle'>users</text></a>
+  <use id='pk' x='211' y='220' xlink:href='#pk'/><a xlink:href='#uid' title='uid int'><text x='224' y='231'>uid</text></a>
+  <a xlink:href='#username' title='username text'><text x='224' y='245'>username</text></a>
+  <a xlink:href='#hpwd' title='hpwd text'><text x='224' y='259'>hpwd</text></a>
+  <a xlink:href='#email' title='email text'><text x='224' y='273'>email</text></a>
+  <a xlink:href='#height' title='height double'><text x='224' y='287'>height</text></a>
+  <a xlink:href='#weight' title='weight double'><text x='224' y='301'>weight</text></a>
+  <a xlink:href='#gender' title='gender char&#040; 1 &#041;'><text x='224' y='315'>gender</text></a>
+  <a xlink:href='#leanBodyMass' title='leanBodyMass double'><text x='224' y='329'>leanBodyMass</text></a>
+  <a xlink:href='#hips' title='hips double'><text x='224' y='343'>hips</text></a>
+  <a xlink:href='#waist' title='waist double'><text x='224' y='357'>waist</text></a>
+  <a xlink:href='#wrist' title='wrist double'><text x='224' y='371'>wrist</text></a>
+  <a xlink:href='#activity' title='activity int'><text x='224' y='385'>activity</text></a>
+  <a xlink:href='#blocks' title='blocks int'><text x='224' y='399'>blocks</text></a>
+
+<g transform='translate(504,532)'>  <rect x='10' y='10' width='240' height='45' rx='6' ry='6' style='fill:url(#legendGradient);filter:url(#shadowFilter); ' />
+  <text x='25' y='22' style='fill:white;' >Layout hygeia6</text>
+  <text x='25' y='36' style='fill:white;' >Project hygeia6</text>
+  <a xlink:href='http://www.dbschema.com'>
+    <text x='150' y='50' style='fill:#aaaaaa;' >DbSchema.com</text>
+  </a>
+</g>
+
+</svg>
+
+<br/><br/>
+<table id='dbs' >
+<thead>
+<tr><th colspan='3'><a name='admins'>Table admins</a> <br/> </th></tr>
+</thead>
+<tbody>
+<tr><td class='name'><a name='aid'>aid</a></td>
+<td width='40%'> INT    NOT NULL  AUTOINCREMENT   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='email'>email</a></td>
+<td width='40%'> TEXT    NOT NULL   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='hpwd'>hpwd</a></td>
+<td width='40%'> TEXT    NOT NULL   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td colspan='3' class='subpart'><b>Indexes</b></td></tr>
+<tr><td class='name'>pk&#095;admins primary key</td>
+<td> ( aid) </td><td>  </td>
+</tr>
+</tbody>
+</table>
+
+<br/><br/>
+<table id='dbs' >
+<thead>
+<tr><th colspan='3'><a name='components'>Table components</a> <br/> </th></tr>
+</thead>
+<tbody>
+<tr><td class='name'><a name='cid'>cid</a></td>
+<td width='40%'> INT    NOT NULL  AUTOINCREMENT   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='mid'>mid</a></td>
+<td width='40%'> INT    NOT NULL   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='fid'>fid</a></td>
+<td width='40%'> INT    NOT NULL   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='count'>count</a></td>
+<td width='40%'> DOUBLE    NOT NULL   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td colspan='3' class='subpart'><b>Indexes</b></td></tr>
+<tr><td class='name'>pk&#095;components primary key</td>
+<td> ( cid) </td><td>  </td>
+</tr>
+<tr><td class='name'>fid </td>
+<td> ( fid) </td><td>  </td>
+</tr>
+<tr><td class='name'>mid </td>
+<td> ( mid) </td><td>  </td>
+</tr>
+<tr><td colspan='3' class='subpart'><b>Foreign Keys</b></td></tr>
+<tr>
+<td class='name'>components_ibfk_2</td><td > (  mid  ) ref <a href='#meals'>meals</a> ( mid ) </td>
+<td>  </td>
+</tr>
+<tr>
+<td class='name'>components_ibfk_1</td><td > (  fid  ) ref <a href='#foods'>foods</a> ( fid ) </td>
+<td>  </td>
+</tr>
+</tbody>
+</table>
+
+<br/><br/>
+<table id='dbs' >
+<thead>
+<tr><th colspan='3'><a name='favorites'>Table favorites</a> <br/> </th></tr>
+</thead>
+<tbody>
+<tr><td class='name'><a name='fid'>fid</a></td>
+<td width='40%'> INT    NOT NULL  AUTOINCREMENT   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='mid'>mid</a></td>
+<td width='40%'> INT    NOT NULL   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='uid'>uid</a></td>
+<td width='40%'> INT    NOT NULL   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td colspan='3' class='subpart'><b>Indexes</b></td></tr>
+<tr><td class='name'>pk&#095;favorites primary key</td>
+<td> ( fid) </td><td>  </td>
+</tr>
+<tr><td class='name'>uid </td>
+<td> ( uid) </td><td>  </td>
+</tr>
+<tr><td class='name'>mid </td>
+<td> ( mid) </td><td>  </td>
+</tr>
+<tr><td colspan='3' class='subpart'><b>Foreign Keys</b></td></tr>
+<tr>
+<td class='name'>favorites_ibfk_2</td><td > (  mid  ) ref <a href='#meals'>meals</a> ( mid ) </td>
+<td>  </td>
+</tr>
+<tr>
+<td class='name'>favorites_ibfk_1</td><td > (  uid  ) ref <a href='#users'>users</a> ( uid ) </td>
+<td>  </td>
+</tr>
+</tbody>
+</table>
+
+<br/><br/>
+<table id='dbs' >
+<thead>
+<tr><th colspan='3'><a name='foods'>Table foods</a> <br/> </th></tr>
+</thead>
+<tbody>
+<tr><td class='name'><a name='fid'>fid</a></td>
+<td width='40%'> INT    NOT NULL  AUTOINCREMENT   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='uid'>uid</a></td>
+<td width='40%'> INT    NOT NULL   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='name'>name</a></td>
+<td width='40%'> TEXT    NOT NULL   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='weight'>weight</a></td>
+<td width='40%'> DOUBLE    NOT NULL   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='factor'>factor</a></td>
+<td width='40%'> DOUBLE    NOT NULL   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='calories'>calories</a></td>
+<td width='40%'> DOUBLE    NOT NULL   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='carbohydrates'>carbohydrates</a></td>
+<td width='40%'> DOUBLE    NOT NULL   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='protein'>protein</a></td>
+<td width='40%'> DOUBLE    NOT NULL   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='fat'>fat</a></td>
+<td width='40%'> DOUBLE    NOT NULL   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td colspan='3' class='subpart'><b>Indexes</b></td></tr>
+<tr><td class='name'>pk&#095;foods primary key</td>
+<td> ( fid) </td><td>  </td>
+</tr>
+<tr><td class='name'>uid </td>
+<td> ( uid) </td><td>  </td>
+</tr>
+<tr><td colspan='3' class='subpart'><b>Foreign Keys</b></td></tr>
+<tr>
+<td class='name'>foods_ibfk_1</td><td > (  uid  ) ref <a href='#users'>users</a> ( uid ) </td>
+<td>  </td>
+</tr>
+</tbody>
+</table>
+
+<br/><br/>
+<table id='dbs' >
+<thead>
+<tr><th colspan='3'><a name='history'>Table history</a> <br/> </th></tr>
+</thead>
+<tbody>
+<tr><td class='name'><a name='hid'>hid</a></td>
+<td width='40%'> INT    NOT NULL  AUTOINCREMENT   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='mid'>mid</a></td>
+<td width='40%'> INT    NOT NULL   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='uid'>uid</a></td>
+<td width='40%'> INT    NOT NULL   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='occurrence'>occurrence</a></td>
+<td width='40%'> TIMESTAMP    NOT NULL    DEFO CURRENT_TIMESTAMP </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td colspan='3' class='subpart'><b>Indexes</b></td></tr>
+<tr><td class='name'>pk&#095;history primary key</td>
+<td> ( hid) </td><td>  </td>
+</tr>
+<tr><td class='name'>uid </td>
+<td> ( uid) </td><td>  </td>
+</tr>
+<tr><td class='name'>mid </td>
+<td> ( mid) </td><td>  </td>
+</tr>
+<tr><td colspan='3' class='subpart'><b>Foreign Keys</b></td></tr>
+<tr>
+<td class='name'>history_ibfk_2</td><td > (  mid  ) ref <a href='#meals'>meals</a> ( mid ) </td>
+<td>  </td>
+</tr>
+<tr>
+<td class='name'>history_ibfk_1</td><td > (  uid  ) ref <a href='#users'>users</a> ( uid ) </td>
+<td>  </td>
+</tr>
+</tbody>
+</table>
+
+<br/><br/>
+<table id='dbs' >
+<thead>
+<tr><th colspan='3'><a name='inventory'>Table inventory</a> <br/> </th></tr>
+</thead>
+<tbody>
+<tr><td class='name'><a name='iid'>iid</a></td>
+<td width='40%'> INT    NOT NULL  AUTOINCREMENT   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='uid'>uid</a></td>
+<td width='40%'> INT    NOT NULL   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='fid'>fid</a></td>
+<td width='40%'> INT    NOT NULL   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='count'>count</a></td>
+<td width='40%'> DOUBLE    NOT NULL   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td colspan='3' class='subpart'><b>Indexes</b></td></tr>
+<tr><td class='name'>pk&#095;inventory primary key</td>
+<td> ( iid) </td><td>  </td>
+</tr>
+<tr><td class='name'>uid </td>
+<td> ( uid) </td><td>  </td>
+</tr>
+<tr><td class='name'>fid </td>
+<td> ( fid) </td><td>  </td>
+</tr>
+<tr><td colspan='3' class='subpart'><b>Foreign Keys</b></td></tr>
+<tr>
+<td class='name'>inventory_ibfk_2</td><td > (  fid  ) ref <a href='#foods'>foods</a> ( fid ) </td>
+<td>  </td>
+</tr>
+<tr>
+<td class='name'>inventory_ibfk_1</td><td > (  uid  ) ref <a href='#users'>users</a> ( uid ) </td>
+<td>  </td>
+</tr>
+</tbody>
+</table>
+
+<br/><br/>
+<table id='dbs' >
+<thead>
+<tr><th colspan='3'><a name='meals'>Table meals</a> <br/> </th></tr>
+</thead>
+<tbody>
+<tr><td class='name'><a name='mid'>mid</a></td>
+<td width='40%'> INT    NOT NULL  AUTOINCREMENT   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='uid'>uid</a></td>
+<td width='40%'> INT    NOT NULL   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='name'>name</a></td>
+<td width='40%'> TEXT    NOT NULL   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='calories'>calories</a></td>
+<td width='40%'> DOUBLE    NOT NULL   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='carbohydrates'>carbohydrates</a></td>
+<td width='40%'> DOUBLE    NOT NULL   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='protein'>protein</a></td>
+<td width='40%'> DOUBLE    NOT NULL   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='fat'>fat</a></td>
+<td width='40%'> DOUBLE    NOT NULL   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td colspan='3' class='subpart'><b>Indexes</b></td></tr>
+<tr><td class='name'>pk&#095;meals primary key</td>
+<td> ( mid) </td><td>  </td>
+</tr>
+<tr><td class='name'>uid </td>
+<td> ( uid) </td><td>  </td>
+</tr>
+<tr><td colspan='3' class='subpart'><b>Foreign Keys</b></td></tr>
+<tr>
+<td class='name'>meals_ibfk_1</td><td > (  uid  ) ref <a href='#users'>users</a> ( uid ) </td>
+<td>  </td>
+</tr>
+</tbody>
+</table>
+
+<br/><br/>
+<table id='dbs' >
+<thead>
+<tr><th colspan='3'><a name='users'>Table users</a> <br/> </th></tr>
+</thead>
+<tbody>
+<tr><td class='name'><a name='uid'>uid</a></td>
+<td width='40%'> INT    NOT NULL  AUTOINCREMENT   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='username'>username</a></td>
+<td width='40%'> TEXT    NOT NULL   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='hpwd'>hpwd</a></td>
+<td width='40%'> TEXT    NOT NULL   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='email'>email</a></td>
+<td width='40%'> TEXT    NOT NULL   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='height'>height</a></td>
+<td width='40%'> DOUBLE    NOT NULL   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='weight'>weight</a></td>
+<td width='40%'> DOUBLE    NOT NULL   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='gender'>gender</a></td>
+<td width='40%'> CHAR&#040; 1 &#041;    NOT NULL   </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='leanBodyMass'>leanBodyMass</a></td>
+<td width='40%'> DOUBLE     </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='hips'>hips</a></td>
+<td width='40%'> DOUBLE     </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='waist'>waist</a></td>
+<td width='40%'> DOUBLE     </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='wrist'>wrist</a></td>
+<td width='40%'> DOUBLE     </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='activity'>activity</a></td>
+<td width='40%'> INT     </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td class='name'><a name='blocks'>blocks</a></td>
+<td width='40%'> INT     </td>
+<td width='60%'>  </td>
+</tr>
+<tr><td colspan='3' class='subpart'><b>Indexes</b></td></tr>
+<tr><td class='name'>pk&#095;users primary key</td>
+<td> ( uid) </td><td>  </td>
+</tr>
+</tbody>
+</table>
+
+</body></html>

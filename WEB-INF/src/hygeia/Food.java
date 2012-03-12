@@ -23,6 +23,28 @@ public class Food {
         public double getCount() {
             return this.count;
         }
+        
+        public String getName(Database db) {
+            if (db == null) {
+                return null;
+            }
+            
+            ResultSet rs = db.execute("select name from foods where fid=" + 
+                this.fid +";");
+            
+            try {
+                if (rs == null) {
+                    db.free();
+                    return null;
+                }
+                db.free();
+                rs.next();
+                return rs.getString("name");
+            } catch (SQLException e) {
+                db.free();
+                return null;
+            }
+        }
 
         private void setFid( int fid) {
             this.fid = fid;
