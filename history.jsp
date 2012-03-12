@@ -97,7 +97,7 @@ if(request.getParameter("searchForMeal") != null)
 }
 
 // display history
-Meal.List meals[] = history.getHistory();
+Meal.List[] meals = history.getHistory();
 if( meals == null )
 {
  response.sendRedirect("error.jsp?code=1&echo=Could not fetch history");
@@ -117,7 +117,7 @@ String histDisp = "<table style='margin:auto auto;'>\n";
   String name = m.getName();
   int mid = m.getMid();
   Timestamp  occurrence = m.getOccurrence();
-
+  
   histDisp += "<form action='history.jsp' method='post'>" +
   	 "<input type='hidden' name='"+ mid +"'>" + name + " Date: " +
   	 "<input type= 'hidden' name='" + occurrence + "'>" +
@@ -169,13 +169,12 @@ Add to history
 
 <br>
 <%= histDisp %>
-=======
 </div>
 </div>
 <div id="footer"><a href="about.jsp">About Us</a><br />
 		Hygeia is a project developed for a Software Engineering class at UCSD.<br />
         Please contact us at hygeia110@gmail.com if you would like to use any of the code found here.
       </div>
-<!-- >>>>>>> 639da075249cec58b72df1485127bb1107b93e19 -->
+</div>
 </BODY>
 </HTML>

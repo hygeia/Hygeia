@@ -1,5 +1,5 @@
-
 <!--
+
    Filename: updateProfile.jsp
    Description: This page will update the users information.
 		Including the users name, weight, lean body mass,
@@ -46,7 +46,6 @@ else if( sex.equals("m"))
 {
  m = "checked";
 }
-
 else
 {
  f = "checked";
@@ -97,9 +96,9 @@ else
  a1= "checked";
 }
 
-/* Debugging statement 
-out.println( Calculator.percentBodyFat("m","180",37.5,37.0,69.0,"7")); 
-*/
+/* Debugging statement */
+//out.println( Calculator.percentBodyFat("m","180",37.5,37.0,69.0,"7")); 
+
 
 /* retrieve input from form */
 String theName = request.getParameter("name");
@@ -205,6 +204,95 @@ if(theName != null)
     </style>
   </head>
   <body>
+<<<<<<< HEAD
+    <form  id="update_profile_form" METHOD="POST" ACTION="updateProfile.jsp">
+      <p> 
+      <label for="user_name">Name</label>
+      <INPUT TYPE="TEXT" VALUE="<%= name %>" NAME="user_name" SIZE="20" />
+      </p>
+
+      <div class="sex-field"> 
+      <label for="user_sex">Gender</label> 
+      <INPUT TYPE="RADIO" NAME="sex" VALUE="female" <%= f %> />Female<br />
+      <INPUT TYPE="RADIO" NAME="sex" VALUE="male" <%= m %> />Male
+      <label for="user_sex" class="error" style="display:none;">Please chose one</label> 
+      </div>
+
+
+      <P> 
+      <label for="activity">What best fits you exercise routine?</label>
+      <INPUT TYPE="RADIO" NAME="activity" VALUE="1" <%= a1 %> /> Sedentary<br />
+      <INPUT TYPE="RADIO" NAME="activity" VALUE="2" <%= a2 %> /> Light (i.e, walking)<br />
+      <INPUT TYPE="RADIO" NAME="activity" VALUE="3" <%= a3 %> /> Moderate (30 minutes per day, 3 times per week)<br />
+      <INPUT TYPE="RADIO" NAME="activity" VALUE="4" <%= a4 %> /> Active (1 hour per day, 5 times per week)<br /> 
+      <INPUT TYPE="RADIO" NAME="activity" VALUE="5" <%= a5 %> /> Very active (2 hours per day, 5 times a week)<br />
+      <INPUT TYPE="RADIO" NAME="activity" VALUE="6" <%= a6 %> /> Heavy weight training or twice-a-day exercise (5 days per week)<br />
+      </p>
+
+      <P> 
+      <label for="user_weight">Weight(LBS)</label>
+      <INPUT TYPE="TEXT" VALUE= "<%= weight %>" NAME="weight" SIZE="10" />
+
+      <P> 
+      Take 3 measurements of your hips <br />
+      How to take proper hip measurements: (Must have measuring tape) Take<br />
+      measuremet from the widest point from hip to hip.(INCHES)<br />
+      Hygeia will find the average of these three measurements<br /> 
+      </p>
+      <P> 
+      <label for="hip1">Hip measurement 1</label>
+      <INPUT TYPE="TEXT" NAME="hip1" VALUE="<%= hips %>" SIZE="10"/> 
+      </p>
+      <P> 
+      <label for="hip2">Hip measurement 2</label>
+      <INPUT TYPE="TEXT" NAME="hip2" VALUE="<%= hips %>" SIZE="10"/>
+      </p>
+      <P> 
+      <label for="hip3">Hip measurement 3</label>
+      <INPUT TYPE="TEXT" NAME="hip3" VALUE="<%= hips %>" SIZE="10"/>
+      </p>
+
+      <P> (Must have measuring tape) Take 3 measurements of of your waist at<br />
+           bellybutton level. (INCHES)<br />
+           Hygeia will find the average of these three measurements<br /> 
+      </p>
+      <P> 
+      <label for="waist1">Waist measurement 1</label>
+      <INPUT TYPE="TEXT" NAME="waist1" VALUE="<%= waist %>" SIZE="10"/>
+      </p>
+      <P> 
+      <label for="waist2">Waist measurement 2</label>
+      <INPUT TYPE="TEXT" NAME="waist2" VALUE="" SIZE="10"/>
+      </p>
+      <P> 
+      <label for="waist3">Waist measurement 3</label>
+      <INPUT TYPE="TEXT" NAME="waist3" VALUE="<%= waist %>" SIZE="10"/>
+      </p>
+
+      <P> Height(W/O SHOES): 
+      <INPUT TYPE="TEXT" VALUE="<%= ft %>" NAME="ft" SIZE="5"/>ft.
+      <INPUT TYPE="TEXT" VALUE="<%= in %>" NAME="in" SIZE="5"/>in.
+      </p>
+
+      <P> Wrist measurement<br />
+          How to take a wrist measurement: (Must have measuring tape) Measure<br />
+          your wrist at the space between your dominant hand and your wrist bone,<br />
+          at the location where your wrist bends.<br />
+      </p>
+
+      <P> 
+      <label for="wrist">Wrist measurement(in.)</label>
+      <INPUT TYPE="TEXT" VALUE="<%= wrist %>" NAME="wrist" SIZE="10"/>
+      </p>
+
+      <P>
+      <input type="hidden" name="updateProfile" value="updateProfile" />
+      <INPUT TYPE="SUBMIT" />
+      </p>
+    </form>
+  </body>
+</html>
+=======
 
    <FORM METHOD="POST" id="update_profile_form" ACTION="updateProfile.jsp">
 
@@ -292,3 +380,4 @@ if(theName != null)
      </p>
    </body>
  </html>
+>>>>>>> 0b8176ccc80bbf701c42453485d8c8eab167d03f
