@@ -93,7 +93,7 @@ if (arr == null) {
 }
 
 /* Produce table of foods, with remove forms */
-String invDisp = "<table style='margin:auto auto;'>\n";
+String invDisp = "<table style='margin:auto auto;'>\n"; //without pictures
 String invDispPics = "<table>";
 for (int i = 0; i < arr.length; i++) {
 	Food.List f = arr[i];
@@ -112,7 +112,7 @@ for (int i = 0; i < arr.length; i++) {
         "value=" + f.getCount() + "><input type='hidden' name='" +
         "removeFromInventory' value=1><input type='submit' value='Update'>" +
         "</form>\n</td>";
-    invDisp += s;
+    invDisp += s; //without pictures
 	invDispPics += d;
 	invDispPics += s;
 	if(i%4==3) {invDispPics += "</tr>";}
