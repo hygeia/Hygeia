@@ -43,18 +43,6 @@ String showTodayCharts =
         "</div>" +
         "<div id=\"today_bar\">" +
         "</div>";
-		
- /* this is all old from when the java files were not yet complete */
-/*int[] pct1 = {30, 32, 40}; //today
-int[] pct2 = {30, 42, 40};
-int[] pct3 = {30, 37, 40};
-int[] pct4 = {30, 32, 40};
-
-int[] block1 = {20, 10, 30}; //today
-int[] block2 = {20, 10, 30};
-int[] block3 = {20, 10, 30};
-int[] block4 = {20, 10, 30};
-*/
 
 DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
 Date todaysdate = new Date();
