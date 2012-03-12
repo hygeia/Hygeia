@@ -39,8 +39,8 @@ String name = (String)session.getAttribute("username");
  int in = (int) inc;
  double leanBodyMass =  u.getLeanBodyMass();
  double bodyFat = weight-leanBodyMass;
- int protein = 80;//User.getBlocks();
- int block = (int)protein/7;
+ int protein = u.getBlocks();
+ int block = protein/7;
   
  /*double percentBodyFat = 
 	Calculator.percentBodyFat(sex,weight,hip,waist,height, wrist);*/ 
@@ -107,7 +107,7 @@ String name = (String)session.getAttribute("username");
 	Your current lean body mass is <%= leanBodyMass %> lbs.</br>
 	Your current estimated body fat is <%= bodyFat %> lbs.</br>
 	Following a "Zone" favorable diet your daily protein requirement is 
-	<%= protein %>grams. </br></br>
+	<%= protein %> grams. </br></br>
 	In order to maintain a "Zone" favorable diet you should have:</br>
 	<%= block %> protein blocks, carbohydrate blocks, and fat blocks a day.
 	</br>
