@@ -1,4 +1,5 @@
 <!--
+
    Filename: updateProfile.jsp
    Description: This page will update the users information.
 		Including the users name, weight, lean body mass,
@@ -31,20 +32,17 @@ double height = u.getHeight();
 double temp =  height/12;
 int ft = (int)(height/12);
 double inc = (temp-ft)*12;
-//String sex = u.getSex();
-//String sex = "f";
 int in = (int) inc;
 
 String sex = Character.toString(u.getGender());
-//String sex = "f";
 String f = "";
 String m = ""; 
-if( sex.equals("F") )
+if( sex.equals("f") )
 {
  f = "checked";
 }
 
-else if( sex.equals("M"))
+else if( sex.equals("m"))
 {
  m = "checked";
 }
@@ -119,10 +117,14 @@ if(theName != null)
 	  Double.parseDouble(request.getParameter("hip2")) +
 	  Double.parseDouble(request.getParameter("hip3")))/3;
 
+  hips = 0.5* Math.round( hips / 0.5 );
+
   /* Take average of waist measurements */
   waist = (Double.parseDouble(request.getParameter("waist1")) +
            Double.parseDouble(request.getParameter("waist2")) +
            Double.parseDouble(request.getParameter("waist3")))/3;
+
+  waist = 0.5 * Math.round( waist / 0.5 );
 
   /* Retrieve weight from form and parse it into a double */
   weight = Double.parseDouble(request.getParameter("weight"));
@@ -135,9 +137,24 @@ if(theName != null)
   char gender = sex.charAt(0);
 
   double lbm = 0; 
+  
+/* Debugging statements 
+  out.println(sex);
+  out.println(request.getParameter("weight"));
+  out.println(hips);
+  out.println(waist);
+  out.println(height);
+  out.println(request.getParameter("wrist"));
+*/
+
   double perBodFat = Calculator.percentBodyFat(sex, 
 			request.getParameter("weight"),hips, waist, height,
 			request.getParameter("wrist"));
+
+ /*  Debugging statement
+  out.println(perBodFat);
+ */
+
   if(perBodFat < 0)
   {
    /* error flaged*/
@@ -146,15 +163,23 @@ if(theName != null)
   }
 
   lbm = Calculator.leanBodyMass(weight, perBodFat);
-  //double protein = 
-//	Calculator.protein(lbm,Integer.parseInt(request.getParameter("activity")));
- // blocks = (int)protein;
+  
+  double protein = 
+  	Calculator.protein(lbm,Integer.parseInt(request.getParameter("activity")));
+  blocks = (int)protein;
 
+  
   u.updateAllInfo(theName, u.getEmail(),gender, act, blocks, height, 
 		weight, hips, waist, wrist, lbm);     
-  
+
+  /* Debugging statements 
+  out.println(u.getBlocks());
+  out.println(u.getLeanBodyMass());
+  */
+
   session.setAttribute( "username", theName );
   db.close(); // close database
+
   response.sendRedirect("profile.jsp"); // Go back to profile.jsp
 
 }
@@ -179,6 +204,7 @@ if(theName != null)
     </style>
   </head>
   <body>
+<<<<<<< HEAD
     <form  id="update_profile_form" METHOD="POST" ACTION="updateProfile.jsp">
       <p> 
       <label for="user_name">Name</label>
@@ -266,3 +292,92 @@ if(theName != null)
     </form>
   </body>
 </html>
+=======
+
+   <FORM METHOD="POST" id="update_profile_form" ACTION="updateProfile.jsp">
+
+     <p> 
+     <label for="user_name">Name</label>
+     <INPUT TYPE="TEXT" VALUE="<%= name %>" NAME="name" SIZE="20" />
+     </p>
+
+     <div class="sex-field"> 
+     <label for="user_sex">Gender</label> 
+     <INPUT TYPE="RADIO" NAME="sex" VALUE="f" <%= f %> />Female</br>
+     <INPUT TYPE="RADIO" NAME="sex" VALUE="m" <%= m %> />Male
+     <label for="user_sex" class="error" style="display:none;">Please chose one</label> 
+     </div>
+
+
+     <P> 
+     <label for="activity">What best fits you exercise routine?</label>
+     <INPUT TYPE="RADIO" NAME="activity" VALUE="1" <%= a1 %> /> Sedentary</br>
+     <INPUT TYPE="RADIO" NAME="activity" VALUE="2" <%= a2 %> /> Light (i.e, walking)</br>
+     <INPUT TYPE="RADIO" NAME="activity" VALUE="3" <%= a3 %> /> Moderate (30 minutes per day, 3 times per week)</br>
+     <INPUT TYPE="RADIO" NAME="activity" VALUE="4" <%= a4 %> /> Active (1 hour per day, 5 times per week)</br> 
+     <INPUT TYPE="RADIO" NAME="activity" VALUE="5" <%= a5 %> /> Very active (2 hours per day, 5 times a week)</br>
+     <INPUT TYPE="RADIO" NAME="activity" VALUE="6" <%= a6 %> /> Heavy weight training or twice-a-day exercise (5 days per week)</br>
+     </p>
+
+     <P> 
+     <label for="user_weight">Weight(LBS)</label>
+     <INPUT TYPE="TEXT" VALUE= "<%= weight %>" NAME="weight" SIZE="10" />
+
+     <P> Take 3 measurements of your hips </br>
+     How to take proper hip measurements: (Must have measuring tape) Take</br>
+     measuremet from the widest point from hip to hip.(INCHES)</br>
+     Hygeia will find the average of these three measurements</br> 
+     </p>
+     <P> 
+     <label for="hip1">Hip measurement 1</label>
+     <INPUT TYPE="TEXT" NAME="hip1" VALUE="<%= hips %>" SIZE="10"/> 
+     </p>
+     <P> 
+     <label for="hip2">Hip measurement 2</label>
+     <INPUT TYPE="TEXT" NAME="hip2" VALUE="<%= hips %>" SIZE="10"/>
+     </p>
+     <P> 
+     <label for="hip3">Hip measurement 3</label>
+     <INPUT TYPE="TEXT" NAME="hip3" VALUE="<%= hips %>" SIZE="10"/>
+     </p>
+
+     <P> (Must have measuring tape) Take 3 measurements of of your waist at</br>
+          bellybutton level. (INCHES)</br>
+          Hygeia will find the average of these three measurements</br> 
+     </p>
+     <P> 
+     <label for="waist1">Waist measurement 1</label>
+     <INPUT TYPE="TEXT" NAME="waist1" VALUE="<%= waist %>" SIZE="10"/>
+     </p>
+     <P> 
+     <label for="waist2">Waist measurement 2</label>
+     <INPUT TYPE="TEXT" NAME="waist2" VALUE="<%= waist %>" SIZE="10"/>
+     </p>
+     <P> 
+     <label for="waist3">Waist measurement 3</label>
+     <INPUT TYPE="TEXT" NAME="waist3" VALUE="<%= waist %>" SIZE="10"/>
+     </p>
+
+     <P> Height(W/O SHOES): 
+     <INPUT TYPE="TEXT" VALUE="<%= ft %>" NAME="ft" SIZE="5"/>ft.
+     <INPUT TYPE="TEXT" VALUE="<%= in %>" NAME="in" SIZE="5"/>in.
+     </p>
+
+     <P> Wrist measurement</br>
+         How to take a wrist measurement: (Must have measuring tape) Measure</br>
+         your wrist at the space between your dominant hand and your wrist bone,</br>
+         at the location where your wrist bends.</br>
+     </p>
+
+     <P> 
+     <label for="wrist">Wrist measurement(in.)</label>
+     <INPUT TYPE="TEXT" VALUE="<%= wrist %>" NAME="wrist" SIZE="10"/>
+     </p>
+
+     <P>
+     <input type="hidden" name="updateProfile" value="updateProfile" />
+     <INPUT TYPE="SUBMIT" VALUE="Submit" />
+     </p>
+   </body>
+ </html>
+>>>>>>> 0b8176ccc80bbf701c42453485d8c8eab167d03f

@@ -31,16 +31,7 @@ if( session.getAttribute("mealArray") == null){
 	session.setAttribute("mealArray", new ArrayList<Food.Update>()); }
 //if( session.getAttribute("mealNameArray") == null){
 //	session.setAttribute("mealNameArray", new ArrayList<String>()); }
-if( session.getAttribute("mealName") == null){
-	session.setAttribute("mealName", ""); }
-if( session.getAttribute("mealDay") == null){
-	session.setAttribute("mealDay", "today.getDate()");}
-if( session.getAttribute("mealMonth") == null){
-	session.setAttribute("mealMonth", "today.getMonth()"); }
-if( session.getAttribute("mealYear") == null){
-	session.setAttribute("mealYear", "today.getFullYear()");}
-if( session.getAttribute("mealTime") == null){
-	session.setAttribute("mealTime", "today.getHours()");}
+
 ArrayList<Food.Update> f = (ArrayList<Food.Update>)session.getAttribute("mealArray");
 //ArrayList<String> fNames = (ArrayList<String>)session.getAttribute("mealNameArray");
 
@@ -50,7 +41,7 @@ if (request.getParameter("addToMeal") != null) {
 	Food.Update food = new Food.Update(fid, count);
     boolean r = inv.removeFood(food);
     if (r == false) {
-        response.sendRedirect("error.jsp?code=2&echo=Could not update" +
+        response.sendRedirect("error.jsp?code=1&echo=Could not update" +
             " inventory");
         db.close();
         return;
@@ -67,22 +58,16 @@ if (request.getParameter("addToMeal") != null) {
 		f.add(food);
 	}
 	session.setAttribute("mealArray", f);
-	/* save the name, date, and time for the meal */
-	session.setAttribute("mealName", request.getParameter("name"));
-	session.setAttribute("mealDay", request.getParameter("daydropdown"));
-	session.setAttribute("mealMonth", request.getParameter("monthdropdown"));
-	session.setAttribute("mealYear", request.getParameter("yeardropdown"));
-	session.setAttribute("mealTime", request.getParameter("timedropdown"));
 }
 
 if (request.getParameter("removeFromMeal") != null) {
     int fid = Integer.parseInt(request.getParameter("fid"));
     double count=Double.parseDouble(request.getParameter("count"));
 	Food.Update food = new Food.Update(fid, count);
-	Food.Update removed;
+	Food.Update removed = null;
 	for(int i=0; i<f.size(); i++){
 		if(f.get(i).getFid() == food.getFid()){
-			f.set(i, new Food.Update(fid, f.get(i).getCount() + count));
+			f.set(i, new Food.Update(fid, f.get(i).getCount() - count));
 			if(f.get(i).getCount() == 0){
 				removed = f.remove(i);
 			}
@@ -99,12 +84,6 @@ if (request.getParameter("removeFromMeal") != null) {
 		return;
 	}
 	session.setAttribute("mealArray", f);
-	/* save the name, date, and time for the meal */
-	session.setAttribute("mealName", request.getParameter("name"));
-	session.setAttribute("mealDay", request.getParameter("daydropdown"));
-	session.setAttribute("mealMonth", request.getParameter("monthdropdown"));
-	session.setAttribute("mealYear", request.getParameter("yeardropdown"));
-	session.setAttribute("mealTime", request.getParameter("timedropdown"));
 }
 
 if (request.getParameter("addToHistory") != null) {
@@ -116,8 +95,26 @@ if (request.getParameter("addToHistory") != null) {
 	// create Timestamp
 	Calendar c = Calendar.getInstance();
 	c.set(Calendar.YEAR, Integer.parseInt(request.getParameter("yeardropdown")));
-	String month = request.getParameter("monthdropdown");
-	if( month.equals("Jan")){
+	int month = Integer.parseInt(request.getParameter("monthdropdown"));
+	switch(month){
+		case 0: c.set(Calendar.MONTH, Calendar.JANUARY); break;
+		case 1: c.set(Calendar.MONTH, Calendar.FEBRUARY); break;
+		case 2: c.set(Calendar.MONTH, Calendar.MARCH); break;
+		case 3: c.set(Calendar.MONTH, Calendar.APRIL); break;
+		case 4: c.set(Calendar.MONTH, Calendar.MAY); break;
+		case 5: c.set(Calendar.MONTH, Calendar.JUNE); break;
+		case 6: c.set(Calendar.MONTH, Calendar.JULY); break;
+		case 7: c.set(Calendar.MONTH, Calendar.AUGUST); break;
+		case 8: c.set(Calendar.MONTH, Calendar.SEPTEMBER); break;
+		case 9: c.set(Calendar.MONTH, Calendar.OCTOBER); break;
+		case 10: c.set(Calendar.MONTH, Calendar.NOVEMBER); break;
+		case 11: c.set(Calendar.MONTH, Calendar.DECEMBER); break;
+		default: 
+			response.sendRedirect("error.jsp?code=3&echo=Could not parse date");
+			db.close();
+			return;
+	}
+/*	if( month.equals("Jan")){
 		c.set(Calendar.MONTH, Calendar.JANUARY);
 	}else if( month.equals("Feb")){
 		c.set(Calendar.MONTH, Calendar.FEBRUARY);
@@ -142,64 +139,24 @@ if (request.getParameter("addToHistory") != null) {
 	}else if( month.equals("Dec")){
 		c.set(Calendar.MONTH, Calendar.DECEMBER);
 	}else{
-		response.sendRedirect("error.jsp?code=2&echo=Could not parse date");
+		response.sendRedirect("error.jsp?code=3&echo=Could not parse date");
 		db.close();
 		return;
-	}
+	}*/
 	c.set(Calendar.DAY_OF_MONTH, Integer.parseInt(request.getParameter("daydropdown")));
 	c.set(Calendar.HOUR_OF_DAY, Integer.parseInt(request.getParameter("timedropdown")));
 	Timestamp today = new Timestamp(c.getTimeInMillis());
 	
 	hist.addMeal(new Meal(db, mid2), today);
 	session.setAttribute("mealArray", new ArrayList<Food.Update>());
-	session.setAttribute("mealName", "");
-	session.setAttribute("mealDay", "today.getDate()");
-	session.setAttribute("mealMonth", "today.getMonth()");
-	session.setAttribute("mealYear", "today.getFullYear()");
-	session.setAttribute("mealTime", "today.getHours()");
 }
 
 Food.List[] arr = inv.getInventoryList();
 if (arr == null) {
-    response.sendRedirect("error.jsp?code=1&echo=Could not fetch inventory");
+    response.sendRedirect("error.jsp?code=4&echo=Could not fetch inventory");
     db.close();
     return;
 }
-String mealName = (String)session.getAttribute("mealName");
-String mealDay = (String)session.getAttribute("mealDay");
-String mealMonthStr = (String)session.getAttribute("mealMonth");
-String mealMonthNum;
-if( mealMonthStr.equals("Jan")){
-		mealMonthNum = "0";
-	}else if( mealMonthStr.equals("Feb")){
-		mealMonthNum = "1";
-	}else if( mealMonthStr.equals("Mar")){
-		mealMonthNum = "2";
-	}else if( mealMonthStr.equals("Apr")){
-		mealMonthNum = "3";
-	}else if( mealMonthStr.equals("May")){
-		mealMonthNum = "4";
-	}else if( mealMonthStr.equals("Jun")){
-		mealMonthNum = "5";
-	}else if( mealMonthStr.equals("Jul")){
-		mealMonthNum = "6";
-	}else if( mealMonthStr.equals("Aug")){
-		mealMonthNum = "7";
-	}else if( mealMonthStr.equals("Sept")){
-		mealMonthNum = "8";
-	}else if( mealMonthStr.equals("Oct")){
-		mealMonthNum = "9";
-	}else if( mealMonthStr.equals("Nov")){
-		mealMonthNum = "10";
-	}else if( mealMonthStr.equals("Dec")){
-		mealMonthNum = "11";
-	}else{
-		response.sendRedirect("error.jsp?code=2&echo=Could not parse date");
-		db.close();
-		return;
-	}
-String mealYear = (String)session.getAttribute("mealYear");
-String mealTime = (String)session.getAttribute("mealTime");
 
 /* Produce table of foods already in meal, with remove from meal forms */
 f = (ArrayList<Food.Update>)session.getAttribute("mealArray"); // get most current array
@@ -252,19 +209,19 @@ var yearfield=document.getElementById(yearfield)
 var timefield=document.getElementById(timefield)
 for (var i=1; i<32; i++)
 dayfield.options[i]=new Option(i, i+1)
-dayfield.options[<%= mealDay %>]=new Option(<%= mealDay %>, <%= mealDay %>, true, true) //select today's day
+dayfield.options[today.getDate()]=new Option(today.getDate(), today.getDate(), true, true) //select today's day
 for (var m=0; m<12; m++)
 monthfield.options[m]=new Option(monthtext[m], monthtext[m])
-monthfield.options[<%= mealMonthNum %>]=new Option(monthtext[<%= mealMonthNum %>], monthtext[<%= mealMonthNum %>], true, true) //select today's month
+monthfield.options[today.getMonth()]=new Option(monthtext[today.getMonth()], today.getMonth(), true, true) //select today's month
 var thisyear=today.getFullYear()
 for (var y=0; y<20; y++){
 yearfield.options[y]=new Option(thisyear, thisyear)
 thisyear+=1
 }
-yearfield.options[<%= mealYear %> - today.getFullYear()]=new Option(<%= mealYear %>, <%= mealYear %>, true, true) //select today's year
+yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, true) //select today's year
 for (var d=0; d<24; d++)
-timefield.options[d]=new Option(d, d+1)
-timefield.options[<%= mealTime %>]=new Option(<%= mealTime %>, <%= mealTime %>, true, true) //select current time
+timefield.options[d]=new Option(d + ":00", d+1)
+timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.getHours(), true, true) //select current time
 }
 
 </script>
@@ -273,22 +230,24 @@ timefield.options[<%= mealTime %>]=new Option(<%= mealTime %>, <%= mealTime %>, 
   <div id="page">
     <div id="content">
       <center><h1>Add a Meal</h1></center><br />
+	<center><h2 class="new">Meal</h2></center><br /><%= mealDisp %>
+	<br /><center><h2>Inventory</h2></center><br /><%= invDisp %>
+	<p>Once you've finished adding food, enter a name and date to add it to your calendar!</p>
+	<br />
 	<form action="addMeal.jsp" method="post">
         <div id="left">Name: <input name="name"></div>
 		<input type="hidden" name="mid">
         <div id="right">Date: <select id="daydropdown" name="daydropdown"></select> 
 			<select id="monthdropdown" name="monthdropdown"></select> 
 			<select id="yeardropdown" name="yeardropdown"></select>
-		<br />Time: <select id="timedropdown" name="timedropdown"></select>
+		Time: <select id="timedropdown" name="timedropdown"></select>
 		</div>
-		<br /><br /><br /><input type="hidden" name="addToHistory" value="addToHistory">
+		<br /><br /><input type="hidden" name="addToHistory" value="addToHistory">
         <div id="right"><input type="submit"></div>
     </form>
-	<br /><%= mealDisp %>
-	<br /><%= invDisp %>
 	<br /><a href="mealChoice.jsp"> Select another method of adding a meal </a>
-	<script type="text/javascript">
-
+	
+<script type="text/javascript">
 //populatedropdown(id_of_day_select, id_of_month_select, id_of_year_select)
 window.onload=function(){
 populatedropdown("daydropdown", "monthdropdown", "yeardropdown", "timedropdown")
