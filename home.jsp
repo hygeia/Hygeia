@@ -403,7 +403,7 @@ db.close();
         <div id="chartwrapperOday">
 		  <%= showYesterdayCharts %>
         </div>
-        <br /><p class="oday">Carbs/Protein/Fat Ratio and Block Levels for yesterday</p>
+        <br /><p class="oday">Carbs/Protein/Fat Ratio and Block Levels for<br />yesterday</p>
       </div>
       <div id="today" class="shadowBox"><h1><%= day1 %></h1><a class='ajax' href="mealChoice.jsp"><img src="images/addMeal.png" width=200px height=66px></a>
         <div id="chartwrapperToday">
