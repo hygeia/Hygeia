@@ -297,12 +297,12 @@ if(theName != null)
    <FORM METHOD="POST" id="update_profile_form" ACTION="updateProfile.jsp">
 
      <p> 
-     <label for="user_name">Name</label>
+     <label for="user_name">Name:</label>
      <INPUT TYPE="TEXT" VALUE="<%= name %>" NAME="name" SIZE="20" />
      </p>
 
      <div class="sex-field"> 
-     <label for="user_sex">Gender</label> 
+     <label for="user_sex">Gender:</label> 
      <INPUT TYPE="RADIO" NAME="sex" VALUE="f" <%= f %> />Female</br>
      <INPUT TYPE="RADIO" NAME="sex" VALUE="m" <%= m %> />Male
      <label for="user_sex" class="error" style="display:none;">Please chose one</label> 
@@ -320,45 +320,45 @@ if(theName != null)
      </p>
 
      <P> 
-     <label for="user_weight">Weight(LBS)</label>
+     <label for="user_weight">Weight(lbs):</label>
      <INPUT TYPE="TEXT" VALUE= "<%= weight %>" NAME="weight" SIZE="10" />
 
      <P> Take 3 measurements of your hips </br>
      How to take proper hip measurements: (Must have measuring tape) Take</br>
-     measuremet from the widest point from hip to hip.(INCHES)</br>
-     Hygeia will find the average of these three measurements</br> 
+     measuremet from the widest point from hip to hip. Measure in inches.</br>
+     Hygeia will find the average of these three measurements.</br> 
      </p>
      <P> 
-     <label for="hip1">Hip measurement 1</label>
+     <label for="hip1">Hip measurement 1 (inches)</label>
      <INPUT TYPE="TEXT" NAME="hip1" VALUE="<%= hips %>" SIZE="10"/> 
      </p>
      <P> 
-     <label for="hip2">Hip measurement 2</label>
+     <label for="hip2">Hip measurement 2 (inches)</label>
      <INPUT TYPE="TEXT" NAME="hip2" VALUE="<%= hips %>" SIZE="10"/>
      </p>
      <P> 
-     <label for="hip3">Hip measurement 3</label>
+     <label for="hip3">Hip measurement 3 (inches)</label>
      <INPUT TYPE="TEXT" NAME="hip3" VALUE="<%= hips %>" SIZE="10"/>
      </p>
 
      <P> (Must have measuring tape) Take 3 measurements of of your waist at</br>
-          bellybutton level. (INCHES)</br>
-          Hygeia will find the average of these three measurements</br> 
+          bellybutton level. Measure in inches.</br>
+          Hygeia will find the average of these three measurement.</br> 
      </p>
      <P> 
-     <label for="waist1">Waist measurement 1</label>
+     <label for="waist1">Waist measurement 1 (inches)</label>
      <INPUT TYPE="TEXT" NAME="waist1" VALUE="<%= waist %>" SIZE="10"/>
      </p>
      <P> 
-     <label for="waist2">Waist measurement 2</label>
+     <label for="waist2">Waist measurement 2 (inches)</label>
      <INPUT TYPE="TEXT" NAME="waist2" VALUE="<%= waist %>" SIZE="10"/>
      </p>
      <P> 
-     <label for="waist3">Waist measurement 3</label>
+     <label for="waist3">Waist measurement 3 (inches)</label>
      <INPUT TYPE="TEXT" NAME="waist3" VALUE="<%= waist %>" SIZE="10"/>
      </p>
 
-     <P> Height(W/O SHOES): 
+     <P> Height (w/o shoes): 
      <INPUT TYPE="TEXT" VALUE="<%= ft %>" NAME="ft" SIZE="5"/>ft.
      <INPUT TYPE="TEXT" VALUE="<%= in %>" NAME="in" SIZE="5"/>in.
      </p>
@@ -370,7 +370,7 @@ if(theName != null)
      </p>
 
      <P> 
-     <label for="wrist">Wrist measurement(in.)</label>
+     <label for="wrist">Wrist measurement (inches)</label>
      <INPUT TYPE="TEXT" VALUE="<%= wrist %>" NAME="wrist" SIZE="10"/>
      </p>
 

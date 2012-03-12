@@ -5,7 +5,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 
 <head>
+    <title>Recipes | Hygeia</title>
     <link type="text/css" rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="favicon.ico" mce_href="favicon.ico"/> 
 <!-- >>>>>>> f6ca7a8af3c6087e83c7c1d72317fe743dc47143 -->
 
 	<style type="text/css">
@@ -96,6 +98,7 @@ margin-top: 10px;
 </head>
 <body>
     <div id="page">
+       <div id="content">
 	      <div id="header">
 
 <%
@@ -228,10 +231,16 @@ quantity:
 
 </div>
 </div>
+<div id="footer"><a href="about.jsp">About Us</a><br />
+		Hygeia is a project developed for a Software Engineering class at UCSD.<br />
+        Please contact us at hygeia110@gmail.com if you would like to use any of the code found here.
+      </div>
+</body>
+</html>
 
-
+<!-- Not sure what this is, commenting out for now --Link --
 <html>
-<head><title>Hygeia</title></head>
+<head><title>Recipes | Hygeia</title></head>
 <body>
 <%= s %>
 </body>
@@ -239,4 +248,4 @@ quantity:
 
 </body>
 </html>
-<!-- >>>>>>> f6ca7a8af3c6087e83c7c1d72317fe743dc47143-->
+<>>>>>> f6ca7a8af3c6087e83c7c1d72317fe743dc47143-->

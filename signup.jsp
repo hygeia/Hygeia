@@ -44,6 +44,10 @@ if (request.getParameter("signup") != null) {
     <script type="text/javascript" src="javascript/jquery-1.7.1.min.js"></script>          
     <script type="text/javascript" src="javascript/jquery.validate.min.js"></script>          
     <script type="text/javascript" src="javascript/validation.js"></script>          
+<<<<<<< HEAD
+=======
+    <title>Sign Up | Hygeia</title>
+>>>>>>> 0122401cb53e9b5738170a8698dc90accc17a2a5
     <style type="text/css">
       label { width: 10em; float: left; }
       label.error { float: none; color: red; padding-left: .5em; vertical-align:top; }

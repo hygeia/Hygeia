@@ -22,6 +22,7 @@ History history = new History(u);
 
 String historyForm = "";
 String searchDisp = "";
+
 if(request.getParameter("removeFromHistory")!= null)
 {
  int mid = Integer.parseInt(request.getParameter("mid"));
@@ -33,6 +34,7 @@ if(request.getParameter("removeFromHistory")!= null)
  Meal meal = new Meal(db, mid);
  boolean check = history.removeMeal(meal, occur);
  
+ searchDisp = "";
 
  if(check == false)
  {
@@ -78,6 +80,11 @@ if(request.getParameter("searchForMeal") != null)
 
  for(Meal.List m : meal)
  {
+  if(m == null){
+	response.sendRedirect("error.jsp?code=1&echo=Could not fetch meal");
+    db.close();
+    return;
+  }
   String s = "<tr><form action='history.jsp' method='post'>" +
 	"<input type='hidden' name='mid' value='" + m.getMid() + "'>" +
 	"<td>" + m.getName() + "</td><td> Occurrence(MM-dd hh:mm):"+
@@ -102,6 +109,11 @@ String histDisp = "<table style='margin:auto auto;'>\n";
 
  for(Meal.List m : meals)
  {
+  if( m == null){
+   response.sendRedirect("error.jsp?code=1&echo=Could not fetch meal");
+   db.close();
+   return;
+  }
   String name = m.getName();
   int mid = m.getMid();
   Timestamp  occurrence = m.getOccurrence();
@@ -139,6 +151,7 @@ String histDisp = "<table style='margin:auto auto;'>\n";
 <td> <a href="logout.jsp"><img src="images/lightICON8.png"></a></td>
 </tr>
 </table>
+</div>
 
 <!-- Ask user if they would like to add meal to history -->
 Add to history
@@ -156,7 +169,7 @@ Add to history
 
 <br>
 <%= histDisp %>
-=======
+</div>
 </div>
 <div id="footer"><a href="about.jsp">About Us</a><br />
 		Hygeia is a project developed for a Software Engineering class at UCSD.<br />

@@ -8,7 +8,8 @@ String meal = "MEAL NAME HERE";
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 
 <head>
-<link type="text/css" rel="stylesheet" href="favoritesStyle.css" />
+<title>Favorites | Hygeia</title>
+<link type="text/css" rel="stylesheet" href="style.css" />
     <link rel="shortcut icon" href="favicon.ico" mce_href="favicon.ico"/> 
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
@@ -81,6 +82,7 @@ li{color:black; font-family:arial;}
 </style>
 </head>
 <div id="page">
+  <div id="content">
   <div id="header">
 <!-- Navigation Bar -->
 
@@ -124,5 +126,10 @@ li{color:black; font-family:arial;}
   <div id="today_bar"></div>
 </div>
 </div>
+</div>
+<div id="footer"><a href="about.jsp">About Us</a><br />
+		Hygeia is a project developed for a Software Engineering class at UCSD.<br />
+        Please contact us at hygeia110@gmail.com if you would like to use any of the code found here.
+      </div>
 </body>
 </html>
