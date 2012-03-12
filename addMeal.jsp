@@ -243,7 +243,7 @@ timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.
 		Time: <select id="timedropdown" name="timedropdown"></select>
 		</div>
 		<br /><br /><input type="hidden" name="addToHistory" value="addToHistory">
-        <div id="right"><input type="submit"></div>
+        <div id="right"><input type="submit" value="Add Meal"></div>
     </form>
 	<br /><a href="mealChoice.jsp"> Select another method of adding a meal </a>
 	

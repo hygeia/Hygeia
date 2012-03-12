@@ -231,10 +231,14 @@ timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.
     <div id="content">
       <center><h1>Add A Suggested Meal</h1></center><br />
 	<center><h2 class="new">Meal</h2></center><br /><%= mealDisp %>
-	<br /><center><h2>Inventory</h2></center><br /><%= invDisp %>
-	<p>Once you've finished adding food, enter a name and date to add it to your calendar!</p>
+	<br /><center>
+	<form action="suggestMeal.jsp" method="post">
+		<input type="submit" value="Give Me a Suggestion">
+	</form>
+	</center><br />
+	<p>Once you're happy with your meal, enter a name and date to add it to your calendar!</p>
 	<br />
-	<form action="addMeal.jsp" method="post">
+	<form action="suggestMeal.jsp" method="post">
         <div id="left">Name: <input name="name"></div>
 		<input type="hidden" name="mid">
         <div id="right">Date: <select id="daydropdown" name="daydropdown"></select> 
@@ -243,7 +247,7 @@ timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.
 		Time: <select id="timedropdown" name="timedropdown"></select>
 		</div>
 		<br /><br /><input type="hidden" name="addToHistory" value="addToHistory">
-        <div id="right"><input type="submit"></div>
+        <div id="right"><input type="submit" value="Add Meal"></div>
     </form>
 	<br /><a href="mealChoice.jsp"> Select another method of adding a meal </a>
 	
