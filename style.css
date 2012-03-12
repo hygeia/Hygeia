@@ -17,14 +17,13 @@ body {
     width:960px;
     min-height:100%;
     margin: 0 auto 0 auto;
-    position:relative;
     background-color:#fbffcc;
 }
 
 #content {
-    margin:0;
-    padding-bottom:40px;
-    min-height:650px;
+    margin-bottom:10px;
+    overflow:auto;
+    padding-bottom:60px;
 }
 
 /* Header start */
@@ -180,8 +179,9 @@ color:rgb(255,255,255);
 
 /* Footer */
 #footer {
-  position:absolute;
-  bottom:0;
+  position:relative;
+  margin: -60px auto 0 auto;
+  clear:both;
   width:960px;
   height:60px;
   text-align:center;

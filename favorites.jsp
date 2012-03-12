@@ -8,6 +8,7 @@ String meal = "MEAL NAME HERE";
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 
 <head>
+<title>Favorites | Hygeia</title>
 <link type="text/css" rel="stylesheet" href="favoritesStyle.css" />
     <link rel="shortcut icon" href="favicon.ico" mce_href="favicon.ico"/> 
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>

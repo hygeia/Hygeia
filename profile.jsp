@@ -64,7 +64,7 @@ String name = (String)session.getAttribute("username");
 	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
  <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
  <head>
- <title>Hygeia</title>
+ <title>Profile | Hygeia</title>
  <link type="text/css" rel="stylesheet" href="style.css" />
  <link rel="shortcut icon" href="favicon.ico" mce_href="favicon.ico"/>  
  </head>
@@ -121,11 +121,11 @@ String name = (String)session.getAttribute("username");
      } 
     %>
     </div>
+    </div>
      <div id="footer"><a href="about.jsp">About Us</a><br />
 		Hygeia is a project developed for a Software Engineering class at UCSD.<br />
         Please contact us at hygeia110@gmail.com if you would like to use any of the code found here.
       </div>
-    </div>
  <!-- 
       HTML content should go here. Dynamic content can be inserted via JSP tags.
       Form elements must have names to be accessed in Java. Anything that will
