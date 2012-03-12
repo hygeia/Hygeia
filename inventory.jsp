@@ -54,9 +54,10 @@ if (request.getParameter("searchForFood") != null) {
     searchDisp = "<table style='margin:auto auto;'>\n";
     for (Food.List f : avail) {
 		if( f == null ){
-			response.sendRedirect("error.jsp?code=1&echo=Error finding foods with name " + term);
+		    continue;
+			/* response.sendRedirect("error.jsp?code=1&echo=Error finding foods with name " + term);
 			db.close();
-			return;
+			return; */
 		}
         String s = "<tr><form action='inventory.jsp' method='post'>" +
             "<input type='hidden' name='fid' value=" + f.getFid() + ">" +
@@ -66,12 +67,12 @@ if (request.getParameter("searchForFood") != null) {
         searchDisp += s;
     }
     searchDisp += "</table>\n<h3>If you can't find your food, create it!</h3><table>\n" +
-        "<form action='inventory.jsp' method='post'><tr>Food Name: <input name='name'></tr>" +
-        "<tr>Weight: <input name='weight'></tr><tr>Serving Size: <input name='serving'></tr>" +
-        "<tr>Calories: <input name='calories'></tr><tr>Carbohydrates: <input " +
-        "name='carbohydrates'></tr><tr>Protein: <input name='protein'></tr><tr>Fat: " +
-        "<input name='fat'></tr><input type='hidden' name='addFoodToDatabase' value=1>" +
-        "<input type='submit' value='Create Food!'></form></table>\n";
+        "<form action='inventory.jsp' method='post'><tr><td>Food Name: <input name='name'></td>" +
+        "<td>Weight: <input name='weight'></td><td>Serving Size: <input name='serving'></td></tr>" +
+        "<tr><td>Calories: <input name='calories'></td><td>Carbohydrates: <input " +
+        "name='carbohydrates'></td><td>Protein: <input name='protein'></td></tr><tr><td>Fat: " +
+        "<input name='fat'></td><td><input type='hidden' name='addFoodToDatabase' value=1>" +
+        "<input type='submit' value='Create Food!'></td></tr></form></table>\n";
 }
 
 if (request.getParameter("addToInventory") != null) {
@@ -83,6 +84,22 @@ if (request.getParameter("addToInventory") != null) {
         db.close();
         return;
     }
+}
+
+if (request.getParameter("addFoodToDatabase") != null) {
+    String name = (String)request.getParameter("name");
+    double weight = Double.parseDouble(request.getParameter("weight"));
+    double serving = Double.parseDouble(request.getParameter("serving"));
+    double calories = Double.parseDouble(request.getParameter("calories"));
+    double carbohydrates = Double.parseDouble(request.getParameter("carbohydrates"));
+    double protein = Double.parseDouble(request.getParameter("protein"));
+    double fat = Double.parseDouble(request.getParameter("fat"));
+    double factor = weight/serving;
+    
+    Food.Create cf = new Food.Create(name, factor, weight, calories, 
+        carbohydrates, protein, fat);
+        
+    Food.createFood(u, cf);
 }
 
 Food.List[] arr = inv.getInventoryList();
