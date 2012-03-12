@@ -409,11 +409,12 @@ db.close();
         </p>
       </div>
     </div>
+    </div>
       <div id="footer"><a href="about.jsp">About Us</a><br />
 		Hygeia is a project developed for a Software Engineering class at UCSD.<br />
         Please contact us at hygeia110@gmail.com if you would like to use any of the code found here.
       </div>
-    </div>
+
   </body>
 </html>
 

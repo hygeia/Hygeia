@@ -121,11 +121,11 @@ String name = (String)session.getAttribute("username");
      } 
     %>
     </div>
+    </div>
      <div id="footer"><a href="about.jsp">About Us</a><br />
 		Hygeia is a project developed for a Software Engineering class at UCSD.<br />
         Please contact us at hygeia110@gmail.com if you would like to use any of the code found here.
       </div>
-    </div>
  <!-- 
       HTML content should go here. Dynamic content can be inserted via JSP tags.
       Form elements must have names to be accessed in Java. Anything that will
