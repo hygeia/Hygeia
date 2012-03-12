@@ -35,31 +35,6 @@ if( session.getAttribute("mealArray") == null){
 ArrayList<Food.Update> f = (ArrayList<Food.Update>)session.getAttribute("mealArray");
 //ArrayList<String> fNames = (ArrayList<String>)session.getAttribute("mealNameArray");
 
-if (request.getParameter("addToMeal") != null) {
-    int fid = Integer.parseInt(request.getParameter("fid"));
-    double count=Double.parseDouble(request.getParameter("count"));
-	Food.Update food = new Food.Update(fid, count);
-    boolean r = inv.removeFood(food);
-    if (r == false) {
-        response.sendRedirect("error.jsp?code=1&echo=Could not update" +
-            " inventory");
-        db.close();
-        return;
-    }
-	/* check if food already exists in meal. if so, update count */
-	boolean exists = false;
-	for(int i=0; i<f.size(); i++){
-		if(f.get(i).getFid() == food.getFid()){
-			f.set(i, new Food.Update(fid, f.get(i).getCount() + count));
-			i=f.size(); //breaks from the loop
-		}
-	}
-	if( !exists ){
-		f.add(food);
-	}
-	session.setAttribute("mealArray", f);
-}
-
 if (request.getParameter("removeFromMeal") != null) {
     int fid = Integer.parseInt(request.getParameter("fid"));
     double count=Double.parseDouble(request.getParameter("count"));
@@ -151,39 +126,35 @@ if (request.getParameter("addToHistory") != null) {
 	session.setAttribute("mealArray", new ArrayList<Food.Update>());
 }
 
-Food.List[] arr = inv.getInventoryList();
-if (arr == null) {
-    response.sendRedirect("error.jsp?code=4&echo=Could not fetch inventory");
-    db.close();
-    return;
+Algorithm alg = new Algorithm(db, u);
+Meal suggested = new Meal(db, 0);
+
+if (request.getParameter("suggestNewMeal") != null) {
+	suggested = alg.suggestMeal(u, Integer.parseInt(request.getParameter("mealType")));
 }
 
+Food.Update[] sf = null;
+
+if( suggested == null ){
+	response.sendRedirect("error.jsp?code=3&echo=Could not generate meal");
+	db.close();
+	return;
+}else if( suggested.getMid() == 0 ){
+	sf = new Food.Update[0];
+}else{
+	sf = suggested.getMeal();
+}
+
+
 /* Produce table of foods already in meal, with remove from meal forms */
-f = (ArrayList<Food.Update>)session.getAttribute("mealArray"); // get most current array
+//f = (ArrayList<Food.Update>)session.getAttribute("mealArray"); // get most current array
 String mealDisp = "<table style='margin:auto auto;'>\n";
-for (Food.Update up : f) {
-	String s = "<tr><form action='addMeal.jsp' method='post'>" +
-        "<input type='hidden' name='fid' value=" + up.getFid() + ">" +
-        "<td>" + up.getName(db) + "</td><td>Amount: <input name='count' " +
-        "value=" + up.getCount() + "><input type='hidden' name='" +
-        "removeFromMeal' value=1><input type='submit' value='Remove'>" +
-        "</td></form></tr>\n";
+for (Food.Update up : sf) {
+	String s = "<tr><td>" + up.getName(db) + "</td><td>Amount: " +up.getCount() +
+        "</td></tr>\n";
 	mealDisp += s;
 }
 mealDisp += "</table>\n";
-
-/* Produce table of foods, with add to meal forms */
-String invDisp = "<table style='margin:auto auto;'>\n";
-for (Food.List fl : arr) {
-    String s = "<tr><form action='addMeal.jsp' method='post'>" +
-        "<input type='hidden' name='fid' value=" + fl.getFid() + ">" +
-        "<td>" + fl.getName() + "</td><td>Amount: <input name='count' " +
-        "value=" + fl.getCount() + "><input type='hidden' name='" +
-        "addToMeal' value=1><input type='submit' value='Add To Meal'>" +
-        "</td></form></tr>\n";
-    invDisp += s;
-}
-invDisp += "</table>\n";
 
 db.close();
 
@@ -233,7 +204,12 @@ timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.
 	<center><h2 class="new">Meal</h2></center><br /><%= mealDisp %>
 	<br /><center>
 	<form action="suggestMeal.jsp" method="post">
-		<input type="submit" value="Give Me a Suggestion">
+		<input type="hidden" value="suggestNewMeal" />
+		<input type="radio" name="mealType" value="1" />Breakfast<br />
+		<input type="radio" name="mealType" value="2" />Lunch<br />
+		<input type="radio" name="mealType" value="3" />Dinner<br />
+		<input type="radio" name="mealType" value="4" />Snack<br />
+		<input type="submit" value="Give Me a Suggestion" />
 	</form>
 	</center><br />
 	<p>Once you're happy with your meal, enter a name and date to add it to your calendar!</p>
