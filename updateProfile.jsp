@@ -191,7 +191,8 @@ if(theName != null)
     <title>Update Profile | Hygeia</title>
     <script type="text/javascript" src="javascript/jquery-1.7.1.min.js"></script>          
     <script type="text/javascript" src="javascript/jquery.validate.min.js"></script>          
-    <script type="text/javascript" src="javascript/validation.js"></script>          
+    <script type="text/javascript" src="javascript/validation.js"></script>      
+    <link type="text/css" rel="stylesheet" href="profile.css" />    
     <style type="text/css">
       label { width:10em; float:left; }
       label.error { color:red; padding-left:.5em; vertical-align:top; }
