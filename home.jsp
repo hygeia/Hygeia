@@ -147,7 +147,7 @@ for(int i=0; i<threedayarr.size(); i++){
 	tempp += nuts.getProtein();
 	tempf += nuts.getFat();
 }
-if(todayarr.size() == 0){
+if(threedayarr.size() == 0){
 	showThreeDayCharts = "add a meal to start tracking progress";
 }else{
 	pct4[0] = tempc/threedayarr.size(); pct4[1] = tempp/threedayarr.size(); pct4[2] = tempf/threedayarr.size();
