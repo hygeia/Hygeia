@@ -164,17 +164,20 @@ if(theName != null)
   }
 
   lbm = Calculator.leanBodyMass(weight, perBodFat);
-/*  double protein = 
+  
+  double protein = 
   	Calculator.protein(lbm,Integer.parseInt(request.getParameter("activity")));
-  int  blocks = (int)protein;
-*/
+  blocks = (int)protein;
+
   
   u.updateAllInfo(theName, u.getEmail(),gender, act, blocks, height, 
 		weight, hips, waist, wrist, lbm);     
 
-  /* Debugging statement
-  out.println(u.getLeanBodyMass());*/
- 
+  /* Debugging statements 
+  out.println(u.getBlocks());
+  out.println(u.getLeanBodyMass());
+  */
+
   session.setAttribute( "username", theName );
   db.close(); // close database
 
