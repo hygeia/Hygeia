@@ -27,45 +27,19 @@ int uid = (Integer)session.getAttribute("uid");
 User u = new User(db, uid);
 Inventory inv = new Inventory(u);
 
-if( session.getAttribute("mealArray") == null){
-	session.setAttribute("mealArray", new ArrayList<Food.Update>()); }
-//if( session.getAttribute("mealNameArray") == null){
-//	session.setAttribute("mealNameArray", new ArrayList<String>()); }
+if( session.getAttribute("suggestedArray") == null){
+	session.setAttribute("suggestedArray", new Food.Update[0]); }
+//if( session.getAttribute("suggestedNameArray") == null){
+//	session.setAttribute("suggestedNameArray", String[0]); }
 
-ArrayList<Food.Update> f = (ArrayList<Food.Update>)session.getAttribute("mealArray");
-//ArrayList<String> fNames = (ArrayList<String>)session.getAttribute("mealNameArray");
-
-if (request.getParameter("removeFromMeal") != null) {
-    int fid = Integer.parseInt(request.getParameter("fid"));
-    double count=Double.parseDouble(request.getParameter("count"));
-	Food.Update food = new Food.Update(fid, count);
-	Food.Update removed = null;
-	for(int i=0; i<f.size(); i++){
-		if(f.get(i).getFid() == food.getFid()){
-			f.set(i, new Food.Update(fid, f.get(i).getCount() - count));
-			if(f.get(i).getCount() == 0){
-				removed = f.remove(i);
-			}
-			else{
-				removed = food; //to prevent error checking when not removed from array
-			}
-			i=f.size(); //breaks from the loop
-		}
-	}
-	if(removed == null){
-		response.sendRedirect("error.jsp?code=2&echo=Could not update" +
-			" meal");
-		db.close();
-		return;
-	}
-	session.setAttribute("mealArray", f);
-}
+Food.Update[] f = (Food.Update[])session.getAttribute("suggestedArray");
+//String[] fNames = (String[])session.getAttribute("suggestedNameArray");
 
 if (request.getParameter("addToHistory") != null) {
 	//int mid = Integer.parseInt(request.getParameter("mid"));
 	History hist = new History(u);
-	f = (ArrayList<Food.Update>)session.getAttribute("mealArray"); // get most current array
-	int mid2 = Meal.createMeal(db, u, f.toArray(new Food.Update[0]), request.getParameter("name"));
+	f = (Food.Update[])session.getAttribute("suggestedArray"); // get most current array
+	int mid2 = Meal.createMeal(db, u, f, request.getParameter("name"));
 	
 	// create Timestamp
 	Calendar c = Calendar.getInstance();
@@ -123,23 +97,25 @@ if (request.getParameter("addToHistory") != null) {
 	Timestamp today = new Timestamp(c.getTimeInMillis());
 	
 	hist.addMeal(new Meal(db, mid2), today);
-	session.setAttribute("mealArray", new ArrayList<Food.Update>());
+	session.setAttribute("suggestedArray", new Food.Update[0]);
 }
 
 Algorithm alg = new Algorithm(db, u);
-Meal suggested = new Meal(db, 0);
+Meal suggested = null;
 
 if (request.getParameter("suggestNewMeal") != null) {
 	suggested = alg.suggestMeal(u, Integer.parseInt(request.getParameter("mealType")));
+	if( suggested == null ){
+		response.sendRedirect("error.jsp?code=3&echo=Could not generate meal");
+		db.close();
+		return;
+	}
+	session.setAttribute("suggestedArray", suggested.getMeal());
 }
 
 Food.Update[] sf = null;
 
 if( suggested == null ){
-	response.sendRedirect("error.jsp?code=3&echo=Could not generate meal");
-	db.close();
-	return;
-}else if( suggested.getMid() == 0 ){
 	sf = new Food.Update[0];
 }else{
 	sf = suggested.getMeal();
@@ -147,7 +123,7 @@ if( suggested == null ){
 
 
 /* Produce table of foods already in meal, with remove from meal forms */
-//f = (ArrayList<Food.Update>)session.getAttribute("mealArray"); // get most current array
+//f = (Food.Update[])session.getAttribute("suggestedArray"); // get most current array
 String mealDisp = "<table style='margin:auto auto;'>\n";
 for (Food.Update up : sf) {
 	String s = "<tr><td>" + up.getName(db) + "</td><td>Amount: " +up.getCount() +
@@ -204,7 +180,7 @@ timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.
 	<center><h2 class="new">Meal</h2></center><br /><%= mealDisp %>
 	<br /><center>
 	<form action="suggestMeal.jsp" method="post">
-		<input type="hidden" value="suggestNewMeal" />
+		<input type="hidden" name="suggestNewMeal" value="suggestNewMeal"/>
 		<input type="radio" name="mealType" value="1" />Breakfast<br />
 		<input type="radio" name="mealType" value="2" />Lunch<br />
 		<input type="radio" name="mealType" value="3" />Dinner<br />
