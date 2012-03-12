@@ -1,6 +1,7 @@
 package hygeia;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Favorites {
 
@@ -19,7 +20,7 @@ public class Favorites {
             return false;
         }
 		int r = db.update("insert into favorites (mid, uid) values (" + 
-		    m.getMid() + ", " + uid + ";");
+		    m.getMid() + ", " + uid + ");");
 		if (r < 1) {
 		    return false;
 		}
@@ -71,7 +72,7 @@ public class Favorites {
        the history or favorites. This just calls the same method in the 
        History class. */
     public Meal.List[] getAvailableMeals() {
-        return new History(new User(this.db, this.uid)).getAvailableMeals();
+        return new History(new User(this.db, this.uid)).getAvailableMeals("");
     }
 
 }
