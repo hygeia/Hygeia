@@ -118,10 +118,14 @@ if(theName != null)
 	  Double.parseDouble(request.getParameter("hip2")) +
 	  Double.parseDouble(request.getParameter("hip3")))/3;
 
+  hips = 0.5* Math.round( hips / 0.5 );
+
   /* Take average of waist measurements */
   waist = (Double.parseDouble(request.getParameter("waist1")) +
            Double.parseDouble(request.getParameter("waist2")) +
            Double.parseDouble(request.getParameter("waist3")))/3;
+
+  waist = 0.5 * Math.round( waist / 0.5 );
 
   /* Retrieve weight from form and parse it into a double */
   weight = Double.parseDouble(request.getParameter("weight"));
@@ -134,9 +138,24 @@ if(theName != null)
   char gender = sex.charAt(0);
 
   double lbm = 0; 
+  
+/* Debugging statements 
+  out.println(sex);
+  out.println(request.getParameter("weight"));
+  out.println(hips);
+  out.println(waist);
+  out.println(height);
+  out.println(request.getParameter("wrist"));
+*/
+
   double perBodFat = Calculator.percentBodyFat(sex, 
 			request.getParameter("weight"),hips, waist, height,
 			request.getParameter("wrist"));
+
+ /*  Debugging statement
+  out.println(perBodFat);
+ */
+
   if(perBodFat < 0)
   {
    /* error flaged*/
@@ -145,15 +164,20 @@ if(theName != null)
   }
 
   lbm = Calculator.leanBodyMass(weight, perBodFat);
-  //double protein = 
-//	Calculator.protein(lbm,Integer.parseInt(request.getParameter("activity")));
- // blocks = (int)protein;
-
+/*  double protein = 
+  	Calculator.protein(lbm,Integer.parseInt(request.getParameter("activity")));
+  int  blocks = (int)protein;
+*/
+  
   u.updateAllInfo(theName, u.getEmail(),gender, act, blocks, height, 
 		weight, hips, waist, wrist, lbm);     
-  
+
+  /* Debugging statement
+  out.println(u.getLeanBodyMass());*/
+ 
   session.setAttribute( "username", theName );
   db.close(); // close database
+
   response.sendRedirect("profile.jsp"); // Go back to profile.jsp
 
 }
@@ -188,8 +212,8 @@ if(theName != null)
 
      <div class="sex-field"> 
      <label for="user_sex">Gender</label> 
-     <INPUT TYPE="RADIO" NAME="sex" VALUE="female" <%= f %> />Female</br>
-     <INPUT TYPE="RADIO" NAME="sex" VALUE="male" <%= m %> />Male
+     <INPUT TYPE="RADIO" NAME="sex" VALUE="f" <%= f %> />Female</br>
+     <INPUT TYPE="RADIO" NAME="sex" VALUE="m" <%= m %> />Male
      <label for="user_sex" class="error" style="display:none;">Please chose one</label> 
      </div>
 

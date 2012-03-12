@@ -20,7 +20,7 @@ Database db = new Database();
 int uid = (Integer)session.getAttribute("uid");
 User u = new User(db, uid);
 db.close();
-/*
+
 boolean load = u.getAllInfo();
 if(load == false)
 {
@@ -28,7 +28,7 @@ if(load == false)
  db.close();
  return;
 }
-*/
+
 String name = (String)session.getAttribute("username");
 
  double weight = u.getWeight();
