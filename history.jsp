@@ -119,9 +119,9 @@ String histDisp = "<table style='margin:auto auto;'>\n";
   Timestamp  occurrence = m.getOccurrence();
   
   histDisp += "<form action='history.jsp' method='post'>" +
-  	 "<input type='hidden' name='"+ mid +"'>" + name + " Date: " +
-  	 "<input type= 'hidden' name='" + occurrence + "'>" +
-	 occurrence + "</br> <input type='hidden' name='removeFromHistory'" +
+  	 "<input type='hidden' name='mid' value='"+ mid +"'>" + name + " Date: " +
+  	 "<input type='hidden' name='occurrence' value='" + occurrence + "'>" + occurrence + "</br>" +
+	 "<input type='hidden' name='removeFromHistory'" +
 	" value='removeFromHistory'> <input type='submit' value='Remove'>"+
   	"<form action='history.jsp' method='post'> </form>\n";
  }
