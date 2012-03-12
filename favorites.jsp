@@ -1,3 +1,44 @@
+<%@ page import = "hygeia.*" %>
+<%
+/* Check to see if a session exists */
+if (session.getAttribute("uid") == null) {
+    /* Send away non-logged in users */
+    response.sendRedirect("index.jsp");
+    return;
+}
+
+Database db = new Database();
+int uid = (Integer)session.getAttribute("uid");
+String username = (String)session.getAttribute("username");
+User u = new User(db, uid);
+Favorites favs = new Favorites(u);
+
+Meal.List meals[] = favs.getFavorites();
+if (meals == null) {
+    response.sendRedirect("error.jsp?code=1&echo=Could not fetch favorites");
+    db.close();
+    return;
+}
+
+/* Produce table of meals */
+String favDisp = "<table style='margin:auto auto;'>\n";
+for (Meal.List m : meals) {
+    if (m == null) {
+        response.sendRedirect("error.jsp?code=1&echo=Could not fetch");
+        db.close();
+        return;
+    }
+    String s = "<form action='favorites.jsp' method='post'><tr><td>" + 
+        m.getName() + "<input type='hidden' name='mid' value=" + m.getMid() +
+        "><input type='hidden' name='removeFromFavorites' value=1></td><td>" +
+        "<input type='submit' value='Remove'></td></tr></form>\n";
+    favDisp += s;
+}
+favDisp += "</table>\n";
+
+
+%>
+
 <%
 int[] pct1 = {30, 32, 40}; 
 int[] block1 = {20, 10, 30};
@@ -102,6 +143,14 @@ li{color:black; font-family:arial;}
 
 <br />
 
+<h1><%= username %>'s Favorites</h1>
+
+<br>
+<%= favDisp %>
+
+<!--
+
+
 <h2 style="text-align:right; font-family: verdana; background-color: #77850c; color:#fbff90; font-color: black; margin-right:700px; border-color:353b00; border-radius:7px; color=black; padding-right: 0.5cm"> Meal 1 </h2>
 
 <ul>
@@ -125,8 +174,13 @@ li{color:black; font-family:arial;}
   <div id="today_pie"></div>
   <div id="today_bar"></div>
 </div>
+
+-->
+
 </div>
 </div>
+
+
 <div id="footer"><a href="about.jsp">About Us</a><br />
 		Hygeia is a project developed for a Software Engineering class at UCSD.<br />
         Please contact us at hygeia110@gmail.com if you would like to use any of the code found here.
