@@ -21,6 +21,7 @@ History history = new History(u);
 //Meal.List meals[] = history.getHistory();
 
 String historyForm = "";
+String searchDisp = "";
 
 if(request.getParameter("removeFromHistory")!= null)
 {
@@ -33,7 +34,7 @@ if(request.getParameter("removeFromHistory")!= null)
  Meal meal = new Meal(db, mid);
  boolean check = history.removeMeal(meal, occur);
  
- String searchDisp = "";
+ searchDisp = "";
 
  if(check == false)
  {
@@ -75,7 +76,7 @@ if(request.getParameter("searchForMeal") != null)
    return;
  }
  
- String searchDisp = "<table style='margin:auto auto;'>\n";
+ searchDisp = "<table style='margin:auto auto;'>\n";
 
  for(Meal.List m : meal)
  {
