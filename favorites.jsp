@@ -13,6 +13,13 @@ String username = (String)session.getAttribute("username");
 User u = new User(db, uid);
 Favorites favs = new Favorites(u);
 
+if (request.getParameter("removeFromFavorites") != null) {
+    int mid = Integer.parseInt(request.getParameter("mid"));
+    Meal m = new Meal(db, mid);
+    favs.removeMeal(m);
+}
+
+
 Meal.List meals[] = favs.getFavorites();
 if (meals == null) {
     response.sendRedirect("error.jsp?code=1&echo=Could not fetch favorites");
