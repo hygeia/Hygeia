@@ -110,7 +110,7 @@ for (int i = 0; i < arr.length; i++) {
         "<input type='hidden' name='fid' value=" + f.getFid() + ">" +
         "Amount: <input name='count' size=2 " +
         "value=" + f.getCount() + "><input type='hidden' name='" +
-        "removeFromInventory' value=1><input type='submit' value='Remove'>" +
+        "removeFromInventory' value=1><input type='submit' value='Update'>" +
         "</form>\n</td>";
     invDisp += s;
 	invDispPics += d;
@@ -130,7 +130,6 @@ db.close();
 <head>
 	<title>Inventory | Hygeia</title>
     <link type="text/css" rel="stylesheet" href="style.css" />
-    <link rel="shortcut icon" href="favicon.ico" mce_href="favicon.ico"/> 
 
 	<style type="text/css">
 #image {
@@ -212,114 +211,6 @@ margin-top: 10px;
 </form>
 
 <%= searchDisp %>
-
-<!--
-<div align="center">
-<table>
-<tr>
-<td>
-<div id="image">
-<div id="image">
-<div class="text" style="text-align:left">
-<br/><br/><br/><br/><br/><br/><br/><br/>
-white eggs<br/>
-quantity: 
-</div>
-<div class="trans">
-</div>
-</div>
-</td>
-
-<td>
-<div id="image">
-<div id="image">
-<div class="text" style="text-align:left">
-<br/><br/><br/><br/><br/><br/><br/><br/>
-white eggs<br/>
-quantity: 
-</div>
-<div class="trans">
-</div>
-</div>
-</td>
-
-<td>
-<div id="image">
-<div id="image">
-<div class="text" style="text-align:left">
-<br/><br/><br/><br/><br/><br/><br/><br/>
-white eggs<br/>
-quantity: 
-</div>
-<div class="trans">
-</div>
-</div>
-</td>
-
-<td>
-<div id="image">
-<div id="image">
-<div class="text" style="text-align:left">
-<br/><br/><br/><br/><br/><br/><br/><br/>
-white eggs<br/>
-quantity: 
-</div>
-<div class="trans">
-</div>
-</div>
-</td>
-</tr>
-
-
-
-<tr>
-<td>
-<div id="image">
-<div id="image">
-<div class="text" style="text-align:left">
-<br/><br/><br/><br/><br/><br/><br/><br/>
-white eggs<br/>
-quantity: 
-</div>
-<div class="trans">
-</div>
-</div>
-</td>
-
-<td>
-<div id="image">
-<div id="image">
-<div class="text" style="text-align:left">
-<br/><br/><br/><br/><br/><br/><br/><br/>
-white eggs<br/>
-quantity: 
-</div>
-<div class="trans">
-</div>
-</div>
-</td>
-
-<td>
-<div id="image">
-<div id="image">
-<div class="text" style="text-align:left">
-<br/><br/><br/><br/><br/><br/><br/><br/>
-white eggs<br/>
-quantity: 
-</div>
-<div class="trans">
-</div>
-</div>
-</td>
-
-<td>
-<img src="images/addItemLARGEICON.png" style="margin-top:10px;">
-</td>
-</tr>
-
-</table>
-</div>
--->
 </div>
 </div>
 <div id="footer"><a href="about.jsp">About Us</a><br />
