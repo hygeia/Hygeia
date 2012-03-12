@@ -154,7 +154,6 @@ Add to history
 <H1> Meal History </H1>
 <P>
 
-<<<<<<< HEAD
 <%= searchDisp %>
 
 <br>
@@ -166,6 +165,6 @@ Add to history
         Please contact us at hygeia110@gmail.com if you would like to use any of the code found here.
       </div>
 </div>
->>>>>>> 639da075249cec58b72df1485127bb1107b93e19
+<!-- >>>>>>> 639da075249cec58b72df1485127bb1107b93e19 -->
 </BODY>
 </HTML>
