@@ -192,7 +192,8 @@ if(theName != null)
     <script type="text/javascript" src="javascript/jquery-1.7.1.min.js"></script>          
     <script type="text/javascript" src="javascript/jquery.validate.min.js"></script>          
     <script type="text/javascript" src="javascript/validation.js"></script>      
-    <link type="text/css" rel="stylesheet" href="profile.css" />    
+    <link type="text/css" rel="stylesheet" href="profile.css" /> 
+    <link rel="shortcut icon" href="favicon.ico" mce_href="favicon.ico"/> 
   </head>
   <body>
     <div id="page">
@@ -208,14 +209,14 @@ if(theName != null)
 
      <div class="sex-field"> 
      <label for="user_sex">Gender:</label> 
-     <INPUT TYPE="RADIO" NAME="sex" VALUE="f" <%= f %> />Female</br>
+     <INPUT TYPE="RADIO" NAME="sex" VALUE="f" <%= f %> />Female
      <INPUT TYPE="RADIO" NAME="sex" VALUE="m" <%= m %> />Male
-     <label for="user_sex" class="error" style="display:none;">Please chose one</label> 
+     <label for="user_sex" class="error" style="display:none;">Please choose one</label> 
      </div>
 
 
      <P> 
-     <label for="activity">What best fits you exercise routine?</label>
+     <label for="activity">What best fits you exercise routine?</label><br />
      <INPUT TYPE="RADIO" NAME="activity" VALUE="1" <%= a1 %> /> Sedentary</br>
      <INPUT TYPE="RADIO" NAME="activity" VALUE="2" <%= a2 %> /> Light (i.e, walking)</br>
      <INPUT TYPE="RADIO" NAME="activity" VALUE="3" <%= a3 %> /> Moderate (30 minutes per day, 3 times per week)</br>
