@@ -1,0 +1,74 @@
+html {
+    height:100%;
+    margin:0;
+    padding:0;
+}
+ 
+body {
+    margin:0;
+    background: #fbffcc fixed;
+    height:100%;
+    padding:0;
+	font-family:Verdana;
+}
+
+#page {
+    width:960px;
+    margin: 0 auto 0 auto;
+    position:relative;
+    background-color:#fbffcc;
+}
+
+#content {
+    padding-left:75px;
+}
+
+#right {
+    float:right;
+}
+
+label
+{
+ font: normal 12px/20px Arial, Sans-serif;
+ color: black;
+ vertical-align: middle;
+}
+/* common settings checkbox and radiobutton */
+input[type="checkbox"],
+input[type="radio"]
+{
+ -khtml-appearance: none;
+ background: url('images/radioandcheckboxsprite.gif') no-repeat;
+ width: 20px;
+ height: 20px;
+ vertical-align: middle;
+}
+input[type="checkbox"]
+{
+ background-position-x: left;
+}
+input[type="radio"]
+{
+ background-position-x: right;
+}
+input[type="checkbox"]:hover,
+input[type="radio"]:hover
+{
+ background-position-y: -40px;
+}
+input[type="checkbox"]:checked,
+input[type="radio"]:checked
+{
+ background-position-y: -20px;
+}
+input[type="checkbox"]:checked:hover,
+input[type="radio"]:checked:hover
+{
+ background-position-y: -60px;
+}
+/* disabled settings for checkbox and radiobutton */
+input[type="radio"]:disabled,
+input[type="checkbox"]:disabled
+{
+ opacity: .3;
+}

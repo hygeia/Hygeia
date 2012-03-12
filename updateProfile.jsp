@@ -193,19 +193,11 @@ if(theName != null)
     <script type="text/javascript" src="javascript/jquery.validate.min.js"></script>          
     <script type="text/javascript" src="javascript/validation.js"></script>      
     <link type="text/css" rel="stylesheet" href="profile.css" />    
-    <style type="text/css">
-      label { width:10em; float:left; }
-      label.error { color:red; padding-left:.5em; vertical-align:top; }
-      p { clear:both; }
-      .submit { margin-left:12em }
-      em { font-weight:bold; padding-right: 1em; vertical-align:top; }
-      .sex-field * {
-        vertical-align: middle;
-      }
-    </style>
   </head>
   <body>
-<<<<<<< HEAD
+    <div id="page">
+	<img src="images/profile.png">
+	<div id="content">
     <form  id="update_profile_form" METHOD="POST" ACTION="updateProfile.jsp">
       <p> 
       <label for="user_name">Name</label>
@@ -214,14 +206,14 @@ if(theName != null)
 
       <div class="sex-field"> 
       <label for="user_sex">Gender</label> 
-      <INPUT TYPE="RADIO" NAME="sex" VALUE="female" <%= f %> />Female<br />
+      <INPUT TYPE="RADIO" NAME="sex" VALUE="female" <%= f %> />Female
       <INPUT TYPE="RADIO" NAME="sex" VALUE="male" <%= m %> />Male
       <label for="user_sex" class="error" style="display:none;">Please chose one</label> 
       </div>
 
 
       <P> 
-      <label for="activity">What best fits you exercise routine?</label>
+      <label for="activity">What best fits you exercise routine?</label><br />
       <INPUT TYPE="RADIO" NAME="activity" VALUE="1" <%= a1 %> /> Sedentary<br />
       <INPUT TYPE="RADIO" NAME="activity" VALUE="2" <%= a2 %> /> Light (i.e, walking)<br />
       <INPUT TYPE="RADIO" NAME="activity" VALUE="3" <%= a3 %> /> Moderate (30 minutes per day, 3 times per week)<br />
@@ -377,8 +369,9 @@ if(theName != null)
 
      <P>
      <input type="hidden" name="updateProfile" value="updateProfile" />
-     <INPUT TYPE="SUBMIT" VALUE="Submit" />
+     <div id="right"><INPUT TYPE="image" src="images/submit.png" VALUE="Submit" /></div>
      </p>
+	 </div>
+	 </div>
    </body>
  </html>
->>>>>>> 0b8176ccc80bbf701c42453485d8c8eab167d03f
