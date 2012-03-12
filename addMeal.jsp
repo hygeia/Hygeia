@@ -88,9 +88,16 @@ if (request.getParameter("addToHistory") != null) {
 		return;
 	}
 	c.set(Calendar.DAY_OF_MONTH, Integer.parseInt(request.getParameter("daydropdown")));
+	c.set(Calendar.HOUR_OF_DAY, Integer.parseInt(request.getParameter("timedropdown")));
 	Timestamp today = new Timestamp(c.getTimeInMillis());
 	
 	hist.addMeal(new Meal(db, mid2), today);
+	session.setAttribute("mealArray", new ArrayList<Food.Update>());
+	session.setAttribute("mealName", "");
+	session.setAttribute("mealDay", "today.getDate()");
+	session.setAttribute("mealMonth", "today.getMonth()");
+	session.setAttribute("mealYear", "today.getFullYear()");
+	session.setAttribute("mealTime", "today.getHours()");
 }
 
 Food.List[] arr = inv.getInventoryList();
@@ -129,11 +136,12 @@ db.close();
 
 var monthtext=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
 
-function populatedropdown(dayfield, monthfield, yearfield){
+function populatedropdown(dayfield, monthfield, yearfield, timefield){
 var today=new Date()
 var dayfield=document.getElementById(dayfield)
 var monthfield=document.getElementById(monthfield)
 var yearfield=document.getElementById(yearfield)
+var timefield=document.getElementById(timefield)
 for (var i=1; i<32; i++)
 dayfield.options[i]=new Option(i, i+1)
 dayfield.options[today.getDate()]=new Option(today.getDate(), today.getDate(), true, true) //select today's day
@@ -146,6 +154,9 @@ yearfield.options[y]=new Option(thisyear, thisyear)
 thisyear+=1
 }
 yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, true) //select today's year
+for (var d=0; d<24; d++)
+timefield.options[d]=new Option(d, d+1)
+timefield.options[today.getHours()]=new Option(today.getHours(), today.getHours(), true, true) //select current time
 }
 
 </script>
@@ -160,6 +171,7 @@ yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, 
         <div id="right">Date: <select id="daydropdown" name="daydropdown"></select> 
 			<select id="monthdropdown" name="monthdropdown"></select> 
 			<select id="yeardropdown" name="yeardropdown"></select>
+		<br />Time: <select id="timedropdown" name="timedropdown"></select>
 		</div>
 		<br /><br /><br /><input type="hidden" name="addToHistory" value="addToHistory">
         <div id="right"><input type="submit"></div>
@@ -170,7 +182,7 @@ yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, 
 
 //populatedropdown(id_of_day_select, id_of_month_select, id_of_year_select)
 window.onload=function(){
-populatedropdown("daydropdown", "monthdropdown", "yeardropdown")
+populatedropdown("daydropdown", "monthdropdown", "yeardropdown", "timedropdown")
 }
 </script>
     </div>
