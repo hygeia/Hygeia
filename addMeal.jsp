@@ -27,7 +27,10 @@ int uid = (Integer)session.getAttribute("uid");
 User u = new User(db, uid);
 Inventory inv = new Inventory(u);
 
-ArrayList<Food.Update> f = new ArrayList<Food.Update>();
+if( session.getAttribute("mealArray") == null){
+	session.setAttribute("mealArray", new ArrayList<Food.Update>());
+}
+ArrayList<Food.Update> f = (ArrayList<Food.Update>)session.getAttribute("mealArray");
 
 if (request.getParameter("addToMeal") != null) {
     int fid = Integer.parseInt(request.getParameter("fid"));
@@ -41,13 +44,17 @@ if (request.getParameter("addToMeal") != null) {
         return;
     }
 	f.add(food);
+	session.setAttribute("mealArray", f);
 }
 
 if (request.getParameter("addToHistory") != null) {
 	String mealName = request.getParameter("name");
-	int mid = Integer.parseInt(request.getParameter("mid"));
+	//int mid = Integer.parseInt(request.getParameter("mid"));
 	History hist = new History(u);
-	int idk = Meal.createMeal(db, u, (Food.Update[])f.toArray(), mealName);
+	f = (ArrayList<Food.Update>)session.getAttribute("mealArray"); // get most current array
+	int mid2 = Meal.createMeal(db, u, f.toArray(new Food.Update[0]), mealName);
+	
+	// create Timestamp
 	Calendar c = Calendar.getInstance();
 	c.set(Calendar.YEAR, Integer.parseInt(request.getParameter("yeardropdown")));
 	String month = request.getParameter("monthdropdown");
@@ -83,7 +90,7 @@ if (request.getParameter("addToHistory") != null) {
 	c.set(Calendar.DAY_OF_MONTH, Integer.parseInt(request.getParameter("daydropdown")));
 	Timestamp today = new Timestamp(c.getTimeInMillis());
 	
-	hist.addMeal(new Meal(db, idk), today);
+	hist.addMeal(new Meal(db, mid2), today);
 }
 
 Food.List[] arr = inv.getInventoryList();
@@ -150,9 +157,9 @@ yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, 
 	<form action="addMeal.jsp" method="post">
         <div id="left">Name: <input name="name"></div>
 		<input type="hidden" name="mid">
-        <div id="right">Date: <select id="daydropdown"></select> 
-			<select id="monthdropdown"></select> 
-			<select id="yeardropdown"></select>
+        <div id="right">Date: <select id="daydropdown" name="daydropdown"></select> 
+			<select id="monthdropdown" name="monthdropdown"></select> 
+			<select id="yeardropdown" name="yeardropdown"></select>
 		</div>
 		<br /><br /><br /><input type="hidden" name="addToHistory" value="addToHistory">
         <div id="right"><input type="submit"></div>
