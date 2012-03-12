@@ -80,6 +80,11 @@ if(request.getParameter("searchForMeal") != null)
 
  for(Meal.List m : meal)
  {
+  if(m == null){
+	response.sendRedirect("error.jsp?code=1&echo=Could not fetch meal");
+    db.close();
+    return;
+  }
   String s = "<tr><form action='history.jsp' method='post'>" +
 	"<input type='hidden' name='mid' value='" + m.getMid() + "'>" +
 	"<td>" + m.getName() + "</td><td> Occurrence(MM-dd hh:mm):"+
@@ -104,6 +109,11 @@ String histDisp = "<table style='margin:auto auto;'>\n";
 
  for(Meal.List m : meals)
  {
+  if( m == null){
+   response.sendRedirect("error.jsp?code=1&echo=Could not fetch meal");
+   db.close();
+   return;
+  }
   String name = m.getName();
   int mid = m.getMid();
   Timestamp  occurrence = m.getOccurrence();
