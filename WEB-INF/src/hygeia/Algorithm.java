@@ -49,7 +49,7 @@ public class Algorithm {
 						inventorymatchcount += 1;
 				}
 			}
-			if (inventorymatchcount == m.getMeal.length)
+			if (inventorymatchcount == m.getMeal().length)
 			{
 				//currently not calorie budget based. Functionality will be added if budget is accessible.
 				//begins balanced suggestion based on the 40:30:30 ideal,

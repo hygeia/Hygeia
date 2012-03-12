@@ -111,7 +111,7 @@ public class Food {
         private double weight;
         private double calories, carbohydrates, protein, fat, factor; // wtf is factor?
         
-        public Create(String name, double factor, int wt,
+        public Create(String name, double factor, double wt,
             double cal, double carb, double pro, double fat) {
 
             // instantiate the instance variables
