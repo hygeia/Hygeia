@@ -32,20 +32,17 @@ double height = u.getHeight();
 double temp =  height/12;
 int ft = (int)(height/12);
 double inc = (temp-ft)*12;
-//String sex = u.getSex();
-//String sex = "f";
 int in = (int) inc;
 
 String sex = Character.toString(u.getGender());
-//String sex = "f";
 String f = "";
 String m = ""; 
-if( sex.equals("F") )
+if( sex.equals("f") )
 {
  f = "checked";
 }
 
-else if( sex.equals("M"))
+else if( sex.equals("m"))
 {
  m = "checked";
 }
@@ -100,9 +97,9 @@ else
  a1= "checked";
 }
 
-/* Debugging statement */
+/* Debugging statement 
 out.println( Calculator.percentBodyFat("m","180",37.5,37.0,69.0,"7")); 
-
+*/
 
 /* retrieve input from form */
 String theName = request.getParameter("name");
@@ -186,7 +183,7 @@ if(theName != null)
 
      <p> 
      <label for="user_name">Name</label>
-     <INPUT TYPE="TEXT" VALUE="<%= name %>" NAME="user_name" SIZE="20" />
+     <INPUT TYPE="TEXT" VALUE="<%= name %>" NAME="name" SIZE="20" />
      </p>
 
      <div class="sex-field"> 
@@ -239,7 +236,7 @@ if(theName != null)
      </p>
      <P> 
      <label for="waist2">Waist measurement 2</label>
-     <INPUT TYPE="TEXT" NAME="waist2" VALUE="" SIZE="10"/>
+     <INPUT TYPE="TEXT" NAME="waist2" VALUE="<%= waist %>" SIZE="10"/>
      </p>
      <P> 
      <label for="waist3">Waist measurement 3</label>
