@@ -151,6 +151,7 @@ String histDisp = "<table style='margin:auto auto;'>\n";
 <td> <a href="logout.jsp"><img src="images/lightICON8.png"></a></td>
 </tr>
 </table>
+</div>
 
 <!-- Ask user if they would like to add meal to history -->
 Add to history
@@ -170,11 +171,11 @@ Add to history
 <%= histDisp %>
 =======
 </div>
+</div>
 <div id="footer"><a href="about.jsp">About Us</a><br />
 		Hygeia is a project developed for a Software Engineering class at UCSD.<br />
         Please contact us at hygeia110@gmail.com if you would like to use any of the code found here.
       </div>
-</div>
 <!-- >>>>>>> 639da075249cec58b72df1485127bb1107b93e19 -->
 </BODY>
 </HTML>
