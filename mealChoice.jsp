@@ -20,7 +20,7 @@
 	  <p class="choice">Pick a meal from your list of favorites</p>
 	  </div>
 	  <div id="left">
-	  <a href="addMeal.jsp"><img src="images/getSuggestion.png" ></a><br /><br />
+	  <a href="suggestMeal.jsp"><img src="images/getSuggestion.png" ></a><br /><br />
 	  <p class="choice">Get a suggested meal from our suggestion algorithm</p>
 	  </div>
 	  <div id="left">
