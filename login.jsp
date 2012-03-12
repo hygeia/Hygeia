@@ -53,7 +53,7 @@ if (request.getParameter("login") != null) {
     <link type="text/css" rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <img src="images/lightICON6.png"/>
+    <img src="images/lightICON1.png"/>
     <div id="page"><div id="content">
     <h3>Login</h3>
     <br>
@@ -74,10 +74,11 @@ if (request.getParameter("login") != null) {
       <tr>
       </table>
     </form>
+</div>
+</div>
    <div id="footer"><a href="about.jsp">About Us</a><br />
 		Hygeia is a project developed for a Software Engineering class at UCSD.<br />
         Please contact us at hygeia110@gmail.com if you would like to use any of the code found here.
       </div>
-  </div></div> <!-- content -->
   </body>
 </html>
