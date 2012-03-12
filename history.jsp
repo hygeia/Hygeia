@@ -164,7 +164,6 @@ Add to history
 		Hygeia is a project developed for a Software Engineering class at UCSD.<br />
         Please contact us at hygeia110@gmail.com if you would like to use any of the code found here.
       </div>
-</div>
 >>>>>>> 639da075249cec58b72df1485127bb1107b93e19
 </BODY>
 </HTML>
