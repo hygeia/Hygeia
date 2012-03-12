@@ -64,7 +64,7 @@ String name = (String)session.getAttribute("username");
 	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
  <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
  <head>
- <title>Hygeia</title>
+ <title>Profile | Hygeia</title>
  <link type="text/css" rel="stylesheet" href="style.css" />
  <link rel="shortcut icon" href="favicon.ico" mce_href="favicon.ico"/>  
  </head>
