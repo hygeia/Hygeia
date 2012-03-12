@@ -114,8 +114,9 @@ for(int i=0; i<todayarr.size(); i++){
 if(todayarr.size() == 0){
 	showTodayCharts = "add a meal to start tracking progress";
 }else{
-	pct1[0] = tempc/todayarr.size(); pct1[1] = tempp/todayarr.size(); pct1[2] = tempf/todayarr.size();
+	pct1[0] = tempc; pct1[1] = tempp; pct1[2] = tempf;
 	block1[0] = pct1[0]/9; block1[1] = pct1[1]/7; block1[2] = pct1[2]/3; 
+	tempc = 0; tempp = 0; tempf = 0;
 }
 for(int i=0; i<yesterdayarr.size(); i++){
 	Nutrition nuts = yesterdayarr.get(i).getNutrition();
@@ -126,8 +127,9 @@ for(int i=0; i<yesterdayarr.size(); i++){
 if(yesterdayarr.size() == 0){
 	showYesterdayCharts = "add a meal to start tracking progress";
 }else{
-	pct2[0] = tempc/yesterdayarr.size(); pct2[1] = tempp/yesterdayarr.size(); pct2[2] = tempf/yesterdayarr.size();
+	pct2[0] = tempc; pct2[1] = tempp; pct2[2] = tempf;
 	block2[0] = pct2[0]/9; block2[1] = pct2[1]/7; block2[2] = pct2[2]/3; 
+	tempc = 0; tempp = 0; tempf = 0;
 }
 for(int i=0; i<twodayarr.size(); i++){
 	Nutrition nuts = twodayarr.get(i).getNutrition();
@@ -138,8 +140,9 @@ for(int i=0; i<twodayarr.size(); i++){
 if(twodayarr.size() == 0){
 	showTwoDayCharts = "add a meal to start tracking progress";
 }else{
-	pct3[0] = tempc/twodayarr.size(); pct3[1] = tempp/twodayarr.size(); pct3[2] = tempf/twodayarr.size();
+	pct3[0] = tempc; pct3[1] = tempp; pct3[2] = tempf;
 	block3[0] = pct3[0]/9; block3[1] = pct3[1]/7; block3[2] = pct3[2]/3; 
+	tempc = 0; tempp = 0; tempf = 0;
 }
 for(int i=0; i<threedayarr.size(); i++){
 	Nutrition nuts = threedayarr.get(i).getNutrition();
@@ -150,8 +153,9 @@ for(int i=0; i<threedayarr.size(); i++){
 if(threedayarr.size() == 0){
 	showThreeDayCharts = "add a meal to start tracking progress";
 }else{
-	pct4[0] = tempc/threedayarr.size(); pct4[1] = tempp/threedayarr.size(); pct4[2] = tempf/threedayarr.size();
+	pct4[0] = tempc; pct4[1] = tempp; pct4[2] = tempf;
 	block4[0] = pct4[0]/9; block4[1] = pct4[1]/7; block4[2] = pct4[2]/3; 
+	tempc = 0; tempp = 0; tempf = 0;
 }
 
 // create a string that shows meal names, foods, and nutrition info for today 
@@ -178,15 +182,18 @@ db.close();
 	/* 0 = today, 1 = yesterday, 2 = two days ago, 3 = three days ago, 4 = more than three days ago -1 = future*/
 	int findDay(Meal.List m){
 		Calendar c = Calendar.getInstance();
-		int year = c.get(Calendar.YEAR);
+		/*int year = c.get(Calendar.YEAR);
 		int month = c.get(Calendar.MONTH);
 		int day = c.get(Calendar.DAY_OF_MONTH);
-		c.set(year, month, day, 0, 0);
+		c.set(year, month, day, 0, 0);*/
+		c.set(Calendar.HOUR_OF_DAY, 0);
+		c.set(Calendar.MINUTE, 0);
+		c.set(Calendar.SECOND, 0);
+		Timestamp tomorrow = new Timestamp(c.getTimeInMillis() + 86400000);
 		Timestamp today = new Timestamp(c.getTimeInMillis());
 		Timestamp yesterday = new Timestamp(c.getTimeInMillis() - 86400000);
 		Timestamp twoday = new Timestamp(c.getTimeInMillis() - (86400000 * 2));
 		Timestamp threeday = new Timestamp(c.getTimeInMillis() - (86400000 * 3));
-		Timestamp tomorrow = new Timestamp(c.getTimeInMillis() + 86400000);
 		
 		if(m == null){
 			return -1;
