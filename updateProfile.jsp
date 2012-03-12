@@ -44,10 +44,12 @@ if( sex.equals("F") )
 {
  f = "checked";
 }
+
 else if( sex.equals("M"))
 {
  m = "checked";
 }
+
 else
 {
  f = "checked";
@@ -160,7 +162,6 @@ if(theName != null)
 }
 
 %>
-<<<<<<< HEAD
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
   <head>
@@ -169,7 +170,7 @@ if(theName != null)
     <script type="text/javascript" src="javascript/jquery.validate.min.js"></script>          
     <script type="text/javascript" src="javascript/validation.js"></script>          
     <style type="text/css">
-      label { width:10em; float:left; };
+      label { width:10em; float:left; }
       label.error { color:red; padding-left:.5em; vertical-align:top; }
       p { clear:both; }
       .submit { margin-left:12em }
@@ -257,7 +258,7 @@ if(theName != null)
      </p>
 
      <P> 
-     <label for="wrist">Wrist measurement(INCHES)</label>
+     <label for="wrist">Wrist measurement(in.)</label>
      <INPUT TYPE="TEXT" VALUE="<%= wrist %>" NAME="wrist" SIZE="10"/>
      </p>
 
@@ -265,72 +266,5 @@ if(theName != null)
      <input type="hidden" name="updateProfile" value="updateProfile" />
      <INPUT TYPE="SUBMIT" VALUE="Submit" />
      </p>
-=======
- <html>
- <title>Update Profile</title>
- <link href="main.css" rel="stylesheet" type="text/css">
- <!-- <script src="main.js"> -->
- </head>
- <body>
-
- <FORM METHOD="POST" ACTION="updateProfile.jsp">
-
- <P> Name: </br>
- <INPUT TYPE="TEXT" VALUE="<%= name %>" NAME="name" SIZE="20">
-
- <P> Gender: </br>
- <INPUT TYPE="RADIO" NAME="sex" VALUE="female" <%= f %> >Female
- <INPUT TYPE="RADIO" NAME="sex" VALUE="male" <%= m %> >Male
-
- <P> What best fits you exercise routine? </br>
- <INPUT TYPE="RADIO" NAME="activity" VALUE="1" <%= a1 %> >
-  Sedentary</br>
- <INPUT TYPE="RADIO" NAME="activity" VALUE="2" <%= a2 %> >
-  Light (i.e, walking)</br>
- <INPUT TYPE="RADIO" NAME="activity" VALUE="3" <%= a3 %> >
-  Moderate (30 minutes per day, 3 times per week)</br>
- <INPUT TYPE="RADIO" NAME="activity" VALUE="4" <%= a4 %> >
-  Active (1 hour per day, 5 times per week)</br> 
- <INPUT TYPE="RADIO" NAME="activity" VALUE="5" <%= a5 %> >
-  Very active (2 hours per day, 5 times a week)</br>
- <INPUT TYPE="RADIO" NAME="activity" VALUE="6" <%= a6 %> >
-  Heavy weight training or twice-a-day exercise (5 days per week)</br>
-
- <P> Weight(LBS):
- <INPUT TYPE="TEXT" VALUE= "<%= weight %>" NAME="weight" SIZE="10">
-
- <P> Take 3 measurements of your hips </br>
- How to take proper hip measurements: (Must have measuring tape) Take</br>
- measuremet from the widest point from hip to hip.(INCHES)</br>
- Hygeia will find the average of these three measurements</br> 
- <P> Hip measurement 1:<INPUT TYPE="TEXT" NAME="hip1" VALUE="<%= hips %>" SIZE="10"> 
- <P> Hip measurement 2:<INPUT TYPE="TEXT" NAME="hip2" VALUE="<%= hips %>" SIZE="10">
- <P> Hip measurement 3:<INPUT TYPE="TEXT" NAME="hip3" VALUE="<%= hips %>" SIZE="10">
-
- <P> (Must have measuring tape) Take 3 measurements of of your waist at</br>
-      bellybutton level. (INCHES)</br>
-Hygeia will find the average of these three measurements</br> 
- <P> Waist measurement 1:<INPUT TYPE="TEXT" NAME="waist1" VALUE="<%= waist %>" SIZE="10">
- <P> Waist measurement 2:<INPUT TYPE="TEXT" NAME="waist2" VALUE="<%= waist %>" SIZE="10">
- <P> Waist measurement 3:<INPUT TYPE="TEXT" NAME="waist3" VALUE="<%= waist %>" SIZE="10">
-
- <P> Height(W/O SHOES): 
- <INPUT TYPE="TEXT" VALUE="<%= ft %>" NAME="ft" SIZE="5">ft.
- <INPUT TYPE="TEXT" VALUE="<%= in %>" NAME="in" SIZE="5">in.
-
- <P> Wrist measurement</br>
-     How to take a wrist measurement: (Must have measuring tape) Measure</br>
-     your wrist at the space between your dominant hand and your wrist bone,</br>
-     at the location where your wrist bends.</br>
-
- <P> Wrist measurement(INCHES):
- <INPUT TYPE="TEXT" VALUE="<%= wrist %>" NAME="wrist" SIZE="10">
-
- <P>
- <INPUT TYPE="SUBMIT" VALUE="Submit">
->>>>>>> 301f8ed2ed8787f6b4c048bbd60c7039b04bc2c9
- </FORM> 
- </body>
+   </body>
  </html>
-
-
