@@ -29,6 +29,8 @@ Inventory inv = new Inventory(u);
 
 if( session.getAttribute("mealArray") == null){
 	session.setAttribute("mealArray", new ArrayList<Food.Update>()); }
+//if( session.getAttribute("mealNameArray") == null){
+//	session.setAttribute("mealNameArray", new ArrayList<String>()); }
 if( session.getAttribute("mealName") == null){
 	session.setAttribute("mealName", ""); }
 if( session.getAttribute("mealDay") == null){
@@ -40,6 +42,7 @@ if( session.getAttribute("mealYear") == null){
 if( session.getAttribute("mealTime") == null){
 	session.setAttribute("mealTime", "today.getHours()");}
 ArrayList<Food.Update> f = (ArrayList<Food.Update>)session.getAttribute("mealArray");
+//ArrayList<String> fNames = (ArrayList<String>)session.getAttribute("mealNameArray");
 
 if (request.getParameter("addToMeal") != null) {
     int fid = Integer.parseInt(request.getParameter("fid"));
@@ -204,7 +207,7 @@ String mealDisp = "<table style='margin:auto auto;'>\n";
 for (Food.Update up : f) {
 	String s = "<tr><form action='addMeal.jsp' method='post'>" +
         "<input type='hidden' name='fid' value=" + up.getFid() + ">" +
-        "<td>" + up.getName() + "</td><td>Amount: <input name='count' " +
+        "<td>" + up.getName(db) + "</td><td>Amount: <input name='count' " +
         "value=" + up.getCount() + "><input type='hidden' name='" +
         "removeFromMeal' value=1><input type='submit' value='Remove'>" +
         "</td></form></tr>\n";
