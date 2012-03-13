@@ -1,7 +1,8 @@
-<!--input.test {color: a3a770; background:url(EmailAddress.png); height:40px; width:200px; font-size:16px; border:0; border-color:353b00;}-->
-input.email {color: a3a770; background-color:444a1e; height:30px; font-size:16px; border-color:353b00; border-radius:7px; font-family:"Verdana"; font-weight:bold; border-style:solid;}
+<!--input.test {color: a3a770; background:url(EmailAddress.png); height:60px; width:200px; font-size:16px; border:0; border-color:353b00;}-->
+input.email {color: a3a770; background-color:444a1e; width:200px; height:30px; font-size:16px; border-color:353b00; border-radius:7px; font-family:"Verdana"; font-weight:bold; border-style:solid;}
 input.password {color: a3a770; background-color:444a1e; height:30px; font-size:16px; border-color:353b00; border-radius:7px; border-style:solid;}
 input.button {vertical-align: -12px; }
+#leaf { margin-left:290px; }
 html {
     height:100%;
     margin:0;
@@ -25,6 +26,7 @@ body {
 }
 
 #content {
+    position:relative;
     margin-bottom:10px;
     overflow:auto;
     padding-bottom:60px;
