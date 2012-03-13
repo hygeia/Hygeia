@@ -74,12 +74,6 @@ public class Food {
 
         private void setCount( double count) {
 
-            // Lower limit of 0, no negative counts;
-            if ( count < 0 )
-            {
-                count = 0;
-            }
-
             this.count = count;
         }
         
