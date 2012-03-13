@@ -46,7 +46,7 @@ public class Algorithm {
         ResultSet rs = db.execute("select mid from meals where (uid = " + 
             u.getUid() + " or uid = 0) and type & " + type + " = " + type + ";");
         //arraylist of meal IDs that come from the database
-        ArrayList<Integer> results = new ArrayList<Integer>();
+        ArrayList<Integer> results = new ArrayList<Integer>(0);
 		while(rs.next())
 		{
 			results.add(rs.getInt("mid"));
@@ -64,7 +64,8 @@ public class Algorithm {
 		while (results.size() > 0)
 		{
 			inventorymatchcount = 0;
-			m = new Meal(db, results.get(r.nextInt(results.size())));
+			int nextInt = r.nextInt(results.size());
+			m = new Meal(db, results.get(nextInt));
 			Food.Update mu[] = m.getMeal();
 			for (int i = 0; i < mu.length; i++)
 			{
@@ -76,7 +77,6 @@ public class Algorithm {
 			}
 			if (inventorymatchcount == mu.length)
 			{
-				//currently not calorie budget based. Functionality will be added if budget is accessible.
 				//begins balanced suggestion based on the 40:30:30 ideal,
 				//+ and - 10% (defined as constant SAME, Suggest A Meal Error) to find relatively balanced meals
 				Nutrition n = m.getNutrition();
@@ -100,7 +100,7 @@ public class Algorithm {
 			{
 				//if the contents of the inventory don't satisfy the recipe, remove that recipe
 				//from the ArrayList of meals so it won't accidentally be compared again
-				results.remove(m.getMid());
+				results.remove(nextInt);
 			}
 
 		}
