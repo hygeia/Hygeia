@@ -16,6 +16,14 @@ public class Food {
             this.setCount ( count );
         }
         
+        public boolean equals(Object o) {
+            Food.Update fu = (Food.Update)o;
+            if (this.fid == fu.fid) {
+                return true;
+            }
+            return false;
+        }
+        
         public int getFid() {
             return this.fid;
         }
