@@ -28,21 +28,37 @@ String showThreeDayCharts =
         "</div>" +
         "<div id=\"threeday_bar\">" +
         "</div>";
+String createThreeDayBarChart = "var chart4 = new google.visualization.ColumnChart(document.getElementById('threeday_bar'));" +
+		"chart4.draw(data4, optionsOday);";
+String createThreeDayPieChart = "var chart4 = new google.visualization.PieChart(document.getElementById('threeday_pie'));" +
+        "chart4.draw(data4, optionsOday);";
 String showTwoDayCharts = 
         "<div id=\"twoday_pie\">" +
         "</div>" +
         "<div id=\"twoday_bar\">" +
         "</div>";
+String createTwoDayBarChart = "var chart3 = new google.visualization.ColumnChart(document.getElementById('twoday_bar'));" +
+        "chart3.draw(data3, optionsOday);";
+String createTwoDayPieChart = "var chart3 = new google.visualization.PieChart(document.getElementById('twoday_pie'));" +
+        "chart3.draw(data3, optionsOday);";
 String showYesterdayCharts = 
         "<div id=\"yesterday_pie\">" +
         "</div>" +
         "<div id=\"yesterday_bar\">" +
         "</div>";
+String createYesterdayBarChart = "var chart2 = new google.visualization.ColumnChart(document.getElementById('yesterday_bar'));" +
+        "chart2.draw(data2, optionsOday);";
+String createYesterdayPieChart = "var chart2 = new google.visualization.PieChart(document.getElementById('yesterday_pie'));" +
+        "chart2.draw(data2, optionsOday);";
 String showTodayCharts = 
         "<div id=\"today_pie\">" +
         "</div>" +
         "<div id=\"today_bar\">" +
         "</div>";
+String createTodayBarChart = "var chart1 = new google.visualization.ColumnChart(document.getElementById('today_bar'));" +
+        "chart1.draw(data1, optionsToday);";
+String createTodayPieChart = "var chart1 = new google.visualization.PieChart(document.getElementById('today_pie'));" +
+        "chart1.draw(data1, optionsToday);";
 
 DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
 Date todaysdate = new Date();
@@ -101,6 +117,8 @@ for(int i=0; i<todayarr.size(); i++){
 }
 if(todayarr.size() == 0){
 	showTodayCharts = "add a meal to start tracking progress";
+	createTodayPieChart = "";
+	createTodayBarChart = "";
 }else{
 	pct1[0] = tempc; pct1[1] = tempp; pct1[2] = tempf;
 	block1[0] = pct1[0]/9; block1[1] = pct1[1]/7; block1[2] = pct1[2]/3; 
@@ -114,6 +132,8 @@ for(int i=0; i<yesterdayarr.size(); i++){
 }
 if(yesterdayarr.size() == 0){
 	showYesterdayCharts = "add a meal to start tracking progress";
+	createYesterdayPieChart = "";
+	createYesterdayBarChart = "";
 }else{
 	pct2[0] = tempc; pct2[1] = tempp; pct2[2] = tempf;
 	block2[0] = pct2[0]/9; block2[1] = pct2[1]/7; block2[2] = pct2[2]/3; 
@@ -127,6 +147,8 @@ for(int i=0; i<twodayarr.size(); i++){
 }
 if(twodayarr.size() == 0){
 	showTwoDayCharts = "add a meal to start tracking progress";
+	createTwoDayPieChart = "";
+	createTwoDayBarChart = "";
 }else{
 	pct3[0] = tempc; pct3[1] = tempp; pct3[2] = tempf;
 	block3[0] = pct3[0]/9; block3[1] = pct3[1]/7; block3[2] = pct3[2]/3; 
@@ -140,6 +162,8 @@ for(int i=0; i<threedayarr.size(); i++){
 }
 if(threedayarr.size() == 0){
 	showThreeDayCharts = "add a meal to start tracking progress";
+	createThreeDayPieChart = "";
+	createThreeDayBarChart = "";
 }else{
 	pct4[0] = tempc; pct4[1] = tempp; pct4[2] = tempf;
 	block4[0] = pct4[0]/9; block4[1] = pct4[1]/7; block4[2] = pct4[2]/3; 
@@ -270,14 +294,10 @@ db.close();
         };
 
 
-        var chart1 = new google.visualization.PieChart(document.getElementById('today_pie'));
-        chart1.draw(data1, optionsToday);
-	var chart2 = new google.visualization.PieChart(document.getElementById('yesterday_pie'));
-        chart2.draw(data2, optionsOday);
-	var chart3 = new google.visualization.PieChart(document.getElementById('twoday_pie'));
-        chart3.draw(data3, optionsOday);
-	var chart4 = new google.visualization.PieChart(document.getElementById('threeday_pie'));
-        chart4.draw(data4, optionsOday);
+		<%= createTodayPieChart %>
+		<%= createYesterdayPieChart %>
+		<%= createTwoDayPieChart %>
+		<%= createThreeDayPieChart %>
 
       }
     </script>
@@ -353,15 +373,10 @@ db.close();
         };
 
 
-        var chart1 = new google.visualization.ColumnChart(document.getElementById('today_bar'));
-        chart1.draw(data1, optionsToday);
-	var chart2 = new google.visualization.ColumnChart(document.getElementById('yesterday_bar'));
-        chart2.draw(data2, optionsOday);
-	var chart3 = new google.visualization.ColumnChart(document.getElementById('twoday_bar'));
-        chart3.draw(data3, optionsOday);
-	var chart4 = new google.visualization.ColumnChart(document.getElementById('threeday_bar'));
-        chart4.draw(data4, optionsOday);
-
+        <%= createTodayBarChart %>
+		<%= createYesterdayBarChart %>
+		<%= createTwoDayBarChart %>
+		<%= createThreeDayBarChart %>
       }
     </script>
   </head>
