@@ -1,0 +1,46 @@
+<!--input.test {color: a3a770; background:url(EmailAddress.png); height:40px; width:200px; font-size:16px; border:0; border-color:353b00;}-->
+input.email {color: a3a770; background-color:444a1e; height:30px; font-size:16px; border-color:353b00; border-radius:7px; font-family:"Verdana"; font-weight:bold; border-style:solid;}
+input.password {color: a3a770; background-color:444a1e; height:30px; font-size:16px; border-color:353b00; border-radius:7px; border-style:solid;}
+#leaf {margin-left:200px;}
+input.button {vertical-align: -12px; }
+html {
+    height:100%;
+    margin:0;
+    padding:0;
+}
+ 
+body {
+    margin:0;
+    background-color:#7b840d;
+    height:100%;
+    text-align:center;
+    padding:0;
+	font-family:Verdana;
+}
+
+#page {
+    width:960px;
+    min-height:100%;
+    margin: 0 auto 0 auto;
+    background-color:#7b840d;
+}
+
+#content {
+    margin-bottom:10px;
+    overflow:auto;
+    padding-bottom:60px;
+}
+
+
+
+/* Footer */
+#footer {
+  position:relative;
+  margin: -60px auto 0 auto;
+  clear:both;
+  width:960px;
+  height:60px;
+  text-align:center;
+  color:rgb(255,255,255);
+  background-color:#7b840d;
+}
