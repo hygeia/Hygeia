@@ -19,6 +19,7 @@ public class Favorites {
         if (m == null) {
             return false;
         }
+        //adds the meal to the favorites table
 		int r = db.update("insert into favorites (mid, uid) values (" + 
 		    m.getMid() + ", " + uid + ");");
 		if (r < 1) {

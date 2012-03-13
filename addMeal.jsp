@@ -90,7 +90,8 @@ if (request.getParameter("addToHistory") != null) {
 	//int mid = Integer.parseInt(request.getParameter("mid"));
 	History hist = new History(u);
 	f = (ArrayList<Food.Update>)session.getAttribute("mealArray"); // get most current array
-	int mid2 = Meal.createMeal(db, u, f.toArray(new Food.Update[0]), request.getParameter("name"));
+	int mid2 = Meal.createMeal(db, u, f.toArray(new Food.Update[0]), 
+		request.getParameter("name")/*, Integer.parseInt(request.getParameter("mealType"))*/);
 	
 	// create Timestamp
 	Calendar c = Calendar.getInstance();
@@ -229,7 +230,7 @@ timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.
   <body>
   <div id="page">
     <div id="content">
-      <center><h1>Add a Meal</h1></center><br />
+    <a href="mealChoice.jsp"> Select another method of adding a meal </a><center><h1>Input Your Own</h1></center><br />
 	<center><h2 class="new">Meal</h2></center><br /><%= mealDisp %>
 	<br /><center><h2>Inventory</h2></center><br /><%= invDisp %>
 	<p>Once you've finished adding food, enter a name and date to add it to your calendar!</p>
@@ -242,10 +243,15 @@ timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.
 			<select id="yeardropdown" name="yeardropdown"></select>
 		Time: <select id="timedropdown" name="timedropdown"></select>
 		</div>
-		<br /><br /><input type="hidden" name="addToHistory" value="addToHistory">
-        <div id="right"><input type="submit" value="Add Meal"></div>
+		<br /><br />
+		What type of meal is this? <input type="checkbox" name="mealType" value="1000" />Breakfast
+		<input type="checkbox" name="mealType" value="0100" />Lunch
+		<input type="checkbox" name="mealType" value="0010" />Dinner
+		<input type="checkbox" name="mealType" value="0001" />Snack
+		<div id="right">
+		<input type="hidden" name="addToHistory" value="addToHistory">
+        * Add to favorites<br /><br /><input type="submit" value="Add Meal"></div>
     </form>
-	<br /><a href="mealChoice.jsp"> Select another method of adding a meal </a>
 	
 <script type="text/javascript">
 //populatedropdown(id_of_day_select, id_of_month_select, id_of_year_select)
