@@ -287,7 +287,7 @@ db.close();
         };
 
 	var optionsOday = {
-          width: 170, height: 170,
+          width: 165, height: 165,
           backgroundColor:'#8b9A70',
 		  legend: {position: 'top', textStyle: {color: 'black', fontSize: 8}},
 		chartArea:{width:"70%",height:"70%"}
@@ -357,7 +357,7 @@ db.close();
         };
 
 	var optionsOday = {
-          width: 170, height: 170,
+          width: 165, height: 165,
 		  backgroundColor: '#8b9A70',
 		  vAxis: {
 		    baselineColor:'#8b9A70',
