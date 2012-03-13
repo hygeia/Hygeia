@@ -149,6 +149,7 @@ db.close();
 <head>
 	<title>Inventory | Hygeia</title>
     <link type="text/css" rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="favicon.ico" mce_href="favicon.ico"/> 
 
 	<style type="text/css">
 #image {
