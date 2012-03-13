@@ -50,30 +50,25 @@ if (request.getParameter("login") != null) {
 <html>
   <head>
     <title>Login | Hygeia</title>
-    <link type="text/css" rel="stylesheet" href="style.css" />
+    <link type="text/css" rel="stylesheet" href="loginStyle.css" />    
+    <link rel="shortcut icon" href="favicon.ico" mce_href="favicon.ico"/> 
   </head>
   <body>
-    <img src="images/lightICON1.png"/>
     <div id="page"><div id="content">
-    <h3>Login</h3>
-    <br>
-    Not a member? <a href="signup.jsp" style="color:#87D7A5">Sign up.</a>
+<a href="signup.jsp"><img src="images/getStartedGreen.png" width=150px height=50px align="right"></a>
+<div id="leaf"><img src="images/HomepageLogo2.png"></div>
     <form method="post" action="login.jsp">
       <table style="margin-left:auto;margin-right:auto;">
         <%= loginerr %>
       <tr>
-          <td> Email: </td> 
-          <td><input type="text" name="email" /></td>
+          <td><input type="text" name="email" class="email"/></td> 
+          <td><input type="password" name="password" class="password" /></td>
+      <input type="hidden" name="login" value="login" />
+      <td><input type="image" src="images/LoginButton.png" value="Login!"/></td>
       </tr>
-      <tr>
-          <td>Password: </td> 
-          <td><input type="password" name="password" /></td>
-      <input type="hidden" name="login" value="login" /><br />
-      <tr>
-          <td><input type="submit" value="Login!"/></td>
-      <tr>
       </table>
     </form>
+<img src="images/aNewWayToEat.png">
 </div>
 </div>
    <div id="footer"><a href="about.jsp">About Us</a><br />
