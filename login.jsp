@@ -54,8 +54,8 @@ if (request.getParameter("login") != null) {
     <link rel="shortcut icon" href="favicon.ico" mce_href="favicon.ico"/> 
   </head>
   <body>
+    <a href="signup.jsp"><img src="images/getStartedGreen.png" align="right"></a>
     <div id="page"><div id="content">
-<a href="signup.jsp"><img src="images/getStartedGreen.png" width=150px height=50px align="right"></a>
 <div id="leaf"><img src="images/HomepageLogo2.png"></div>
     <form method="post" action="login.jsp">
       <table style="margin-left:auto;margin-right:auto;">
