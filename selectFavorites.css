@@ -19,6 +19,16 @@ body {
     position:relative;
     background-color:#fbffcc;
 }
+p.selectFav, p.suggestMeal, p.addMeal{
+font-size:xx-large;
+font-weight:bold;
+text-align:left;
+display:inline;
+color:#7b840d;
+}
+p.selectFav {
+margin-left:130px;
+}
 
 #left {
 float:left;

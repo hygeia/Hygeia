@@ -45,7 +45,8 @@ public class History {
     public Meal.List[] getAvailableMeals(String s) {
 		s = Algorithm.Clean(s);
 		ResultSet rs = db.execute("select mid, name from meals where (uid = 0" +
-		    " or uid = " + this.uid + ") and name like '%" + s + "%';");
+		    " or uid = " + this.uid + ") and name like '%" + s + "%' " +
+		    "order by name;");
     	
     	ArrayList<Meal.List> mla = new ArrayList<Meal.List>();
 
