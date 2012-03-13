@@ -63,14 +63,27 @@ if (request.getParameter("addToMeal") != null) {
 if (request.getParameter("removeFromMeal") != null) {
     int fid = Integer.parseInt(request.getParameter("fid"));
     double count=Double.parseDouble(request.getParameter("count"));
+	Food.Update[] arr = inv.getInventory();
 	Food.Update food = new Food.Update(fid, count);
-	/*boolean r = inv.updateFood(new Food.Update(food.getFid(), food.getCount() - count));
+	if (arr == null) {
+		response.sendRedirect("error.jsp?code=4&echo=Could not fetch inventory");
+		db.close();
+		return;
+	}
+	for( Food.Update up : arr ){
+		if(up.getFid() == fid){
+			food = up;
+			break;
+		}
+	}
+	
+	boolean r = inv.updateFood(new Food.Update(fid, food.getCount() + count));
     if (r == false) {
         response.sendRedirect("error.jsp?code=1&echo=Could not update" +
             " inventory");
         db.close();
         return;
-    }*/ // add above code when Inventory is recompiled
+    }
 	Food.Update removed = null;
 	for(int i=0; i<f.size(); i++){
 		if(f.get(i).getFid() == food.getFid()){
