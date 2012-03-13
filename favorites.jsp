@@ -27,16 +27,20 @@ if (request.getParameter("addToFavorites") != null) {
 
 
 Meal.List meals[] = favs.getFavorites();
+if (meals == null) {
+    response.sendRedirect("error.jsp?code=1&echo=Could not fetch favorites");
+    db.close();
+    return;
+}
 
 /* Produce table of meals */
 String favDisp = "<table style='margin:auto auto;'>\n";
-String noFavs = "";
-
+String noFavs="";
 for (Meal.List m : meals) {
     if (m == null) {
-    noFavs = "You currently have no items added to favorites.";
-    db.close();
-    break;
+        noFavs = "You currently have no meals saved in your favorites";
+	db.close();
+        break;
     }
     String s = "<form action='favorites.jsp' method='post'><tr><td>" + 
         m.getName() + "<input type='hidden' name='mid' value=" + m.getMid() +
@@ -158,10 +162,6 @@ li{color:black; font-family:arial;}
 <br>
 <%= favDisp %>
 <%= noFavs %>
-</br>
-</br>
-<FORM METHOD="POST" id="add_favorite" ACTION="addMeal.jsp">
-<INPUT TYPE="image" src="images/addFavorite.png" VALUE="Submit" /> 
 <!--
 
 
