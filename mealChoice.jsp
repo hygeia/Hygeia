@@ -16,7 +16,7 @@
     <div id="content">
 	  <h1>How Would You Like to Enter Your Meal?</h1>
 	  <div id="left">
-	  <a href="addMeal.jsp"><img src="images/favorites.png" ></a><br /><br />
+	  <a href="selectFavorites.jsp"><img src="images/favorites.png" ></a><br /><br />
 	  <p class="choice">Pick a meal from your list of favorites</p>
 	  </div>
 	  <div id="left">
