@@ -166,8 +166,8 @@ timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.
   <body>
   <div id="page">
     <div id="content">
-	<a href="mealChoice.jsp"> Select another method of adding a meal </a>
-    <center><h1>Add A Suggested Meal</h1></center><br />
+	<a href="mealChoice.jsp"><img src="images/back.png" style="float:left" width=50px height=50px/></a>
+    <p class="suggestMeal">Add A Suggested Meal</p<br />
 	<center><h2 class="new">Meal</h2></center><br /><%= mealDisp %>
 	<br /><center>
 	<form action="suggestMeal.jsp" method="post">

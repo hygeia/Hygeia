@@ -19,6 +19,14 @@ body {
     position:relative;
     background-color:#fbffcc;
 }
+p.suggestMeal {
+font-size:xx-large;
+font-weight:bold;
+text-align:left;
+margin-left:200px;
+display:inline;
+color:#7b840d;
+}
 
 #left {
 float:left;
