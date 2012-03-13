@@ -13,7 +13,8 @@ if (request.getParameter("signup") != null) {
     String username = request.getParameter("username");
     String password = request.getParameter("user_password");
     String email = request.getParameter("user_email");
-    double height = Double.parseDouble(request.getParameter("user_height"));
+    double height = Double.parseDouble(request.getParameter("user_height_ft")) / 12 
+                    +  Double.parseDouble(request.getParameter("user_height_in"));
     double weight = Double.parseDouble(request.getParameter("user_weight"));
     char sex = request.getParameter("user_sex").charAt(0);   
  
@@ -81,8 +82,10 @@ if (request.getParameter("signup") != null) {
       </p>
 
       <p>
-      <label for="height">Height</label>
-      <input name="user_height" />
+      <label for="user_height_ft">Height (w/o shoes)</label>
+      <input type="text" name="user_height_ft" id="user_height" size="5"/>ft.
+      <input type="text" name="user_height_in" id="user_height" size="5"/>in.
+      <label for="user_height" class="error" style="display:none;">Please enter your height</label>
       </p>
 
       <p>

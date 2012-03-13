@@ -233,6 +233,7 @@ if(theName != null)
      <dt class="radio"><label for="activity">Active (1 hour per day, 5 times per week)</label></dt>
      <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="4" <%= a4 %> /> </dd>
      <br />
+     <br />
      <dt class="radio"><label for="activity">Very active (2 hours per day, 5 times a week)</label></dt>
      <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="5" <%= a5 %> /></dd>
      <br />
@@ -241,8 +242,10 @@ if(theName != null)
      <dt class="radio"><label for="activity">Heavy weight training or twice-a-day exercise (5 days per week)</label></dt>
      <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="6" <%= a6 %> /></dd>
      </p>
+     
+     <br />
 
-     <P> 
+     <p> 
      <label for="user_weight">Weight(lbs):</label>
      <INPUT TYPE="TEXT" VALUE= "<%= weight %>" NAME="weight" SIZE="10" />
      </p>
