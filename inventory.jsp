@@ -34,7 +34,7 @@ String searchDisp = "";
 if (request.getParameter("removeFromInventory") != null) {
     int fid = Integer.parseInt(request.getParameter("fid"));
     double count=Double.parseDouble(request.getParameter("count"));
-    boolean r = inv.removeFood(new Food.Update(fid, count));
+    boolean r = inv.updateFood(new Food.Update(fid, count));
     if (r == false) {
         response.sendRedirect("error.jsp?code=2&echo=Could not update" +
             " inventory");
