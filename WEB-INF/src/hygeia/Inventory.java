@@ -160,6 +160,29 @@ public class Inventory {
         return true;   
     }
     
+    /* Updates the amount of food to the amount contained in the count of the
+       Food.Update object. If the count is negative, it is positivized and 
+       removeFood is called. */
+    public boolean updateFood(Food.Update f) {
+        if (f == null) {
+            return false;
+        } else if (f.getCount() < 0) {
+            this.removeFood(new Food.Update(f.getFid(), f.getCount() * -1));
+        }
+        
+        /* Run the update */
+        int r = this.db.update("update inventory set count =" +
+            f.getCount() + " where uid = " + this.uid + " and fid = " +
+            f.getFid() + ";");
+            
+        db.free();
+        
+        if (r < 1) {
+            return false;
+        }
+        return true;
+    }
+    
     /* Remove an amount of food from inventory. This functions more as an 
        update to the quantity of food that is in the inventory. */
     public boolean removeFood(Food.Update f) {

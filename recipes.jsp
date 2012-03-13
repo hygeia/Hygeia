@@ -1,6 +1,4 @@
-<!-- <<<<<<< HEAD -->
 <%@ page import = "hygeia.*" %>
-<!-- ======= -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 
@@ -8,20 +6,46 @@
     <title>Recipes | Hygeia</title>
     <link type="text/css" rel="stylesheet" href="style.css" />
     <link rel="shortcut icon" href="favicon.ico" mce_href="favicon.ico"/> 
-<!-- >>>>>>> f6ca7a8af3c6087e83c7c1d72317fe743dc47143 -->
 
-	<style type="text/css">
-#image {
-background-image: url('images/DEFAULTPIC.png');
-width: 190px;
-height: 190px;
-margin: 0 auto;
-position: relative;
-z-index: 10;
-margin-right: 10px;
-}
+    <style type="text/css">
+      #image {
+        background-image: url('images/DEFAULTPIC.png');
+        width: 190px;
+        height: 190px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 10;
+        margin-right: 10px;
+      }
 
-<!-- <<<<<<< HEAD -->
+      .trans {
+        opacity:.50;filter:
+        alpha(opacity=50);
+        -moz-opacity: 0.50;
+        width: 190px;
+        height: 60px;
+        background: #000000;
+        float: none;
+        margin-top: 60px;
+        position: relative;
+        z-index: 50;
+        }
+
+        .text {
+        float: none;
+        display: block;
+        position: relative;
+        z-index: 90;
+        color: #ffffff;
+        width: 280px;
+        height: 50px;
+        padding: 10px;
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+</style>
 <%
 
 /* Check to see if a session exists */
@@ -65,35 +89,6 @@ if(request.getParameter("addRecipeToDatabase") != null) {
 }
 %>
 <!-- ======= -->
-.trans {
-opacity:.50;filter:
-alpha(opacity=50);
--moz-opacity: 0.50;
-width: 190px;
-height: 60px;
-background: #000000;
-float: none;
-margin-top: 60px;
-position: relative;
-z-index: 50;
-}
-
-.text {
-float: none;
-display: block;
-position: relative;
-z-index: 90;
-color: #ffffff;
-width: 280px;
-height: 50px;
-padding: 10px;
-font-family: Verdana, Arial, Helvetica, sans-serif;
-font-size: 12px;
-font-weight: bold;
-margin-top: 10px;
-<!-- >>>>>>> f6ca7a8af3c6087e83c7c1d72317fe743dc47143 -->
-}
-</style>
 
 </head>
 <body>
@@ -119,7 +114,6 @@ margin-top: 10px;
 <td> <a href="logout.jsp"><img src="images/lightICON8.png"></a></td>
 </tr>
 </table>
-<!-- >>>>>>> f6ca7a8af3c6087e83c7c1d72317fe743dc47143 -->
 
 <br />
 
@@ -248,4 +242,3 @@ quantity:
 
 </body>
 </html>
-<>>>>>> f6ca7a8af3c6087e83c7c1d72317fe743dc47143-->
