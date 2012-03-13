@@ -222,6 +222,11 @@ timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.
 }
 
 </script>
+<script type="text/javascript">  
+ function check(checkboxid) {  
+ document.getElementById(checkboxid).checked = "checked";  
+ }  
+ </script>  
   </head>
   <body>
   <div id="page">
@@ -246,7 +251,10 @@ timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.
 		<input type="checkbox" name="mealType" value="0001" /> Snack&nbsp;
 		<div id="right">
 		<input type="hidden" name="addToHistory" value="addToHistory" />
-        <input type="checkbox" name="favs" value="1" /> Add To Favorites<br /><br /><input type="submit" value="Add Meal"></div>
+<img src="images/starDull.png" onclick="javascript:check('checkbox');">  
+ <input type="checkbox" id="checkbox" type="hidden" />          
+<input type="checkbox" name="favs" value="1" /> Add To Favorites<br /><br />
+	<input type="submit" value="Add Meal"></div>
     </form>
 	
 <script type="text/javascript">
