@@ -253,7 +253,8 @@ $('#myImage').click(function() {
   <body>
   <div id="page">
     <div id="content">
-    <a href="mealChoice.jsp"> Select another method of adding a meal </a><center><h1>Input Your Own</h1></center><br />
+    <a href="mealChoice.jsp"><img src="images/back.png" style="float:left" width=50px height=50px/></a>
+	<p class="addMeal">Input Your Own</p><br />
 	<center><h2 class="new">Meal</h2></center><br /><%= mealDisp %>
 	<br /><center><h2>Inventory</h2></center><br /><%= invDisp %>
 	<p>Once you've finished adding food, enter a name and date to add it to your calendar!</p>
@@ -275,7 +276,7 @@ $('#myImage').click(function() {
 		<input type="hidden" name="addToHistory" value="addToHistory" />
      <img id='myImage' src = "images/starDull.png" />
 	 <input type="checkbox" name="favs" value="1" id='myHiddenCheckbox' style="display:none" /><br /><br />
-	<input type="submit" value="Add Meal"></div>
+	<input type="image" src="images/submit.png" value="Submit"></div>
     </form>
 	
 <script type="text/javascript">
