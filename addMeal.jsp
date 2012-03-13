@@ -64,6 +64,13 @@ if (request.getParameter("removeFromMeal") != null) {
     int fid = Integer.parseInt(request.getParameter("fid"));
     double count=Double.parseDouble(request.getParameter("count"));
 	Food.Update food = new Food.Update(fid, count);
+	/*boolean r = inv.updateFood(new Food.Update(food.getFid(), food.getCount() - count));
+    if (r == false) {
+        response.sendRedirect("error.jsp?code=1&echo=Could not update" +
+            " inventory");
+        db.close();
+        return;
+    }*/ // add above code when Inventory is recompiled
 	Food.Update removed = null;
 	for(int i=0; i<f.size(); i++){
 		if(f.get(i).getFid() == food.getFid()){
