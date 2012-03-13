@@ -18,6 +18,7 @@ public class Algorithm {
     }
 
     /* Main algorithm. types: 1 breakfast, 2 lunch, 3 dinner, 4 snack */
+    /* Based on what kind of meal requested an int matching the legend is passed. 0 for no preference */
     public Meal suggestMeal(User u, int type) {
 		//pulls all meals from the universal meal list and the user's personal meals
         ResultSet rs = db.execute("select mid from meals where uid = " + u.getUid() + " or uid = 0;");
