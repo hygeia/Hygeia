@@ -86,7 +86,7 @@ min-width:170px;
 width:170px;
 margin-right:3px;
 text-align:center;
-color:rgb(255,255,255);
+color:#fffc9e;
 -moz-border-radius: 15px;
 -webkit-border-radius: 15px;
 -khtml-border-radius: 15px;
@@ -185,6 +185,6 @@ color:rgb(255,255,255);
   width:960px;
   height:60px;
   text-align:center;
-  color:rgb(255,255,255);
+  color:#fffc9e;
   background-color:#709100;
 }
