@@ -16,6 +16,14 @@ public class Food {
             this.setCount ( count );
         }
         
+        public boolean equals(Object o) {
+            Food.Update fu = (Food.Update)o;
+            if (this.fid == fu.fid) {
+                return true;
+            }
+            return false;
+        }
+        
         public int getFid() {
             return this.fid;
         }
@@ -59,9 +67,10 @@ public class Food {
                     db.free();
                     return null;
                 }
-                db.free();
                 rs.next();
-                return rs.getString("name");
+                String s = rs.getString("name");
+                db.free();
+                return s;
             } catch (SQLException e) {
                 db.free();
                 return null;

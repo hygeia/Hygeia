@@ -230,7 +230,8 @@ timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.
   <body>
   <div id="page">
     <div id="content">
-    <a href="mealChoice.jsp"> Select another method of adding a meal </a><center><h1>Select From Your Favorite Meals</h1></center><br />
+    <a href="mealChoice.jsp"><img src="images/back.png" style="float:left" width=50px height=50px/></a>
+	<p class="selectFav">Select From Your Favorite Meals</p><br />
 	<center><h2 class="new">Meal</h2></center><br /><%= mealDisp %>
 	<br /><center><h2>Favorites</h2></center><br /><%= invDisp %>
 	<p>Once you've finished adding food, enter a name and date to add it to your calendar!</p>

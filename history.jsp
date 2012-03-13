@@ -365,6 +365,49 @@ out.println("f"+block7[2]);
   <title>History | Hygeia</title>
   <link type="text/css" rel="stylesheet" href="style.css" />
     <link rel="shortcut icon" href="favicon.ico" mce_href="favicon.ico"/> 
+	<link rel="shortcut icon" href="favicon.ico" mce_href="favicon.ico"/> 
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Day');
+        data.addColumn('number', 'Carbs');
+        data.addColumn('number', 'Protien');
+	data.addColumn('number', 'Fat');
+        data.addRows([
+          ['2/29', 18, 17, 19],
+          ['3/1', 17, 18, 18],
+          ['3/2', 18, 19, 17],
+          ['3/3', 18, 17, 18]
+        ]);
+
+        var options = {
+          width: 860, height: 580,
+		  backgroundColor: '#fbffcc',
+		  vAxis: {
+			gridlines: {
+			  count:3 ,
+			  color:'black',
+			},
+		  },
+		  hAxis: {
+			gridlines: {
+			  count:2,
+			  color:'black',
+			},
+		  },
+		  title:'Block Level History',
+		  legend: {
+		    position:'right'
+		  }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('line_chart'));
+        chart.draw(data, options);
+      }
+    </script>
 </head>
 <BODY>
     <div id="page">
@@ -406,6 +449,7 @@ Add to history
 </br>
 <FORM METHOD="POST" id="add_meal" ACTION="addMeal.jsp">
 <INPUT TYPE="image" src="images/addMeal.png" VALUE="Submit" />
+<div id="line_chart" style="width: 960px; height: 500px;"></div>
 </div>
 </div>
 <div id="footer"><a href="about.jsp">About Us</a><br />
