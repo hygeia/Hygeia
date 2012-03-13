@@ -34,7 +34,7 @@ String searchDisp = "";
 if (request.getParameter("removeFromInventory") != null) {
     int fid = Integer.parseInt(request.getParameter("fid"));
     double count=Double.parseDouble(request.getParameter("count"));
-    boolean r = inv.removeFood(new Food.Update(fid, count));
+    boolean r = inv.updateFood(new Food.Update(fid, count));
     if (r == false) {
         response.sendRedirect("error.jsp?code=2&echo=Could not update" +
             " inventory");
@@ -112,7 +112,6 @@ if (arr == null) {
 }
 
 /* Produce table of foods, with remove forms */
-String invDisp = "<table style='margin:auto auto;'>\n"; //without pictures
 String invDispPics = "<table>";
 for (int i = 0; i < arr.length; i++) {
 	Food.List f = arr[i];
@@ -124,19 +123,16 @@ for (int i = 0; i < arr.length; i++) {
 	if(i%4==0) {invDispPics += "<tr>";}
 	String d = "<td><div id='image'><div id='image'><div class='text' style='text-align:left'>" +
 		"<br /><br /><br /><br /><br /><br /><br /><br /><br />" + f.getName() + "<br />" +
-		"quantity: " + f.getCount() + "g</div><div class='trans'></div></div>";
-    String s = "<form action='inventory.jsp' method='post'>" +
+		"quantity: " + f.getCount() + "g</div><div class='trans'></div></div>" +
+		"<form action='inventory.jsp' method='post'>" +
         "<input type='hidden' name='fid' value=" + f.getFid() + ">" +
         "Amount: <input name='count' size=2 " +
         "value=" + f.getCount() + "><input type='hidden' name='" +
         "removeFromInventory' value=1><input type='submit' value='Update'>" +
         "</form>\n</td>";
-    invDisp += s; //without pictures
 	invDispPics += d;
-	invDispPics += s;
 	if(i%4==3) {invDispPics += "</tr>";}
 }
-invDisp += "</table>\n";
 invDispPics += "</table>";
 
 db.close();
@@ -160,6 +156,7 @@ margin: 0 auto;
 position: relative;
 z-index: 10;
 margin-right: 10px;
+margin-top: 30px;
 }
 
 .trans {

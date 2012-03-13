@@ -10,20 +10,43 @@ public class Algorithm {
 
     private Database db;
     private int uid;
-    private final double SAME = 0.1; //used as a margin of error for relatively balanced meals
+    private static final int BREAKFAST = 0x08;
+    private static final int LUNCH = 0x04;
+    private static final int DINNER = 0x02;
+    private static final int SNACK = 0x01;
+    private static final double SAME = 0.1; //used as a margin of error for relatively balanced meals
 
     public Algorithm(Database db, User u) {
 		this.uid = u.getUid();
 		this.db = u.getDb();
     }
 
-    /* Main algorithm. types: 1 breakfast, 2 lunch, 3 dinner, 4 snack */
-    /* Based on what kind of meal requested an int matching the legend is passed. 0 for no preference */
-    public Meal suggestMeal(User u, int type) {
+    /* Main algorithm. */
+    /* Based on what kind of meal requested an int matching the legend is passed. */
+    
+    public static Meal suggestMeal(User u, int type) {
+        try {
+            Meal m = suggestMeal0(u, type);
+            u.getDb().free();
+            return m;
+        } catch (SQLException e) {
+            u.getDb().free();
+            return null;
+        }
+    }
+    
+    public static Meal suggestMeal0(User u, int type) throws SQLException {
+        if (u == null) {
+            return null;
+        }
+        
+        Database db = u.getDb();
+    
 		//pulls all meals from the universal meal list and the user's personal meals
-        ResultSet rs = db.execute("select mid from meals where uid = " + u.getUid() + " or uid = 0;");
+        ResultSet rs = db.execute("select mid from meals where (uid = " + 
+            u.getUid() + " or uid = 0) and type & " + type + " = " + type + ";");
         //arraylist of meal IDs that come from the database
-        ArrayList<Integer> results = new ArrayList();
+        ArrayList<Integer> results = new ArrayList<Integer>();
 		while(rs.next())
 		{
 			results.add(rs.getInt("mid"));
@@ -32,32 +55,31 @@ public class Algorithm {
 		Inventory inven = new Inventory(u);
 		Food.Update[] fu = inven.getInventory();
 		//random generator to select a meal at random from available MIDs
-		Random r = new Random(results.size());
+		Random r = new Random();
 		//if the inventorymatchcount variable equals the number of ingredients in a recipe, all necessary ingredients are available
 		int inventorymatchcount = 0;
 		//Meal m is the variable used to store meals as they are accessed for comparison to ingredients
-		Meal m = new Meal(db, 0);
+		Meal m;
 		//while loop runs while a suitable meal isn't found yet
 		while (results.size() > 0)
 		{
 			inventorymatchcount = 0;
-			m = new Meal(db, results.get(r.nextInt()));
-			for (int i = 0; i < m.getMeal().length; i++)
+			m = new Meal(db, results.get(r.nextInt(results.size())));
+			Food.Update mu[] = m.getMeal();
+			for (int i = 0; i < mu.length; i++)
 			{
 				for (int j = 0; j < fu.length; j++)
 				{
-					if (m.getMeal()[i] == fu[j])
+					if (mu[i].equals(fu[j]))
 						inventorymatchcount += 1;
 				}
 			}
-			if (inventorymatchcount == m.getMeal().length)
+			if (inventorymatchcount == mu.length)
 			{
 				//currently not calorie budget based. Functionality will be added if budget is accessible.
 				//begins balanced suggestion based on the 40:30:30 ideal,
 				//+ and - 10% (defined as constant SAME, Suggest A Meal Error) to find relatively balanced meals
-				Nutrition n = new Nutrition(m.getNutrition().getCalories(),
-					m.getNutrition().getCarbohydrates(), m.getNutrition().getProtein(),
-					m.getNutrition().getFat()); //makes a nutrition object holding the meal's total nutrition
+				Nutrition n = m.getNutrition();
 				double totalGrams = 0;
 				totalGrams = (n.getCarbohydrates() + n.getProtein() + n.getFat());
 				if (n.getCarbohydrates() / totalGrams > 0.4 - SAME 
@@ -79,7 +101,6 @@ public class Algorithm {
 				//if the contents of the inventory don't satisfy the recipe, remove that recipe
 				//from the ArrayList of meals so it won't accidentally be compared again
 				results.remove(m.getMid());
-				r = new Random(results.size());
 			}
 
 		}

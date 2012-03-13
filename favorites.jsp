@@ -19,6 +19,12 @@ if (request.getParameter("removeFromFavorites") != null) {
     favs.removeMeal(m);
 }
 
+if (request.getParameter("addToFavorites") != null) {
+    int mid = Integer.parseInt(request.getParameter("mid"));
+    Meal m = new Meal(db, mid);
+    favs.addMeal(m);
+}
+
 
 Meal.List meals[] = favs.getFavorites();
 if (meals == null) {
@@ -29,11 +35,12 @@ if (meals == null) {
 
 /* Produce table of meals */
 String favDisp = "<table style='margin:auto auto;'>\n";
+String noFavs="";
 for (Meal.List m : meals) {
     if (m == null) {
-        response.sendRedirect("error.jsp?code=1&echo=Could not fetch");
-        db.close();
-        return;
+        noFavs = "You currently have no meals saved in your favorites";
+	db.close();
+        break;
     }
     String s = "<form action='favorites.jsp' method='post'><tr><td>" + 
         m.getName() + "<input type='hidden' name='mid' value=" + m.getMid() +
@@ -154,7 +161,7 @@ li{color:black; font-family:arial;}
 
 <br>
 <%= favDisp %>
-
+<%= noFavs %>
 <!--
 
 

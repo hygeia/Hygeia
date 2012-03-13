@@ -6,11 +6,11 @@ html {
  
 body {
     margin:0;
-    background: #fbffcc fixed;
+    background:#fbffcc;
     height:100%;
     text-align:center;
     padding:0;
-	font-family:Verdana;
+    font-family:Verdana;
 }
 
 #page {
@@ -18,19 +18,25 @@ body {
     min-height:100%;
     margin: 0 auto 0 auto;
     background-color:#fbffcc;
+	border-style:none solid none solid;
+	border-width:1px;
+	border-color:#7b840d;
 }
 
 #content {
     margin-bottom:10px;
     overflow:auto;
     padding-bottom:60px;
+	
 }
 
 /* Header start */
 #header {
 	text-align: center;
 	margin: 0 0 10px 0;
-	padding: 0;
+	padding: 0 9999px;
+	margin: 0 -9999px;
+	background:url('images/background.jpg') repeat-x;
 }
 /* Header end */
 
@@ -82,8 +88,9 @@ box-shadow: 3px 3px 4px #000;
 float:left;
 background-color:#8B9A70;
 margin-top:50px;
-min-width:170px;
-width:170px;
+margin-left:3px;
+min-width:165px;
+width:165px;
 margin-right:3px;
 text-align:center;
 color:#fffc9e;
@@ -96,7 +103,7 @@ border-radius: 15px;
 #today {
 float:left;
 background-color:#c3e2da;
-margin-right:3px;
+margin-left:3px;
 min-height:500px;
 width:437px;
 padding-bottom:40px;
@@ -114,7 +121,7 @@ width:222px;
 
 /* Wrapper for other day's charts */
 #chartwrapperOday {
-width:170px;
+width:165px;
 }
 
 #yesterday_pie {
@@ -166,6 +173,8 @@ width:132px;
 
 h1 {
 text-align:center;
+padding:0;
+margin:5px 0 0 0;
 }
 
 h2 {
@@ -185,6 +194,6 @@ color:rgb(255,255,255);
   width:960px;
   height:60px;
   text-align:center;
-  color:#fffc9e;
-  background-color:#709100;
+  color:#7b840d;
+  background-color:#fbffcc;
 }
