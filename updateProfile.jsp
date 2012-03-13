@@ -193,6 +193,8 @@ if(theName != null)
     <script type="text/javascript" src="javascript/jquery.validate.min.js"></script>          
     <script type="text/javascript" src="javascript/validation.js"></script>      
     <link type="text/css" rel="stylesheet" href="profile.css" /> 
+    <link type="text/css" rel="stylesheet" href="forms.css" /> 
+    <link rel="shortcut icon" href="favicon.ico" mce_href="favicon.ico"/> 
     <link rel="shortcut icon" href="favicon.ico" mce_href="favicon.ico"/> 
   </head>
   <body>
@@ -216,18 +218,34 @@ if(theName != null)
 
 
      <P> 
-     <label for="activity">What best fits you exercise routine?</label><br />
-     <INPUT TYPE="RADIO" NAME="activity" VALUE="1" <%= a1 %> /> Sedentary</br>
-     <INPUT TYPE="RADIO" NAME="activity" VALUE="2" <%= a2 %> /> Light (i.e, walking)</br>
-     <INPUT TYPE="RADIO" NAME="activity" VALUE="3" <%= a3 %> /> Moderate (30 minutes per day, 3 times per week)</br>
-     <INPUT TYPE="RADIO" NAME="activity" VALUE="4" <%= a4 %> /> Active (1 hour per day, 5 times per week)</br> 
-     <INPUT TYPE="RADIO" NAME="activity" VALUE="5" <%= a5 %> /> Very active (2 hours per day, 5 times a week)</br>
-     <INPUT TYPE="RADIO" NAME="activity" VALUE="6" <%= a6 %> /> Heavy weight training or twice-a-day exercise (5 days per week)</br>
+     <label for="activity">What best fits you exercise routine?</label><br /><br />
+     <dt class="radio"><label for="activity">Sedentary</label></dt>
+     <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="1" <%= a1 %> /></dd>
+     <br />
+     <dt class="radio"><label for="activity">Light (i.e, walking)</label></dt>
+     <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="2" <%= a2 %> /></dd>
+     <br />
+     <dt class="radio"><label for="activity">Moderate (30 minutes per day, 3 times per week)</label></dt>
+     <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="3" <%= a3 %> /></dd>
+     <br />
+     <br />
+     <br />
+     <dt class="radio"><label for="activity">Active (1 hour per day, 5 times per week)</label></dt>
+     <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="4" <%= a4 %> /> </dd>
+     <br />
+     <dt class="radio"><label for="activity">Very active (2 hours per day, 5 times a week)</label></dt>
+     <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="5" <%= a5 %> /></dd>
+     <br />
+     <br />
+     <br />
+     <dt class="radio"><label for="activity">Heavy weight training or twice-a-day exercise (5 days per week)</label></dt>
+     <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="6" <%= a6 %> /></dd>
      </p>
 
      <P> 
      <label for="user_weight">Weight(lbs):</label>
      <INPUT TYPE="TEXT" VALUE= "<%= weight %>" NAME="weight" SIZE="10" />
+     </p>
 
      <P> Take 3 measurements of your hips </br>
      How to take proper hip measurements: (Must have measuring tape) Take</br>
