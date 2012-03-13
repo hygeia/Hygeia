@@ -19,6 +19,12 @@ if (request.getParameter("removeFromFavorites") != null) {
     favs.removeMeal(m);
 }
 
+if (request.getParameter("addToFavorites") != null) {
+    int mid = Integer.parseInt(request.getParameter("mid"));
+    Meal m = new Meal(db, mid);
+    favs.addMeal(m);
+}
+
 
 Meal.List meals[] = favs.getFavorites();
 

@@ -51,10 +51,23 @@ if (request.getParameter("login") != null) {
   <head>
     <title>Login | Hygeia</title>
     <link type="text/css" rel="stylesheet" href="loginStyle.css" />    
-    <link rel="shortcut icon" href="favicon.ico" mce_href="favicon.ico"/> 
+    <link rel="shortcut icon" href="favicon.ico" mce_href="favicon.ico"/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script type="text/javascript">
+	  if (navigator.userAgent.toLowerCase().indexOf("chrome") >= 0) {
+    $(window).load(function(){
+        $('input:-webkit-autofill').each(function(){
+            var text = $(this).val();
+            var name = $(this).attr('name');
+            $(this).after(this.outerHTML).remove();
+            $('input[name=' + name + ']').val(text);
+        });
+    });
+}
+</script>
   </head>
   <body>
-    <a href="signup.jsp"><img src="images/getStartedGreen.png" align="right"></a>
+    <a href="signup.jsp"><img src="images/getStartedGreen.png" width=200px height=66px align="right"></a>
     <div id="page"><div id="content">
 <div id="leaf"><img src="images/HomepageLogo2.png"></div>
     <form method="post" action="login.jsp">
