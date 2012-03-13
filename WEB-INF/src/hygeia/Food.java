@@ -24,6 +24,28 @@ public class Food {
             return this.count;
         }
         
+        public double getFactor(Database db) {
+            if (db == null) {
+                return -1;
+            }
+            
+            ResultSet rs = db.execute("select factor from foods where mid = " +
+                this.mid + ";");
+            
+            try {
+                if (rs == null) {
+                    db.free();
+                    return -2;
+                }
+                rs.next();
+                double factor = rs.getDouble("factor");
+                db.free();
+                return factor;
+            } catch (SQLException e) {
+                return -2;
+            }
+        }
+        
         public String getName(Database db) {
             if (db == null) {
                 return null;
@@ -92,10 +114,13 @@ public class Food {
             
             // multiply the nutrients of the food by the number of food items
             // in inventory (count)
-            cal *= this.getCount();
-            carb *= this.getCount();
-            pro *= this.getCount();
-            fat *= this.getCount();
+            
+            double servings = this.getCount() * this.getFactor(db);
+            
+            cal *= servings;
+            carb *= servings;
+            pro *= servings;
+            fat *= servings;
 
             // return a newly created Nutriention object with the given 
             //macronutrient info
