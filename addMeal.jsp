@@ -1,3 +1,4 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <%@ page import = "hygeia.*,java.util.*,java.sql.Timestamp,java.text.*" %>
 <%
 /* Check to see if a session exists */
@@ -198,9 +199,11 @@ invDisp += "</table>\n";
 db.close();
 
 %>
-<html>
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <link type="text/css" rel="stylesheet" href="addMeal.css" />
+	  <script type='text/javascript' src='http://code.jquery.com/jquery-1.4.4.min.js'></script>
+	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/themes/ui-lightness/jquery-ui.css"/>
 			<script type="text/javascript">
 
 /***********************************************
@@ -235,11 +238,17 @@ timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.
 }
 
 </script>
-<script type="text/javascript">  
- function check(checkboxid) {  
- document.getElementById(checkboxid).checked = "checked";  
- }  
- </script>  
+<script type='text/javascript'>//<![CDATA[ 
+$(function(){
+var cbox = $('#myHiddenCheckbox')[0];
+
+$('#myImage').click(function() {
+    cbox.checked = !cbox.checked;
+        this.src = (cbox.checked)?"images/starBright.png":"images/starDull.png";
+});
+});//]]>  
+
+</script>
   </head>
   <body>
   <div id="page">
@@ -264,9 +273,8 @@ timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.
 		<input type="checkbox" name="mealType" value="0001" /> Snack&nbsp;
 		<div id="right">
 		<input type="hidden" name="addToHistory" value="addToHistory" />
-<img src="images/starDull.png" onclick="javascript:check('checkbox');">  
- <input type="checkbox" id="checkbox" type="hidden" />          
-<input type="checkbox" name="favs" value="1" /> Add To Favorites<br /><br />
+     <img id='myImage' src = "images/starDull.png" />
+	 <input type="checkbox" name="favs" value="1" id='myHiddenCheckbox' style="display:none" /><br /><br />
 	<input type="submit" value="Add Meal"></div>
     </form>
 	
