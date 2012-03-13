@@ -337,7 +337,7 @@ public class User {
 
         this.username = Algorithm.Clean(username);
         this.email = Algorithm.Clean(email);
-        this.gender = gender;
+        this.gender = Character.toUpperCase(gender);
         this.activity = activity;
         this.blocks = blocks;
         this.height = ht;
