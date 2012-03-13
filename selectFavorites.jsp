@@ -191,7 +191,7 @@ db.close();
 %>
 <html>
   <head>
-    <link type="text/css" rel="stylesheet" href="selectFavorites.css" />
+    <link type="text/css" rel="stylesheet" href="popup.css" />
 			<script type="text/javascript">
 
 /***********************************************

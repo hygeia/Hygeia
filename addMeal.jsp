@@ -201,7 +201,7 @@ db.close();
 %>
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
-    <link type="text/css" rel="stylesheet" href="addMeal.css" />
+    <link type="text/css" rel="stylesheet" href="popup.css" />
 	  <script type='text/javascript' src='http://code.jquery.com/jquery-1.4.4.min.js'></script>
 	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/themes/ui-lightness/jquery-ui.css"/>
 			<script type="text/javascript">

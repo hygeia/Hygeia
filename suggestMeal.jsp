@@ -128,7 +128,7 @@ db.close();
 %>
 <html>
   <head>
-    <link type="text/css" rel="stylesheet" href="suggestMeal.css" />
+    <link type="text/css" rel="stylesheet" href="popup.css" />
 			<script type="text/javascript">
 
 /***********************************************
