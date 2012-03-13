@@ -149,8 +149,9 @@ if (request.getParameter("addToHistory") != null) {
 	hist.addMeal(newMeal, today);
 	session.setAttribute("mealArray", new ArrayList<Food.Update>());
 	
-	
-	if( request.getParameterValues("favs").length > 0 ){
+
+	if( (request.getParameterValues("favs") != null) && 
+	    (request.getParameterValues("favs").length > 0) ){
 		Favorites fav = new Favorites (u);
 		boolean r = fav.addMeal(newMeal);
 		if (r == false) {
