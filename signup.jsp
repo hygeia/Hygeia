@@ -60,7 +60,7 @@ if (request.getParameter("signup") != null) {
       </p>
 
       <p>
-        <label for="email">Reenter Email</label>
+        <label for="email">Re-enter Email</label>
         <input type="text" name="reenter_email" /><br />
       </p>
 
@@ -70,7 +70,7 @@ if (request.getParameter("signup") != null) {
       </p>
 
       <p>
-      <label for="retype_password">Reenter Password</label>
+      <label for="reenter_password">Re-enter Password</label>
       <input type="password" id= "reenter_password" name="reenter_password" /><br />
       </p>
 
