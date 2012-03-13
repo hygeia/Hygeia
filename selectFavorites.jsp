@@ -191,7 +191,7 @@ db.close();
 %>
 <html>
   <head>
-    <link type="text/css" rel="stylesheet" href="addMeal.css" />
+    <link type="text/css" rel="stylesheet" href="selectFavorites.css" />
 			<script type="text/javascript">
 
 /***********************************************

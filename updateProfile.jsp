@@ -195,7 +195,6 @@ if(theName != null)
     <link type="text/css" rel="stylesheet" href="profile.css" /> 
     <link type="text/css" rel="stylesheet" href="forms.css" /> 
     <link rel="shortcut icon" href="favicon.ico" mce_href="favicon.ico"/> 
-    <link rel="shortcut icon" href="favicon.ico" mce_href="favicon.ico"/> 
   </head>
   <body>
     <div id="page">

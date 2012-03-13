@@ -63,14 +63,27 @@ if (request.getParameter("addToMeal") != null) {
 if (request.getParameter("removeFromMeal") != null) {
     int fid = Integer.parseInt(request.getParameter("fid"));
     double count=Double.parseDouble(request.getParameter("count"));
+	Food.Update[] arr = inv.getInventory();
 	Food.Update food = new Food.Update(fid, count);
-	/*boolean r = inv.updateFood(new Food.Update(food.getFid(), food.getCount() - count));
+	if (arr == null) {
+		response.sendRedirect("error.jsp?code=4&echo=Could not fetch inventory");
+		db.close();
+		return;
+	}
+	for( Food.Update up : arr ){
+		if(up.getFid() == fid){
+			food = up;
+			break;
+		}
+	}
+	
+	boolean r = inv.updateFood(new Food.Update(fid, food.getCount() + count));
     if (r == false) {
         response.sendRedirect("error.jsp?code=1&echo=Could not update" +
             " inventory");
         db.close();
         return;
-    }*/ // add above code when Inventory is recompiled
+    }
 	Food.Update removed = null;
 	for(int i=0; i<f.size(); i++){
 		if(f.get(i).getFid() == food.getFid()){
@@ -222,6 +235,11 @@ timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.
 }
 
 </script>
+<script type="text/javascript">  
+ function check(checkboxid) {  
+ document.getElementById(checkboxid).checked = "checked";  
+ }  
+ </script>  
   </head>
   <body>
   <div id="page">
@@ -246,7 +264,10 @@ timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.
 		<input type="checkbox" name="mealType" value="0001" /> Snack&nbsp;
 		<div id="right">
 		<input type="hidden" name="addToHistory" value="addToHistory" />
-        <input type="checkbox" name="favs" value="1" /> Add To Favorites<br /><br /><input type="submit" value="Add Meal"></div>
+<img src="images/starDull.png" onclick="javascript:check('checkbox');">  
+ <input type="checkbox" id="checkbox" type="hidden" />          
+<input type="checkbox" name="favs" value="1" /> Add To Favorites<br /><br />
+	<input type="submit" value="Add Meal"></div>
     </form>
 	
 <script type="text/javascript">
