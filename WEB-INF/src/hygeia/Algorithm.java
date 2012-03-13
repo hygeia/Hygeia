@@ -43,7 +43,8 @@ public class Algorithm {
         Database db = u.getDb();
     
 		//pulls all meals from the universal meal list and the user's personal meals
-        ResultSet rs = db.execute("select mid from meals where uid = " + u.getUid() + " or uid = 0;");
+        ResultSet rs = db.execute("select mid from meals where (uid = " + 
+            u.getUid() + " or uid = 0) and type & " + type + " = " + type + ";");
         //arraylist of meal IDs that come from the database
         ArrayList<Integer> results = new ArrayList<Integer>();
 		while(rs.next())
@@ -54,7 +55,7 @@ public class Algorithm {
 		Inventory inven = new Inventory(u);
 		Food.Update[] fu = inven.getInventory();
 		//random generator to select a meal at random from available MIDs
-		Random r = new Random(results.size());
+		Random r = new Random();
 		//if the inventorymatchcount variable equals the number of ingredients in a recipe, all necessary ingredients are available
 		int inventorymatchcount = 0;
 		//Meal m is the variable used to store meals as they are accessed for comparison to ingredients
@@ -63,7 +64,7 @@ public class Algorithm {
 		while (results.size() > 0)
 		{
 			inventorymatchcount = 0;
-			m = new Meal(db, results.get(r.nextInt()));
+			m = new Meal(db, results.get(r.nextInt(results.size())));
 			Food.Update mu[] = m.getMeal();
 			for (int i = 0; i < mu.length; i++)
 			{
@@ -100,7 +101,6 @@ public class Algorithm {
 				//if the contents of the inventory don't satisfy the recipe, remove that recipe
 				//from the ArrayList of meals so it won't accidentally be compared again
 				results.remove(m.getMid());
-				r = new Random(results.size());
 			}
 
 		}
