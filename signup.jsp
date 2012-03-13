@@ -44,9 +44,7 @@ if (request.getParameter("signup") != null) {
     <script type="text/javascript" src="javascript/jquery-1.7.1.min.js"></script>          
     <script type="text/javascript" src="javascript/jquery.validate.min.js"></script>          
     <script type="text/javascript" src="javascript/validation.js"></script>          
-    <style type="text/css">
     <link type="text/css" rel="stylesheet" href="forms.css" /> 
-    </style>
   </head>
   <body>
     <br />
@@ -81,6 +79,17 @@ if (request.getParameter("signup") != null) {
       <input type="radio" name="user_sex" value="female" />Female
       <label for="user_sex" class="error" style="display:none;">Please chose one</label>
       </p>
+
+      <p>
+      <label for="height">Height</label>
+      <input name="user_height" />
+      </p>
+
+      <p>
+      <label for="weight">Weight</label>
+      <input name="user_weight" />
+      </p>
+
       <p>
       <input type="hidden" name="signup" value="signup" />
       <input type="submit" />
