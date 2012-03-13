@@ -43,7 +43,8 @@ if (request.getParameter("addToHistory") != null) {
 		db.close();
 		return;
 	}
-	int mealType = session.getAttribute("suggestedMealType");
+	String suggMealType = (String)session.getAttribute("suggestedMealType");
+	int mealType = Integer.parseInt(suggMealType);
 	int mid = Meal.createMeal(db, u, f, request.getParameter("name"), mealType);
 	
 	// create Timestamp
@@ -100,7 +101,7 @@ if (request.getParameter("suggestNewMeal") != null) {
 		return;
 	}
 	session.setAttribute("suggestedArray", suggested.getMeal());
-	session.setAttribute("suggestedMealType", request.getParameter("mealType"));
+	session.setAttribute("suggestedMealType", (String)request.getParameter("mealType"));
 }
 
 Food.Update[] sf = null;
@@ -172,10 +173,10 @@ timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.
 	<br /><center>
 	<form action="suggestMeal.jsp" method="post">
 		<input type="hidden" name="suggestNewMeal" value="suggestNewMeal"/>
-		<input type="radio" name="mealType" value="1000" />Breakfast<br />
-		<input type="radio" name="mealType" value="0100" />Lunch<br />
-		<input type="radio" name="mealType" value="0010" />Dinner<br />
-		<input type="radio" name="mealType" value="0001" />Snack<br />
+		<input type="radio" name="mealType" value=1000 />Breakfast<br />
+		<input type="radio" name="mealType" value=100 />Lunch<br />
+		<input type="radio" name="mealType" value=10 />Dinner<br />
+		<input type="radio" name="mealType" value=1 />Snack<br />
 		<input type="submit" value="Give Me a Suggestion" />
 	</form>
 	</center><br />
