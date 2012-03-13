@@ -102,7 +102,7 @@ if (request.getParameter("addToHistory") != null) {
 		mealType += Integer.parseInt(mealTypes[i]);
 	}
 	int mid = Meal.createMeal(db, u, f.toArray(new Food.Update[0]), 
-		request.getParameter("name") /*, mealType */);
+		request.getParameter("name") , mealType );
 	
 	// create Timestamp
 	Calendar c = Calendar.getInstance();

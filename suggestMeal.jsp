@@ -36,10 +36,15 @@ Food.Update[] f = (Food.Update[])session.getAttribute("suggestedArray");
 //String[] fNames = (String[])session.getAttribute("suggestedNameArray");
 
 if (request.getParameter("addToHistory") != null) {
-	//int mid = Integer.parseInt(request.getParameter("mid"));
 	History hist = new History(u);
 	f = (Food.Update[])session.getAttribute("suggestedArray"); // get most current array
-	int mid2 = Meal.createMeal(db, u, f, request.getParameter("name"));
+	if(session.getAttribute("suggestedMealType") == null){
+		response.sendRedirect("error.jsp?code=3&echo=Could not get meal type");
+		db.close();
+		return;
+	}
+	int mealType = session.getAttribute("suggestedMealType");
+	int mid = Meal.createMeal(db, u, f, request.getParameter("name"), mealType);
 	
 	// create Timestamp
 	Calendar c = Calendar.getInstance();
@@ -63,41 +68,25 @@ if (request.getParameter("addToHistory") != null) {
 			db.close();
 			return;
 	}
-/*	if( month.equals("Jan")){
-		c.set(Calendar.MONTH, Calendar.JANUARY);
-	}else if( month.equals("Feb")){
-		c.set(Calendar.MONTH, Calendar.FEBRUARY);
-	}else if( month.equals("Mar")){
-		c.set(Calendar.MONTH, Calendar.MARCH);
-	}else if( month.equals("Apr")){
-		c.set(Calendar.MONTH, Calendar.APRIL);
-	}else if( month.equals("May")){
-		c.set(Calendar.MONTH, Calendar.MAY);
-	}else if( month.equals("Jun")){
-		c.set(Calendar.MONTH, Calendar.JUNE);
-	}else if( month.equals("Jul")){
-		c.set(Calendar.MONTH, Calendar.JULY);
-	}else if( month.equals("Aug")){
-		c.set(Calendar.MONTH, Calendar.AUGUST);
-	}else if( month.equals("Sept")){
-		c.set(Calendar.MONTH, Calendar.SEPTEMBER);
-	}else if( month.equals("Oct")){
-		c.set(Calendar.MONTH, Calendar.OCTOBER);
-	}else if( month.equals("Nov")){
-		c.set(Calendar.MONTH, Calendar.NOVEMBER);
-	}else if( month.equals("Dec")){
-		c.set(Calendar.MONTH, Calendar.DECEMBER);
-	}else{
-		response.sendRedirect("error.jsp?code=3&echo=Could not parse date");
-		db.close();
-		return;
-	}*/
+
 	c.set(Calendar.DAY_OF_MONTH, Integer.parseInt(request.getParameter("daydropdown")));
 	c.set(Calendar.HOUR_OF_DAY, Integer.parseInt(request.getParameter("timedropdown")));
 	Timestamp today = new Timestamp(c.getTimeInMillis());
 	
-	hist.addMeal(new Meal(db, mid2), today);
+	Meal newMeal = new Meal(db, mid);
+	hist.addMeal(newMeal, today);
 	session.setAttribute("suggestedArray", new Food.Update[0]);
+	
+	if( request.getParameterValues("favs").length > 0 ){
+		Favorites fav = new Favorites (u);
+		boolean r = fav.addMeal(newMeal);
+		if (r == false) {
+			response.sendRedirect("error.jsp?code=1&echo=Could not add" +
+				" meal to favorites");
+			db.close();
+			return;
+		}
+	}
 }
 
 Algorithm alg = new Algorithm(db, u);
@@ -111,6 +100,7 @@ if (request.getParameter("suggestNewMeal") != null) {
 		return;
 	}
 	session.setAttribute("suggestedArray", suggested.getMeal());
+	session.setAttribute("suggestedMealType", request.getParameter("mealType"));
 }
 
 Food.Update[] sf = null;
@@ -182,10 +172,10 @@ timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.
 	<br /><center>
 	<form action="suggestMeal.jsp" method="post">
 		<input type="hidden" name="suggestNewMeal" value="suggestNewMeal"/>
-		<input type="radio" name="mealType" value="1" />Breakfast<br />
-		<input type="radio" name="mealType" value="2" />Lunch<br />
-		<input type="radio" name="mealType" value="3" />Dinner<br />
-		<input type="radio" name="mealType" value="4" />Snack<br />
+		<input type="radio" name="mealType" value="1000" />Breakfast<br />
+		<input type="radio" name="mealType" value="0100" />Lunch<br />
+		<input type="radio" name="mealType" value="0010" />Dinner<br />
+		<input type="radio" name="mealType" value="0001" />Snack<br />
 		<input type="submit" value="Give Me a Suggestion" />
 	</form>
 	</center><br />
@@ -193,14 +183,15 @@ timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.
 	<br />
 	<form action="suggestMeal.jsp" method="post">
         <div id="left">Name: <input name="name"></div>
-		<input type="hidden" name="mid">
         <div id="right">Date: <select id="daydropdown" name="daydropdown"></select> 
 			<select id="monthdropdown" name="monthdropdown"></select> 
 			<select id="yeardropdown" name="yeardropdown"></select>
 		Time: <select id="timedropdown" name="timedropdown"></select>
 		</div>
 		<br /><br /><input type="hidden" name="addToHistory" value="addToHistory">
-        <div id="right"><input type="submit" value="Add Meal"></div>
+        <div id="right">
+		<input type="checkbox" name="favs" value="1" /> Add to favorites<br /><br /><input type="submit" value="Add Meal">
+		</div>
     </form>
 	
 <script type="text/javascript">

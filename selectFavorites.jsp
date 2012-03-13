@@ -88,11 +88,10 @@ if (request.getParameter("removeFromMeal") != null) {
 }
 
 if (request.getParameter("addToHistory") != null) {
-	//int mid = Integer.parseInt(request.getParameter("mid"));
 	History hist = new History(u);
 	f = (ArrayList<Food.Update>)session.getAttribute("mealArray"); // get most current array
-	int mid2 = Meal.createMeal(db, u, f.toArray(new Food.Update[0]), 
-		request.getParameter("name")/*, Integer.parseInt(request.getParameter("mealType"))*/);
+	int mid = Meal.createMeal(db, u, f.toArray(new Food.Update[0]), 
+		request.getParameter("name"), Integer.parseInt(request.getParameter("mealType")));
 	
 	// create Timestamp
 	Calendar c = Calendar.getInstance();
@@ -149,7 +148,7 @@ if (request.getParameter("addToHistory") != null) {
 	c.set(Calendar.HOUR_OF_DAY, Integer.parseInt(request.getParameter("timedropdown")));
 	Timestamp today = new Timestamp(c.getTimeInMillis());
 	
-	hist.addMeal(new Meal(db, mid2), today);
+	hist.addMeal(new Meal(db, mid), today);
 	session.setAttribute("mealArray", new ArrayList<Food.Update>());
 }
 
@@ -251,7 +250,8 @@ timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.
 		<input type="checkbox" name="mealType" value="0001" />Snack
 		<div id="right">
 		<input type="hidden" name="addToHistory" value="addToHistory">
-        * Add to favorites<br /><br /><input type="submit" value="Add Meal"></div>
+		<br /><br /><input type="submit" value="Add Meal">
+		</div>
     </form>
 	
 <script type="text/javascript">
