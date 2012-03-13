@@ -67,8 +67,11 @@ if (request.getParameter("searchForFood") != null) {
         searchDisp += s;
     }
     searchDisp += "</table>\n<h3>If you can't find your food, create it!</h3><table>\n" +
+        "<p>Enter the name of the food, the weight of a serving in grams, the" +
+        " number of calories in a serving, and the amount of carbohydrates, " +
+        "protein, and fat in grams per serving.</p>" +
         "<form action='inventory.jsp' method='post'><tr><td>Food Name: <input name='name'></td>" +
-        "<td>Weight: <input name='weight'></td><td>Serving Size: <input name='serving'></td></tr>" +
+        "<td>Serving Size: <input name='serving'></td></tr>" +
         "<tr><td>Calories: <input name='calories'></td><td>Carbohydrates: <input " +
         "name='carbohydrates'></td><td>Protein: <input name='protein'></td></tr><tr><td>Fat: " +
         "<input name='fat'></td><td><input type='hidden' name='addFoodToDatabase' value=1>" +
@@ -88,15 +91,14 @@ if (request.getParameter("addToInventory") != null) {
 
 if (request.getParameter("addFoodToDatabase") != null) {
     String name = (String)request.getParameter("name");
-    double weight = Double.parseDouble(request.getParameter("weight"));
     double serving = Double.parseDouble(request.getParameter("serving"));
     double calories = Double.parseDouble(request.getParameter("calories"));
     double carbohydrates = Double.parseDouble(request.getParameter("carbohydrates"));
     double protein = Double.parseDouble(request.getParameter("protein"));
     double fat = Double.parseDouble(request.getParameter("fat"));
-    double factor = weight/serving;
+    double factor = 1/serving;
     
-    Food.Create cf = new Food.Create(name, factor, weight, calories, 
+    Food.Create cf = new Food.Create(name, factor, serving, calories, 
         carbohydrates, protein, fat);
         
     Food.createFood(u, cf);
