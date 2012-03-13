@@ -81,17 +81,6 @@ if (request.getParameter("signup") != null) {
       <input type="radio" name="user_sex" value="female" />Female
       <label for="user_sex" class="error" style="display:none;">Please chose one</label>
       </p>
-
-      <p>
-      <label for="height">Height</label>
-      <input name="user_height" />
-      </p>
-
-      <p>
-      <label for="weight">Weight</label>
-      <input name="user_weight" />
-      </p>
-
       <p>
       <input type="hidden" name="signup" value="signup" />
       <input type="submit" />
