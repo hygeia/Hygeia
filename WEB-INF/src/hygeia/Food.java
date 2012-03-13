@@ -29,8 +29,8 @@ public class Food {
                 return -1;
             }
             
-            ResultSet rs = db.execute("select factor from foods where mid = " +
-                this.mid + ";");
+            ResultSet rs = db.execute("select factor from foods where fid = " +
+                this.fid + ";");
             
             try {
                 if (rs == null) {
