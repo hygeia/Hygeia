@@ -66,39 +66,38 @@ else{ //show the navigation bar
   <div id="left">
     <img src="images/adam.png" width=320px height=320px>
     <p class="name">Adam William Kuipers</p>
-    Project Manager - enjoys fur hats and tasteful blazers<br /><br />
+    <p class="description">Project Manager - enjoys fur hats and tasteful blazers</p><br />
 	<img src="images/asher.png" width=320px height=320px>
      <p class="name">Asher McCall Garland</p>
-     Database Specialist - enjoys cinnamon Whiskey and coding on the beach<br /><br />
+    <p class="description"> Database Specialist - enjoys cinnamon Whiskey and coding on the beach</p><br />
 	 <img src="images/kenney.png" width=320px height=320px>
      <p class="name">Kenney Cheung</p>
-     Software Development Lead - fascinated with the city of Los Angeles<br /><br />
+    <p class="description"> Software Development Lead - fascinated with the city of Los Angeles</p><br />
   </div>
   <div id="center">
      <img src="images/alex.png" width=320px height=320px>
      <p class="name">Alex Morris</p>
-     Database Specialist - Eagle Scout who enjoys wearing suits<br /><br />
+     <p class="description">Database Specialist - Eagle Scout who enjoys wearing suits</p><br />
 	 <img src="images/brian.png" width=320px height=320px>
      <p class="name">Brian Ta</p>
-     Graphic Designer - either pro or terrible at longboarding depending on the day<br /><br />
+    <p class="description"> Graphic Designer - either pro or terrible at longboarding depending on the day</p><br />
 	 <img src="images/link.png" width=320px height=320px>
     <p class="name">Lincoln J Race</p>
-    Algorithm Specialaist/User Interface - basically the coolest person ever and in no way the one who wrote this page<br />
+    <p class="description">Algorithm Specialaist/User Interface - basically the coolest person ever and in no way the one who wrote this page</p>
 	 <img src="images/sara.png" width=320px height=320px>
 	 <p class="name">Sara Millar</p>
-     Quality Assurance Specialist - always has to tell people she's not a vegetarian<br /><br />
+     <p class="description">Quality Assurance Specialist - always has to tell people she's not a vegetarian</p><br />
    </div>
    <div id="right">
    <img src="images/anne.png" width=320px height=320px>
     <p class="name">Anne Brookes</p>
-    Software Architect - avid runner and explorer of places far and wide<br /><br />
+    <p class="description">Software Architect - avid runner and explorer of places far and wide</p><br />
 	<img src="images/corbin.png" width=320px height=320px>
      <p class="name">Corbin Lewis</p>
-     Software Development Lead - random fact extraordinar with a keen sense of pants color<br /><br />
-	 
+     <p class="description">Software Development Lead - random fact extraordinar with a keen sense of pants color</p><br /> 
 	 <img src="images/mana.png" width=320px height=320px>
      <p class="name">Mana Jammalamadaka</p>
-     Senior System Analyst - staunchly vegetarian but not vegan<br /><br />
+     <p class="description">Senior System Analyst - staunchly vegetarian but not vegan</p><br />
     </div>
 </div>
   </div>
@@ -106,6 +105,5 @@ else{ //show the navigation bar
 		Hygeia is a project developed for a Software Engineering class at UCSD.<br />
         Please contact us at hygeia110@gmail.com if you would like to use any of the code found here.
   </div>
-</div>
 </body>
 </html>
