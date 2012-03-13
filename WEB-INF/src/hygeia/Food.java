@@ -59,9 +59,10 @@ public class Food {
                     db.free();
                     return null;
                 }
-                db.free();
                 rs.next();
-                return rs.getString("name");
+                String s = rs.getString("name");
+                db.free();
+                return s;
             } catch (SQLException e) {
                 db.free();
                 return null;
