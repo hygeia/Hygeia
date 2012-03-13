@@ -94,11 +94,15 @@ if (request.getParameter("removeFromMeal") != null) {
 }
 
 if (request.getParameter("addToHistory") != null) {
-	//int mid = Integer.parseInt(request.getParameter("mid"));
 	History hist = new History(u);
 	f = (ArrayList<Food.Update>)session.getAttribute("mealArray"); // get most current array
-	int mid2 = Meal.createMeal(db, u, f.toArray(new Food.Update[0]), 
-		request.getParameter("name")/*, Integer.parseInt(request.getParameter("mealType"))*/);
+	int mealType = 0;
+	String[] mealTypes = request.getParameterValues("mealType");
+	for( int i=0; i<mealTypes.length; i++ ){
+		mealType += Integer.parseInt(mealTypes[i]);
+	}
+	int mid = Meal.createMeal(db, u, f.toArray(new Food.Update[0]), 
+		request.getParameter("name") /*, mealType */);
 	
 	// create Timestamp
 	Calendar c = Calendar.getInstance();
@@ -122,41 +126,26 @@ if (request.getParameter("addToHistory") != null) {
 			db.close();
 			return;
 	}
-/*	if( month.equals("Jan")){
-		c.set(Calendar.MONTH, Calendar.JANUARY);
-	}else if( month.equals("Feb")){
-		c.set(Calendar.MONTH, Calendar.FEBRUARY);
-	}else if( month.equals("Mar")){
-		c.set(Calendar.MONTH, Calendar.MARCH);
-	}else if( month.equals("Apr")){
-		c.set(Calendar.MONTH, Calendar.APRIL);
-	}else if( month.equals("May")){
-		c.set(Calendar.MONTH, Calendar.MAY);
-	}else if( month.equals("Jun")){
-		c.set(Calendar.MONTH, Calendar.JUNE);
-	}else if( month.equals("Jul")){
-		c.set(Calendar.MONTH, Calendar.JULY);
-	}else if( month.equals("Aug")){
-		c.set(Calendar.MONTH, Calendar.AUGUST);
-	}else if( month.equals("Sept")){
-		c.set(Calendar.MONTH, Calendar.SEPTEMBER);
-	}else if( month.equals("Oct")){
-		c.set(Calendar.MONTH, Calendar.OCTOBER);
-	}else if( month.equals("Nov")){
-		c.set(Calendar.MONTH, Calendar.NOVEMBER);
-	}else if( month.equals("Dec")){
-		c.set(Calendar.MONTH, Calendar.DECEMBER);
-	}else{
-		response.sendRedirect("error.jsp?code=3&echo=Could not parse date");
-		db.close();
-		return;
-	}*/
+
 	c.set(Calendar.DAY_OF_MONTH, Integer.parseInt(request.getParameter("daydropdown")));
 	c.set(Calendar.HOUR_OF_DAY, Integer.parseInt(request.getParameter("timedropdown")));
 	Timestamp today = new Timestamp(c.getTimeInMillis());
 	
-	hist.addMeal(new Meal(db, mid2), today);
+	Meal newMeal = new Meal(db, mid);
+	hist.addMeal(newMeal, today);
 	session.setAttribute("mealArray", new ArrayList<Food.Update>());
+	
+	
+	if( request.getParameterValues("favs").length > 0 ){
+		Favorites fav = new Favorites (u);
+		boolean r = fav.addMeal(newMeal);
+		if (r == false) {
+			response.sendRedirect("error.jsp?code=1&echo=Could not add" +
+				" meal to favorites");
+			db.close();
+			return;
+		}
+	}
 }
 
 Food.List[] arr = inv.getInventoryList();
@@ -244,20 +233,20 @@ timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.
 	<br />
 	<form action="addMeal.jsp" method="post">
         <div id="left">Name: <input name="name"></div>
-		<input type="hidden" name="mid">
         <div id="right">Date: <select id="daydropdown" name="daydropdown"></select> 
 			<select id="monthdropdown" name="monthdropdown"></select> 
 			<select id="yeardropdown" name="yeardropdown"></select>
 		Time: <select id="timedropdown" name="timedropdown"></select>
 		</div>
 		<br /><br />
-		What type of meal is this? <input type="checkbox" name="mealType" value="1000" />Breakfast
-		<input type="checkbox" name="mealType" value="0100" />Lunch
-		<input type="checkbox" name="mealType" value="0010" />Dinner
-		<input type="checkbox" name="mealType" value="0001" />Snack
+		What type of meal is this? 
+		<input type="checkbox" name="mealType" value="1000" /> Breakfast&nbsp;
+		<input type="checkbox" name="mealType" value="0100" /> Lunch&nbsp;
+		<input type="checkbox" name="mealType" value="0010" /> Dinner&nbsp;
+		<input type="checkbox" name="mealType" value="0001" /> Snack&nbsp;
 		<div id="right">
-		<input type="hidden" name="addToHistory" value="addToHistory">
-        * Add to favorites<br /><br /><input type="submit" value="Add Meal"></div>
+		<input type="hidden" name="addToHistory" value="addToHistory" />
+        <input type="checkbox" name="favs" value="1" /> Add To Favorites<br /><br /><input type="submit" value="Add Meal"></div>
     </form>
 	
 <script type="text/javascript">
