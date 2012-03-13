@@ -23,9 +23,9 @@ public class Meal {
     /* Create a new meal in the database consisting of these foods. Returns meal
        id. */
     public static int createMeal(Database db, User u, Food.Update f[], 
-        String name) {
+        String name, int type) {
         if ((db == null) || (u == null) || (f == null) || 
-            (name == null)) {
+            (name == null) || (type < 0)) {
             return -1;
         }
         
@@ -44,10 +44,10 @@ public class Meal {
         }
         
         /* Create meal record in database */
-        int r = db.update("insert into meals (uid, name, calories, " +
+        int r = db.update("insert into meals (uid, name, type, calories, " +
             "carbohydrates, protein, fat) values (" + uid + ", '" + name + "', "
-            + sum.getCalories() + ", " + sum.getCarbohydrates() + ", " + 
-            sum.getProtein() + ", " + sum.getFat() + ");");
+            + type + ", " + sum.getCalories() + ", " + sum.getCarbohydrates() + 
+            ", " + sum.getProtein() + ", " + sum.getFat() + ");");
         
         /* Check to see if it went correctly. */
         if (r != 1) {
@@ -126,6 +126,25 @@ public class Meal {
             return null;
         } catch (SQLException e) {
             return null;
+        }
+    }
+    
+    /* Return the type of meal */
+    public int getType() {
+        ResultSet rs = this.db.execute("select type from meals where mid=" +
+            this.mid + ";");
+        
+        try {
+            if (rs == null) {
+                return 0x10000000;
+            }
+            rs.next();
+            int type = rs.getInt("type");
+            db.free();
+            return type;
+        } catch (SQLException e) {
+            db.free();
+            return 0x10000001;
         }
     }
     
@@ -235,6 +254,10 @@ public class Meal {
         
         public Timestamp getOccurrence() {
             return this.occurrence;
+        }
+        
+        public Meal toMealAdapter(Database db) {
+            return new Meal(db, this.mid);
         }
     
     }

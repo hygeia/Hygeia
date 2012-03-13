@@ -45,14 +45,14 @@ create table history (
     occurrence timestamp not null,
     foreign key (uid) references users(uid) on delete cascade);
 create table favorites (
-    fid integer auto_increment, 
+    fid integer primary key auto_increment, 
     mid integer not null, 
     uid integer not null,
-    primary key (fid, mid, uid),
     foreign key (uid) references users(uid) on delete cascade);
 create table meals (
     mid integer primary key auto_increment, 
     uid integer not null, 
+    type integer not null,
     name text not null, 
     calories real not null, 
     carbohydrates real not null, 
