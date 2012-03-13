@@ -176,7 +176,8 @@ timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.
   <body>
   <div id="page">
     <div id="content">
-      <center><h1>Add A Suggested Meal</h1></center><br />
+	<a href="mealChoice.jsp"> Select another method of adding a meal </a>
+    <center><h1>Add A Suggested Meal</h1></center><br />
 	<center><h2 class="new">Meal</h2></center><br /><%= mealDisp %>
 	<br /><center>
 	<form action="suggestMeal.jsp" method="post">
@@ -201,7 +202,6 @@ timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.
 		<br /><br /><input type="hidden" name="addToHistory" value="addToHistory">
         <div id="right"><input type="submit" value="Add Meal"></div>
     </form>
-	<br /><a href="mealChoice.jsp"> Select another method of adding a meal </a>
 	
 <script type="text/javascript">
 //populatedropdown(id_of_day_select, id_of_month_select, id_of_year_select)
