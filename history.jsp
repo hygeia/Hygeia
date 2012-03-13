@@ -43,7 +43,7 @@ if(request.getParameter("removeFromHistory")!= null)
   return;
  }
 }
-
+/*
 if(request.getParameter("addToHistory") != null)
 {
  int mid = Integer.parseInt(request.getParameter("mid"));
@@ -95,24 +95,26 @@ if(request.getParameter("searchForMeal") != null)
  } 
  
 }
+*/
+// String to display when not history exists
+String noHistory = "";
 
 // display history
 Meal.List[] meals = history.getHistory();
 if( meals == null )
 {
- response.sendRedirect("error.jsp?code=1&echo=Could not fetch history");
- db.close();
- return;
+ noHistory = "So far you have no meals in your history.";
 }
 
 String histDisp = "<table style='margin:auto auto;'>\n";
 
+if( meals != null )
+{
  for(Meal.List m : meals)
  {
   if( m == null){
-   response.sendRedirect("error.jsp?code=1&echo=Could not fetch meal");
-   db.close();
-   return;
+   noHistory = "So far you have no meals in your history.";
+   break; 
   }
   String name = m.getName();
   int mid = m.getMid();
@@ -122,12 +124,13 @@ String histDisp = "<table style='margin:auto auto;'>\n";
   	 "<input type='hidden' name='mid' value='"+ mid +"'>" + name + " Date: " +
   	 "<input type='hidden' name='occurrence' value='" + occurrence + "'>" + occurrence + "</br>" +
 	 "<input type='hidden' name='removeFromHistory'" +
-	" value='removeFromHistory'> <input type='submit' value='Remove'>"+
-  	"<form action='history.jsp' method='post'> </form>\n";
+	" value='1'> <input type='submit' value='Remove'>"+
+  	"<form action='history.jsp' method='post'> </form>\n"; 
+	
  }
  
  histDisp += "</table>\n";
-
+}
 %>
 <HTML>
 <head>
@@ -153,7 +156,7 @@ String histDisp = "<table style='margin:auto auto;'>\n";
 </table>
 </div>
 
-<!-- Ask user if they would like to add meal to history -->
+<!-- Ask user if they would like to add meal to history
 Add to history
 
 <form action="history.jsp" method="post">
@@ -161,6 +164,7 @@ Add to history
 <input type="hidden" name="searchForFood" value=1>
 <input type="submit" value="Find It!">
 </form>
+-->
 </br>
 <H1> Meal History </H1>
 <P>
@@ -169,6 +173,7 @@ Add to history
 
 <br>
 <%= histDisp %>
+<%= noHistory %>
 </div>
 </div>
 <div id="footer"><a href="about.jsp">About Us</a><br />
