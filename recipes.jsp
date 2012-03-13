@@ -22,6 +22,7 @@ if (avail == null) {
 for (Meal.List m : avail) {
     String s = "<tr><td>" + m.getName() + "</td><td><form action='favorites.jsp'" +
         " method='post'><input type='hidden' name='addToFavorites' value=1>" +
+        "<input type='hidden' name='mid' value=" + m.getMid() + ">" +
         "<input type='submit' value='Add to Favorites!'></form></td></tr>\n";
     mealDisp += s;
 }
