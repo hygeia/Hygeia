@@ -67,7 +67,8 @@ $(document).ready(function () {
       }   
   });
   
-  $('add_meal_form').validate({
+  $("#add_meal_form").validate({
+
     /* Prevent double submissions */
     submitHandler: function(form){
       if(!this.wasSent){
@@ -80,6 +81,14 @@ $(document).ready(function () {
         return false;
       }
     },
-    rules: 
+    rules: {
+      name:{ required:true },
+      daydropdown:{ required:true },
+      monthdropdown:{ required:true },
+      yeardropdown:{ required:true },
+      timedropdown:{ required:true },
+      timedropdown:{ required:true },
+      mealType:{ required:true }
+    }
   });
 });
