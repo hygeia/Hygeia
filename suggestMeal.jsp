@@ -163,6 +163,8 @@ if (request.getParameter("suggestNewMeal") != null) {
 		}
 //		session.setAttribute("suggestedArray", suggested.getMeal());
 		session.setAttribute("suggestedMealType", (String)request.getParameter("mealType"));
+
+		mealDisp = "<center>Meal added successfully!</center>";
 	}
 }
 
