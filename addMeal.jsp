@@ -222,7 +222,7 @@ var monthfield=document.getElementById(monthfield)
 var yearfield=document.getElementById(yearfield)
 var timefield=document.getElementById(timefield)
 for (var i=1; i<32; i++)
-dayfield.options[i]=new Option(i, i+1)
+dayfield.options[i]=new Option(i, i)
 dayfield.options[today.getDate()]=new Option(today.getDate(), today.getDate(), true, true) //select today's day
 for (var m=0; m<12; m++)
 monthfield.options[m]=new Option(monthtext[m], monthtext[m])
@@ -234,7 +234,7 @@ thisyear+=1
 }
 yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, true) //select today's year
 for (var d=0; d<24; d++)
-timefield.options[d]=new Option(d + ":00", d+1)
+timefield.options[d]=new Option(d + ":00", d)
 timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.getHours(), true, true) //select current time
 }
 

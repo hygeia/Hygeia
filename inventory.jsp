@@ -152,7 +152,7 @@ db.close();
 background-image: url('images/DEFAULTPIC.png');
 width: 190px;
 height: 190px;
-margin: 0 auto;
+margin: 0;
 position: relative;
 z-index: 10;
 margin-right: 10px;
@@ -178,7 +178,7 @@ display: block;
 position: relative;
 z-index: 90;
 color: #ffffff;
-width: 280px;
+width: 190px;
 height: 50px;
 padding: 10px;
 font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -214,7 +214,7 @@ margin-top: 10px;
 
 <h1><%= username %>'s Inventory</h1>
 
-<div align="center">
+<div id="pics">
 <%= invDispPics %>
 </div>
 
