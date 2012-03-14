@@ -502,7 +502,7 @@ out.println("f"+block7[2]);
 <tr>
 <td> <a href="home.jsp"><img src="images/lightICON1.png"></a></td>
 <td> <a href="inventory.jsp"><img src="images/lightICON2.png"></a></td>
-<td> <a href="history.jsp"><img src="images/lightICON3.png"></a></td>
+<td> <a href="history.jsp"><img src="images/darkICON3.png"></a></td>
 <td> <a href="recipes.jsp"><img src="images/lightICON4.png"></a></td>
 <td> <a href="profile.jsp"><img src="images/lightICON5.png"></a></td>
 <td> <a href="favorites.jsp"><img src="images/lightICON6.png"></a></td>
@@ -523,14 +523,14 @@ Add to history
 -->
 </br>
 <H1> Meal History </H1>
-<P>
+<P class="leftAlignText">
 
 <%= searchDisp %>
 
 <br>
 <%= histDisp %>
 <%= noHistory %>
-</br>
+</br></p>
 <div id="line_chart" style="width: 960px; height: 700px;"></div>
 </div>
 </div>
