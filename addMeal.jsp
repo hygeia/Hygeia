@@ -36,6 +36,8 @@ if( session.getAttribute("mealArray") == null){
 ArrayList<Food.Update> f = (ArrayList<Food.Update>)session.getAttribute("mealArray");
 //ArrayList<String> fNames = (ArrayList<String>)session.getAttribute("mealNameArray");
 
+String mealDisp = "";
+
 if (request.getParameter("addToMeal") != null) {
     int fid = Integer.parseInt(request.getParameter("fid"));
     double count=Double.parseDouble(request.getParameter("count"));
@@ -161,6 +163,7 @@ if (request.getParameter("addToHistory") != null) {
 			return;
 		}
 	}
+	mealDisp = "<center>Meal added successfully!</center>";
 }
 
 Food.List[] arr = inv.getInventoryList();
@@ -172,7 +175,7 @@ if (arr == null) {
 
 /* Produce table of foods already in meal, with remove from meal forms */
 f = (ArrayList<Food.Update>)session.getAttribute("mealArray"); // get most current array
-String mealDisp = "<table style='margin:auto auto;'>\n";
+mealDisp += "<table style='margin:auto auto;'>\n";
 for (Food.Update up : f) {
 	String s = "<tr><form action='addMeal.jsp' method='post'>" +
         "<input type='hidden' name='fid' value=" + up.getFid() + ">" +

@@ -41,6 +41,8 @@ String selectedMealName = (String)session.getAttribute("selectedMealName");
 //Food.Update[] f = (Food.Update[])session.getAttribute("favArray");
 //String[] fNames = (String[])session.getAttribute("favNameArray");
 
+String mealDisp = "";
+
 if (request.getParameter("selectAsMeal") != null) {
 	/* add the food items of the old meal to the inventory */
 	Food.Update[] mealToAdd = new Meal(db, Integer.parseInt(request.getParameter("mid"))).getMeal();
@@ -156,6 +158,8 @@ if (request.getParameter("addToHistory") != null) {
 //	session.setAttribute("favArray", new Food.Update[0]);
 	session.setAttribute("selectedMid", 0);
 	session.setAttribute("selectedMealName", "");
+	
+	mealDisp = "<center>Meal added successfully!</center>";
 }
 
 Meal.List[] arr = favs.getFavorites();
@@ -169,7 +173,7 @@ selectedMealName = (String)session.getAttribute("selectedMealName");
 /* Produce table of foods in chosen meal */
 //f = (Food.Update[])session.getAttribute("favArray"); // get most current array
 Food.Update[] f = new Meal(db, (Integer)session.getAttribute("selectedMid")).getMeal();
-String mealDisp = "<table style='margin:auto auto;'>\n";
+mealDisp += "<table style='margin:auto auto;'>\n";
 if((Integer)session.getAttribute("selectedMid") > 0){
 	for (Food.Update up : f) {
 			String s = "<tr><td>" + up.getName(db) + "</td><td>Amount: " + 
