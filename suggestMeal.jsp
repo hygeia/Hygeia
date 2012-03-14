@@ -111,11 +111,15 @@ Meal suggested = null;
 String mealDisp = "";
 
 if (request.getParameter("suggestNewMeal") != null) {
-	suggested = alg.suggestMeal(u, Integer.parseInt(request.getParameter("mealType")));
-	if( suggested == null ){
-		mealDisp = "No meals available for suggestion at this time.";
+	if( request.getParameter("mealType") == null ){
+		mealDisp = "<center>Select a meal type in order to receive a suggestion.</center>";
+	}else{
+		suggested = alg.suggestMeal(u, Integer.parseInt(request.getParameter("mealType")));
 	}
-	else{
+	if( request.getParameter("mealType") != null && suggested == null ){
+		mealDisp = "<center>No meals available for suggestion at this time.</center>";
+	}
+	else if(request.getParameter("mealType") != null ){
 		suggestedMealName = suggested.getName();
 		session.setAttribute("suggestedMid", suggested.getMid());
 	
