@@ -31,6 +31,50 @@ String favDisp = "";
 String sectionTitle = "";
 int selectedMid = 1;
 
+/* Actually add meal to history */
+if (request.getParameter("addToHistory2") != null) {
+
+    int mid = Integer.parseInt(request.getParameter("mid"));
+    
+    // create Timestamp
+	Calendar c = Calendar.getInstance();
+	c.set(Calendar.YEAR, Integer.parseInt(request.getParameter("yeardropdown")));
+	int month = Integer.parseInt(request.getParameter("monthdropdown"));
+	switch(month){
+		case 0: c.set(Calendar.MONTH, Calendar.JANUARY); break;
+		case 1: c.set(Calendar.MONTH, Calendar.FEBRUARY); break;
+		case 2: c.set(Calendar.MONTH, Calendar.MARCH); break;
+		case 3: c.set(Calendar.MONTH, Calendar.APRIL); break;
+		case 4: c.set(Calendar.MONTH, Calendar.MAY); break;
+		case 5: c.set(Calendar.MONTH, Calendar.JUNE); break;
+		case 6: c.set(Calendar.MONTH, Calendar.JULY); break;
+		case 7: c.set(Calendar.MONTH, Calendar.AUGUST); break;
+		case 8: c.set(Calendar.MONTH, Calendar.SEPTEMBER); break;
+		case 9: c.set(Calendar.MONTH, Calendar.OCTOBER); break;
+		case 10: c.set(Calendar.MONTH, Calendar.NOVEMBER); break;
+		case 11: c.set(Calendar.MONTH, Calendar.DECEMBER); break;
+		default: 
+			response.sendRedirect("error.jsp?code=3&echo=Could not parse date");
+			db.close();
+			return;
+	}
+	c.set(Calendar.DAY_OF_MONTH, Integer.parseInt(request.getParameter("daydropdown")));
+	c.set(Calendar.HOUR_OF_DAY, Integer.parseInt(request.getParameter("timedropdown")));
+	Timestamp today = new Timestamp(c.getTimeInMillis());
+
+    History hist = new History(u);	
+    Inventory inv = new Inventory(u);
+    Meal m = new Meal(db, mid);
+    Food.Update foods[] = m.getMeal();
+    for (Food.Update f : foods) {
+        inv.removeFood(f);
+    }
+	hist.addMeal(m, today);
+	request.sendRedirect("home.jsp");
+	return;
+}
+
+/* show meal name and request time */
 if (request.getParameter("addToHistory") == null) {
     sectionTitle = "Favorites";
     Meal.List meals[] = favs.getFavorites();
@@ -61,11 +105,6 @@ if (request.getParameter("addToHistory") == null) {
 } else {
     selectedMid = Integer.parseInt(request.getParameter("mid"));
     sectionTitle = new Meal(db, selectedMid).getName();
-}
-
-/* Actually add meal to history */
-if (request.getParameter("addToHistory2") != null) {
-
 }
 
 %>
