@@ -251,7 +251,7 @@ if(theName != null)
 
      <P> Take 3 measurements of your hips </br>
      How to take proper hip measurements: (Must have measuring tape) Take</br>
-     measuremet from the widest point from hip to hip. Measure in inches.</br>
+     measurement from the widest point from hip to hip. Measure in inches.</br>
      Hygeia will find the average of these three measurements.</br> 
      </p>
      <P> 

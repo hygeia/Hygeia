@@ -14,7 +14,7 @@ public class Algorithm {
     private static final int LUNCH = 0x04;
     private static final int DINNER = 0x02;
     private static final int SNACK = 0x01;
-    private static final double SAME = 0.1; //used as a margin of error for relatively balanced meals
+    private static final double SAME = 1.1; //used as a margin of error for relatively balanced meals
 
     public Algorithm(Database db, User u) {
 		this.uid = u.getUid();
@@ -46,20 +46,25 @@ public class Algorithm {
         ResultSet rs = db.execute("select mid from meals where (uid = " + 
             u.getUid() + " or uid = 0) and type & " + type + " = " + type + ";");
         //arraylist of meal IDs that come from the database
-        ArrayList<Integer> results = new ArrayList<Integer>(0);
+        ArrayList<Integer> results = new ArrayList<Integer>();
 		while(rs.next())
 		{
 			results.add(rs.getInt("mid"));
 		}
 		//retrieves a list of food in the inventory
 		Inventory inven = new Inventory(u);
+		
 		Food.Update[] fu = inven.getInventory();
+		if (fu == null)
+		{
+			return null;
+		}
 		//random generator to select a meal at random from available MIDs
 		Random r = new Random();
 		//if the inventorymatchcount variable equals the number of ingredients in a recipe, all necessary ingredients are available
 		int inventorymatchcount = 0;
 		//Meal m is the variable used to store meals as they are accessed for comparison to ingredients
-		Meal m;
+		Meal m = null;
 		//while loop runs while a suitable meal isn't found yet
 		while (results.size() > 0)
 		{
@@ -73,7 +78,9 @@ public class Algorithm {
 				for (int j = 0; j < fu.length; j++)
 				{
 					if (mu[i].equals(fu[j]))
+					{
 						inventorymatchcount += 1;
+					}
 				}
 			}
 			if (inventorymatchcount == mu.length)
