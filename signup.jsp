@@ -98,8 +98,9 @@ if (request.getParameter("signup") != null) {
   <body>
 	
     <div id="page">
-      <img src="images/signup.png">
+      
       <div id="content">
+	  <img src="images/signup.png" style="float:left;" />
 
         <form id="signupform" method="post" action="signup.jsp">
           <p>
