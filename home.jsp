@@ -431,7 +431,7 @@ db.close();
 </table>
       </div>
       <div id="content">
-"Zone" fact: <%= randFact %>
+<p class="tip">"Zone" fact: <%= randFact %></p>
       <div id="oday" class="shadowBox"><%= day4 %><br /><br />
         <div id="chartwrapperOday">
 		  <%= showThreeDayCharts %>
