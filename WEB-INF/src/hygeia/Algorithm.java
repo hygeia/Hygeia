@@ -113,7 +113,7 @@ public class Algorithm {
 
 		}
 		//if no meal matches the SAME margin of error for balancedness, return null
-        return new Meal(db, 0);
+        return null;//new Meal(db, 0);
     }
     
     /* Sanitizes a String for use. */

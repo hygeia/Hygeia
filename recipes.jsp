@@ -11,7 +11,7 @@ String username = (String)session.getAttribute("username");
 int uid = (Integer)session.getAttribute("uid");
 Database db = new Database();
 User u = new User(db, uid);
-String mealDisp = "<table style='margin:auto auto;'>\n";
+String mealDisp = "";
 History hist = new History(u);
 Meal.List avail[] = hist.getAvailableMeals("");
 if (avail == null) {
@@ -19,21 +19,34 @@ if (avail == null) {
     response.sendRedirect("error.jsp?code=1&echo=Could not fetch meals");
     return;
 }
-for (Meal.List m : avail) {
-    String s = "<tr><td>" + m.getName() + "</td><td><form action='favorites.jsp'" +
-        " method='post'><input type='hidden' name='addToFavorites' value=1>" +
-        "<input type='hidden' name='mid' value=" + m.getMid() + ">" +
-        "<input type='submit' value='Add to Favorites!'></form></td><td>" +
-        "<form action='selectFavorites.jsp' method='post'><input type='submit'"+
-        " value='Eat Me!'><input type='hidden' name='addToHistory' value=1>" +
-        "<input type='hidden' name='mid' value=" + m.getMid() + 
-        "></form><td></tr>\n";
-    mealDisp += s;
+
+String searchDisp = "";
+
+/* search for a recipe */
+if (request.getParameter("searchForRecipe") != null) {
+    String term = request.getParameter("nameSearch");
+	avail = hist.getAvailableMeals(term);
+    searchDisp = "<table style='margin:auto auto;'>\n";
+    for (Meal.List m : avail) {
+		if( m == null ){
+		    continue;
+			/* response.sendRedirect("error.jsp?code=1&echo=Error finding foods with name " + term);
+			db.close();
+			return; */
+		}
+        String s = "<tr><form action='recipes.jsp' method='post'>" +
+            "<td>" + m.getName() + "</td><td><form action='favorites.jsp'" +
+			" method='post'><input type='hidden' name='addToFavorites' value=1>" +
+			"<input type='hidden' name='mid' value=" + m.getMid() + ">" +
+			"<input type='submit' value='Add to Favorites!'></form></td><td>" +
+			"<form action='selectFavorites.jsp' method='post'><input type='submit'"+
+			" value='Eat Me!'><input type='hidden' name='addToHistory' value=1>" +
+			"<input type='hidden' name='mid' value=" + m.getMid() + 
+			"></form></td>";
+        searchDisp += s;
+    }
+    searchDisp += "</table>\n";
 }
-mealDisp += "</table>\n";
-
-
-
 
 
 /* forms forms forms....
@@ -114,7 +127,6 @@ if(request.getParameter("addRecipeToDatabase") != null) {
 </head>
 <body>
     <div id="page">
-       <div id="content">
 	      <div id="header">
 
 <%
@@ -135,12 +147,22 @@ if(request.getParameter("addRecipeToDatabase") != null) {
 <td> <a href="logout.jsp"><img src="images/lightICON8.png"></a></td>
 </tr>
 </table>
+</div>
 
+       <div id="content">
 <br />
 
 <h1><%= username %>'s Recipes</h1>
 <br>
 <%= mealDisp %>
+
+<form action="recipes.jsp" method="post">
+  <p>Enter part of the food's name: <input name="nameSearch" />
+  <input type="hidden" name="searchForRecipe" value=1 />
+  <input type="submit" value="Find It!"/>
+</form>
+
+<div id="textWrapperInventory"><%= searchDisp %></div>
 
 <!--
 <div align="center">

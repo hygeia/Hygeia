@@ -124,25 +124,25 @@ if( meals == null )
  noHistory = "So far you have no meals in your history.";
 }
 
-String histDisp = "<table style='margin:auto auto;'>\n";
+String histDisp = "<table style='margin:auto auto;text-align:left'>\n";
 
 if( meals != null )
 {
- for(Meal.List m : meals)
+ for(int i = meals.length - 1; i > -1; i-- )
  {
-  if( m == null){
+  if( meals[i] == null){
    noHistory = "So far you have no meals in your history.";
    break; 
   }
-  String name = m.getName();
-  int mid = m.getMid();
-  Timestamp  occurrence = m.getOccurrence();
+  String name = meals[i].getName();
+  int mid = meals[i].getMid();
+  Timestamp  occurrence = meals[i].getOccurrence();
   
   histDisp += "<form action='history.jsp' method='post'>" +
   	 "<input type='hidden' name='mid' value='"+ mid +"'>" + name + " Date: " +
-  	 "<input type='hidden' name='occurrence' value='" + occurrence + "'>" + occurrence + 
+  	 "<input type='hidden' name='occurrence' value='" + occurrence + "'>" + occurrence + "\t"+ 
 	 "<input type='hidden' name='removeFromHistory'" +
-	" value='1'> <input type='submit' value='Remove'>"+
+	" value='1'> <input type='image' src='images/X.png' width='25' hspace='10' height='25'>"+
   	"<form action='history.jsp' method='post'> </br></form>\n"; 
 
  }
@@ -457,7 +457,7 @@ out.println("f"+block7[2]);
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Day');
         data.addColumn('number', 'Carbs');
-        data.addColumn('number', 'Protien');
+        data.addColumn('number', 'Protein');
 	data.addColumn('number', 'Fat');
         data.addRows([
           ['<%= day7 %>', <%= block7[0] %>,<%= block7[1] %>, <%= block7[2] %>],
@@ -497,13 +497,12 @@ out.println("f"+block7[2]);
 </head>
 <BODY>
     <div id="page">
-	<div id="content">
       <div id="header">
         <table cellpadding="0" cellspacing="0">
 <tr>
 <td> <a href="home.jsp"><img src="images/lightICON1.png"></a></td>
 <td> <a href="inventory.jsp"><img src="images/lightICON2.png"></a></td>
-<td> <a href="history.jsp"><img src="images/lightICON3.png"></a></td>
+<td> <a href="history.jsp"><img src="images/darkICON3.png"></a></td>
 <td> <a href="recipes.jsp"><img src="images/lightICON4.png"></a></td>
 <td> <a href="profile.jsp"><img src="images/lightICON5.png"></a></td>
 <td> <a href="favorites.jsp"><img src="images/lightICON6.png"></a></td>
@@ -512,7 +511,7 @@ out.println("f"+block7[2]);
 </tr>
 </table>
 </div>
-
+	<div id="content">
 <!-- Ask user if they would like to add meal to history
 Add to history
 
@@ -524,15 +523,15 @@ Add to history
 -->
 </br>
 <H1> Meal History </H1>
-<P>
+<P class="leftAlignText">
 
 <%= searchDisp %>
 
 <br>
 <%= histDisp %>
 <%= noHistory %>
-</br>
-<div id="line_chart" style="width: 960px; height: 500px;"></div>
+</br></p>
+<div id="line_chart" style="width: 960px; height: 700px;"></div>
 </div>
 </div>
 <div id="footer"><a href="about.jsp">About Us</a><br />

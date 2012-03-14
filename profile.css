@@ -16,9 +16,6 @@ body {
     min-height:100%;
     margin: 0 auto 0 auto;
     background-color:#fbffcc;
-	border-style:none solid none solid;
-	border-width:1px;
-	border-color:#7b840d;
 }
 
 #content {

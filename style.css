@@ -16,9 +16,6 @@ body {
     min-height:100%;
     margin: 0 auto 0 auto;
     background-color:#fbffcc;
-	border-style:none solid none solid;
-	border-width:1px;
-	border-color:#7b840d;
 }
 
 #content {
@@ -147,19 +144,30 @@ float:right;
 }
 
 /* Text properties for main box */
-p.food {
+#textWrapper {
 padding: 0 0 0 5px;
-width:137px;
+width:210px;
+}
+
+#textWrapperInventory {
+text-align:left;
 }
 
 p.oday {
 padding: 0 3px 0 3px;
 }
 
+p.tip {
+color:#7b840d;
+margin-bottom:20px;
+font-size:18px;
+text-align:center;
+}
+
 p.total {
 padding: 0 0 1px 8px;
 font-weight:bold;
-font-size:14px;
+font-size:12px;
 text-align:left;
 }
 
@@ -187,8 +195,17 @@ padding-left:10px;
 margin:0;
 }
 
-#textWrapper {
+p.leftalignText {
 text-align:left;
+color:#7b840d;
+margin-left:250px;
+}
+
+p.addFood {
+font-size:25px;
+font-weight:bold;
+text-align:center
+margin:0;
 }
 
 p.odaytext {
@@ -242,6 +259,10 @@ width:320px;
 margin:0 0 10px 0;
 }
 
+#pics {
+padding-left:20px;
+width:960px;
+}
 
 #aboutAbout {
 width: 800px;

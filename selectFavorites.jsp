@@ -123,7 +123,7 @@ if (request.getParameter("addToHistory") != null) {
 //	f = (Food.Update[])session.getAttribute("favArray"); // get most current array
 	int mid = (Integer)session.getAttribute("selectedMid");
 	Meal histMeal = new Meal(db, mid);
-	Food.Update[] f = histMeal.getMeal(); //get array of current meal
+//	Food.Update[] f = histMeal.getMeal(); //get array of current meal
 	
 	// create Timestamp
 	Calendar c = Calendar.getInstance();
@@ -187,18 +187,34 @@ if((Integer)session.getAttribute("selectedMid") > 0){
 String favDisp = "<table style='margin:auto auto;'>\n";
 for (Meal.List ml : arr) {
 	if( ml != null ){
+		String disabled = "";
+		Meal me = new Meal(db, ml.getMid());
+		Food.List[] mefl = me.getFoodList();
+		Food.List[] infl = inv.getInventoryList();
+		for( Food.List fl : mefl ){
+			for( Food.List il : infl ){
+				if(il.getFid() == fl.getFid()){
+					if(il.getCount() < fl.getCount()){
+						disabled = "disabled='disabled'";
+						break;
+					}
+				}
+			}
+			if( disabled.equals("disabled='disabled'") ){
+				break;
+			}
+		}
 		String s = "<tr><form action='selectFavorites.jsp' method='post'>" +
 			"<input type='hidden' name='mid' value=" + ml.getMid() + ">" +
 			"<td>" + ml.getName() + "</td><td><input type='hidden' name='" +
-			"selectAsMeal' value=1><input type='submit' value='Select As Meal'>" +
-			"</td></form></tr>\n";
+			"selectAsMeal' value=1><input type='submit' value='Select As Meal' " + 
+			disabled + "></td></form></tr>\n";
 		favDisp += s;
 	}else{
 		favDisp += "<tr><td>You have no favorite meals.</td></tr>";
 	}
 }
 favDisp += "</table>\n";
-
 db.close();
 
 %>
@@ -222,7 +238,7 @@ var monthfield=document.getElementById(monthfield)
 var yearfield=document.getElementById(yearfield)
 var timefield=document.getElementById(timefield)
 for (var i=1; i<32; i++)
-dayfield.options[i]=new Option(i, i+1)
+dayfield.options[i]=new Option(i, i)
 dayfield.options[today.getDate()]=new Option(today.getDate(), today.getDate(), true, true) //select today's day
 for (var m=0; m<12; m++)
 monthfield.options[m]=new Option(monthtext[m], monthtext[m])
@@ -234,7 +250,7 @@ thisyear+=1
 }
 yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, true) //select today's year
 for (var d=0; d<24; d++)
-timefield.options[d]=new Option(d + ":00", d+1)
+timefield.options[d]=new Option(d + ":00", d)
 timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.getHours(), true, true) //select current time
 }
 

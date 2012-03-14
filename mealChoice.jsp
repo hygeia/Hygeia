@@ -19,11 +19,11 @@
 	  <a href="selectFavorites.jsp"><img src="images/favorites.png" ></a><br /><br />
 	  <p class="choice">Pick a meal from your list of favorites</p>
 	  </div>
-	  <div id="leftChoice">
+	  <div id="middleChoice">
 	  <a href="suggestMeal.jsp"><img src="images/getSuggestion.png" ></a><br /><br />
 	  <p class="choice">Get a suggested meal from our suggestion algorithm</p>
 	  </div>
-	  <div id="leftChoice">
+	  <div id="rightChoice">
 	  <a href="addMeal.jsp"><img src="images/input.png" ></a><br /><br />
 	  <p class="choice">Input a custom meal from the food you have available in your inventory</p>
 	  </div>

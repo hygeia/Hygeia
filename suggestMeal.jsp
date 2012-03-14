@@ -27,17 +27,21 @@ int uid = (Integer)session.getAttribute("uid");
 User u = new User(db, uid);
 Inventory inv = new Inventory(u);
 
-if( session.getAttribute("suggestedArray") == null){
-	session.setAttribute("suggestedArray", new Food.Update[0]); }
+if( session.getAttribute("suggestedMid") == null){
+	session.setAttribute("suggestedMid", 0); }
+//if( session.getAttribute("suggestedArray") == null){
+//	session.setAttribute("suggestedArray", new Food.Update[0]); }
 //if( session.getAttribute("suggestedNameArray") == null){
 //	session.setAttribute("suggestedNameArray", String[0]); }
 
-Food.Update[] f = (Food.Update[])session.getAttribute("suggestedArray");
+//Food.Update[] f = (Food.Update[])session.getAttribute("suggestedArray");
 //String[] fNames = (String[])session.getAttribute("suggestedNameArray");
+
+String suggestedMealName = "";
 
 if (request.getParameter("addToHistory") != null) {
 	History hist = new History(u);
-	f = (Food.Update[])session.getAttribute("suggestedArray"); // get most current array
+//	f = (Food.Update[])session.getAttribute("suggestedArray"); // get most current array
 	if(session.getAttribute("suggestedMealType") == null){
 		response.sendRedirect("error.jsp?code=3&echo=Could not get meal type");
 		db.close();
@@ -45,7 +49,10 @@ if (request.getParameter("addToHistory") != null) {
 	}
 	String suggMealType = (String)session.getAttribute("suggestedMealType");
 	int mealType = Integer.parseInt(suggMealType);
-	int mid = Meal.createMeal(db, u, f, request.getParameter("name"), mealType);
+	int mid = (Integer)session.getAttribute("suggestedMid");
+	Meal histMeal = new Meal(db, mid);
+	Food.Update[] f = histMeal.getMeal(); //get array of current meal
+//	int mid = Meal.createMeal(db, u, f, request.getParameter("name"), mealType);
 	
 	// create Timestamp
 	Calendar c = Calendar.getInstance();
@@ -74,8 +81,7 @@ if (request.getParameter("addToHistory") != null) {
 	c.set(Calendar.HOUR_OF_DAY, Integer.parseInt(request.getParameter("timedropdown")));
 	Timestamp today = new Timestamp(c.getTimeInMillis());
 	
-	Meal newMeal = new Meal(db, mid);
-	if ( newMeal == null )
+	if ( histMeal == null )
 	{
 		response.sendRedirect("error.jsp?code=1&echo=Could not add" +
 				" meal to favorites");
@@ -83,12 +89,14 @@ if (request.getParameter("addToHistory") != null) {
 			return;
 	} 
 	
-	hist.addMeal(newMeal, today);
-	session.setAttribute("suggestedArray", new Food.Update[0]);
+	hist.addMeal(histMeal, today);
+//	session.setAttribute("suggestedArray", new Food.Update[0]);
+	session.setAttribute("suggestedMid", 0);
 	
-	if( request.getParameterValues("favs").length > 0 ){
+	if( (request.getParameterValues("favs") != null) && 
+	    (request.getParameterValues("favs").length > 0) ){
 		Favorites fav = new Favorites (u);
-		boolean r = fav.addMeal(newMeal);
+		boolean r = fav.addMeal(histMeal);
 		if (r == false) {
 			response.sendRedirect("error.jsp?code=1&echo=Could not add" +
 				" meal to favorites");
@@ -100,16 +108,62 @@ if (request.getParameter("addToHistory") != null) {
 
 Algorithm alg = new Algorithm(db, u);
 Meal suggested = null;
+String mealDisp = "";
 
 if (request.getParameter("suggestNewMeal") != null) {
-	suggested = alg.suggestMeal(u, Integer.parseInt(request.getParameter("mealType")));
-	if( suggested == null ){
-		response.sendRedirect("error.jsp?code=3&echo=Could not generate meal");
-		db.close();
-		return;
+	if( request.getParameter("mealType") == null ){
+		mealDisp = "<center>Select a meal type in order to receive a suggestion.</center>";
+	}else{
+		suggested = alg.suggestMeal(u, Integer.parseInt(request.getParameter("mealType")));
 	}
-	session.setAttribute("suggestedArray", suggested.getMeal());
-	session.setAttribute("suggestedMealType", (String)request.getParameter("mealType"));
+	if( request.getParameter("mealType") != null && suggested == null ){
+		mealDisp = "<center>No meals available for suggestion at this time.</center>";
+	}
+	else if(request.getParameter("mealType") != null ){
+		suggestedMealName = suggested.getName();
+		session.setAttribute("suggestedMid", suggested.getMid());
+	
+		/* add the food items of the old meal to the inventory */
+		Food.Update[] mealToAdd = new Meal(db, suggested.getMid()).getMeal();
+		for( Food.Update food : mealToAdd ){
+			Food.Update foodToAdd = new Food.Update(food.getFid(), food.getCount());
+			Food.Update[] arr = inv.getInventory();
+			if (arr == null) {
+				response.sendRedirect("error.jsp?code=4&echo=Could not fetch inventory");
+				db.close();
+				return;
+			}
+			for( Food.Update up : arr ){
+				if(up.getFid() == food.getFid()){
+					foodToAdd = up;
+					break;
+				}
+			}
+			boolean r = inv.updateFood(new Food.Update(food.getFid(), foodToAdd.getCount() + food.getCount()));
+			if (r == false) {
+				response.sendRedirect("error.jsp?code=1&echo=Could not update" +
+					" inventory");
+				db.close();
+				return;
+			}
+		}
+
+		/* remove the food items of the new meal from the inventory */
+		int mid = suggested.getMid();
+		Meal m = new Meal(db, mid);
+		Food.Update[] foods = m.getMeal();
+		for( Food.Update food : foods ){
+			boolean r = inv.removeFood(food);
+			if (r == false) {
+				response.sendRedirect("error.jsp?code=1&echo=Could not update" +
+					" inventory");
+				db.close();
+				return;
+			}
+		}
+//		session.setAttribute("suggestedArray", suggested.getMeal());
+		session.setAttribute("suggestedMealType", (String)request.getParameter("mealType"));
+	}
 }
 
 Food.Update[] sf = null;
@@ -120,10 +174,9 @@ if( suggested == null ){
 	sf = suggested.getMeal();
 }
 
-
 /* Produce table of foods already in meal, with remove from meal forms */
 //f = (Food.Update[])session.getAttribute("suggestedArray"); // get most current array
-String mealDisp = "<table style='margin:auto auto;'>\n";
+mealDisp += "<table style='margin:auto auto;'>\n";
 for (Food.Update up : sf) {
 	String s = "<tr><td>" + up.getName(db) + "</td><td>Amount: " +up.getCount() +
         "</td></tr>\n";
@@ -156,7 +209,7 @@ var monthfield=document.getElementById(monthfield)
 var yearfield=document.getElementById(yearfield)
 var timefield=document.getElementById(timefield)
 for (var i=1; i<32; i++)
-dayfield.options[i]=new Option(i, i+1)
+dayfield.options[i]=new Option(i, i)
 dayfield.options[today.getDate()]=new Option(today.getDate(), today.getDate(), true, true) //select today's day
 for (var m=0; m<12; m++)
 monthfield.options[m]=new Option(monthtext[m], monthtext[m])
@@ -168,7 +221,7 @@ thisyear+=1
 }
 yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, true) //select today's year
 for (var d=0; d<24; d++)
-timefield.options[d]=new Option(d + ":00", d+1)
+timefield.options[d]=new Option(d + ":00", d)
 timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.getHours(), true, true) //select current time
 }
 
@@ -203,7 +256,7 @@ $('#myImage').click(function() {
 	<p>Once you're happy with your meal, enter a name and date to add it to your calendar!</p>
 	<br />
 	<form action="suggestMeal.jsp" method="post">
-        <div id="left">Name: <input name="name"></div>
+        <div id="left">Name: <input type="hidden" name="name" value="<%= suggestedMealName %>"><%= suggestedMealName %></div>
         <div id="right">Date: <select id="daydropdown" name="daydropdown"></select> 
 			<select id="monthdropdown" name="monthdropdown"></select> 
 			<select id="yeardropdown" name="yeardropdown"></select>
@@ -213,6 +266,7 @@ $('#myImage').click(function() {
         <div id="right">
 		<img id='myImage' src = "images/starDull.png" />
 	 <input type="checkbox" name="favs" value="1" id='myHiddenCheckbox' style="display:none" />Add to Favorites<br /><br />
+	 <input type="submit" value="Add Meal" />
 		</div>
     </form>
 	

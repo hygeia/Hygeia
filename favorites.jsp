@@ -45,7 +45,7 @@ for (Meal.List m : meals) {
     String s = "<form action='favorites.jsp' method='post'><tr><td>" + 
         m.getName() + "<input type='hidden' name='mid' value=" + m.getMid() +
         "><input type='hidden' name='removeFromFavorites' value=1></td><td>" +
-        "<input type='submit' value='Remove'></td></tr></form>\n";
+        "<input type='image' src='images/X.png' width='25' height='25'></td></tr></form>\n";
     favDisp += s;
 }
 favDisp += "</table>\n";
@@ -66,6 +66,15 @@ String meal = "MEAL NAME HERE";
 <title>Favorites | Hygeia</title>
 <link type="text/css" rel="stylesheet" href="style.css" />
     <link rel="shortcut icon" href="favicon.ico" mce_href="favicon.ico"/> 
+<link rel="stylesheet" href="colorbox.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script src="javascript/jquery.colorbox.js"></script>
+		<script>
+			$(document).ready(function(){
+				//Examples of how to assign the ColorBox event to elements
+				$(".ajax").colorbox({innerWidth:"925px", innerHeight:"600px", iframe:true, onClosed:function(){ window.location="home.jsp" }});
+			});
+		</script>
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
@@ -137,7 +146,6 @@ li{color:black; font-family:arial;}
 </style>
 </head>
 <div id="page">
-  <div id="content">
   <div id="header">
 <!-- Navigation Bar -->
 
@@ -154,10 +162,13 @@ li{color:black; font-family:arial;}
 <td> <a href="logout.jsp"><img src="images/lightICON8.png"></a></td>
 </tr>
 </table>
-
+</div>
+  <div id="content">
 <br />
 
+<div id="green">
 <h1><%= username %>'s Favorites</h1>
+</div>
 
 <br>
 <%= favDisp %>
@@ -190,6 +201,8 @@ li{color:black; font-family:arial;}
 </div>
 
 -->
+
+<div style="float:right; margin-top:50px;"><a class='ajax' href="addtoFaves.jsp"><img src="images/addFaves.png"></a></div>
 
 </div>
 </div>

@@ -185,6 +185,7 @@ if(theName != null)
 }
 
 %>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
   <head>
@@ -213,10 +214,12 @@ if(theName != null)
      <INPUT TYPE="RADIO" NAME="sex" VALUE="m" <%= m %> />Male
      <label for="user_sex" class="error" style="display:none;">Please choose one</label> 
      </div>
-
+	<br />
+	
+	<hr />
 
      <P> 
-     <label for="activity">What best fits you exercise routine?</label><br /><br />
+     <label for="activity" style="margin-left:250px;">What best fits you exercise routine?</label><br />
      <dt class="radio"><label for="activity">Sedentary</label></dt>
      <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="1" <%= a1 %> /></dd>
      <br />
@@ -226,8 +229,6 @@ if(theName != null)
      <dt class="radio"><label for="activity">Moderate (30 minutes per day, 3 times per week)</label></dt>
      <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="3" <%= a3 %> /></dd>
      <br />
-     <br />
-     <br />
      <dt class="radio"><label for="activity">Active (1 hour per day, 5 times per week)</label></dt>
      <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="4" <%= a4 %> /> </dd>
      <br />
@@ -236,12 +237,12 @@ if(theName != null)
      <dt class="radio"><label for="activity">Very active (2 hours per day, 5 times a week)</label></dt>
      <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="5" <%= a5 %> /></dd>
      <br />
-     <br />
-     <br />
      <dt class="radio"><label for="activity">Heavy weight training or twice-a-day exercise (5 days per week)</label></dt>
      <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="6" <%= a6 %> /></dd>
      </p>
      
+	 <hr />
+	 
      <br />
 
      <p> 
@@ -249,13 +250,14 @@ if(theName != null)
      <INPUT TYPE="TEXT" VALUE= "<%= weight %>" NAME="weight" SIZE="10" />
      </p>
 
-     <P> Take 3 measurements of your hips </br>
+     <P class="subtitle"> Take 3 measurements of your hips </br>
      How to take proper hip measurements: (Must have measuring tape) Take</br>
      measurement from the widest point from hip to hip. Measure in inches.</br>
      Hygeia will find the average of these three measurements.</br> 
      </p>
-
-     <P> 
+     
+	 <br />
+	 <P> 
      <label for="hip1">Hip measurement 1 (inches)</label>
      <INPUT TYPE="TEXT" NAME="hip1" VALUE="<%= hips %>" SIZE="10"/> 
      </p>
@@ -268,11 +270,14 @@ if(theName != null)
      <label for="hip3">Hip measurement 3 (inches)</label>
      <INPUT TYPE="TEXT" NAME="hip3" VALUE="<%= hips %>" SIZE="10"/>
      </p>
-
-     <P> (Must have measuring tape) Take 3 measurements of of your waist at</br>
+	 <br />
+     <P class="subtitle"> (Must have measuring tape) Take 3 measurements of of your waist at</br>
           bellybutton level. Measure in inches.</br>
           Hygeia will find the average of these three measurement.</br> 
      </p>
+	 
+	 <br />
+	 
      <P> 
      <label for="waist1">Waist measurement 1 (inches)</label>
      <INPUT TYPE="TEXT" NAME="waist1" VALUE="<%= waist %>" SIZE="10"/>
@@ -285,13 +290,13 @@ if(theName != null)
      <label for="waist3">Waist measurement 3 (inches)</label>
      <INPUT TYPE="TEXT" NAME="waist3" VALUE="<%= waist %>" SIZE="10"/>
      </p>
-
+	 <br />
      <P> Height (w/o shoes): 
      <INPUT TYPE="TEXT" VALUE="<%= ft %>" NAME="ft" SIZE="5"/>ft.
      <INPUT TYPE="TEXT" VALUE="<%= in %>" NAME="in" SIZE="5"/>in.
      </p>
-
-     <P> Wrist measurement</br>
+	 
+     <P class="subtitle"> Wrist measurement</br>
          How to take a wrist measurement: (Must have measuring tape) Measure</br>
          your wrist at the space between your dominant hand and your wrist bone,</br>
          at the location where your wrist bends.</br>
