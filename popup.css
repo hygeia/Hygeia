@@ -20,7 +20,7 @@ body {
     background-color:#fbffcc;
 }
 
-p.selectFav, p.suggestMeal, p.addMeal{
+p.selectFav, p.suggestMeal, p.addMeal, p.addFaves{
 font-size:xx-large;
 font-weight:bold;
 text-align:left;
@@ -33,6 +33,10 @@ margin-left:190px;
 
 p.addMeal {
 margin-left:300px;
+}
+
+p.addFaves {
+margin-left:210px;
 }
 
 p.suggestMeal {
