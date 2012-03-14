@@ -13,6 +13,30 @@ if (session.getAttribute("uid") == null) {
     return;
 }
 
+DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
+Date todaysdate = new Date();
+String day1 = df.format(todaysdate);
+String day2 = df.format(new Date(todaysdate.getTime() - 86400000));
+String day3 = df.format(new Date(todaysdate.getTime() - (86400000 * 2)));
+String day4 = df.format(new Date(todaysdate.getTime() - (86400000 * 3)));
+String day5 = df.format(new Date(todaysdate.getTime() - (86400000 * 4)));
+String day6 = df.format(new Date(todaysdate.getTime() - (86400000 * 5)));
+String day7 = df.format(new Date(todaysdate.getTime() - (86400000 * 6)));
+
+// declaration of variables
+// double tempc = 0; // temp carb count
+// double tempp = 0; // temp protein count
+// double tempf = 0; // temp fat count
+//
+ //blocks in this order [protein,carbs,fat]
+ double[] block1 = {0, 0, 0}; // today
+ double[] block2 = {0, 0, 0}; // 1 day ago
+ double[] block3 = {0, 0, 0}; // 2 days ago
+ double[] block4 = {0, 0, 0}; // 3 days ago
+ double[] block5 = {0, 0, 0}; // 4 day ago
+double[] block6 = {0, 0, 0}; // 5 days ago
+double[] block7 = {0, 0, 0}; // 6 days ago
+
 Database db = new Database();
 int uid = (Integer)session.getAttribute("uid");
 User u = new User(db, uid);
@@ -25,12 +49,6 @@ String searchDisp = "";
 if(request.getParameter("removeFromHistory")!= null)
 {
  int mid = Integer.parseInt(request.getParameter("mid"));
- /*
- String o = request.getParameter("occurrence"); 
- SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
- java.util.Date parsedDate = dateFormat.parse(o);
- java.sql.Timestamp occur = new java.sql.Timestamp(parsedDate.getTime()); 
- */
  Meal meal = new Meal(db, mid);
  boolean check = history.removeMeal(meal, meal.getOccurrence());
  
@@ -171,6 +189,7 @@ double tempp = 0; // temp protein count
 double tempf = 0; // temp fat count
 
 //blocks in this order [protein,carbs,fat] 
+/*
 double[] block1 = {0, 0, 0}; // today
 double[] block2 = {0, 0, 0}; // 1 day ago
 double[] block3 = {0, 0, 0}; // 2 days ago
@@ -178,16 +197,16 @@ double[] block4 = {0, 0, 0}; // 3 days ago
 double[] block5 = {0, 0, 0}; // 4 day ago
 double[] block6 = {0, 0, 0}; // 5 days ago
 double[] block7 = {0, 0, 0}; // 6 days ago
-
+*/
 for(int i=0; i<todayarr.size(); i++){
 	Nutrition nuts = todayarr.get(i).getNutrition();
 	tempc += nuts.getCarbohydrates();
 	tempp += nuts.getProtein();
 	tempf += nuts.getFat();
 }
-block1[0]= tempp / 7;
-block1[1]= tempc / 9;
-block1[2]= tempf / 1.5;
+block1[1]= tempp / 7;
+block1[0]= tempc / 9;
+block1[2]= tempf / 3;
 
 // Reset temp values to 0
 tempc = 0;
@@ -200,9 +219,9 @@ for(int i=0; i<onedayarr.size(); i++){
 	tempp += nuts.getProtein();
 	tempf += nuts.getFat();
 }
-block2[0]= tempp / 7;
-block2[1]= tempc / 9;
-block2[2]= tempf / 1.5;
+block2[1]= tempp / 7;
+block2[0]= tempc / 9;
+block2[2]= tempf / 3;
 
 // Reset temp values to 0
 tempc = 0;
@@ -215,9 +234,9 @@ for(int i=0; i<twodayarr.size(); i++){
 	tempp += nuts.getProtein();
 	tempf += nuts.getFat();
 }
-block3[0]= tempp / 7;
-block3[1]= tempc / 9;
-block3[2]= tempf / 1.5;
+block3[1]= tempp / 7;
+block3[0]= tempc / 9;
+block3[2]= tempf / 3;
 
 // Reset temp values to 0
 tempc = 0;
@@ -230,9 +249,9 @@ for(int i=0; i<threedayarr.size(); i++){
 	tempp += nuts.getProtein();
 	tempf += nuts.getFat();
 }
-block4[0]= tempp / 7;
-block4[1]= tempc / 9;
-block4[2]= tempf / 1.5;
+block4[1]= tempp / 7;
+block4[0]= tempc / 9;
+block4[2]= tempf / 3;
 
 // Reset temp values to 0
 tempc = 0;
@@ -245,9 +264,9 @@ for(int i=0; i<fourdayarr.size(); i++){
 	tempp += nuts.getProtein();
 	tempf += nuts.getFat();
 }
-block5[0]= tempp / 7;
-block5[1]= tempc / 9;
-block5[2]= tempf / 1.5;
+block5[1]= tempp / 7;
+block5[0]= tempc / 9;
+block5[2]= tempf / 3;
 
 // Reset temp values to 0
 tempc = 0;
@@ -260,9 +279,9 @@ for(int i=0; i<fivedayarr.size(); i++){
 	tempp += nuts.getProtein();
 	tempf += nuts.getFat();
 }
-block6[0]= tempp / 7;
-block6[1]= tempc / 9;
-block6[2]= tempf / 1.5;
+block6[1]= tempp / 7;
+block6[0]= tempc / 9;
+block6[2]= tempf / 3;
 
 // Reset temp values to 0
 tempc = 0;
@@ -275,9 +294,9 @@ for(int i=0; i<sixdayarr.size(); i++){
 	tempp += nuts.getProtein();
 	tempf += nuts.getFat();
 }
-block7[0]= tempp / 7;
-block7[1]= tempc / 9;
-block7[2]= tempf / 1.5;
+block7[1]= tempp / 7;
+block7[0]= tempc / 9;
+block7[2]= tempf / 3;
 
 // Reset temp values to 0
 tempc = 0;
@@ -378,10 +397,13 @@ out.println("f"+block7[2]);
         data.addColumn('number', 'Protien');
 	data.addColumn('number', 'Fat');
         data.addRows([
-          ['2/29', 18, 17, 19],
-          ['3/1', 17, 18, 18],
-          ['3/2', 18, 19, 17],
-          ['3/3', 18, 17, 18]
+          ['<%= day7 %>', <%= block7[0] %>,<%= block7[1] %>, <%= block7[2] %>],
+	  ['<%= day6 %>', <%= block6[0] %>,<%= block6[1] %>, <%= block6[2] %>],
+	  ['<%= day5 %>', <%= block5[0] %>,<%= block5[1] %>, <%= block5[2] %>],
+          ['<%= day4 %>', <%= block4[0] %>,<%= block4[1] %>, <%= block4[2] %>],
+          ['<%= day3 %>', <%= block3[0] %>,<%= block3[1] %>, <%= block3[2] %>],
+          ['<%= day2 %>', <%= block2[0] %>,<%= block2[1] %>, <%= block2[2] %>],
+	  ['<%= day1 %>', <%= block1[0] %>,<%= block1[1] %>, <%= block1[2] %>]
         ]);
 
         var options = {
@@ -447,9 +469,6 @@ Add to history
 <%= histDisp %>
 <%= noHistory %>
 </br>
-</br>
-<FORM METHOD="POST" id="add_meal" ACTION="addMeal.jsp">
-<INPUT TYPE="image" src="images/addMeal.png" VALUE="Submit" />
 <div id="line_chart" style="width: 960px; height: 500px;"></div>
 </div>
 </div>
