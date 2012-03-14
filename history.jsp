@@ -25,13 +25,14 @@ String searchDisp = "";
 if(request.getParameter("removeFromHistory")!= null)
 {
  int mid = Integer.parseInt(request.getParameter("mid"));
+ /*
  String o = request.getParameter("occurrence"); 
  SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
  java.util.Date parsedDate = dateFormat.parse(o);
  java.sql.Timestamp occur = new java.sql.Timestamp(parsedDate.getTime()); 
- 
+ */
  Meal meal = new Meal(db, mid);
- boolean check = history.removeMeal(meal, occur);
+ boolean check = history.removeMeal(meal, meal.getOccurrence());
  
  searchDisp = "";
 
