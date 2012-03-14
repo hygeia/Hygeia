@@ -258,15 +258,11 @@ timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.
 		Time: <select id="timedropdown" name="timedropdown"></select>
 		</div>
 		<br /><br />
-		What type of meal is this? <input type="checkbox" name="mealType" value="1000" />Breakfast
-		<input type="checkbox" name="mealType" value="0100" />Lunch
-		<input type="checkbox" name="mealType" value="0010" />Dinner
-		<input type="checkbox" name="mealType" value="0001" />Snack
 		<div id="right">
-		<input type="hidden" name="addToHistory" value="addToHistory">
+		<input type="hidden" name="addToHistory2" value="addToHistory">
 		<br /><br /><input type="submit" value="Add Meal">
 		</div>
-    </form>
+         </form>
 	
 <script type="text/javascript">
 //populatedropdown(id_of_day_select, id_of_month_select, id_of_year_select)

@@ -75,6 +75,14 @@ if (request.getParameter("addToHistory") != null) {
 	Timestamp today = new Timestamp(c.getTimeInMillis());
 	
 	Meal newMeal = new Meal(db, mid);
+	if ( newMeal == null )
+	{
+		response.sendRedirect("error.jsp?code=1&echo=Could not add" +
+				" meal to favorites");
+			db.close();
+			return;
+	} 
+	
 	hist.addMeal(newMeal, today);
 	session.setAttribute("suggestedArray", new Food.Update[0]);
 	

@@ -223,13 +223,13 @@ db.close();
 		}else if(m.getOccurrence().after(today)){
 			return 0;
 		}else if(m.getOccurrence().after(yesterday)){
-			return 1;
-		}else if(m.getOccurrence().after(twoday)){
 			return 2;
-		}else if(m.getOccurrence().after(threeday)){
+		}else if(m.getOccurrence().after(twoday)){
 			return 3;
+		}else if(m.getOccurrence().after(threeday)){
+			return 1;
 		}else{
-			return 4;
+			return 1;
 		}
 	}
  %>
@@ -396,7 +396,7 @@ db.close();
 <tr>
 <td> <a href="home.jsp"><img src="images/lightICON1.png"></a></td>
 <td> <a href="inventory.jsp"><img src="images/lightICON2.png"></a></td>
-<td> <a hretf="history.jsp"><img src="images/lightICON3.png"></a></td>
+<td> <a href="history.jsp"><img src="images/lightICON3.png"></a></td>
 <td> <a href="recipes.jsp"><img src="images/lightICON4.png"></a></td>
 <td> <a href="profile.jsp"><img src="images/lightICON5.png"></a></td>
 <td> <a href="favorites.jsp"><img src="images/lightICON6.png"></a></td>
