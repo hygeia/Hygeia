@@ -44,7 +44,7 @@ public class Algorithm {
     
 		//pulls all meals from the universal meal list and the user's personal meals
         ResultSet rs = db.execute("select mid from meals where (uid = " + 
-            u.getUid() + " or uid = 0) and type & " + type + " = " + type + ";");
+            u.getUid() + " or uid = 0);");// and type & " + type + " = " + type + ";");
         //arraylist of meal IDs that come from the database
         ArrayList<Integer> results = new ArrayList<Integer>();
 		while(rs.next())
