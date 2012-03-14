@@ -58,15 +58,15 @@ public class Algorithm {
 		}
 		if (b == 1)
 		{
-			typeS += "type = 0100 or type = 0110 or type = 0111 or ";
+			typeS += "type = 100 or type = 110 or type = 111 or ";
 		}
 		if (c == 1)
 		{
-			typeS += "type = 0010 or type = 0011 or ";
+			typeS += "type = 10 or type = 11 or ";
 		}
 		if (d == 1)
 		{
-			typeS += "type = 0001 or ";
+			typeS += "type = 1 or ";
 		}
 		typeS += "type = 99999";
 		
