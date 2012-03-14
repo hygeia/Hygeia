@@ -66,6 +66,15 @@ String meal = "MEAL NAME HERE";
 <title>Favorites | Hygeia</title>
 <link type="text/css" rel="stylesheet" href="style.css" />
     <link rel="shortcut icon" href="favicon.ico" mce_href="favicon.ico"/> 
+<link rel="stylesheet" href="colorbox.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script src="javascript/jquery.colorbox.js"></script>
+		<script>
+			$(document).ready(function(){
+				//Examples of how to assign the ColorBox event to elements
+				$(".ajax").colorbox({innerWidth:"925px", innerHeight:"600px", iframe:true, onClosed:function(){ window.location="home.jsp" }});
+			});
+		</script>
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
@@ -190,6 +199,8 @@ li{color:black; font-family:arial;}
 </div>
 
 -->
+
+<div style="float:right; margin-top:50px;"><a class='ajax' href="addtoFaves.jsp"><img src="images/addFaves.png"></a></div>
 
 </div>
 </div>

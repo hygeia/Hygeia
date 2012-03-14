@@ -220,7 +220,7 @@ margin-top: 10px;
 
 <br><br>
 
-<h2>Add a Food to Your Inventory</h2>
+<p class="addFood">Add a Food to Your Inventory</p>
 <form action="inventory.jsp" method="post">
   <p>Enter part of the food's name: <input name="nameSearch" />
   <input type="hidden" name="searchForFood" value=1 />
