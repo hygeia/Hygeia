@@ -152,7 +152,7 @@ if (request.getParameter("addToHistory") != null) {
 	c.set(Calendar.HOUR_OF_DAY, Integer.parseInt(request.getParameter("timedropdown")));
 	Timestamp today = new Timestamp(c.getTimeInMillis());
 	
-	hist.addMeal(histMeal, today);
+	hist.addMeal(histMeal, today);	
 //	session.setAttribute("favArray", new Food.Update[0]);
 	session.setAttribute("selectedMid", 0);
 	session.setAttribute("selectedMealName", "");
@@ -275,7 +275,7 @@ timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.
 		</div>
 		<br /><br />
 		<div id="right">
-		<input type="hidden" name="addToHistory2" value="addToHistory">
+		<input type="hidden" name="addToHistory" value="addToHistory">
 		<br /><br /><input type="submit" value="Add Meal">
 		</div>
          </form>

@@ -204,12 +204,12 @@ if(theName != null)
    
      <FORM METHOD="POST" id="update_profile_form" ACTION="updateProfile.jsp">
      <p> 
-     <label for="user_name">Name:</label>
+     <label for="user_name">Name</label>
      <INPUT TYPE="TEXT" VALUE="<%= name %>" NAME="name" SIZE="20" />
      </p>
 
      <div class="sex-field"> 
-     <label for="user_sex">Gender:</label> 
+     <label for="user_sex">Gender</label> 
      <INPUT TYPE="RADIO" NAME="sex" VALUE="f" <%= f %> />Female
      <INPUT TYPE="RADIO" NAME="sex" VALUE="m" <%= m %> />Male
      <label for="user_sex" class="error" style="display:none;">Please choose one</label> 

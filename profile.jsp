@@ -103,17 +103,20 @@ String name = (String)session.getAttribute("username");
      {
     %>
 	<p class="update">Hello <%= name %>!</br></br>
-	Your current weight is <%= weight %> lbs.</br>
-	You are <%= ft %> ft. <%= in  %> in. tall.</br>
-	Your current lean body mass is <%= leanBodyMass %> lbs.</br>
-	Your current estimated body fat is <%= bodyFat %> lbs.</br>
+	Your current weight is <b><%= weight %></b> lbs.</br>
+	You are <b><%= ft %> ft <%= in  %> in</b> tall.</br>
+	Your current lean body mass is <b><%= leanBodyMass %></b> lbs.</br>
+	Your current estimated body fat is <b><%= bodyFat %></b> lbs.</br>
 	Following a "Zone" favorable diet your daily protein requirement is 
-	<%= protein %> grams. </br></br>
-	In order to maintain a "Zone" favorable diet you should have:</br>
-	<%= block %> protein blocks, carbohydrate blocks, and fat blocks a day.
+	<b><%= protein %></b> grams. </br></br>
+	In order to maintain a "Zone" favorable diet you should have</br>
+	a daily amount of: </br></br>
+	<b><%= block %></b> protein blocks,<br>
+	<b><%= block %></b> carbohydrate blocks,<br>
+	<b><%= block %></b> and fat blocks.
 	</br>
 	</br>
-	Try to spread the blocks throughout the day. In order to be in the "Zone"</br>
+	Try to spread the blocks throughout the day. In order to be in the "Zone",
 	you must maintain balance.</br>
 	</br>
 	</br></p>
