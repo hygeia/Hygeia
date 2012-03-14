@@ -117,7 +117,7 @@ String name = (String)session.getAttribute("username");
 	you must maintain balance.</br>
 	</br>
 	</br></p>
-	<A HREF="updateProfile.jsp">Update Profile</A></br>
+	<A HREF="updateProfile.jsp"><img src="images/updateProfile.png" /></A></br>
     <%
      } 
     %>
