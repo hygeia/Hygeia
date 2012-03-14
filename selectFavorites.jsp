@@ -70,7 +70,7 @@ if (request.getParameter("addToHistory2") != null) {
         inv.removeFood(f);
     }
 	hist.addMeal(m, today);
-	request.sendRedirect("home.jsp");
+	response.sendRedirect("home.jsp");
 	return;
 }
 
