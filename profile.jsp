@@ -96,7 +96,7 @@ String name = (String)session.getAttribute("username");
     <p class="update"> You have not updated your profile. By updating your profile, Hygeia
         will be able to provide information to help you obtain a "Zone"
 	favorable diet. <br /></p>
-	<A HREF="updateProfile.jsp">Update Profile</A>
+	<A HREF="updateProfile.jsp"><img src="images/updateProfile.png" /></A>
     <%
     }
      else
