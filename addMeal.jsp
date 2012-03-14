@@ -276,7 +276,7 @@ $('#myImage').click(function() {
 		<div id="right">
 		<input type="hidden" name="addToHistory" value="addToHistory" />
      <img id='myImage' src = "images/starDull.png" />
-	 <input type="checkbox" name="favs" value="1" id='myHiddenCheckbox' style="display:none" /><br /><br />
+	 <input type="checkbox" name="favs" value="1" id='myHiddenCheckbox' style="display:none" />Add to Favorites<br /><br />
 	<input type="image" src="images/submit.png" value="Submit"></div>
     </form>
 	
