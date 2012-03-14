@@ -37,9 +37,8 @@ if (request.getParameter("searchForRecipe") != null) {
         String s = "<tr><td>" + m.getName() + "</td><td><form action='favorites.jsp'" +
 			" method='post'><input type='hidden' name='addToFavorites' value=1>" +
 			"<input type='hidden' name='mid' value=" + m.getMid() + ">" +
-			"<input type='submit' value='Add to Favorites!'></form></td><td>" +
-			"<form action='selectFavorites.jsp' method='post'><input type='submit'"+
-			" value='Eat Me!'><input type='hidden' name='addToHistory' value=1>" +
+			"<input type='image' src=\"images/starDull.png\" height=20px width=20px value='submit'></form></td><td>" +
+			"<form action='selectFavorites.jsp' method='post'>" + 
 			"<input type='hidden' name='mid' value=" + m.getMid() + 
 			"></form></td>";
         searchDisp += s;

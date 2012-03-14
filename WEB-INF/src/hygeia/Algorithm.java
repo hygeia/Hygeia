@@ -54,25 +54,27 @@ public class Algorithm {
 		}
 		if (a == 1)
 		{
-			typeS += "type = 1000 or type = 1100 or type = 1110 or type = 1111 ";
+			typeS += "type = 1000 or type = 1100 or type = 1110 or type = 1111 or type = 1011 or type = 1001 or type = 1010";
 		}
 		if (b == 1)
 		{
-			typeS += "type = 0100 or type = 0110 or type = 0111 ";
+			typeS += "type = 100 or type = 110 or type = 111 or type = 101";
 		}
 		if (c == 1)
 		{
-			typeS += "type = 0010 or type = 0011 ";
+			typeS += "type = 10 or type = 11 or ";
 		}
 		if (d == 1)
 		{
-			typeS += "type = 0001 ";
+			typeS += "type = 1 or ";
 		}
+		typeS += "type = 99999";
+		
         ResultSet rs = db.execute("select mid from meals where (uid = " + 
-            u.getUid() + " or uid = 0);");// " + typeS + ";");// and type & " + type + " = " + type + ";");
+            u.getUid() + " or uid = 0) ");// + typeS + ";");// and type & " + type + " = " + type + ";");
         //arraylist of meal IDs that come from the database
         ArrayList<Integer> results = new ArrayList<Integer>();
-		while(rs.next())
+		while(rs != null & rs.next())
 		{
 			results.add(rs.getInt("mid"));
 		}
