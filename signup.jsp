@@ -93,140 +93,142 @@ if (request.getParameter("signup") != null) {
     <script type="text/javascript" src="javascript/jquery.validate.min.js"></script>          
     <script type="text/javascript" src="javascript/validation.js"></script>          
     <link type="text/css" rel="stylesheet" href="forms.css" /> 
+    <link type="text/css" rel="stylesheet" href="profile.css" /> 
   </head>
   <body>
-    <br />
 	
-	<img src="images/signup.png">
-	
-	<br />
-    <form id="signupform" method="post" action="signup.jsp">
-      <p>
-        <label for="username">Name</label>
-        <input type="text" name="username" />
-      </p>
+    <div id="page">
+      <img src="images/signup.png">
+      <div id="content">
 
-      <p>
-        <label for="email">Email</label>
-        <input type="text" id="user_email" name="user_email" /><br />
-      </p>
+        <form id="signupform" method="post" action="signup.jsp">
+          <p>
+            <label for="username">Name</label>
+            <input type="text" name="username" size='20' />
+          </p>
 
-      <p>
-        <label for="email">Re-enter Email</label>
-        <input type="text" name="reenter_email" /><br />
-      </p>
+          <p>
+            <label for="email">Email</label>
+            <input type="text" id="user_email" name="user_email" size='20'/><br />
+          </p>
 
-      <p>
-        <label for="password">Password</label>
-        <input type="password" id="user_password" name="user_password" /><br />
-      </p>
+          <p>
+            <label for="email">Re-enter Email</label>
+            <input type="text" name="reenter_email" size='20'/><br />
+          </p>
 
-      <p>
-      <label for="reenter_password">Re-enter Password</label>
-      <input type="password" id= "reenter_password" name="reenter_password" /><br />
-      </p>
+          <p>
+            <label for="password">Password</label>
+            <input type="password" id="user_password" name="user_password" size='20'/><br />
+          </p>
+
+          <p>
+          <label for="reenter_password">Re-enter Password</label>
+          <input type="password" id= "reenter_password" name="reenter_password" size='20'/><br />
+          </p>
 
 
 
-      <div class="sex-field"> 
-      <label for="user_sex">Gender:</label> 
-      <INPUT TYPE="RADIO" NAME="user_sex" VALUE="f" />Female
-      <INPUT TYPE="RADIO" NAME="user_sex" VALUE="m"  />Male
-      <label for="user_sex" class="error" style="display:none;">Please choose one</label> 
-      </div>
+          <div class="sex-field"> 
+          <label for="user_sex">Gender</label> 
+          <INPUT TYPE="RADIO" NAME="user_sex" VALUE="f" />Female
+          <INPUT TYPE="RADIO" NAME="user_sex" VALUE="m"  />Male
+          <label for="user_sex" class="error" style="display:none;">Please choose one</label> 
+          </div>
 
-      <P> 
-      <label for="activity">What best fits you exercise routine?</label><br /><br />
-      <dt class="radio"><label for="activity">Sedentary</label></dt>
-      <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="1" /></dd>
-      <br />
-      <dt class="radio"><label for="activity">Light (i.e, walking)</label></dt>
-      <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="2" /></dd>
-      <br />
-      <dt class="radio"><label for="activity">Moderate (30 minutes per day, 3 times per week)</label></dt>
-      <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="3" /></dd>
-      <br />
-      <br />
-      <br />
-      <dt class="radio"><label for="activity">Active (1 hour per day, 5 times per week)</label></dt>
-      <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="4" /> </dd>
-      <br />
-      <br />
-      <dt class="radio"><label for="activity">Very active (2 hours per day, 5 times a week)</label></dt>
-      <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="5" /></dd>
-      <br />
-      <br />
-      <br />
-      <dt class="radio"><label for="activity">Heavy weight training or twice-a-day exercise (5 days per week)</label></dt>
-      <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="6" /></dd>
-      </p>
-     
-      <br />
+          <P> 
+          <label for="activity">What best fits you exercise routine?</label><br /><br />
+          <dt class="radio"><label for="activity">Sedentary</label></dt>
+          <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="1" /></dd>
+          <br />
+          <dt class="radio"><label for="activity">Light (i.e, walking)</label></dt>
+          <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="2" /></dd>
+          <br />
+          <dt class="radio"><label for="activity">Moderate (30 minutes per day, 3 times per week)</label></dt>
+          <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="3" /></dd>
+          <br />
+          <br />
+          <br />
+          <dt class="radio"><label for="activity">Active (1 hour per day, 5 times per week)</label></dt>
+          <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="4" /> </dd>
+          <br />
+          <br />
+          <dt class="radio"><label for="activity">Very active (2 hours per day, 5 times a week)</label></dt>
+          <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="5" /></dd>
+          <br />
+          <br />
+          <br />
+          <dt class="radio"><label for="activity">Heavy weight training or twice-a-day exercise (5 days per week)</label></dt>
+          <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="6" /></dd>
+          </p>
+         
+          <br />
 
-      <p>
-      <label for="user_weight">Weight</label>
-      <input type="text" name="user_weight" />
-      </p>
+          <p>
+          <label for="user_weight">Weight</label>
+          <input type="text" name="user_weight" />
+          </p>
 
-      <p>
-      <label for="user_height_ft">Height (w/o shoes)</label>
-      <input type="text" name="user_height_ft" id="user_height" size="5"/>ft.
-      <input type="text" name="user_height_in" id="user_height" size="5"/>in.
-      <label for="user_height" class="error" style="display:none;">Please enter your height</label>
-      </p>
+          <p>
+          <label for="user_height_ft">Height (w/o shoes)</label>
+          <input type="text" name="user_height_ft" id="user_height" size="5"/>ft.
+          <input type="text" name="user_height_in" id="user_height" size="5"/>in.
+          <label for="user_height" class="error" style="display:none;">Please enter your height</label>
+          </p>
 
-       <P> Take 3 measurements of your hips </br>
-       How to take proper hip measurements: (Must have measuring tape) Take</br>
-       measurement from the widest point from hip to hip. Measure in inches.</br>
-       Hygeia will find the average of these three measurements.</br> 
-       </p>
-       <P> 
-       <label for="hip1">Hip measurement 1 (inches)</label>
-       <INPUT TYPE="TEXT" NAME="hip1" SIZE="10"/> 
-       </p>
-       <P> 
-       <label for="hip2">Hip measurement 2 (inches)</label>
-       <INPUT TYPE="TEXT" NAME="hip2" SIZE="10"/>
-       </p>
-       <P> 
-       <label for="hip3">Hip measurement 3 (inches)</label>
-       <INPUT TYPE="TEXT" NAME="hip3" SIZE="10"/>
-       </p>
-	  
-	  
-       <P> (Must have measuring tape) Take 3 measurements of of your waist at</br>
-            bellybutton level. Measure in inches.</br>
-            Hygeia will find the average of these three measurement.</br> 
-       </p>
-       <P> 
-       <label for="waist1">Waist measurement 1 (inches)</label>
-       <INPUT TYPE="TEXT" NAME="waist1" SIZE="10"/>
-       </p>
-       <P> 
-       <label for="waist2">Waist measurement 2 (inches)</label>
-       <INPUT TYPE="TEXT" NAME="waist2" SIZE="10"/>
-       </p>
-       <P> 
-       <label for="waist3">Waist measurement 3 (inches)</label>
-       <INPUT TYPE="TEXT" NAME="waist3" SIZE="10"/>
-       </p>
+           <P> Take 3 measurements of your hips </br>
+           How to take proper hip measurements: (Must have measuring tape) Take</br>
+           measurement from the widest point from hip to hip. Measure in inches.</br>
+           Hygeia will find the average of these three measurements.</br> 
+           </p>
+           <P> 
+           <label for="hip1">Hip measurement 1 (inches)</label>
+           <INPUT TYPE="TEXT" NAME="hip1" SIZE="10"/> 
+           </p>
+           <P> 
+           <label for="hip2">Hip measurement 2 (inches)</label>
+           <INPUT TYPE="TEXT" NAME="hip2" SIZE="10"/>
+           </p>
+           <P> 
+           <label for="hip3">Hip measurement 3 (inches)</label>
+           <INPUT TYPE="TEXT" NAME="hip3" SIZE="10"/>
+           </p>
+        
+        
+           <P> (Must have measuring tape) Take 3 measurements of of your waist at</br>
+                bellybutton level. Measure in inches.</br>
+                Hygeia will find the average of these three measurement.</br> 
+           </p>
+           <P> 
+           <label for="waist1">Waist measurement 1 (inches)</label>
+           <INPUT TYPE="TEXT" NAME="waist1" SIZE="10"/>
+           </p>
+           <P> 
+           <label for="waist2">Waist measurement 2 (inches)</label>
+           <INPUT TYPE="TEXT" NAME="waist2" SIZE="10"/>
+           </p>
+           <P> 
+           <label for="waist3">Waist measurement 3 (inches)</label>
+           <INPUT TYPE="TEXT" NAME="waist3" SIZE="10"/>
+           </p>
 
-       <P> Wrist measurement</br>
-           How to take a wrist measurement: (Must have measuring tape) Measure</br>
-           your wrist at the space between your dominant hand and your wrist bone,</br>
-           at the location where your wrist bends.</br>
-       </p>
+           <P> Wrist measurement</br>
+               How to take a wrist measurement: (Must have measuring tape) Measure</br>
+               your wrist at the space between your dominant hand and your wrist bone,</br>
+               at the location where your wrist bends.</br>
+           </p>
 
-       <P> 
-       <label for="wrist">Wrist measurement (inches)</label>
-       <INPUT TYPE="TEXT" NAME="wrist" SIZE="10"/>
-       </p>
+           <P> 
+           <label for="wrist">Wrist measurement (inches)</label>
+           <INPUT TYPE="TEXT" NAME="wrist" SIZE="10"/>
+           </p>
 
-       <p>
-       <input type="hidden" name="signup" value="signup" />
-       <div align="right" style="margin-right:60px;"><input TYPE="image" src="images/submit.png" VALUE="submit" /></div>
-       </p>
-
+           <p>
+           <input type="hidden" name="signup" value="signup" />
+           <div align="right" style="margin-right:60px;"><input TYPE="image" src="images/submit.png" VALUE="submit" /></div>
+           </p>
+         </div>
+       </div>
     </form>
   </body>
 </html>
