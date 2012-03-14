@@ -1,4 +1,4 @@
-<%@ page import = "hygeia.*,java.text.DecimalFormat,java.text.NumberFormat,java.util.*,java.sql.Timestamp,java.text.*" %>
+<%@ page import = "hygeia.*,java.text.DecimalFormat,java.text.NumberFormat,java.util.*,java.sql.Timestamp,java.text.*,java.util.Random" %>
 <%
 /* Check to see if a session exists */
 if (session.getAttribute("uid") == null){ 
@@ -21,6 +21,31 @@ if (session.getAttribute("uid") == null){
    Close the database: db.close();
    Redirect to another page: response.sendRedirect("url"); return;
  */
+// Random Zone Facts
+Random myRandom = new Random();
+		int randomNumber = myRandom.nextInt(7) + 1;
+		String[] fact;
+		fact = new String[8];
+		
+		fact[0]="\"Reaching the Zone Requires Precise Control of the Protein-to" +
+				"-Carbohydrate Ratio.\"";
+		fact[1]="\"On a Zone-favorable diet you restrict excess calories from " +
+				"carbogydrates, not total calories certainly not nutrition.\"";
+		fact[2]="\"That favorable balance of eicosanoids spells optimal health.\"";
+		fact[3]="\"If you want to permanently reap the rewards of living in th" +
+				"e Zone, you have to make a radical change in the way you think " +
+				"about food\"";
+		fact[4]="\"Every time you eat, you are taking very strong medicine, " +
+				"which can have a good, bad, or indifferent effect on our body " +
+				"for the next four to six hours\"";
+		fact[5]="\"Eating healthy can have a better effect than any prescription" +
+				" a doctor can give to you\"";
+		fact[6]="\"The higher your physical-activity level, the faster the rate that" +
+				" you're breaking down protein.\"";
+		fact[7]="\"Remember that even though protein primarily stimulates " +
+				"glucagon, it also has an effect on insulin.\"";
+		
+		String randFact = fact[randomNumber];
  
 //in case there is no data, don't show graphs
 String showThreeDayCharts = 
@@ -173,7 +198,7 @@ if(threedayarr.size() == 0){
 // create a string that shows meal names, foods, and nutrition info for today 
 String todayInfo = "";
 for(int i=0; i<todayarr.size(); i++){
-	todayInfo += "<p class=\"time\">" + todayarr.get(i).getOccurrence().toString()+ "</p><br /><br /><br /><img src=\"images/X.png\" width=30px height=30px style=\"float:left;\"><h2>" + todayarr.get(i).getName() + "</h2><p class=\"meal\">";
+	todayInfo += "<p class=\"time\">" + todayarr.get(i).getOccurrence().toString()+ "</p><br /><br /><br /><h2>" + todayarr.get(i).getName() + "</h2><p class=\"meal\">";
 	Food.List foods[] = todayarr.get(i).getFoodList();
 	for(int j=0; j < foods.length; j++){
 		todayInfo += (foods[j].getCount() + "g&nbsp;&nbsp;&nbsp;" + foods[j].getName() + "<br />");
@@ -406,6 +431,7 @@ db.close();
 </table>
       </div>
       <div id="content">
+"Zone" fact: <%= randFact %>
       <div id="oday" class="shadowBox"><%= day4 %><br /><br />
         <div id="chartwrapperOday">
 		  <%= showThreeDayCharts %>
