@@ -13,7 +13,7 @@ if (request.getParameter("signup") != null) {
     String username = request.getParameter("username");
     String password = request.getParameter("user_password");
     String email = request.getParameter("user_email");
-    double height = Double.parseDouble(request.getParameter("user_height_ft")) / 12 
+    double height = Double.parseDouble(request.getParameter("user_height_ft")) * 12 
                     +  Double.parseDouble(request.getParameter("user_height_in"));
     double weight = Double.parseDouble(request.getParameter("user_weight"));
     char sex = request.getParameter("user_sex").charAt(0);   
