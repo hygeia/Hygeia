@@ -204,8 +204,11 @@ db.close();
   <head>
     <link type="text/css" rel="stylesheet" href="popup.css" />
 	  <script type='text/javascript' src='http://code.jquery.com/jquery-1.4.4.min.js'></script>
-	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/themes/ui-lightness/jquery-ui.css"/>
-			<script type="text/javascript">
+	  <script type='text/javascript' src='javascript/validation.js'></script>
+	  <script type='text/javascript' src='javascript/jquery.validate.min.js'></script>
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/themes/ui-lightness/jquery-ui.css"/>
+    <link type="text/css" rel="stylesheet" href="forms.css" /> 
+    <script type="text/javascript">
 
 /***********************************************
 * Drop Down Date select script- by JavaScriptKit.com
@@ -261,24 +264,36 @@ $('#myImage').click(function() {
 	<p>Once you've finished adding food, enter a name and date to add it to your calendar!</p>
 	<br />
 	<form id='add_meal_form' action="addMeal.jsp" method="post">
-        <div id="left">Name: <input name="name"></div>
-        <div id="right">Date: <select id="daydropdown" name="daydropdown"></select> 
-			<select id="monthdropdown" name="monthdropdown"></select> 
-			<select id="yeardropdown" name="yeardropdown"></select>
-		Time: <select id="timedropdown" name="timedropdown"></select>
+    <div id="left">
+      Name: <input name="name">
+    </div>
+
+    <div id="right">
+      Date: 
+      <select id="daydropdown" name="daydropdown"></select> 
+      <select id="monthdropdown" name="monthdropdown"></select> 
+      <select id="yeardropdown" name="yeardropdown"></select>
+
+      Time: <select id="timedropdown" name="timedropdown"></select>
 		</div>
+
 		<br /><br />
+
 		What type of meal is this? 
 		<input type="checkbox" name="mealType" value="1000" /> Breakfast&nbsp;
 		<input type="checkbox" name="mealType" value="0100" /> Lunch&nbsp;
 		<input type="checkbox" name="mealType" value="0010" /> Dinner&nbsp;
 		<input type="checkbox" name="mealType" value="0001" /> Snack&nbsp;
-		<div id="right">
+    <label for="mealType" class="error" style="display:none;">Please choose one</label> 
+
+  <div id="right">
 		<input type="hidden" name="addToHistory" value="addToHistory" />
-     <img id='myImage' src = "images/starDull.png" />
-	 <input type="checkbox" name="favs" value="1" id='myHiddenCheckbox' style="display:none" />Add to Favorites<br /><br />
-	<input type="image" src="images/submit.png" value="Submit"></div>
-    </form>
+    <img id='myImage' src = "images/starDull.png" />
+
+    <input type="checkbox" name="favs" value="1" id='myHiddenCheckbox' style="display:none" />Add to Favorites<br /><br />
+    <input type="image" src="images/submit.png" value="Submit">
+  </div>
+  </form>
 	
 <script type="text/javascript">
 //populatedropdown(id_of_day_select, id_of_month_select, id_of_year_select)
