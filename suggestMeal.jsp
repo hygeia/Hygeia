@@ -35,6 +35,8 @@ if( session.getAttribute("suggestedArray") == null){
 Food.Update[] f = (Food.Update[])session.getAttribute("suggestedArray");
 //String[] fNames = (String[])session.getAttribute("suggestedNameArray");
 
+String suggestedMealName = "";
+
 if (request.getParameter("addToHistory") != null) {
 	History hist = new History(u);
 	f = (Food.Update[])session.getAttribute("suggestedArray"); // get most current array
@@ -86,7 +88,8 @@ if (request.getParameter("addToHistory") != null) {
 	hist.addMeal(newMeal, today);
 	session.setAttribute("suggestedArray", new Food.Update[0]);
 	
-	if( request.getParameterValues("favs").length > 0 ){
+	if( (request.getParameterValues("favs") != null) && 
+	    (request.getParameterValues("favs").length > 0) ){
 		Favorites fav = new Favorites (u);
 		boolean r = fav.addMeal(newMeal);
 		if (r == false) {
@@ -108,6 +111,46 @@ if (request.getParameter("suggestNewMeal") != null) {
 		db.close();
 		return;
 	}
+	suggestedMealName = suggested.getName();
+	
+	/* add the food items of the old meal to the inventory */
+	Food.Update[] mealToAdd = new Meal(db, suggested.getMid()).getMeal();
+	for( Food.Update food : mealToAdd ){
+		Food.Update foodToAdd = new Food.Update(food.getFid(), food.getCount());
+		Food.Update[] arr = inv.getInventory();
+		if (arr == null) {
+			response.sendRedirect("error.jsp?code=4&echo=Could not fetch inventory");
+			db.close();
+			return;
+		}
+		for( Food.Update up : arr ){
+			if(up.getFid() == food.getFid()){
+				foodToAdd = up;
+				break;
+			}
+		}
+		boolean r = inv.updateFood(new Food.Update(food.getFid(), foodToAdd.getCount() + food.getCount()));
+		if (r == false) {
+			response.sendRedirect("error.jsp?code=1&echo=Could not update" +
+				" inventory");
+			db.close();
+			return;
+		}
+	}
+
+	/* remove the food items of the new meal from the inventory */
+    int mid = suggested.getMid();
+	Meal m = new Meal(db, mid);
+	Food.Update[] foods = m.getMeal();
+	for( Food.Update food : foods ){
+		boolean r = inv.removeFood(food);
+		if (r == false) {
+			response.sendRedirect("error.jsp?code=1&echo=Could not update" +
+				" inventory");
+			db.close();
+			return;
+		}
+	}
 	session.setAttribute("suggestedArray", suggested.getMeal());
 	session.setAttribute("suggestedMealType", (String)request.getParameter("mealType"));
 }
@@ -119,7 +162,6 @@ if( suggested == null ){
 }else{
 	sf = suggested.getMeal();
 }
-
 
 /* Produce table of foods already in meal, with remove from meal forms */
 //f = (Food.Update[])session.getAttribute("suggestedArray"); // get most current array
@@ -156,7 +198,7 @@ var monthfield=document.getElementById(monthfield)
 var yearfield=document.getElementById(yearfield)
 var timefield=document.getElementById(timefield)
 for (var i=1; i<32; i++)
-dayfield.options[i]=new Option(i, i+1)
+dayfield.options[i]=new Option(i, i)
 dayfield.options[today.getDate()]=new Option(today.getDate(), today.getDate(), true, true) //select today's day
 for (var m=0; m<12; m++)
 monthfield.options[m]=new Option(monthtext[m], monthtext[m])
@@ -168,7 +210,7 @@ thisyear+=1
 }
 yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, true) //select today's year
 for (var d=0; d<24; d++)
-timefield.options[d]=new Option(d + ":00", d+1)
+timefield.options[d]=new Option(d + ":00", d)
 timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.getHours(), true, true) //select current time
 }
 
@@ -203,7 +245,7 @@ $('#myImage').click(function() {
 	<p>Once you're happy with your meal, enter a name and date to add it to your calendar!</p>
 	<br />
 	<form action="suggestMeal.jsp" method="post">
-        <div id="left">Name: <input name="name"></div>
+        <div id="left">Name: <input type="hidden" name="name" value="<%= suggestedMealName %>"><%= suggestedMealName %></div>
         <div id="right">Date: <select id="daydropdown" name="daydropdown"></select> 
 			<select id="monthdropdown" name="monthdropdown"></select> 
 			<select id="yeardropdown" name="yeardropdown"></select>
@@ -213,6 +255,7 @@ $('#myImage').click(function() {
         <div id="right">
 		<img id='myImage' src = "images/starDull.png" />
 	 <input type="checkbox" name="favs" value="1" id='myHiddenCheckbox' style="display:none" />Add to Favorites<br /><br />
+	 <input type="submit" value="Add Meal" />
 		</div>
     </form>
 	

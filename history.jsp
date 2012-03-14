@@ -4,7 +4,7 @@
 		     User should be able to add and remove items from
 		     their history as desired.
 -->
-<%@ page import = "hygeia.*,java.util.*,java.sql.Timestamp,java.text.*" %>
+<%@ page import = "hygeia.*,java.text.DecimalFormat,java.text.NumberFormat,java.util.*,java.sql.Timestamp,java.text.*" %>
 <%
  /* Check to see if a session exists */
 if (session.getAttribute("uid") == null) {
@@ -144,7 +144,7 @@ if( meals != null )
 	 "<input type='hidden' name='removeFromHistory'" +
 	" value='1'> <input type='submit' value='Remove'>"+
   	"<form action='history.jsp' method='post'> </br></form>\n"; 
-	
+
  }
  
  histDisp += "</table>\n";
@@ -204,9 +204,19 @@ for(int i=0; i<todayarr.size(); i++){
 	tempp += nuts.getProtein();
 	tempf += nuts.getFat();
 }
-block1[1]= tempp / 7;
-block1[0]= tempc / 9;
-block1[2]= tempf / 3;
+
+double carbAmount1 = tempc/7;
+double protAmount1 = tempp/9;
+double fatAmount1 = tempf/3;
+
+NumberFormat carbFormat1 = new DecimalFormat("#0.00");
+NumberFormat protFormat1 = new DecimalFormat("#0.00");
+NumberFormat fatFormat1 = new DecimalFormat("#0.00");
+
+
+block1[1]= Double.parseDouble(carbFormat1.format(carbAmount1));
+block1[0]= Double.parseDouble(protFormat1.format(protAmount1));
+block1[2]= Double.parseDouble(fatFormat1.format(fatAmount1));
 
 // Reset temp values to 0
 tempc = 0;
@@ -219,9 +229,17 @@ for(int i=0; i<onedayarr.size(); i++){
 	tempp += nuts.getProtein();
 	tempf += nuts.getFat();
 }
-block2[1]= tempp / 7;
-block2[0]= tempc / 9;
-block2[2]= tempf / 3;
+double carbAmount2 = tempc/7;
+double protAmount2 = tempp/9;
+double fatAmount2 = tempf/3;
+
+NumberFormat carbFormat2 = new DecimalFormat("#0.00");
+NumberFormat protFormat2 = new DecimalFormat("#0.00");
+NumberFormat fatFormat2 = new DecimalFormat("#0.00");
+
+block2[1]= Double.parseDouble(carbFormat2.format(carbAmount2));
+block2[0]= Double.parseDouble(protFormat2.format(protAmount2));
+block2[2]= Double.parseDouble(fatFormat2.format(fatAmount2));
 
 // Reset temp values to 0
 tempc = 0;
@@ -234,9 +252,18 @@ for(int i=0; i<twodayarr.size(); i++){
 	tempp += nuts.getProtein();
 	tempf += nuts.getFat();
 }
-block3[1]= tempp / 7;
-block3[0]= tempc / 9;
-block3[2]= tempf / 3;
+
+double carbAmount3 = tempc/7;
+double protAmount3 = tempp/9;
+double fatAmount3 = tempf/3;
+
+NumberFormat carbFormat3 = new DecimalFormat("#0.00");
+NumberFormat protFormat3 = new DecimalFormat("#0.00");
+NumberFormat fatFormat3 = new DecimalFormat("#0.00");
+
+block3[1]= Double.parseDouble(carbFormat3.format(carbAmount3));
+block3[0]= Double.parseDouble(protFormat3.format(protAmount3));
+block3[2]= Double.parseDouble(fatFormat3.format(fatAmount3));
 
 // Reset temp values to 0
 tempc = 0;
@@ -249,9 +276,18 @@ for(int i=0; i<threedayarr.size(); i++){
 	tempp += nuts.getProtein();
 	tempf += nuts.getFat();
 }
-block4[1]= tempp / 7;
-block4[0]= tempc / 9;
-block4[2]= tempf / 3;
+
+double carbAmount4 = tempc/7;
+double protAmount4 = tempp/9;
+double fatAmount4 = tempf/3;
+
+NumberFormat carbFormat4 = new DecimalFormat("#0.00");
+NumberFormat protFormat4 = new DecimalFormat("#0.00");
+NumberFormat fatFormat4 = new DecimalFormat("#0.00");
+
+block4[1]= Double.parseDouble(carbFormat4.format(carbAmount4));
+block4[0]= Double.parseDouble(protFormat4.format(protAmount4));
+block4[2]= Double.parseDouble(fatFormat4.format(fatAmount4));
 
 // Reset temp values to 0
 tempc = 0;
@@ -264,9 +300,18 @@ for(int i=0; i<fourdayarr.size(); i++){
 	tempp += nuts.getProtein();
 	tempf += nuts.getFat();
 }
-block5[1]= tempp / 7;
-block5[0]= tempc / 9;
-block5[2]= tempf / 3;
+
+double carbAmount5 = tempc/7;
+double protAmount5 = tempp/9;
+double fatAmount5 = tempf/3;
+
+NumberFormat carbFormat5 = new DecimalFormat("#0.00");
+NumberFormat protFormat5 = new DecimalFormat("#0.00");
+NumberFormat fatFormat5 = new DecimalFormat("#0.00");
+
+block5[1]= Double.parseDouble(carbFormat5.format(carbAmount5));
+block5[0]= Double.parseDouble(protFormat5.format(protAmount5));
+block5[2]= Double.parseDouble(fatFormat5.format(fatAmount5));
 
 // Reset temp values to 0
 tempc = 0;
@@ -279,9 +324,18 @@ for(int i=0; i<fivedayarr.size(); i++){
 	tempp += nuts.getProtein();
 	tempf += nuts.getFat();
 }
-block6[1]= tempp / 7;
-block6[0]= tempc / 9;
-block6[2]= tempf / 3;
+
+double carbAmount6 = tempc/7;
+double protAmount6 = tempp/9;
+double fatAmount6 = tempf/3;
+
+NumberFormat carbFormat6 = new DecimalFormat("#0.00");
+NumberFormat protFormat6 = new DecimalFormat("#0.00");
+NumberFormat fatFormat6 = new DecimalFormat("#0.00");
+
+block6[1]= Double.parseDouble(carbFormat6.format(carbAmount6));
+block6[0]= Double.parseDouble(protFormat6.format(protAmount6));
+block6[2]= Double.parseDouble(fatFormat6.format(fatAmount6));
 
 // Reset temp values to 0
 tempc = 0;
@@ -294,9 +348,18 @@ for(int i=0; i<sixdayarr.size(); i++){
 	tempp += nuts.getProtein();
 	tempf += nuts.getFat();
 }
-block7[1]= tempp / 7;
-block7[0]= tempc / 9;
-block7[2]= tempf / 3;
+
+double carbAmount7 = tempc/7;
+double protAmount7 = tempp/9;
+double fatAmount7 = tempf/3;
+
+NumberFormat carbFormat7 = new DecimalFormat("#0.00");
+NumberFormat protFormat7 = new DecimalFormat("#0.00");
+NumberFormat fatFormat7 = new DecimalFormat("#0.00");
+
+block7[1]= Double.parseDouble(carbFormat7.format(carbAmount7));
+block7[0]= Double.parseDouble(protFormat7.format(protAmount7));
+block7[2]= Double.parseDouble(fatFormat7.format(fatAmount7));
 
 // Reset temp values to 0
 tempc = 0;
@@ -434,7 +497,6 @@ out.println("f"+block7[2]);
 </head>
 <BODY>
     <div id="page">
-	<div id="content">
       <div id="header">
         <table cellpadding="0" cellspacing="0">
 <tr>
@@ -449,7 +511,7 @@ out.println("f"+block7[2]);
 </tr>
 </table>
 </div>
-
+	<div id="content">
 <!-- Ask user if they would like to add meal to history
 Add to history
 
@@ -469,7 +531,7 @@ Add to history
 <%= histDisp %>
 <%= noHistory %>
 </br>
-<div id="line_chart" style="width: 960px; height: 500px;"></div>
+<div id="line_chart" style="width: 960px; height: 700px;"></div>
 </div>
 </div>
 <div id="footer"><a href="about.jsp">About Us</a><br />

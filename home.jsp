@@ -198,7 +198,7 @@ if(threedayarr.size() == 0){
 // create a string that shows meal names, foods, and nutrition info for today 
 String todayInfo = "";
 for(int i=0; i<todayarr.size(); i++){
-	todayInfo += "<p class=\"time\">" + todayarr.get(i).getOccurrence().toString()+ "</p><h2>" + todayarr.get(i).getName() + "</h2><img src=\"images/X.png\" width=30px height=30px ><p class=\"meal\">";
+	todayInfo += "<p class=\"time\">" + todayarr.get(i).getOccurrence().toString()+ "</p><br /><br /><br /><img src=\"images/X.png\" width=30px height=30px style=\"float:left;\"><h2>" + todayarr.get(i).getName() + "</h2><p class=\"meal\">";
 	Food.List foods[] = todayarr.get(i).getFoodList();
 	for(int j=0; j < foods.length; j++){
 		todayInfo += (foods[j].getCount() + "g&nbsp;&nbsp;&nbsp;" + foods[j].getName() + "<br />");
@@ -453,9 +453,9 @@ db.close();
         <div id="chartwrapperToday">
 		  <%= showTodayCharts %>
         </div>
-        <p class="food">
+        <div id="textWrapper">
 			<%= todayInfo %>
-        </p>
+        </div>
       </div>
     </div>
     </div>
