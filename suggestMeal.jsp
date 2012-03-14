@@ -27,19 +27,21 @@ int uid = (Integer)session.getAttribute("uid");
 User u = new User(db, uid);
 Inventory inv = new Inventory(u);
 
-if( session.getAttribute("suggestedArray") == null){
-	session.setAttribute("suggestedArray", new Food.Update[0]); }
+if( session.getAttribute("suggestedMid") == null){
+	session.setAttribute("suggestedMid", 0); }
+//if( session.getAttribute("suggestedArray") == null){
+//	session.setAttribute("suggestedArray", new Food.Update[0]); }
 //if( session.getAttribute("suggestedNameArray") == null){
 //	session.setAttribute("suggestedNameArray", String[0]); }
 
-Food.Update[] f = (Food.Update[])session.getAttribute("suggestedArray");
+//Food.Update[] f = (Food.Update[])session.getAttribute("suggestedArray");
 //String[] fNames = (String[])session.getAttribute("suggestedNameArray");
 
 String suggestedMealName = "";
 
 if (request.getParameter("addToHistory") != null) {
 	History hist = new History(u);
-	f = (Food.Update[])session.getAttribute("suggestedArray"); // get most current array
+//	f = (Food.Update[])session.getAttribute("suggestedArray"); // get most current array
 	if(session.getAttribute("suggestedMealType") == null){
 		response.sendRedirect("error.jsp?code=3&echo=Could not get meal type");
 		db.close();
@@ -47,7 +49,10 @@ if (request.getParameter("addToHistory") != null) {
 	}
 	String suggMealType = (String)session.getAttribute("suggestedMealType");
 	int mealType = Integer.parseInt(suggMealType);
-	int mid = Meal.createMeal(db, u, f, request.getParameter("name"), mealType);
+	int mid = (Integer)session.getAttribute("suggestedMid");
+	Meal histMeal = new Meal(db, mid);
+	Food.Update[] f = histMeal.getMeal(); //get array of current meal
+//	int mid = Meal.createMeal(db, u, f, request.getParameter("name"), mealType);
 	
 	// create Timestamp
 	Calendar c = Calendar.getInstance();
@@ -76,8 +81,7 @@ if (request.getParameter("addToHistory") != null) {
 	c.set(Calendar.HOUR_OF_DAY, Integer.parseInt(request.getParameter("timedropdown")));
 	Timestamp today = new Timestamp(c.getTimeInMillis());
 	
-	Meal newMeal = new Meal(db, mid);
-	if ( newMeal == null )
+	if ( histMeal == null )
 	{
 		response.sendRedirect("error.jsp?code=1&echo=Could not add" +
 				" meal to favorites");
@@ -85,13 +89,14 @@ if (request.getParameter("addToHistory") != null) {
 			return;
 	} 
 	
-	hist.addMeal(newMeal, today);
-	session.setAttribute("suggestedArray", new Food.Update[0]);
+	hist.addMeal(histMeal, today);
+//	session.setAttribute("suggestedArray", new Food.Update[0]);
+	session.setAttribute("suggestedMid", 0);
 	
 	if( (request.getParameterValues("favs") != null) && 
 	    (request.getParameterValues("favs").length > 0) ){
 		Favorites fav = new Favorites (u);
-		boolean r = fav.addMeal(newMeal);
+		boolean r = fav.addMeal(histMeal);
 		if (r == false) {
 			response.sendRedirect("error.jsp?code=1&echo=Could not add" +
 				" meal to favorites");
@@ -112,6 +117,7 @@ if (request.getParameter("suggestNewMeal") != null) {
 		return;
 	}
 	suggestedMealName = suggested.getName();
+	session.setAttribute("suggestedMid", suggested.getMid());
 	
 	/* add the food items of the old meal to the inventory */
 	Food.Update[] mealToAdd = new Meal(db, suggested.getMid()).getMeal();
@@ -151,7 +157,7 @@ if (request.getParameter("suggestNewMeal") != null) {
 			return;
 		}
 	}
-	session.setAttribute("suggestedArray", suggested.getMeal());
+//	session.setAttribute("suggestedArray", suggested.getMeal());
 	session.setAttribute("suggestedMealType", (String)request.getParameter("mealType"));
 }
 

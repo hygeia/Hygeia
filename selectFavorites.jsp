@@ -123,7 +123,7 @@ if (request.getParameter("addToHistory") != null) {
 //	f = (Food.Update[])session.getAttribute("favArray"); // get most current array
 	int mid = (Integer)session.getAttribute("selectedMid");
 	Meal histMeal = new Meal(db, mid);
-	Food.Update[] f = histMeal.getMeal(); //get array of current meal
+//	Food.Update[] f = histMeal.getMeal(); //get array of current meal
 	
 	// create Timestamp
 	Calendar c = Calendar.getInstance();
