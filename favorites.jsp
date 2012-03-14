@@ -166,7 +166,9 @@ li{color:black; font-family:arial;}
   <div id="content">
 <br />
 
+<div id="green">
 <h1><%= username %>'s Favorites</h1>
+</div>
 
 <br>
 <%= favDisp %>
