@@ -260,7 +260,7 @@ $('#myImage').click(function() {
 	<br /><center><h2>Inventory</h2></center><br /><%= invDisp %>
 	<p>Once you've finished adding food, enter a name and date to add it to your calendar!</p>
 	<br />
-	<form action="addMeal.jsp" method="post">
+	<form id='add_meal_form' action="addMeal.jsp" method="post">
         <div id="left">Name: <input name="name"></div>
         <div id="right">Date: <select id="daydropdown" name="daydropdown"></select> 
 			<select id="monthdropdown" name="monthdropdown"></select> 

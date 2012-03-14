@@ -65,7 +65,7 @@ String name = (String)session.getAttribute("username");
  <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
  <head>
  <title>Profile | Hygeia</title>
- <link type="text/css" rel="stylesheet" href="style.css" />
+ <link type="text/css" rel="stylesheet" href="profile.css" />
  <link rel="shortcut icon" href="favicon.ico" mce_href="favicon.ico"/>  
  </head>
  <body>
@@ -87,21 +87,22 @@ String name = (String)session.getAttribute("username");
  
       </div>
       <div id="content">
+        <div id="update">
  <% 
    if((name == null)||(weight == 0)||(leanBodyMass == 0) || 
       (protein == 0))
    { 
     %>
-    <P> You have not updated your profile. By updating your profile, Hygeia</br>
-        will be able to provide information to help you obtain a "Zone" </br>
-	favorable diet. </br>
+    <p class="update"> You have not updated your profile. By updating your profile, Hygeia<br />
+        will be able to provide information to help you obtain a "Zone" <br />
+	favorable diet. <br /></p>
 	<A HREF="updateProfile.jsp">Update Profile</A>
     <%
     }
      else
      {
     %>
-	Hello <%= name %>!</br></br>
+	<p class="update">Hello <%= name %>!</br></br>
 	Your current weight is <%= weight %> lbs.</br>
 	You are <%= ft %> ft. <%= in  %> in. tall.</br>
 	Your current lean body mass is <%= leanBodyMass %> lbs.</br>
@@ -115,11 +116,12 @@ String name = (String)session.getAttribute("username");
 	Try to spread the blocks throughout the day. In order to be in the "Zone"</br>
 	you must maintain balance.</br>
 	</br>
-	</br>
+	</br></p>
 	<A HREF="updateProfile.jsp">Update Profile</A></br>
     <%
      } 
     %>
+    </div>
     </div>
     </div>
      <div id="footer"><a href="about.jsp">About Us</a><br />
