@@ -173,7 +173,7 @@ if(threedayarr.size() == 0){
 // create a string that shows meal names, foods, and nutrition info for today 
 String todayInfo = "";
 for(int i=0; i<todayarr.size(); i++){
-	todayInfo += "<p class=\"time\">12:00</p><h2>" + todayarr.get(i).getName() + "</h2><p class=\"meal\">";
+	todayInfo += "<p class=\"time\">12:00</p><h2>" + todayarr.get(i).getName() + "</h2><img src=\"images/X.png\" width=30px height=30px><p class=\"meal\">";
 	Food.List foods[] = todayarr.get(i).getFoodList();
 	for(int j=0; j < foods.length; j++){
 		todayInfo += (foods[j].getCount() + "g&nbsp;&nbsp;&nbsp;" + foods[j].getName() + "<br />");
