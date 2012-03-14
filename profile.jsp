@@ -106,7 +106,7 @@ String name = (String)session.getAttribute("username");
 	Your current weight is <b><%= weight %></b> lbs.</br>
 	You are <b><%= ft %> ft <%= in  %> in</b> tall.</br>
 	Your current lean body mass is <b><%= leanBodyMass %></b> lbs.</br>
-	Your current estimated body fat is <b><%= bodyFat %></b> lbs.</br>
+	Your current estimated body fat is <b><%= bodyFat %></b> lbs.</br></br>
 	Following a "Zone" favorable diet your daily protein requirement is 
 	<b><%= protein %></b> grams. </br></br>
 	In order to maintain a "Zone" favorable diet you should have</br>
