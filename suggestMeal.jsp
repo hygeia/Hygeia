@@ -35,6 +35,8 @@ if( session.getAttribute("suggestedArray") == null){
 Food.Update[] f = (Food.Update[])session.getAttribute("suggestedArray");
 //String[] fNames = (String[])session.getAttribute("suggestedNameArray");
 
+String selectedMealName = "";
+
 if (request.getParameter("addToHistory") != null) {
 	History hist = new History(u);
 	f = (Food.Update[])session.getAttribute("suggestedArray"); // get most current array
@@ -108,6 +110,7 @@ if (request.getParameter("suggestNewMeal") != null) {
 		db.close();
 		return;
 	}
+	selectedMealName = suggested.getName();
 	
 	/* add the food items of the old meal to the inventory */
 	Food.Update[] mealToAdd = new Meal(db, suggested.getMid()).getMeal();
@@ -158,7 +161,6 @@ if( suggested == null ){
 }else{
 	sf = suggested.getMeal();
 }
-
 
 /* Produce table of foods already in meal, with remove from meal forms */
 //f = (Food.Update[])session.getAttribute("suggestedArray"); // get most current array
@@ -242,7 +244,7 @@ $('#myImage').click(function() {
 	<p>Once you're happy with your meal, enter a name and date to add it to your calendar!</p>
 	<br />
 	<form action="suggestMeal.jsp" method="post">
-        <div id="left">Name: <input name="name"></div>
+        <div id="left">Name: <input type="hidden" name="name" value="<%= suggestedMealName %>"><%= suggestedMealName %></div>
         <div id="right">Date: <select id="daydropdown" name="daydropdown"></select> 
 			<select id="monthdropdown" name="monthdropdown"></select> 
 			<select id="yeardropdown" name="yeardropdown"></select>
