@@ -397,13 +397,13 @@ out.println("f"+block7[2]);
         data.addColumn('number', 'Protien');
 	data.addColumn('number', 'Fat');
         data.addRows([
-          ['<%= day1 %>', <%= block1[0] %>,<%= block1[1] %>, <%= block1[2] %>],
-          ['<%= day2 %>', <%= block2[0] %>,<%= block2[1] %>, <%= block2[2] %>],
-          ['<%= day3 %>', <%= block3[0] %>,<%= block3[1] %>, <%= block3[2] %>],
-          ['<%= day4 %>', <%= block4[0] %>,<%= block4[1] %>, <%= block4[2] %>],
-	  ['<%= day5 %>', <%= block5[0] %>,<%= block5[1] %>, <%= block5[2] %>],
+          ['<%= day7 %>', <%= block7[0] %>,<%= block7[1] %>, <%= block7[2] %>],
 	  ['<%= day6 %>', <%= block6[0] %>,<%= block6[1] %>, <%= block6[2] %>],
-	  ['<%= day7 %>', <%= block7[0] %>,<%= block7[1] %>, <%= block7[2] %>]
+	  ['<%= day5 %>', <%= block5[0] %>,<%= block5[1] %>, <%= block5[2] %>],
+          ['<%= day4 %>', <%= block4[0] %>,<%= block4[1] %>, <%= block4[2] %>],
+          ['<%= day3 %>', <%= block3[0] %>,<%= block3[1] %>, <%= block3[2] %>],
+          ['<%= day2 %>', <%= block2[0] %>,<%= block2[1] %>, <%= block2[2] %>],
+	  ['<%= day1 %>', <%= block1[0] %>,<%= block1[1] %>, <%= block1[2] %>]
         ]);
 
         var options = {
