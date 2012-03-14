@@ -443,7 +443,8 @@ out.println("f"+block7[2]);
 
 
  %>
-<HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
   <title>History | Hygeia</title>
   <link type="text/css" rel="stylesheet" href="style.css" />
@@ -510,7 +511,7 @@ out.println("f"+block7[2]);
 <td> <a href="logout.jsp"><img src="images/lightICON8.png"></a></td>
 </tr>
 </table>
-</div>
+      </div>
 	<div id="content">
 <!-- Ask user if they would like to add meal to history
 Add to history
