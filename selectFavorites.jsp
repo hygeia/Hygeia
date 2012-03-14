@@ -187,18 +187,34 @@ if((Integer)session.getAttribute("selectedMid") > 0){
 String favDisp = "<table style='margin:auto auto;'>\n";
 for (Meal.List ml : arr) {
 	if( ml != null ){
+		String disabled = "";
+		Meal me = new Meal(db, ml.getMid());
+		Food.List[] mefl = me.getFoodList();
+		Food.List[] infl = inv.getInventoryList();
+		for( Food.List fl : mefl ){
+			for( Food.List il : infl ){
+				if(il.getFid() == fl.getFid()){
+					if(il.getCount() < fl.getCount()){
+						disabled = "disabled='disabled'";
+						break;
+					}
+				}
+			}
+			if( disabled.equals("disabled='disabled'") ){
+				break;
+			}
+		}
 		String s = "<tr><form action='selectFavorites.jsp' method='post'>" +
 			"<input type='hidden' name='mid' value=" + ml.getMid() + ">" +
 			"<td>" + ml.getName() + "</td><td><input type='hidden' name='" +
-			"selectAsMeal' value=1><input type='submit' value='Select As Meal'>" +
-			"</td></form></tr>\n";
+			"selectAsMeal' value=1><input type='submit' value='Select As Meal' " + 
+			disabled + "></td></form></tr>\n";
 		favDisp += s;
 	}else{
 		favDisp += "<tr><td>You have no favorite meals.</td></tr>";
 	}
 }
 favDisp += "</table>\n";
-
 db.close();
 
 %>
