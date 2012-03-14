@@ -93,10 +93,10 @@ String name = (String)session.getAttribute("username");
       (protein == 0))
    { 
     %>
-    <p class="update"> You have not updated your profile. By updating your profile, Hygeia<br />
-        will be able to provide information to help you obtain a "Zone" <br />
+    <p class="update"> You have not updated your profile. By updating your profile, Hygeia
+        will be able to provide information to help you obtain a "Zone"
 	favorable diet. <br /></p>
-	<A HREF="updateProfile.jsp"><img src="images/updateProfile.png" /></A>
+	<A HREF="updateProfile.jsp">Update Profile</A>
     <%
     }
      else
@@ -117,7 +117,7 @@ String name = (String)session.getAttribute("username");
 	you must maintain balance.</br>
 	</br>
 	</br></p>
-	<A HREF="updateProfile.jsp"><img src="images/updateProfile.png" /></A></br>
+	<A HREF="updateProfile.jsp">Update Profile</A></br>
     <%
      } 
     %>
