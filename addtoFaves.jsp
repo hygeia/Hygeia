@@ -28,12 +28,12 @@ int uid = (Integer)session.getAttribute("uid");
 User u = new User(db, uid);
 Inventory inv = new Inventory(u);
 
-if( session.getAttribute("mealArray") == null){
-	session.setAttribute("mealArray", new ArrayList<Food.Update>()); }
+if( session.getAttribute("favMealArray") == null){
+	session.setAttribute("favMealArray", new ArrayList<Food.Update>()); }
 //if( session.getAttribute("mealNameArray") == null){
 //	session.setAttribute("mealNameArray", new ArrayList<String>()); }
 
-ArrayList<Food.Update> f = (ArrayList<Food.Update>)session.getAttribute("mealArray");
+ArrayList<Food.Update> f = (ArrayList<Food.Update>)session.getAttribute("favMealArray");
 //ArrayList<String> fNames = (ArrayList<String>)session.getAttribute("mealNameArray");
 
 if (request.getParameter("addToMeal") != null) {
@@ -58,7 +58,7 @@ if (request.getParameter("addToMeal") != null) {
 	if( !exists ){
 		f.add(food);
 	}
-	session.setAttribute("mealArray", f);
+	session.setAttribute("favMealArray", f);
 }
 
 if (request.getParameter("removeFromMeal") != null) {
@@ -104,12 +104,12 @@ if (request.getParameter("removeFromMeal") != null) {
 		db.close();
 		return;
 	}
-	session.setAttribute("mealArray", f);
+	session.setAttribute("favMealArray", f);
 }
 
-if (request.getParameter("addToHistory") != null) {
-	History hist = new History(u);
-	f = (ArrayList<Food.Update>)session.getAttribute("mealArray"); // get most current array
+if (request.getParameter("addToFaves") != null) {
+//	History hist = new History(u);
+	f = (ArrayList<Food.Update>)session.getAttribute("favMealArray"); // get most current array
 	int mealType = 0;
 	String[] mealTypes = request.getParameterValues("mealType");
 	for( int i=0; i<mealTypes.length; i++ ){
@@ -118,40 +118,10 @@ if (request.getParameter("addToHistory") != null) {
 	int mid = Meal.createMeal(db, u, f.toArray(new Food.Update[0]), 
 		request.getParameter("name") , mealType );
 	
-	// create Timestamp
-	Calendar c = Calendar.getInstance();
-	c.set(Calendar.YEAR, Integer.parseInt(request.getParameter("yeardropdown")));
-	int month = Integer.parseInt(request.getParameter("monthdropdown"));
-	switch(month){
-		case 0: c.set(Calendar.MONTH, Calendar.JANUARY); break;
-		case 1: c.set(Calendar.MONTH, Calendar.FEBRUARY); break;
-		case 2: c.set(Calendar.MONTH, Calendar.MARCH); break;
-		case 3: c.set(Calendar.MONTH, Calendar.APRIL); break;
-		case 4: c.set(Calendar.MONTH, Calendar.MAY); break;
-		case 5: c.set(Calendar.MONTH, Calendar.JUNE); break;
-		case 6: c.set(Calendar.MONTH, Calendar.JULY); break;
-		case 7: c.set(Calendar.MONTH, Calendar.AUGUST); break;
-		case 8: c.set(Calendar.MONTH, Calendar.SEPTEMBER); break;
-		case 9: c.set(Calendar.MONTH, Calendar.OCTOBER); break;
-		case 10: c.set(Calendar.MONTH, Calendar.NOVEMBER); break;
-		case 11: c.set(Calendar.MONTH, Calendar.DECEMBER); break;
-		default: 
-			response.sendRedirect("error.jsp?code=3&echo=Could not parse date");
-			db.close();
-			return;
-	}
-
-	c.set(Calendar.DAY_OF_MONTH, Integer.parseInt(request.getParameter("daydropdown")));
-	c.set(Calendar.HOUR_OF_DAY, Integer.parseInt(request.getParameter("timedropdown")));
-	Timestamp today = new Timestamp(c.getTimeInMillis());
-	
 	Meal newMeal = new Meal(db, mid);
-	hist.addMeal(newMeal, today);
-	session.setAttribute("mealArray", new ArrayList<Food.Update>());
-	
+	session.setAttribute("favMealArray", new ArrayList<Food.Update>());
 
-	if( (request.getParameterValues("favs") != null) && 
-	    (request.getParameterValues("favs").length > 0) ){
+
 		Favorites fav = new Favorites (u);
 		boolean r = fav.addMeal(newMeal);
 		if (r == false) {
@@ -160,7 +130,7 @@ if (request.getParameter("addToHistory") != null) {
 			db.close();
 			return;
 		}
-	}
+
 }
 
 Food.List[] arr = inv.getInventoryList();
@@ -171,10 +141,10 @@ if (arr == null) {
 }
 
 /* Produce table of foods already in meal, with remove from meal forms */
-f = (ArrayList<Food.Update>)session.getAttribute("mealArray"); // get most current array
+f = (ArrayList<Food.Update>)session.getAttribute("favMealArray"); // get most current array
 String mealDisp = "<table style='margin:auto auto;'>\n";
 for (Food.Update up : f) {
-	String s = "<tr><form action='addMeal.jsp' method='post'>" +
+	String s = "<tr><form action='addtoFaves.jsp' method='post'>" +
         "<input type='hidden' name='fid' value=" + up.getFid() + ">" +
         "<td>" + up.getName(db) + "</td><td>Amount: <input name='count' " +
         "value=" + up.getCount() + "><input type='hidden' name='" +
@@ -187,7 +157,7 @@ mealDisp += "</table>\n";
 /* Produce table of foods, with add to meal forms */
 String invDisp = "<table style='margin:auto auto;'>\n";
 for (Food.List fl : arr) {
-    String s = "<tr><form action='addMeal.jsp' method='post'>" +
+    String s = "<tr><form action='addtoFaves.jsp' method='post'>" +
         "<input type='hidden' name='fid' value=" + fl.getFid() + ">" +
         "<td>" + fl.getName() + "</td><td>Amount: <input name='count' " +
         "value=" + fl.getCount() + "><input type='hidden' name='" +
@@ -261,20 +231,20 @@ $('#myImage').click(function() {
 	<p class="addFaves">Add a Meal to Your Favorites</p><br />
 	<center><h2 class="new">Meal</h2></center><br /><%= mealDisp %>
 	<br /><center><h2>Inventory</h2></center><br /><%= invDisp %>
-	<p>Once you've finished adding food, enter a name and date to add it to your calendar!</p>
+	<p>Once you've finished adding food, enter a name and date to add it to your favorites!</p>
 	<br />
-	<form id='add_meal_form' action="addMeal.jsp" method="post">
+	<form id='add_meal_form' action="addtoFaves.jsp" method="post">
     <div id="left">
       Name: <input name="name">
     </div>
 
     <div id="right">
-      Date: 
+<!--      Date: 
       <select id="daydropdown" name="daydropdown"></select> 
       <select id="monthdropdown" name="monthdropdown"></select> 
       <select id="yeardropdown" name="yeardropdown"></select>
 
-      Time: <select id="timedropdown" name="timedropdown"></select>
+      Time: <select id="timedropdown" name="timedropdown"></select> -->
 		</div>
 
 		<br /><br />
@@ -287,8 +257,8 @@ $('#myImage').click(function() {
     <label for="mealType" class="error" style="display:none;">Please choose one</label> 
 
   <div id="right">
-		<input type="hidden" name="addToHistory" value="addToHistory" /><br /><br />
-    <input type="image" src="images/addFaves.png" value="Submit">
+<!--	<input type="hidden" name="addToFaves" value="addToFaves" /><br /><br /> -->
+    <input type="image" src="images/addFaves.png" name="addToFaves" value="Submit">
   </div>
   </form>
 	
