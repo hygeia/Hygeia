@@ -124,19 +124,19 @@ if( meals == null )
  noHistory = "So far you have no meals in your history.";
 }
 
-String histDisp = "<table style='margin:auto auto;'>\n";
+String histDisp = "<table style='margin:auto auto;text-align:left'>\n";
 
 if( meals != null )
 {
- for(Meal.List m : meals)
+ for(int i = meals.length - 1; i > -1; i-- )
  {
-  if( m == null){
+  if( meals[i] == null){
    noHistory = "So far you have no meals in your history.";
    break; 
   }
-  String name = m.getName();
-  int mid = m.getMid();
-  Timestamp  occurrence = m.getOccurrence();
+  String name = meals[i].getName();
+  int mid = meals[i].getMid();
+  Timestamp  occurrence = meals[i].getOccurrence();
   
   histDisp += "<form action='history.jsp' method='post'>" +
   	 "<input type='hidden' name='mid' value='"+ mid +"'>" + name + " Date: " +
