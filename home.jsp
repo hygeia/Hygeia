@@ -1,4 +1,4 @@
-<%@ page import = "hygeia.*,java.text.DecimalFormat,java.text.NumberFormat,java.util.*,java.sql.Timestamp,java.text.*,java.util.Random" %>
+<%@ page import = "hygeia.*,java.text.DecimalFormat,java.text.NumberFormat,java.util.*,java.sql.Timestamp,java.text.*" %>
 <%
 /* Check to see if a session exists */
 if (session.getAttribute("uid") == null){ 
@@ -21,31 +21,6 @@ if (session.getAttribute("uid") == null){
    Close the database: db.close();
    Redirect to another page: response.sendRedirect("url"); return;
  */
-//Random fact
-Random myRandom = new Random();
-		int randomNumber = myRandom.nextInt(7) + 1;
-		String[] fact;
-		fact = new String[8];
-		
-		fact[0]="\"Reaching the Zone Requires Precise Control of the Protein-to" +
-				"-Carbohydrate Ratio.\"";
-		fact[1]="\"On a Zone-favorable diet you restrict excess calories from " +
-				"carbogydrates, not total calories certainly not nutrition.\"";
-		fact[2]="\"That favorable balance of eicosanoids spells optimal health.\"";
-		fact[3]="\"If you want to permanently reap the rewards of living in th" +
-				"e Zone, you have to make a radical change in the way you think " +
-				"about food\"";
-		fact[4]="\"Every time you eat, you are taking very strong medicine, " +
-				"which can have a good, bad, or indifferent effect on our body " +
-				"for the next four to six hours\"";
-		fact[5]="\"Eating healthy can have a better effect than any prescription" +
-				" a doctor can give to you\"";
-		fact[6]="\"The higher your physical-activity level, the faster the rate that" +
-				" you're breaking down protein.\"";
-		fact[7]="\"Remember that even though protein primarily stimulates " +
-				"glucagon, it also has an effect on insulin.\"";
-		
-		String randFact = fact[randomNumber];
  
 //in case there is no data, don't show graphs
 String showThreeDayCharts = 
@@ -406,6 +381,7 @@ db.close();
 		  },	
         };
 
+
         <%= createTodayBarChart %>
 		<%= createYesterdayBarChart %>
 		<%= createTwoDayBarChart %>
@@ -430,7 +406,6 @@ db.close();
 </table>
       </div>
       <div id="content">
-"Zone" Fact: <%= randFact %>
       <div id="oday" class="shadowBox"><%= day4 %><br /><br />
         <div id="chartwrapperOday">
 		  <%= showThreeDayCharts %>
@@ -449,7 +424,7 @@ db.close();
         </div>
         <br /><p class="oday">Carbs/Protein/Fat Ratio and Block Levels for<br />yesterday</p>
       </div>
-      <div id="today" class="shadowBox"><h1><%= day1 %></h1><a class='ajax' href="mealChoice.jsp"><img src="images/addMeal.png" width=200px height=66px></a>
+      <div id="today" class="shadowBox"><h1><%= day1 %></h1><a class='ajax' href="mealChoice.jsp"><img src="images/addMealInset.png" style="float:left;"></a>
         <div id="chartwrapperToday">
 		  <%= showTodayCharts %>
         </div>
