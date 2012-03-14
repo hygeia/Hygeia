@@ -173,7 +173,7 @@ if(threedayarr.size() == 0){
 // create a string that shows meal names, foods, and nutrition info for today 
 String todayInfo = "";
 for(int i=0; i<todayarr.size(); i++){
-	todayInfo += "<p class=\"time\">12:00</p><h2>" + todayarr.get(i).getName() + "</h2><img src=\"images/X.png\" width=30px height=30px><p class=\"meal\">";
+	todayInfo += "<p class=\"time\">12:00</p><h2>" + todayarr.get(i).getName() + "</h2><img src=\"images/X.png\" width=30px height=30px ><p class=\"meal\">";
 	Food.List foods[] = todayarr.get(i).getFoodList();
 	for(int j=0; j < foods.length; j++){
 		todayInfo += (foods[j].getCount() + "g&nbsp;&nbsp;&nbsp;" + foods[j].getName() + "<br />");
@@ -223,13 +223,13 @@ db.close();
 		}else if(m.getOccurrence().after(today)){
 			return 0;
 		}else if(m.getOccurrence().after(yesterday)){
-			return 2;
+			return 1;
 		}else if(m.getOccurrence().after(twoday)){
-			return 3;
+			return 2;
 		}else if(m.getOccurrence().after(threeday)){
-			return 1;
+			return 3;
 		}else{
-			return 1;
+			return 4;
 		}
 	}
  %>
@@ -396,7 +396,7 @@ db.close();
 <tr>
 <td> <a href="home.jsp"><img src="images/lightICON1.png"></a></td>
 <td> <a href="inventory.jsp"><img src="images/lightICON2.png"></a></td>
-<td> <a href="history.jsp"><img src="images/lightICON3.png"></a></td>
+<td> <a hretf="history.jsp"><img src="images/lightICON3.png"></a></td>
 <td> <a href="recipes.jsp"><img src="images/lightICON4.png"></a></td>
 <td> <a href="profile.jsp"><img src="images/lightICON5.png"></a></td>
 <td> <a href="favorites.jsp"><img src="images/lightICON6.png"></a></td>
