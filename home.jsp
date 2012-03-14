@@ -30,7 +30,7 @@ Random myRandom = new Random();
 		fact[0]="\"Reaching the Zone Requires Precise Control of the Protein-to" +
 				"-Carbohydrate Ratio.\"";
 		fact[1]="\"On a Zone-favorable diet you restrict excess calories from " +
-				"carbogydrates, not total calories certainly not nutrition.\"";
+				"carbohydrates, not total calories certainly not nutrition.\"";
 		fact[2]="\"That favorable balance of eicosanoids spells optimal health.\"";
 		fact[3]="\"If you want to permanently reap the rewards of living in th" +
 				"e Zone, you have to make a radical change in the way you think " +
