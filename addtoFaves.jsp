@@ -287,7 +287,7 @@ $('#myImage').click(function() {
     <label for="mealType" class="error" style="display:none;">Please choose one</label> 
 
   <div id="right">
-		<input type="hidden" name="addToHistory" value="addToHistory" />
+		<input type="hidden" name="addToHistory" value="addToHistory" /><br /><br />
     <input type="image" src="images/addFaves.png" value="Submit">
   </div>
   </form>
