@@ -88,7 +88,7 @@ String name = (String)session.getAttribute("username");
       </div>
       <div id="content">
  <% 
-   if((name == null)&&(weight == 0)&& (leanBodyMass == 0) && 
+   if((name == null)||(weight == 0)||(leanBodyMass == 0) || 
       (protein == 0))
    { 
     %>
