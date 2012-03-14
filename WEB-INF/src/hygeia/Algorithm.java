@@ -43,8 +43,33 @@ public class Algorithm {
         Database db = u.getDb();
     
 		//pulls all meals from the universal meal list and the user's personal meals
+		int a = type / 1000;
+		int b = (type - a * 1000) / 100;
+		int c = (type - a * 1000 - b * 100) / 10;
+		int d = (type -a * 1000 - b * 100 - c * 10);
+		String typeS = new String("");
+		if (a ==1 || b == 1 || c ==1 || d ==1)
+		{
+			typeS += "and";
+		}
+		if (a == 1)
+		{
+			typeS += "type = 1000 or type = 1100 or type = 1110 or type = 1111 ";
+		}
+		if (b == 1)
+		{
+			typeS += "type = 0100 or type = 0110 or type = 0111 ";
+		}
+		if (c == 1)
+		{
+			typeS += "type = 0010 or type = 0011 ";
+		}
+		if (d == 1)
+		{
+			typeS += "type = 0001 ";
+		}
         ResultSet rs = db.execute("select mid from meals where (uid = " + 
-            u.getUid() + " or uid = 0);");// and type & " + type + " = " + type + ";");
+            u.getUid() + " or uid = 0) " + typeS + ";");// and type & " + type + " = " + type + ";");
         //arraylist of meal IDs that come from the database
         ArrayList<Integer> results = new ArrayList<Integer>();
 		while(rs.next())
