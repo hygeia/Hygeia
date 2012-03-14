@@ -139,7 +139,7 @@ if (request.getParameter("signup") != null) {
           </div>
 
           <P> 
-          <label for="activity">What best fits you exercise routine?</label><br /><br />
+          <label for="activity"><center>What best fits you exercise routine?</center></label><br /><br />
           <dt class="radio"><label for="activity">Sedentary</label></dt>
           <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="1" /></dd>
           <br />
@@ -149,8 +149,7 @@ if (request.getParameter("signup") != null) {
           <dt class="radio"><label for="activity">Moderate (30 minutes per day, 3 times per week)</label></dt>
           <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="3" /></dd>
           <br />
-          <br />
-          <br />
+
           <dt class="radio"><label for="activity">Active (1 hour per day, 5 times per week)</label></dt>
           <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="4" /> </dd>
           <br />
