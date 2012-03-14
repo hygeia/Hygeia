@@ -1,4 +1,4 @@
-<%@ page import = "hygeia.*,java.util.*,java.sql.Timestamp,java.text.*" %>
+<%@ page import = "hygeia.*,java.text.DecimalFormat,java.text.NumberFormat,java.util.*,java.sql.Timestamp,java.text.*" %>
 <%
 /* Check to see if a session exists */
 if (session.getAttribute("uid") == null){ 
@@ -179,8 +179,17 @@ for(int i=0; i<todayarr.size(); i++){
 		todayInfo += (foods[j].getCount() + "g&nbsp;&nbsp;&nbsp;" + foods[j].getName() + "<br />");
 	}
 	Nutrition nuts = todayarr.get(i).getNutrition();
-	todayInfo += "</p><p class=\"total\">Carbs: " + nuts.getCarbohydrates() + "g ";
-	todayInfo += "Protein: " + nuts.getProtein() + "g Fat: " + nuts.getFat() + "g</p>";
+	
+	double carbAmount = nuts.getCarbohydrates();
+	double protAmount = nuts.getProtein();
+	double fatAmount = nuts.getFat();
+	
+	NumberFormat carbFormat = new DecimalFormat("#0.00");
+	NumberFormat protFormat = new DecimalFormat("#0.00");
+	NumberFormat fatFormat = new DecimalFormat("#0.00");	
+
+	todayInfo += "</p><p class=\"total\">Carbs: " + carbFormat.format(carbAmount)  + "g ";
+	todayInfo += "Protein: " + protFormat.format(protAmount)  + "g Fat: " + fatFormat.format(fatAmount)  + "g</p>";
 }
 if(todayarr.size() == 0){
 	todayInfo += "<p class=\"meal\">You have no meals planned yet. Click the add meal button to get started!</p>";
