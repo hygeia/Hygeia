@@ -108,57 +108,58 @@ if (request.getParameter("addToHistory") != null) {
 
 Algorithm alg = new Algorithm(db, u);
 Meal suggested = null;
+String mealDisp = "";
 
 if (request.getParameter("suggestNewMeal") != null) {
 	suggested = alg.suggestMeal(u, Integer.parseInt(request.getParameter("mealType")));
 	if( suggested == null ){
-		response.sendRedirect("error.jsp?code=3&echo=Could not generate meal");
-		db.close();
-		return;
+		mealDisp = "No meals available for suggestion at this time.";
 	}
-	suggestedMealName = suggested.getName();
-	session.setAttribute("suggestedMid", suggested.getMid());
+	else{
+		suggestedMealName = suggested.getName();
+		session.setAttribute("suggestedMid", suggested.getMid());
 	
-	/* add the food items of the old meal to the inventory */
-	Food.Update[] mealToAdd = new Meal(db, suggested.getMid()).getMeal();
-	for( Food.Update food : mealToAdd ){
-		Food.Update foodToAdd = new Food.Update(food.getFid(), food.getCount());
-		Food.Update[] arr = inv.getInventory();
-		if (arr == null) {
-			response.sendRedirect("error.jsp?code=4&echo=Could not fetch inventory");
-			db.close();
-			return;
-		}
-		for( Food.Update up : arr ){
-			if(up.getFid() == food.getFid()){
-				foodToAdd = up;
-				break;
+		/* add the food items of the old meal to the inventory */
+		Food.Update[] mealToAdd = new Meal(db, suggested.getMid()).getMeal();
+		for( Food.Update food : mealToAdd ){
+			Food.Update foodToAdd = new Food.Update(food.getFid(), food.getCount());
+			Food.Update[] arr = inv.getInventory();
+			if (arr == null) {
+				response.sendRedirect("error.jsp?code=4&echo=Could not fetch inventory");
+				db.close();
+				return;
+			}
+			for( Food.Update up : arr ){
+				if(up.getFid() == food.getFid()){
+					foodToAdd = up;
+					break;
+				}
+			}
+			boolean r = inv.updateFood(new Food.Update(food.getFid(), foodToAdd.getCount() + food.getCount()));
+			if (r == false) {
+				response.sendRedirect("error.jsp?code=1&echo=Could not update" +
+					" inventory");
+				db.close();
+				return;
 			}
 		}
-		boolean r = inv.updateFood(new Food.Update(food.getFid(), foodToAdd.getCount() + food.getCount()));
-		if (r == false) {
-			response.sendRedirect("error.jsp?code=1&echo=Could not update" +
-				" inventory");
-			db.close();
-			return;
-		}
-	}
 
-	/* remove the food items of the new meal from the inventory */
-    int mid = suggested.getMid();
-	Meal m = new Meal(db, mid);
-	Food.Update[] foods = m.getMeal();
-	for( Food.Update food : foods ){
-		boolean r = inv.removeFood(food);
-		if (r == false) {
-			response.sendRedirect("error.jsp?code=1&echo=Could not update" +
-				" inventory");
-			db.close();
-			return;
+		/* remove the food items of the new meal from the inventory */
+		int mid = suggested.getMid();
+		Meal m = new Meal(db, mid);
+		Food.Update[] foods = m.getMeal();
+		for( Food.Update food : foods ){
+			boolean r = inv.removeFood(food);
+			if (r == false) {
+				response.sendRedirect("error.jsp?code=1&echo=Could not update" +
+					" inventory");
+				db.close();
+				return;
+			}
 		}
+//		session.setAttribute("suggestedArray", suggested.getMeal());
+		session.setAttribute("suggestedMealType", (String)request.getParameter("mealType"));
 	}
-//	session.setAttribute("suggestedArray", suggested.getMeal());
-	session.setAttribute("suggestedMealType", (String)request.getParameter("mealType"));
 }
 
 Food.Update[] sf = null;
@@ -171,7 +172,7 @@ if( suggested == null ){
 
 /* Produce table of foods already in meal, with remove from meal forms */
 //f = (Food.Update[])session.getAttribute("suggestedArray"); // get most current array
-String mealDisp = "<table style='margin:auto auto;'>\n";
+mealDisp += "<table style='margin:auto auto;'>\n";
 for (Food.Update up : sf) {
 	String s = "<tr><td>" + up.getName(db) + "</td><td>Amount: " +up.getCount() +
         "</td></tr>\n";
