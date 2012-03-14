@@ -127,7 +127,8 @@ if (request.getParameter("signup") != null) {
           <input type="password" id= "reenter_password" name="reenter_password" size='20'/><br />
           </p>
 
-
+          <hr />
+          <br />
 
           <div class="sex-field"> 
           <label for="user_sex">Gender</label> 
@@ -176,6 +177,8 @@ if (request.getParameter("signup") != null) {
           <label for="user_height" class="error" style="display:none;">Please enter your height</label>
           </p>
 
+          <br />
+          <hr />
            <P> Take 3 measurements of your hips </br>
            How to take proper hip measurements: (Must have measuring tape) Take</br>
            measurement from the widest point from hip to hip. Measure in inches.</br>
@@ -195,6 +198,8 @@ if (request.getParameter("signup") != null) {
            </p>
         
         
+          <br />
+          <hr />
            <P> (Must have measuring tape) Take 3 measurements of of your waist at</br>
                 bellybutton level. Measure in inches.</br>
                 Hygeia will find the average of these three measurement.</br> 
@@ -212,6 +217,8 @@ if (request.getParameter("signup") != null) {
            <INPUT TYPE="TEXT" NAME="waist3" SIZE="10"/>
            </p>
 
+          <br />
+          <hr />
            <P> Wrist measurement</br>
                How to take a wrist measurement: (Must have measuring tape) Measure</br>
                your wrist at the space between your dominant hand and your wrist bone,</br>
