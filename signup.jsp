@@ -13,7 +13,7 @@ if (request.getParameter("signup") != null) {
     String username = request.getParameter("username");
     String password = request.getParameter("user_password");
     String email = request.getParameter("user_email");
-    double height = Double.parseDouble(request.getParameter("user_height_ft")) * 12 
+    double height = Double.parseDouble(request.getParameter("user_height_ft")) / 12 
                     +  Double.parseDouble(request.getParameter("user_height_in"));
     double weight = Double.parseDouble(request.getParameter("user_weight"));
     char sex = request.getParameter("user_sex").charAt(0);   
@@ -49,6 +49,10 @@ if (request.getParameter("signup") != null) {
   </head>
   <body>
     <br />
+	
+	<img src="images/signup.png">
+	
+	<br />
     <form id="signupform" method="post" action="signup.jsp">
       <p>
         <label for="username">Name</label>
@@ -94,10 +98,12 @@ if (request.getParameter("signup") != null) {
       <label for="weight">Weight</label>
       <input name="user_weight" />
       </p>
-
+	  
+	  <br />
+	  
       <p>
       <input type="hidden" name="signup" value="signup" />
-      <input type="submit" />
+      <div align="right" style="margin-right:60px;"><input TYPE="image" src="images/submit.png" VALUE="submit" /></div>
       </p>
 
     </form>

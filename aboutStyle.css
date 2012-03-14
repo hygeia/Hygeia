@@ -1,34 +1,51 @@
 html, body {
-	margin: 0;
-	padding: 0;
-	font-family:Verdana;
-	color: #817a53;
-	background: #fbffcc;
-	height:100%;
+    height:100%;
+    margin:0;
+    padding:0;
+    overflow-x: hidden;
+}
+ 
+body {
+    background:#fbffcc;
+    text-align:center;
+    font-family:Verdana;
 }
 
 #page {
-    position:relative;
     width:960px;
     min-height:100%;
     margin: 0 auto 0 auto;
-    background: #fbffcc;
+    background-color:#fbffcc;
 }
 
 #content {
-    margin:0;
-    padding-bottom:60px;
+    margin-bottom:10px;
     overflow:auto;
+    padding-bottom:60px;
+	
 }
 
 /* Header start */
 #header {
 	text-align: center;
 	margin: 0 0 10px 0;
-	padding: 0;
+	padding: 0 9999px;
+	margin: 0 -9999px;
+	background:url('images/background.jpg') repeat-x;
 }
 /* Header end */
 
+/* Footer */
+#footer {
+  position:relative;
+  margin: -60px auto 0 auto;
+  clear:both;
+  width:960px;
+  height:60px;
+  text-align:center;
+  color:#7b840d;
+  background-color:#fbffcc;
+}
 #button {
 float:right;
 }
@@ -40,7 +57,7 @@ margin-left:150px;
 
 h1 {
 text-align:center;
-color:green;
+color:#7b840d;
 }
 
 #formbutton{
@@ -91,33 +108,27 @@ text-align:center;
 
 p.description {
 padding: 0 10px 0 10px;
+font-size:15px;
+font-family: verdana;
 }
 
 #left, #center, #right {
 float:left;
 width:320px;
-margin:0 0 10px 0;
+margin:0 0 30px 0;
 }
 
 
 #about {
 width: 800px;
 margin: 0 auto 0 auto;
+text-align:left;
+color:#7b840d;
 }
 
 #team {
 width: 960px;
 margin: 0 auto 0 auto;
-}
-
-/* Footer */
-#footer {
-  position:relative;
-  margin: -60px auto 0 auto;
-  clear:both;
-  width:960px;
-  height:60px;
-  text-align:center;
-  color:rgb(255,255,255);
-  background-color:#709100;
+text-align:left;
+color:#7b840d;
 }

@@ -102,7 +102,7 @@ String name = (String)session.getAttribute("username");
      else
      {
     %>
-	Hello <%= name %>!</br></br>
+	<p class="update">Hello <%= name %>!</br></br>
 	Your current weight is <%= weight %> lbs.</br>
 	You are <%= ft %> ft. <%= in  %> in. tall.</br>
 	Your current lean body mass is <%= leanBodyMass %> lbs.</br>

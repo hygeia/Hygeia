@@ -57,7 +57,7 @@ else{ //show the navigation bar
     </div>
 
   <h2>
-  <font face="helvetica neue" color="green"><center>
+  <font face="helvetica neue" color="#7b840d"><center>
   meet the team
   </center></font>
   </h2>
