@@ -128,7 +128,7 @@ public class Recipe {
         }
     }
     
-    /* Return the type of recipes */
+    /* Return the type of recipes 
     public int getType() {
         ResultSet rs = this.db.execute("select type from recipes where rid=" +
             this.rid + ";");
@@ -145,7 +145,7 @@ public class Recipe {
             db.free();
             return 0x10000001;
         }
-    }
+    } */
     
     /* Return array of Food items that make up recipe */
     public Food.Update[] getIngrediants() {
@@ -250,6 +250,18 @@ public class Recipe {
             return null;
         }
     
+    }
+
+    /* creates a meal based on the recipe for the user */
+    public boolean addToMeals(User user, int type) {
+        if ( type < 0)
+        {
+            return false;
+        }        
+
+        return ( createMeal( this.db, user, getIngrediants(), 
+        getName(), type) );
+
     }
     
     /* Recipe.List is used for listing meals to the user. */
