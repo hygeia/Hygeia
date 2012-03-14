@@ -227,7 +227,7 @@ margin-top: 10px;
   <input type="submit" value="Find It!"/>
 </form>
 
-<div id="textWrapper"><%= searchDisp %></div>
+<div id="textWrapperInventory"><%= searchDisp %></div>
 </div>
 </div>
 <div id="footer"><a href="about.jsp">About Us</a><br />

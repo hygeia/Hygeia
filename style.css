@@ -149,6 +149,10 @@ padding: 0 0 0 5px;
 width:210px;
 }
 
+#textWrapperInventory {
+text-align:left;
+}
+
 p.oday {
 padding: 0 3px 0 3px;
 }
