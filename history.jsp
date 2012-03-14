@@ -522,7 +522,9 @@ Add to history
 </form>
 -->
 </br>
+<div id="green">
 <H1> Meal History </H1>
+</div>
 <P class="leftAlignText">
 
 <%= searchDisp %>
