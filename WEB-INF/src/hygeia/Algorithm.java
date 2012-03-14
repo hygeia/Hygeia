@@ -53,13 +53,18 @@ public class Algorithm {
 		}
 		//retrieves a list of food in the inventory
 		Inventory inven = new Inventory(u);
+		
 		Food.Update[] fu = inven.getInventory();
+		if (fu == null)
+		{
+			return null;
+		}
 		//random generator to select a meal at random from available MIDs
 		Random r = new Random();
 		//if the inventorymatchcount variable equals the number of ingredients in a recipe, all necessary ingredients are available
 		int inventorymatchcount = 0;
 		//Meal m is the variable used to store meals as they are accessed for comparison to ingredients
-		Meal m;
+		Meal m = null;
 		//while loop runs while a suitable meal isn't found yet
 		while (results.size() > 0)
 		{
@@ -73,7 +78,9 @@ public class Algorithm {
 				for (int j = 0; j < fu.length; j++)
 				{
 					if (mu[i].equals(fu[j]))
+					{
 						inventorymatchcount += 1;
+					}
 				}
 			}
 			if (inventorymatchcount == mu.length)
