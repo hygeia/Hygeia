@@ -30,7 +30,7 @@ public class Recipe {
         
         name = Algorithm.Clean(name);
         
-        int uid = u.getUid(); 
+        int uid = user.getUid(); 
         
         /* Ensure each item in recipe is not null. */
         /* Create Recipe.Update objects to get Nutrition. */
@@ -69,7 +69,7 @@ public class Recipe {
         }
         
         /* Not optimal but works to add components to database. */
-        for (Food.Update i : inreg) {
+        for (Food.Update i : ingred) { 
             result = db.update("insert into components(rid, fid, count) values (" +
                 rid + ", " + i.getFid() + ", " + i.getCount() + ");");
             if (result != 1) {
@@ -166,7 +166,7 @@ public class Recipe {
             }
         } catch (SQLException e) {
             if (list.isEmpty()) {
-                return null;
+                return null;w
             }
         }
         
@@ -259,8 +259,12 @@ public class Recipe {
             return false;
         }        
 
-        return ( createMeal( this.db, user, getIngrediants(), 
-        getName(), type) );
+        if ( createMeal( this.db, user, getIngrediants(), getName(), type) < 1 )
+        {
+            return false;
+        }
+
+        return true;
 
     }
     
