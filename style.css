@@ -188,6 +188,12 @@ padding-left:10px;
 margin:0;
 }
 
+p.leftalignText {
+text-align:left;
+color:#7b840d;
+margin-left:250px;
+}
+
 p.addFood {
 font-size:25px;
 font-weight:bold;

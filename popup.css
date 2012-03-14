@@ -50,12 +50,26 @@ text-align:center;
 #leftChoice {
 float:left;
 margin-top:100px;
-width:250px;
-padding-left:30px;
+width:248px;
+padding-left:90px;
+}
+
+#middleChoice {
+float:left;
+margin-top:100px;
+width:286px;
+padding:0px;
+}
+
+#rightChoice {
+float:left;
+margin-top:100px;
+width:225px;
+padding:0px;
 }
 
 p.choice {
-padding-left:50px;
+padding-left:20px;
 }
 
 #left {

@@ -62,8 +62,8 @@ if (request.getParameter("searchForFood") != null) {
         String s = "<tr><form action='inventory.jsp' method='post'>" +
             "<input type='hidden' name='fid' value=" + f.getFid() + ">" +
             "<td>" + f.getName() + "</td><td>Amount (g) to Add: </td><td> <input name='count'" +
-            "><input type='hidden' name='addToInventory' value=1><input type='submit'" +
-            " value='Add!'></td></form></tr>\n";
+            "><input type='hidden' name='addToInventory' value=1><input type='image'" +
+            " src='images/plus.png' width='25' height='25'></td></form></tr>\n";
         searchDisp += s;
     }
     searchDisp += "</table>\n<h3>If you can't find your food, create it!</h3><table>\n" +
@@ -122,7 +122,7 @@ for (int i = 0; i < arr.length; i++) {
 	}
 	if(i%4==0) {invDispPics += "<tr>";}
 	String d = "<td><div id='image'><div id='image'><div class='text' style='text-align:left'>" +
-		"<br /><br /><br /><br /><br /><br /><br /><br /><br />" + f.getName() + "<br />" +
+		"<br /><br /><br /><br /><br /><br />" + f.getName() + "<br />" +
 		"quantity: " + f.getCount() + "g</div><div class='trans'></div></div>" +
 		"<form action='inventory.jsp' method='post'>" +
         "<input type='hidden' name='fid' value=" + f.getFid() + ">" +
@@ -152,11 +152,10 @@ db.close();
 background-image: url('images/DEFAULTPIC.png');
 width: 190px;
 height: 190px;
-margin: 0;
+margin: 0 auto;
 position: relative;
 z-index: 10;
 margin-right: 10px;
-margin-top: 30px;
 }
 
 .trans {
@@ -164,10 +163,10 @@ opacity:.50;filter:
 alpha(opacity=50);
 -moz-opacity: 0.50;
 width: 190px;
-height: 60px;
+height: 100px;
 background: #000000;
 float: none;
-margin-top: 60px;
+margin-top: 20px;
 position: relative;
 z-index: 50;
 }
@@ -178,13 +177,14 @@ display: block;
 position: relative;
 z-index: 90;
 color: #ffffff;
-width: 190px;
+width: 170px;
 height: 50px;
 padding: 10px;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 font-size: 12px;
 font-weight: bold;
 margin-top: 10px;
+margin-bottom: 0px;
 }
 	</style>
 

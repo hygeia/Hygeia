@@ -124,19 +124,19 @@ if( meals == null )
  noHistory = "So far you have no meals in your history.";
 }
 
-String histDisp = "<table style='margin:auto auto;'>\n";
+String histDisp = "<table style='margin:auto auto;text-align:left'>\n";
 
 if( meals != null )
 {
- for(Meal.List m : meals)
+ for(int i = meals.length - 1; i > -1; i-- )
  {
-  if( m == null){
+  if( meals[i] == null){
    noHistory = "So far you have no meals in your history.";
    break; 
   }
-  String name = m.getName();
-  int mid = m.getMid();
-  Timestamp  occurrence = m.getOccurrence();
+  String name = meals[i].getName();
+  int mid = meals[i].getMid();
+  Timestamp  occurrence = meals[i].getOccurrence();
   
   histDisp += "<form action='history.jsp' method='post'>" +
   	 "<input type='hidden' name='mid' value='"+ mid +"'>" + name + " Date: " +
@@ -502,7 +502,7 @@ out.println("f"+block7[2]);
 <tr>
 <td> <a href="home.jsp"><img src="images/lightICON1.png"></a></td>
 <td> <a href="inventory.jsp"><img src="images/lightICON2.png"></a></td>
-<td> <a href="history.jsp"><img src="images/lightICON3.png"></a></td>
+<td> <a href="history.jsp"><img src="images/darkICON3.png"></a></td>
 <td> <a href="recipes.jsp"><img src="images/lightICON4.png"></a></td>
 <td> <a href="profile.jsp"><img src="images/lightICON5.png"></a></td>
 <td> <a href="favorites.jsp"><img src="images/lightICON6.png"></a></td>
@@ -523,14 +523,14 @@ Add to history
 -->
 </br>
 <H1> Meal History </H1>
-<P>
+<P class="leftAlignText">
 
 <%= searchDisp %>
 
 <br>
 <%= histDisp %>
 <%= noHistory %>
-</br>
+</br></p>
 <div id="line_chart" style="width: 960px; height: 700px;"></div>
 </div>
 </div>
