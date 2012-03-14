@@ -67,6 +67,7 @@ public class Algorithm {
 			int nextInt = r.nextInt(results.size());
 			m = new Meal(db, results.get(nextInt));
 			Food.Update mu[] = m.getMeal();
+                       // System.out.println("mu length " + mu.length + " fu length " + fu.length);
 			for (int i = 0; i < mu.length; i++)
 			{
 				for (int j = 0; j < fu.length; j++)
@@ -96,12 +97,12 @@ public class Algorithm {
 					}
 				}
 			}
-			else
-			{
+			/*else
+			{ */
 				//if the contents of the inventory don't satisfy the recipe, remove that recipe
 				//from the ArrayList of meals so it won't accidentally be compared again
 				results.remove(nextInt);
-			}
+		/*	}*/
 
 		}
 		//if no meal matches the SAME margin of error for balancedness, return null

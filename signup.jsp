@@ -75,12 +75,14 @@ if (request.getParameter("signup") != null) {
       <input type="password" id= "reenter_password" name="reenter_password" /><br />
       </p>
 
-      <p>
-      <input type="radio" name="user_sex" value="male" />Male<br />
-      <input type="radio" name="user_sex" value="female" />Female
-      <label for="user_sex" class="error" style="display:none;">Please chose one</label>
-      </p>
 
+
+      <div class="sex-field"> 
+      <label for="user_sex">Gender:</label> 
+      <INPUT TYPE="RADIO" NAME="user_sex" VALUE="female" />Female
+      <INPUT TYPE="RADIO" NAME="user_sex" VALUE="male"  />Male
+      <label for="user_sex" class="error" style="display:none;">Please choose one</label> 
+      </div>
       <p>
       <label for="user_height_ft">Height (w/o shoes)</label>
       <input type="text" name="user_height_ft" id="user_height" size="5"/>ft.
