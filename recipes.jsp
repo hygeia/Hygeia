@@ -150,7 +150,7 @@ if(request.getParameter("addRecipeToDatabase") != null) {
 
        <div id="content">
 <br />
-
+<div id="green">
 <h1><%= username %>'s Recipes</h1>
 <br>
 <%= mealDisp %>
@@ -162,7 +162,7 @@ if(request.getParameter("addRecipeToDatabase") != null) {
 </form>
 
 <div id="textWrapperInventory"><%= searchDisp %></div>
-
+</div>
 <!--
 <div align="center">
 <table>
