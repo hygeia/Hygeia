@@ -129,6 +129,8 @@ db.close();
 <html>
   <head>
     <link type="text/css" rel="stylesheet" href="popup.css" />
+<script type='text/javascript' src='http://code.jquery.com/jquery-1.4.4.min.js'></script>
+	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/themes/ui-lightness/jquery-ui.css"/>
 			<script type="text/javascript">
 
 /***********************************************
@@ -163,6 +165,16 @@ timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.
 }
 
 </script>
+<script type='text/javascript'>//<![CDATA[ 
+$(function(){
+var cbox = $('#myHiddenCheckbox')[0];
+
+$('#myImage').click(function() {
+    cbox.checked = !cbox.checked;
+        this.src = (cbox.checked)?"images/starBright.png":"images/starDull.png";
+});
+});//]]>  
+</script>
   </head>
   <body>
   <div id="page">
@@ -191,7 +203,8 @@ timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.
 		</div>
 		<br /><br /><input type="hidden" name="addToHistory" value="addToHistory">
         <div id="right">
-		<input type="checkbox" name="favs" value="1" /> Add to favorites<br /><br /><input type="submit" value="Add Meal">
+		<img id='myImage' src = "images/starDull.png" />
+	 <input type="checkbox" name="favs" value="1" id='myHiddenCheckbox' style="display:none" />Add to Favorites<br /><br />
 		</div>
     </form>
 	
