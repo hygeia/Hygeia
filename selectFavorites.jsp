@@ -25,168 +25,48 @@ if (session.getAttribute("uid") == null){
 Database db = new Database();
 int uid = (Integer)session.getAttribute("uid");
 User u = new User(db, uid);
-Inventory inv = new Inventory(u);
+Favorites favs = new Favorites(u);
 
-if( session.getAttribute("mealArray") == null){
-	session.setAttribute("mealArray", new ArrayList<Food.Update>()); }
-//if( session.getAttribute("mealNameArray") == null){
-//	session.setAttribute("mealNameArray", new ArrayList<String>()); }
+String favDisp = "";
+String sectionTitle = "";
+int selectedMid = 1;
 
-ArrayList<Food.Update> f = (ArrayList<Food.Update>)session.getAttribute("mealArray");
-//ArrayList<String> fNames = (ArrayList<String>)session.getAttribute("mealNameArray");
-
-if (request.getParameter("addToMeal") != null) {
-    int fid = Integer.parseInt(request.getParameter("fid"));
-    double count=Double.parseDouble(request.getParameter("count"));
-	Food.Update food = new Food.Update(fid, count);
-    boolean r = inv.removeFood(food);
-    if (r == false) {
-        response.sendRedirect("error.jsp?code=1&echo=Could not update" +
-            " inventory");
+if (request.getParameter("addToHistory") == null) {
+    sectionTitle = "Favorites";
+    Meal.List meals[] = favs.getFavorites();
+    if (meals == null) {
         db.close();
+        response.sendRedirect("error.jsp");
         return;
     }
-	
-	/* check if food already exists in meal. if so, update count */
-	boolean exists = false;
-	for(int i=0; i<f.size(); i++){
-		if(f.get(i).getFid() == food.getFid()){
-			f.set(i, new Food.Update(fid, f.get(i).getCount() + count));
-			i=f.size(); //breaks from the loop
-		}
-	}
-	if( !exists ){
-		f.add(food);
-	}
-	session.setAttribute("mealArray", f);
+    /* Produce table of meals */
+    favDisp = "<table style='margin:auto auto;'>\n";
+    String noFavs="";
+    for (Meal.List m : meals) {
+        if (m == null) {
+            noFavs = "You currently have no meals saved in your favorites";
+	    db.close();
+            break;
+        }
+        String s = "<form action='selectFavorites.jsp' method='post'><tr><td>" + 
+        m.getName() + "<input type='hidden' name='mid' value=" + m.getMid() +
+        "><input type='hidden' name='addToHistory' value=1></td><td>" +
+        "<input type='submit' value='Eat Me!'></td></tr></form>\n";
+        favDisp += s;
+    }
+    favDisp += "</table>\n";
+    if (!noFavs.equals("")) {
+        favDisp = noFavs;
+    }
+} else {
+    selectedMid = Integer.parseInt(request.getParameter("mid"));
+    sectionTitle = new Meal(db, selectedMid).getName();
 }
 
-if (request.getParameter("removeFromMeal") != null) {
-    int fid = Integer.parseInt(request.getParameter("fid"));
-    double count=Double.parseDouble(request.getParameter("count"));
-	Food.Update food = new Food.Update(fid, count);
-	Food.Update removed = null;
-	for(int i=0; i<f.size(); i++){
-		if(f.get(i).getFid() == food.getFid()){
-			f.set(i, new Food.Update(fid, f.get(i).getCount() - count));
-			if(f.get(i).getCount() == 0){
-				removed = f.remove(i);
-			}
-			else{
-				removed = food; //to prevent error checking when not removed from array
-			}
-			i=f.size(); //breaks from the loop
-		}
-	}
-	if(removed == null){
-		response.sendRedirect("error.jsp?code=2&echo=Could not update" +
-			" meal");
-		db.close();
-		return;
-	}
-	session.setAttribute("mealArray", f);
-}
+/* Actually add meal to history */
+if (request.getParameter("addToHistory2") != null) {
 
-if (request.getParameter("addToHistory") != null) {
-	History hist = new History(u);
-	f = (ArrayList<Food.Update>)session.getAttribute("mealArray"); // get most current array
-	int mid = Meal.createMeal(db, u, f.toArray(new Food.Update[0]), 
-		request.getParameter("name"), Integer.parseInt(request.getParameter("mealType")));
-	
-	// create Timestamp
-	Calendar c = Calendar.getInstance();
-	c.set(Calendar.YEAR, Integer.parseInt(request.getParameter("yeardropdown")));
-	int month = Integer.parseInt(request.getParameter("monthdropdown"));
-	switch(month){
-		case 0: c.set(Calendar.MONTH, Calendar.JANUARY); break;
-		case 1: c.set(Calendar.MONTH, Calendar.FEBRUARY); break;
-		case 2: c.set(Calendar.MONTH, Calendar.MARCH); break;
-		case 3: c.set(Calendar.MONTH, Calendar.APRIL); break;
-		case 4: c.set(Calendar.MONTH, Calendar.MAY); break;
-		case 5: c.set(Calendar.MONTH, Calendar.JUNE); break;
-		case 6: c.set(Calendar.MONTH, Calendar.JULY); break;
-		case 7: c.set(Calendar.MONTH, Calendar.AUGUST); break;
-		case 8: c.set(Calendar.MONTH, Calendar.SEPTEMBER); break;
-		case 9: c.set(Calendar.MONTH, Calendar.OCTOBER); break;
-		case 10: c.set(Calendar.MONTH, Calendar.NOVEMBER); break;
-		case 11: c.set(Calendar.MONTH, Calendar.DECEMBER); break;
-		default: 
-			response.sendRedirect("error.jsp?code=3&echo=Could not parse date");
-			db.close();
-			return;
-	}
-/*	if( month.equals("Jan")){
-		c.set(Calendar.MONTH, Calendar.JANUARY);
-	}else if( month.equals("Feb")){
-		c.set(Calendar.MONTH, Calendar.FEBRUARY);
-	}else if( month.equals("Mar")){
-		c.set(Calendar.MONTH, Calendar.MARCH);
-	}else if( month.equals("Apr")){
-		c.set(Calendar.MONTH, Calendar.APRIL);
-	}else if( month.equals("May")){
-		c.set(Calendar.MONTH, Calendar.MAY);
-	}else if( month.equals("Jun")){
-		c.set(Calendar.MONTH, Calendar.JUNE);
-	}else if( month.equals("Jul")){
-		c.set(Calendar.MONTH, Calendar.JULY);
-	}else if( month.equals("Aug")){
-		c.set(Calendar.MONTH, Calendar.AUGUST);
-	}else if( month.equals("Sept")){
-		c.set(Calendar.MONTH, Calendar.SEPTEMBER);
-	}else if( month.equals("Oct")){
-		c.set(Calendar.MONTH, Calendar.OCTOBER);
-	}else if( month.equals("Nov")){
-		c.set(Calendar.MONTH, Calendar.NOVEMBER);
-	}else if( month.equals("Dec")){
-		c.set(Calendar.MONTH, Calendar.DECEMBER);
-	}else{
-		response.sendRedirect("error.jsp?code=3&echo=Could not parse date");
-		db.close();
-		return;
-	}*/
-	c.set(Calendar.DAY_OF_MONTH, Integer.parseInt(request.getParameter("daydropdown")));
-	c.set(Calendar.HOUR_OF_DAY, Integer.parseInt(request.getParameter("timedropdown")));
-	Timestamp today = new Timestamp(c.getTimeInMillis());
-	
-	hist.addMeal(new Meal(db, mid), today);
-	session.setAttribute("mealArray", new ArrayList<Food.Update>());
 }
-
-Food.List[] arr = inv.getInventoryList();
-if (arr == null) {
-    response.sendRedirect("error.jsp?code=4&echo=Could not fetch inventory");
-    db.close();
-    return;
-}
-
-/* Produce table of foods already in meal, with remove from meal forms */
-f = (ArrayList<Food.Update>)session.getAttribute("mealArray"); // get most current array
-String mealDisp = "<table style='margin:auto auto;'>\n";
-for (Food.Update up : f) {
-	String s = "<tr><form action='addMeal.jsp' method='post'>" +
-        "<input type='hidden' name='fid' value=" + up.getFid() + ">" +
-        "<td>" + up.getName(db) + "</td><td>Amount: <input name='count' " +
-        "value=" + up.getCount() + "><input type='hidden' name='" +
-        "removeFromMeal' value=1><input type='submit' value='Remove'>" +
-        "</td></form></tr>\n";
-	mealDisp += s;
-}
-mealDisp += "</table>\n";
-
-/* Produce table of foods, with add to meal forms */
-String invDisp = "<table style='margin:auto auto;'>\n";
-for (Food.List fl : arr) {
-    String s = "<tr><form action='addMeal.jsp' method='post'>" +
-        "<input type='hidden' name='fid' value=" + fl.getFid() + ">" +
-        "<td>" + fl.getName() + "</td><td>Amount: <input name='count' " +
-        "value=" + fl.getCount() + "><input type='hidden' name='" +
-        "addToMeal' value=1><input type='submit' value='Add To Meal'>" +
-        "</td></form></tr>\n";
-    invDisp += s;
-}
-invDisp += "</table>\n";
-
-db.close();
 
 %>
 <html>
@@ -232,28 +112,24 @@ timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.
     <div id="content">
     <a href="mealChoice.jsp"><img src="images/back.png" style="float:left" width=50px height=50px/></a>
 	<p class="selectFav">Select From Your Favorite Meals</p><br />
-	<center><h2 class="new">Meal</h2></center><br /><%= mealDisp %>
-	<br /><center><h2>Favorites</h2></center><br /><%= invDisp %>
-	<p>Once you've finished adding food, enter a name and date to add it to your calendar!</p>
-	<br />
+	<br /><center><h2><%= sectionTitle %></h2></center><br />
+	<%= favDisp %>
+	<br>
+        <% if (request.getParameter("addToHistory") != null) { %>
 	<form action="selectFavorites.jsp" method="post">
-        <div id="left">Name: <input name="name"></div>
-		<input type="hidden" name="mid">
+		<input type="hidden" name="mid" value=<%= selectedMid %>>
         <div id="right">Date: <select id="daydropdown" name="daydropdown"></select> 
 			<select id="monthdropdown" name="monthdropdown"></select> 
 			<select id="yeardropdown" name="yeardropdown"></select>
 		Time: <select id="timedropdown" name="timedropdown"></select>
 		</div>
 		<br /><br />
-		What type of meal is this? <input type="checkbox" name="mealType" value="1000" />Breakfast
-		<input type="checkbox" name="mealType" value="0100" />Lunch
-		<input type="checkbox" name="mealType" value="0010" />Dinner
-		<input type="checkbox" name="mealType" value="0001" />Snack
 		<div id="right">
-		<input type="hidden" name="addToHistory" value="addToHistory">
+		<input type="hidden" name="addToHistory2" value="addToHistory">
 		<br /><br /><input type="submit" value="Add Meal">
 		</div>
-    </form>
+         </form>
+         <% } %>
 	
 <script type="text/javascript">
 //populatedropdown(id_of_day_select, id_of_month_select, id_of_year_select)
