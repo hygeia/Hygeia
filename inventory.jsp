@@ -62,8 +62,8 @@ if (request.getParameter("searchForFood") != null) {
         String s = "<tr><form action='inventory.jsp' method='post'>" +
             "<input type='hidden' name='fid' value=" + f.getFid() + ">" +
             "<td>" + f.getName() + "</td><td>Amount (g) to Add: </td><td> <input name='count'" +
-            "><input type='hidden' name='addToInventory' value=1><input type='submit'" +
-            " value='Add!'></td></form></tr>\n";
+            "><input type='hidden' name='addToInventory' value=1><input type='image'" +
+            " src='images/plus.png' width='25' height='25'></td></form></tr>\n";
         searchDisp += s;
     }
     searchDisp += "</table>\n<h3>If you can't find your food, create it!</h3><table>\n" +
