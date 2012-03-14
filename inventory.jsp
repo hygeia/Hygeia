@@ -156,6 +156,7 @@ margin: 0 auto;
 position: relative;
 z-index: 10;
 margin-right: 10px;
+margin-top: 30px;
 }
 
 .trans {
