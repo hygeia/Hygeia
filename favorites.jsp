@@ -45,7 +45,7 @@ for (Meal.List m : meals) {
     String s = "<form action='favorites.jsp' method='post'><tr><td>" + 
         m.getName() + "<input type='hidden' name='mid' value=" + m.getMid() +
         "><input type='hidden' name='removeFromFavorites' value=1></td><td>" +
-        "<input type='submit' value='Remove'></td></tr></form>\n";
+        "<input type='image' src='images/X.png' width='25' height='25'></td></tr></form>\n";
     favDisp += s;
 }
 favDisp += "</table>\n";
