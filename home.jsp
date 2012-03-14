@@ -94,7 +94,7 @@ String day4 = df.format(new Date(todaysdate.getTime() - (86400000 * 3)));
 
 // this will be replaced with the java code below when it works 
 /*String todayInfo = "<h2>Breakfast</h2><p class=\"meal\">7g&nbsp;&nbsp;&nbsp;Eggs<br />8g&nbsp;&nbsp;&nbsp;Bacon<br />9g&nbsp;&nbsp;&nbsp;Sausage<br /></p>" + 
-	"<p class=\"total\">Carbs: 13g Protein: 7g Fat: 12g</p>" + 
+	"<p class=\"total\">Carbs: 13g Protein: 7g<br />Fat: 12g</p>" + 
 	"<h2>Lunch</h2><p class=\"meal\">7g&nbsp;&nbsp;&nbsp;Hamburger<br />7g&nbsp;&nbsp;&nbsp;Fries<br />16g&nbsp;&nbsp;&nbsp;Coke<br /></p>" + 
 	"<p class=\"total\">Carbs: 19g Protein: 17g Fat: 14g</p>";
 */
@@ -141,7 +141,7 @@ for(int i=0; i<todayarr.size(); i++){
 	tempf += nuts.getFat();
 }
 if(todayarr.size() == 0){
-	showTodayCharts = "add a meal to start tracking progress";
+	showTodayCharts = "<p style=\"float:left;\">add a meal to start tracking progress</p>";
 	createTodayPieChart = "";
 	createTodayBarChart = "";
 }else{
@@ -198,7 +198,7 @@ if(threedayarr.size() == 0){
 // create a string that shows meal names, foods, and nutrition info for today 
 String todayInfo = "";
 for(int i=0; i<todayarr.size(); i++){
-	todayInfo += "<p class=\"time\">" + todayarr.get(i).getOccurrence().toString()+ "</p><br /><br /><br /><br /><br /><br /><h2>" + todayarr.get(i).getName() + "</h2><p class=\"meal\">";
+	todayInfo += "<h2>" + todayarr.get(i).getName() + "</h2><p class=\"meal\">";
 	Food.List foods[] = todayarr.get(i).getFoodList();
 	for(int j=0; j < foods.length; j++){
 		todayInfo += (foods[j].getCount() + "g&nbsp;&nbsp;&nbsp;" + foods[j].getName() + "<br />");
@@ -214,7 +214,7 @@ for(int i=0; i<todayarr.size(); i++){
 	NumberFormat fatFormat = new DecimalFormat("#0.00");	
 
 	todayInfo += "</p><p class=\"total\">Carbs: " + carbFormat.format(carbAmount)  + "g ";
-	todayInfo += "Protein: " + protFormat.format(protAmount)  + "g Fat: " + fatFormat.format(fatAmount)  + "g</p>";
+	todayInfo += "Protein: " + protFormat.format(protAmount)  + "g <br />Fat: " + fatFormat.format(fatAmount)  + "g</p>";
 }
 if(todayarr.size() == 0){
 	todayInfo += "<p class=\"meal\">You have no meals planned yet. Click the add meal button to get started!</p>";
@@ -454,7 +454,7 @@ db.close();
         <div id="chartwrapperToday">
 		  <%= showTodayCharts %>
         </div>
-        <div id="textWrapper">
+		<div id="textWrapper">
 			<%= todayInfo %>
         </div>
       </div>

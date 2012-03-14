@@ -126,7 +126,7 @@ for (int i = 0; i < arr.length; i++) {
 		"quantity: " + f.getCount() + "g</div><div class='trans'></div></div>" +
 		"<form action='inventory.jsp' method='post'>" +
         "<input type='hidden' name='fid' value=" + f.getFid() + ">" +
-        "Amount: <input name='count' size=2 " +
+        "Amount: <input name='count' size=4 " +
         "value=" + f.getCount() + "><input type='hidden' name='" +
         "removeFromInventory' value=1><input type='submit' value='Update'>" +
         "</form>\n</td>";

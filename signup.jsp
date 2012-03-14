@@ -94,6 +94,7 @@ if (request.getParameter("signup") != null) {
     <script type="text/javascript" src="javascript/validation.js"></script>          
     <link type="text/css" rel="stylesheet" href="forms.css" /> 
     <link type="text/css" rel="stylesheet" href="profile.css" /> 
+	<link rel="shortcut icon" href="favicon.ico" mce_href="favicon.ico"/> 
   </head>
   <body>
 	

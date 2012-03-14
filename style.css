@@ -145,6 +145,7 @@ float:right;
 
 /* Text properties for main box */
 #textWrapper {
+float:right;
 padding: 0 0 0 5px;
 width:210px;
 }

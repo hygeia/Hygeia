@@ -242,6 +242,7 @@ $('#myImage').click(function() {
   <body>
   <div id="page">
     <div id="content">
+	<div id="green">
 	<a href="mealChoice.jsp"><img src="images/back.png" style="float:left" width=50px height=50px/></a>
     <p class="suggestMeal">Add A Suggested Meal</p<br />
 	<center><h2 class="new">Meal</h2></center><br /><%= mealDisp %>
@@ -266,12 +267,13 @@ $('#myImage').click(function() {
 		</div>
 		<br /><br /><input type="hidden" name="addToHistory" value="addToHistory">
         <div id="right">
-		<img id='myImage' src = "images/starDull.png" />
-	 <input type="checkbox" name="favs" value="1" id='myHiddenCheckbox' style="display:none" />Add to Favorites<br /><br />
-	 <input type="submit" value="Add Meal" />
+		<img id='myImage' src = "images/starDull.png" style="float:right;"/>
+
+    <input type="checkbox" name="favs" value="1" id='myHiddenCheckbox' style="display:none" /><p style="text-align:right;">Add to Favorites</p>
+	 <input type="image" src="images/submit.png" value="submit">
 		</div>
     </form>
-	
+	</div>
 <script type="text/javascript">
 //populatedropdown(id_of_day_select, id_of_month_select, id_of_year_select)
 window.onload=function(){

@@ -181,7 +181,7 @@ for (Food.Update up : f) {
         "<input type='hidden' name='fid' value=" + up.getFid() + ">" +
         "<td>" + up.getName(db) + "</td><td>Amount: <input name='count' " +
         "value=" + up.getCount() + "><input type='hidden' name='" +
-        "removeFromMeal' value=1><input type='submit' value='Remove'>" +
+        "removeFromMeal' value=1><input type='image' src=\"images/X.png\" margin-top:2px width=20px height=20px value='Remove'>" +
         "</td></form></tr>\n";
 	mealDisp += s;
 }
@@ -194,7 +194,7 @@ for (Food.List fl : arr) {
         "<input type='hidden' name='fid' value=" + fl.getFid() + ">" +
         "<td>" + fl.getName() + "</td><td>Amount: <input name='count' " +
         "value=" + fl.getCount() + "><input type='hidden' name='" +
-        "addToMeal' value=1><input type='submit' value='Add To Meal'>" +
+        "addToMeal' value=1><input type='image' src=\"images/plus.png\" width=20px height=20px value='submit'>" +
         "</td></form></tr>\n";
     invDisp += s;
 }
@@ -260,6 +260,7 @@ $('#myImage').click(function() {
   <body>
   <div id="page">
     <div id="content">
+	<div id="green">
     <a href="mealChoice.jsp"><img src="images/back.png" style="float:left" width=50px height=50px/></a>
 	<p class="addMeal">Input Your Own</p><br />
 	<center><h2 class="new">Meal</h2></center><br /><%= mealDisp %>
@@ -291,13 +292,13 @@ $('#myImage').click(function() {
 
   <div id="right">
 		<input type="hidden" name="addToHistory" value="addToHistory" />
-    <img id='myImage' src = "images/starDull.png" />
+    <img id='myImage' src = "images/starDull.png" style="float:right;"/>
 
-    <input type="checkbox" name="favs" value="1" id='myHiddenCheckbox' style="display:none" />Add to Favorites<br /><br />
+    <input type="checkbox" name="favs" value="1" id='myHiddenCheckbox' style="display:none" /><p style="text-align:right;">Add to Favorites</p>
     <input type="image" src="images/submit.png" value="Submit">
   </div>
   </form>
-	
+	</div>
 <script type="text/javascript">
 //populatedropdown(id_of_day_select, id_of_month_select, id_of_year_select)
 window.onload=function(){

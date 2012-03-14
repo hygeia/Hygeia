@@ -211,7 +211,7 @@ for (Meal.List ml : arr) {
 		String s = "<tr><form action='selectFavorites.jsp' method='post'>" +
 			"<input type='hidden' name='mid' value=" + ml.getMid() + ">" +
 			"<td>" + ml.getName() + "</td><td><input type='hidden' name='" +
-			"selectAsMeal' value=1><input type='submit' value='Select As Meal' " + 
+			"selectAsMeal' value=1><input type='image' src=\"images/plus.png\" width=20px height=20px value='submit' " + 
 			disabled + "></td></form></tr>\n";
 		favDisp += s;
 	}else{
@@ -265,6 +265,7 @@ timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.
     <div id="content">
     <a href="mealChoice.jsp"><img src="images/back.png" style="float:left" width=50px height=50px/></a>
 	<p class="selectFav">Select From Your Favorite Meals</p><br />
+	<div id="green">
 	<center><h2 class="new">Meal</h2></center><br /><%= mealDisp %>
 	<br /><center><h2>Favorites</h2></center><br /><%= favDisp %>
 	<p>Once you've finished adding food, enter a name and date to add it to your calendar!</p>
@@ -280,10 +281,10 @@ timefield.options[today.getHours()]=new Option(today.getHours() + ":00" , today.
 		<br /><br />
 		<div id="right">
 		<input type="hidden" name="addToHistory" value="addToHistory">
-		<br /><br /><input type="submit" value="Add Meal">
+		<br /><br /><input type="image" src="images/submit.png" value="submit'">
 		</div>
          </form>
-	
+	</div>
 <script type="text/javascript">
 //populatedropdown(id_of_day_select, id_of_month_select, id_of_year_select)
 window.onload=function(){
