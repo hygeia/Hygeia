@@ -122,6 +122,8 @@ margin:0 0 30px 0;
 #about {
 width: 800px;
 margin: 0 auto 0 auto;
+text-align:left;
+color:#7b840d;
 }
 
 #team {
