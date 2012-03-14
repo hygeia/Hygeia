@@ -203,7 +203,6 @@ if(theName != null)
 	<div id="content">
    
      <FORM METHOD="POST" id="update_profile_form" ACTION="updateProfile.jsp">
-
      <p> 
      <label for="user_name">Name:</label>
      <INPUT TYPE="TEXT" VALUE="<%= name %>" NAME="name" SIZE="20" />
@@ -233,6 +232,8 @@ if(theName != null)
      <dt class="radio"><label for="activity">Active (1 hour per day, 5 times per week)</label></dt>
      <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="4" <%= a4 %> /> </dd>
      <br />
+     <br />
+     <br />
      <dt class="radio"><label for="activity">Very active (2 hours per day, 5 times a week)</label></dt>
      <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="5" <%= a5 %> /></dd>
      <br />
@@ -245,7 +246,7 @@ if(theName != null)
      <br />
 
      <p> 
-     <label for="user_weight">Weight(lbs):</label>
+     <label for="weight">Weight(lbs):</label>
      <INPUT TYPE="TEXT" VALUE= "<%= weight %>" NAME="weight" SIZE="10" />
      </p>
 
@@ -260,6 +261,7 @@ if(theName != null)
      <label for="hip1">Hip measurement 1 (inches)</label>
      <INPUT TYPE="TEXT" NAME="hip1" VALUE="<%= hips %>" SIZE="10"/> 
      </p>
+
      <P> 
      <label for="hip2">Hip measurement 2 (inches)</label>
      <INPUT TYPE="TEXT" NAME="hip2" VALUE="<%= hips %>" SIZE="10"/>

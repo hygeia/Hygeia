@@ -212,7 +212,7 @@ margin-bottom: 0px;
 	<div id="content">
 
 <br />
-
+<div id="green">
 <h1><%= username %>'s Inventory</h1>
 
 <div id="pics">
@@ -229,6 +229,7 @@ margin-bottom: 0px;
 </form>
 
 <div id="textWrapperInventory"><%= searchDisp %></div>
+</div>
 </div>
 </div>
 <div id="footer"><a href="about.jsp">About Us</a><br />

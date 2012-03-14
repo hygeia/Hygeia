@@ -16,7 +16,7 @@ $(document).ready(function () {
     rules: {
       sex_field: { required:true },
       activity: { required:true },
-      user_weight: { required:true, number:true },
+      weight: { required:true, number:true },
       hip1: { required:true, number:true },
       hip2: { required:true, number:true },
       hip3: { required:true, number:true },
@@ -53,7 +53,15 @@ $(document).ready(function () {
         user_weight: { required:true, number:true },
         user_height_ft: { required:true, number:true },
         user_height_in: { required:true, number:true },
-        user_sex: { required:true }
+        user_sex: { required:true },
+        activity: { required:true },
+        hip1: { required:true, number:true },
+        hip2: { required:true, number:true },
+        hip3: { required:true, number:true },
+        waist1: { required:true, number:true },
+        waist2: { required:true, number:true },
+        waist3: { required:true, number:true },
+        wrist: { required:true, number:true }
       },
       messages: {
           user_password: {

@@ -198,7 +198,7 @@ if(threedayarr.size() == 0){
 // create a string that shows meal names, foods, and nutrition info for today 
 String todayInfo = "";
 for(int i=0; i<todayarr.size(); i++){
-	todayInfo += "<p class=\"time\">" + todayarr.get(i).getOccurrence().toString()+ "</p><br /><br /><br /><h2>" + todayarr.get(i).getName() + "</h2><p class=\"meal\">";
+	todayInfo += "<p class=\"time\">" + todayarr.get(i).getOccurrence().toString()+ "</p><br /><br /><br /><br /><br /><br /><h2>" + todayarr.get(i).getName() + "</h2><p class=\"meal\">";
 	Food.List foods[] = todayarr.get(i).getFoodList();
 	for(int j=0; j < foods.length; j++){
 		todayInfo += (foods[j].getCount() + "g&nbsp;&nbsp;&nbsp;" + foods[j].getName() + "<br />");
@@ -431,7 +431,7 @@ db.close();
 </table>
       </div>
       <div id="content">
-"Zone" fact: <%= randFact %>
+<p class="tip">"Zone" fact: <%= randFact %></p>
       <div id="oday" class="shadowBox"><%= day4 %><br /><br />
         <div id="chartwrapperOday">
 		  <%= showThreeDayCharts %>

@@ -166,7 +166,7 @@ public class Recipe {
             }
         } catch (SQLException e) {
             if (list.isEmpty()) {
-                return null;w
+                return null;
             }
         }
         
@@ -259,7 +259,8 @@ public class Recipe {
             return false;
         }        
 
-        if ( createMeal( this.db, user, getIngrediants(), getName(), type) < 1 )
+        if ( Meal.createMeal( this.db, user, getIngrediants(), 
+                                getName(), type) < 1 )
         {
             return false;
         }
