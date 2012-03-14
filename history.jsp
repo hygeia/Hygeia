@@ -144,7 +144,7 @@ if( meals != null )
 	 "<input type='hidden' name='removeFromHistory'" +
 	" value='1'> <input type='submit' value='Remove'>"+
   	"<form action='history.jsp' method='post'> </br></form>\n"; 
-	
+
  }
  
  histDisp += "</table>\n";
