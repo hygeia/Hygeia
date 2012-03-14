@@ -66,10 +66,10 @@ else{ //show the navigation bar
   <div id="left">
     <img src="images/adam.png" width=320px height=320px>
     <p class="name">Adam William Kuipers</p>
-    <p class="description">Project Manager - enjoys fur hats and tasteful blazers</p><br /><br />
+    <p class="description">Project Manager - enjoys fur hats and tasteful blazers</p><br />
 	<img src="images/asher.png" width=320px height=320px>
      <p class="name">Asher McCall Garland</p>
-    <p class="description"> Database Specialist - enjoys cinnamon Whiskey and coding on the beach</p><br /><br />
+    <p class="description"> Database Specialist - enjoys cinnamon Whiskey and coding on the beach</p><br />
 	 <img src="images/kenney.png" width=320px height=320px>
      <p class="name">Kenney Cheung</p>
     <p class="description"> Software Development Lead - fascinated with the city of Los Angeles</p><br />
@@ -80,7 +80,7 @@ else{ //show the navigation bar
      <p class="description">Database Specialist - Eagle Scout who laughs manically at the death of Steve Jobs</p><br />
 	 <img src="images/brian.png" width=320px height=320px>
      <p class="name">Brian Ta</p>
-    <p class="description"> Graphic Designer - either pro or terrible at longboarding depending on the day</p><br /><br />
+    <p class="description"> Graphic Designer - either pro or terrible at longboarding depending on the day</p><br />
 	 <img src="images/link.png" width=320px height=320px>
     <p class="name">Lincoln J Race</p>
     <p class="description">Algorithm Specialaist/User Interface - basically the coolest person ever and in no way the one who wrote this page</p>
@@ -91,7 +91,7 @@ else{ //show the navigation bar
    <div id="right">
    <img src="images/anne.png" width=320px height=320px>
     <p class="name">Anne Brookes</p>
-    <p class="description">Software Architect - avid runner and explorer of places far and wide</p><br /><br />
+    <p class="description">Software Architect - avid runner and explorer of places far and wide</p><br />
 	<img src="images/corbin.png" width=320px height=320px>
      <p class="name">Corbin Lewis</p>
      <p class="description">Software Development Lead - random fact extraordinaire with a keen sense of pants color</p><br /> 
