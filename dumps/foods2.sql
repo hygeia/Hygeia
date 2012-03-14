@@ -1,4 +1,4 @@
-insert into foods (uid, name, weight, factor, calories, carbohydrates, protein, fat) values (
+insert into foods (uid, name, weight, factor, calories, carbohydrates, protein, fat) values 
 (0,'Corn,Swt,Yel,Raw',145.0,0.006896551724137931,124.7,27.115,4.7415,1.9575),
 (0,'Corn,Swt,Yel,Ckd,Bld,Drnd,Wo/Salt',89.0,0.011235955056179775,85.44,18.6722,3.0349000000000004,1.335),
 (0,'Corn,Swt,Yel,Cnd,Brine Pk,Reg Pk,Sol&Liquids',256.0,0.00390625,156.16,35.4816,4.992,1.9712),
@@ -1998,5 +1998,4 @@ insert into foods (uid, name, weight, factor, calories, carbohydrates, protein, 
 (0,'Worthington Veg Steaks,Cnd,Unprep',72.0,0.013888888888888888,81.36,3.6719999999999997,14.903999999999998,0.864),
 (0,'Worthington Vegetarian Burger,Cnd,Unprep',55.0,0.01818181818181818,68.2,3.4100000000000006,10.230000000000002,1.595),
 (0,'Worthington Veja-Links,Cnd,Unprep',31.0,0.03225806451612903,48.05,1.271,4.526,2.759),
-(0,'Worthington Chic-Ketts,Frz,Unprep',55.0,0.01818181818181818,110.00000000000001,2.805,12.980000000000002,5.335)
-);
+(0,'Worthington Chic-Ketts,Frz,Unprep',55.0,0.01818181818181818,110.00000000000001,2.805,12.980000000000002,5.335);

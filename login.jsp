@@ -74,8 +74,8 @@ if (request.getParameter("login") != null) {
       <table style="margin-left:auto;margin-right:auto;">
         <%= loginerr %>
       <tr>
-          <td><input type="text" name="email" class="email"/></td> 
-          <td><input type="password" name="password" class="password" /></td>
+          <td><input type="text" name="email" class="email" value="email address"/></td> 
+          <td><input type="password" name="password" class="password" value="********"/></td>
       <input type="hidden" name="login" value="login" />
       <td><input type="image" src="images/LoginButton.png" value="Login!"/></td>
       </tr>

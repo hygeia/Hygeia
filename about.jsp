@@ -77,7 +77,7 @@ else{ //show the navigation bar
   <div id="center">
      <img src="images/alex.png" width=320px height=320px>
      <p class="name">Alex Morris</p>
-     <p class="description">Database Specialist - Eagle Scout who enjoys wearing suits</p><br />
+     <p class="description">Database Specialist - Eagle Scout who laughs manically at the death of Steve Jobs</p><br />
 	 <img src="images/brian.png" width=320px height=320px>
      <p class="name">Brian Ta</p>
     <p class="description"> Graphic Designer - either pro or terrible at longboarding depending on the day</p><br />
