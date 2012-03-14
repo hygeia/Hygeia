@@ -140,9 +140,9 @@ if( meals != null )
   
   histDisp += "<form action='history.jsp' method='post'>" +
   	 "<input type='hidden' name='mid' value='"+ mid +"'>" + name + " Date: " +
-  	 "<input type='hidden' name='occurrence' value='" + occurrence + "'>" + occurrence + 
+  	 "<input type='hidden' name='occurrence' value='" + occurrence + "'>" + occurrence + "\t"+ 
 	 "<input type='hidden' name='removeFromHistory'" +
-	" value='1'> <input type='submit' value='Remove'>"+
+	" value='1'> <input type='image' src='images/X.png' width='25' hspace='10' height='25'>"+
   	"<form action='history.jsp' method='post'> </br></form>\n"; 
 
  }
@@ -457,7 +457,7 @@ out.println("f"+block7[2]);
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Day');
         data.addColumn('number', 'Carbs');
-        data.addColumn('number', 'Protien');
+        data.addColumn('number', 'Protein');
 	data.addColumn('number', 'Fat');
         data.addRows([
           ['<%= day7 %>', <%= block7[0] %>,<%= block7[1] %>, <%= block7[2] %>],
