@@ -34,8 +34,7 @@ if (request.getParameter("searchForRecipe") != null) {
 			db.close();
 			return; */
 		}
-        String s = "<tr><form action='recipes.jsp' method='post'>" +
-            "<td>" + m.getName() + "</td><td><form action='favorites.jsp'" +
+        String s = "<tr><td>" + m.getName() + "</td><td><form action='favorites.jsp'" +
 			" method='post'><input type='hidden' name='addToFavorites' value=1>" +
 			"<input type='hidden' name='mid' value=" + m.getMid() + ">" +
 			"<input type='submit' value='Add to Favorites!'></form></td><td>" +

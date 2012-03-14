@@ -77,7 +77,7 @@ public class Algorithm {
 			{
 				for (int j = 0; j < fu.length; j++)
 				{
-					if (mu[i].equals(fu[j]))
+					if (mu[i].getFid() == fu[j].getFid() && mu[i].getCount() == fu[j].getCount())
 					{
 						inventorymatchcount += 1;
 					}
