@@ -165,14 +165,15 @@ li{color:black; font-family:arial;}
 </div>
   <div id="content">
 <br />
-
 <div id="green">
 <h1><%= username %>'s Favorites</h1>
 </div>
-
 <br>
+<div id="green">
+<p class="leftalignText">
 <%= favDisp %>
 <%= noFavs %>
+</div></p>
 <!--
 
 
