@@ -497,7 +497,6 @@ out.println("f"+block7[2]);
 </head>
 <BODY>
     <div id="page">
-	<div id="content">
       <div id="header">
         <table cellpadding="0" cellspacing="0">
 <tr>
@@ -512,7 +511,7 @@ out.println("f"+block7[2]);
 </tr>
 </table>
 </div>
-
+	<div id="content">
 <!-- Ask user if they would like to add meal to history
 Add to history
 
@@ -532,7 +531,7 @@ Add to history
 <%= histDisp %>
 <%= noHistory %>
 </br>
-<div id="line_chart" style="width: 960px; height: 500px;"></div>
+<div id="line_chart" style="width: 960px; height: 700px;"></div>
 </div>
 </div>
 <div id="footer"><a href="about.jsp">About Us</a><br />
