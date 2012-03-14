@@ -94,7 +94,7 @@ else{ //show the navigation bar
     <p class="description">Software Architect - avid runner and explorer of places far and wide</p><br />
 	<img src="images/corbin.png" width=320px height=320px>
      <p class="name">Corbin Lewis</p>
-     <p class="description">Software Development Lead - random fact extraordinar with a keen sense of pants color</p><br /> 
+     <p class="description">Software Development Lead - random fact extraordinaire with a keen sense of pants color</p><br /> 
 	 <img src="images/mana.png" width=320px height=320px>
      <p class="name">Mana Jammalamadaka</p>
      <p class="description">Senior System Analyst - staunchly vegetarian but not vegan</p><br />
