@@ -45,6 +45,7 @@ margin-left:265px;
 
 h1 {
 text-align:center;
+color:#7b840d;
 }
 
 #leftChoice {
@@ -70,6 +71,8 @@ padding:0px;
 
 p.choice {
 padding-left:20px;
+width:200px;
+color:#7b840d;
 }
 
 #left {
