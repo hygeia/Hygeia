@@ -72,7 +72,7 @@ String meal = "MEAL NAME HERE";
 		<script>
 			$(document).ready(function(){
 				//Examples of how to assign the ColorBox event to elements
-				$(".ajax").colorbox({innerWidth:"925px", innerHeight:"600px", iframe:true, onClosed:function(){ window.location="home.jsp" }});
+				$(".ajax").colorbox({innerWidth:"925px", innerHeight:"600px", iframe:true, onClosed:function(){ window.location="favorites.jsp" }});
 			});
 		</script>
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
