@@ -69,7 +69,7 @@ public class Algorithm {
 			typeS += "type = 0001 ";
 		}
         ResultSet rs = db.execute("select mid from meals where (uid = " + 
-            u.getUid() + " or uid = 0) " + typeS + ";");// and type & " + type + " = " + type + ";");
+            u.getUid() + " or uid = 0);");// " + typeS + ";");// and type & " + type + " = " + type + ";");
         //arraylist of meal IDs that come from the database
         ArrayList<Integer> results = new ArrayList<Integer>();
 		while(rs.next())
