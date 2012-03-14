@@ -19,6 +19,7 @@ body {
     position:relative;
     background-color:#fbffcc;
 }
+
 p.selectFav, p.suggestMeal, p.addMeal{
 font-size:xx-large;
 font-weight:bold;
@@ -27,15 +28,15 @@ display:inline;
 color:#7b840d;
 }
 p.selectFav {
-margin-left:130px;
+margin-left:190px;
 }
 
 p.addMeal {
-margin-left:270px;
+margin-left:300px;
 }
 
 p.suggestMeal {
-margin-left:200px;
+margin-left:265px;
 }
 
 h1 {

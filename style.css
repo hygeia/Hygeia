@@ -206,3 +206,49 @@ color:rgb(255,255,255);
   color:#7b840d;
   background-color:#fbffcc;
 }
+
+
+/* about.jsp */
+#buttonAbout {
+float:right;
+}
+
+h1.newAbout {
+text-align:center;
+margin-left:150px;
+}
+
+h1About {
+text-align:center;
+color:green;
+}
+
+p.specialAbout {
+text-align:center;
+color:blue;
+}
+
+p.nameAbout {
+text-align:center;
+}
+
+p.descriptionAbout {
+padding: 0 10px 0 10px;
+}
+
+#leftAbout, #centerAbout, #rightAbout {
+float:left;
+width:320px;
+margin:0 0 10px 0;
+}
+
+
+#aboutAbout {
+width: 800px;
+margin: 0 auto 0 auto;
+}
+
+#teamAbout {
+width: 960px;
+margin: 0 auto 0 auto;
+}
