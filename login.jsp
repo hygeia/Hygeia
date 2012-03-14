@@ -47,7 +47,7 @@ if (request.getParameter("login") != null) {
 }
 
 %>
-<html>
+<html xmlns:fb="http://ogp.me/ns/fb#">
   <head>
     <title>Login | Hygeia</title>
     <link type="text/css" rel="stylesheet" href="loginStyle.css" />    
@@ -67,7 +67,16 @@ if (request.getParameter("login") != null) {
 </script>
   </head>
   <body>
-    <div id="page"><div id="content">
+  <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+    <div id="page">
+	<div id="content">
     <a href="signup.jsp"><img src="images/getStartedGreen.png" width=200px height=66px align="right"></a>
 <div id="leaf"><img src="images/HomepageLogo2.png"></div>
     <form method="post" action="login.jsp">
@@ -81,7 +90,8 @@ if (request.getParameter("login") != null) {
       </tr>
       </table>
     </form>
-<img src="images/aNewWayToEat.png">
+<img src="images/aNewWayToEat.png"><br /><br /><br />
+<div class="fb-like" data-href="http://132.239.229.86/link" data-send="false" data-width="200" data-show-faces="false" data-font="verdana"></div>
 </div>
 </div>
    <div id="footer"><a href="about.jsp">About Us</a><br />
