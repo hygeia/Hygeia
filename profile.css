@@ -38,6 +38,20 @@ body {
 #right {
     float:right;
 }
+#nav a:link,a:visited
+{
+display:block;
+font-weight:bold;
+background-color:#98bf21;
+text-align:center;
+padding:4px;
+text-decoration:none;
+text-transform:uppercase;
+}
+a:hover,a:active
+{
+background-color:#7A991A;
+}
 
 p.update {
 text-align:left;

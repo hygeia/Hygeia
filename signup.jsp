@@ -149,15 +149,11 @@ if (request.getParameter("signup") != null) {
           <dt class="radio"><label for="activity">Moderate (30 minutes per day, 3 times per week)</label></dt>
           <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="3" /></dd>
           <br />
-
           <dt class="radio"><label for="activity">Active (1 hour per day, 5 times per week)</label></dt>
           <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="4" /> </dd>
           <br />
-          <br />
           <dt class="radio"><label for="activity">Very active (2 hours per day, 5 times a week)</label></dt>
           <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="5" /></dd>
-          <br />
-          <br />
           <br />
           <dt class="radio"><label for="activity">Heavy weight training or twice-a-day exercise (5 days per week)</label></dt>
           <dd class="radio"><INPUT TYPE="radio" NAME="activity" VALUE="6" /></dd>
