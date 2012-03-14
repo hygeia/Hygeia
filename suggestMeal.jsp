@@ -35,7 +35,7 @@ if( session.getAttribute("suggestedArray") == null){
 Food.Update[] f = (Food.Update[])session.getAttribute("suggestedArray");
 //String[] fNames = (String[])session.getAttribute("suggestedNameArray");
 
-String selectedMealName = "";
+String suggestedMealName = "";
 
 if (request.getParameter("addToHistory") != null) {
 	History hist = new History(u);
@@ -88,7 +88,8 @@ if (request.getParameter("addToHistory") != null) {
 	hist.addMeal(newMeal, today);
 	session.setAttribute("suggestedArray", new Food.Update[0]);
 	
-	if( request.getParameterValues("favs").length > 0 ){
+	if( (request.getParameterValues("favs") != null) && 
+	    (request.getParameterValues("favs").length > 0) ){
 		Favorites fav = new Favorites (u);
 		boolean r = fav.addMeal(newMeal);
 		if (r == false) {
@@ -110,7 +111,7 @@ if (request.getParameter("suggestNewMeal") != null) {
 		db.close();
 		return;
 	}
-	selectedMealName = suggested.getName();
+	suggestedMealName = suggested.getName();
 	
 	/* add the food items of the old meal to the inventory */
 	Food.Update[] mealToAdd = new Meal(db, suggested.getMid()).getMeal();
@@ -254,6 +255,7 @@ $('#myImage').click(function() {
         <div id="right">
 		<img id='myImage' src = "images/starDull.png" />
 	 <input type="checkbox" name="favs" value="1" id='myHiddenCheckbox' style="display:none" />Add to Favorites<br /><br />
+	 <input type="submit" value="Add Meal" />
 		</div>
     </form>
 	
