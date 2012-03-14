@@ -137,7 +137,6 @@ li{color:black; font-family:arial;}
 </style>
 </head>
 <div id="page">
-  <div id="content">
   <div id="header">
 <!-- Navigation Bar -->
 
@@ -154,7 +153,8 @@ li{color:black; font-family:arial;}
 <td> <a href="logout.jsp"><img src="images/lightICON8.png"></a></td>
 </tr>
 </table>
-
+</div>
+  <div id="content">
 <br />
 
 <h1><%= username %>'s Favorites</h1>
