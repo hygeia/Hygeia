@@ -134,8 +134,8 @@ if (request.getParameter("signup") != null) {
 
           <div class="sex-field"> 
           <label for="user_sex">Gender</label> 
-          <INPUT TYPE="RADIO" NAME="user_sex" VALUE="f" />Female
-          <INPUT TYPE="RADIO" NAME="user_sex" VALUE="m"  />Male
+          <INPUT TYPE="RADIO" NAME="user_sex" VALUE="F" />Female
+          <INPUT TYPE="RADIO" NAME="user_sex" VALUE="M"  />Male
           <label for="user_sex" class="error" style="display:none;">Please choose one</label> 
           </div>
 
