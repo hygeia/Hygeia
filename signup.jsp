@@ -77,12 +77,9 @@ if (request.getParameter("signup") != null) {
 
     /* Close database */
     db.close();
-        
-    
-    /* Set session variables */
-    session.setAttribute("uid", uid);
-    session.setAttribute("username", username);
-    response.sendRedirect("home.jsp");  
+
+   response.sendRedirect("home.jsp");
+   return;
 }
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
