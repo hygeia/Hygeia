@@ -118,7 +118,7 @@ public class Food {
             // multiply the nutrients of the food by the number of food items
             // in inventory (count)
             
-            double servings = this.getCount();
+            double servings = this.getCount() / 100;
             
             cal *= servings;
             carb *= servings;
