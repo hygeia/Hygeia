@@ -30,14 +30,14 @@ public static double percentBodyFat(String sex, String w, double hips,
  /*
   * If user is female
   */
- if(sex.equals("f"))
+ if(sex.equals("F"))
  {
   Scanner hipConst = new Scanner(new BufferedReader(
-    new FileReader("/home/anne/www/WEB-INF/src/hygeia/femaleTable.txt")));
+    new FileReader("/home/public/www/WEB-INF/resources/femaleTable.txt")));
   Scanner hConst = new Scanner(new BufferedReader(
-    new FileReader("/home/anne/www/WEB-INF/src/hygeia/femaleTable.txt")));
+    new FileReader("/home/public/www/WEB-INF/resources/femaleTable.txt")));
   Scanner abdConst = new Scanner(new BufferedReader(
-    new FileReader("/home/anne/www/WEB-INF/src/hygeia/femaleTable.txt")));
+    new FileReader("/home/public/www/WEB-INF/resources/femaleTable.txt")));
 
   weight = Double.parseDouble(w);
   
@@ -170,10 +170,10 @@ public static double percentBodyFat(String sex, String w, double hips,
   
  }
   
- if(sex.equals("m"))
+ if(sex.equals("M"))
  {
   Scanner table = new Scanner(new BufferedReader(
-    new FileReader("/home/anne/www/WEB-INF/src/hygeia/maleTable.txt")));
+    new FileReader("/home/public/www/WEB-INF/resources/maleTable.txt")));
   double wrist, ww;
   
    weight = Double.parseDouble(w);

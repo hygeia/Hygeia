@@ -37,12 +37,12 @@ int in = (int) inc;
 String sex = Character.toString(u.getGender());
 String f = "";
 String m = ""; 
-if( sex.equals("f") )
+if( sex.equals("F") )
 {
  f = "checked";
 }
 
-else if( sex.equals("m"))
+else if( sex.equals("M"))
 {
  m = "checked";
 }
@@ -210,8 +210,8 @@ if(theName != null)
 
      <div class="sex-field"> 
      <label for="user_sex">Gender</label> 
-     <INPUT TYPE="RADIO" NAME="sex" VALUE="f" <%= f %> />Female
-     <INPUT TYPE="RADIO" NAME="sex" VALUE="m" <%= m %> />Male
+     <INPUT TYPE="RADIO" NAME="sex" VALUE="F" <%= f %> />Female
+     <INPUT TYPE="RADIO" NAME="sex" VALUE="M" <%= m %> />Male
      <label for="user_sex" class="error" style="display:none;">Please choose one</label> 
      </div>
 	<br />

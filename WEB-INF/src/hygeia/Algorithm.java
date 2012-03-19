@@ -14,7 +14,7 @@ public class Algorithm {
     private static final int LUNCH = 0x04;
     private static final int DINNER = 0x02;
     private static final int SNACK = 0x01;
-    private static final double SAME = 1.1; //used as a margin of error for relatively balanced meals
+    private static final double SAME = .2; //used as a margin of error for relatively balanced meals
 
     public Algorithm(Database db, User u) {
 		this.uid = u.getUid();
@@ -71,7 +71,7 @@ public class Algorithm {
 		typeS += "type = 99999";
 		
         ResultSet rs = db.execute("select mid from meals where (uid = " + 
-            u.getUid() + " or uid = 0) ");// + typeS + ";");// and type & " + type + " = " + type + ";");
+           u.getUid() + " or uid = 0) and type & " + type + " = " + type + ";");
         //arraylist of meal IDs that come from the database
         ArrayList<Integer> results = new ArrayList<Integer>();
 		while(rs != null & rs.next())

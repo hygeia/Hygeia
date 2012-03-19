@@ -77,12 +77,9 @@ if (request.getParameter("signup") != null) {
 
     /* Close database */
     db.close();
-        
-    
-    /* Set session variables */
-    session.setAttribute("uid", uid);
-    session.setAttribute("username", username);
-    response.sendRedirect("home.jsp");  
+
+   response.sendRedirect("home.jsp");
+   return;
 }
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
@@ -134,8 +131,8 @@ if (request.getParameter("signup") != null) {
 
           <div class="sex-field"> 
           <label for="user_sex">Gender</label> 
-          <INPUT TYPE="RADIO" NAME="user_sex" VALUE="f" />Female
-          <INPUT TYPE="RADIO" NAME="user_sex" VALUE="m"  />Male
+          <INPUT TYPE="RADIO" NAME="user_sex" VALUE="F" />Female
+          <INPUT TYPE="RADIO" NAME="user_sex" VALUE="M"  />Male
           <label for="user_sex" class="error" style="display:none;">Please choose one</label> 
           </div>
 
