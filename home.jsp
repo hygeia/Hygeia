@@ -201,7 +201,12 @@ for(int i=0; i<todayarr.size(); i++){
 	todayInfo += "<h2>" + todayarr.get(i).getName() + "</h2><p class=\"meal\">";
 	Food.List foods[] = todayarr.get(i).getFoodList();
 	for(int j=0; j < foods.length; j++){
-		todayInfo += (foods[j].getCount() + "g&nbsp;&nbsp;&nbsp;" + foods[j].getName() + "<br />");
+		if(foods[j] != null){
+			todayInfo += (foods[j].getCount() + "g&nbsp;&nbsp;&nbsp;" + foods[j].getName() + "<br />");
+		}
+		else {
+		  todayInfo += "<br />";
+		}
 	}
 	Nutrition nuts = todayarr.get(i).getNutrition();
 	
